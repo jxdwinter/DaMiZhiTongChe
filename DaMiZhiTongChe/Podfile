@@ -1,0 +1,20 @@
+source 'https://github.com/CocoaPods/Specs.git'
+platform :ios, '7.0'
+
+# ignore all warnings from all pods
+inhibit_all_warnings!
+
+pod 'AFNetworking'
+pod 'MBProgressHUD'
+pod 'SDWebImage'
+pod 'MJRefresh'
+pod 'GBVersionTracking'
+pod 'Masonry'
+pod 'Reveal-iOS-SDK', :configurations => ['Debug']
+pod 'YTKKeyValueStore'
+pod 'YTKNetwork'
+pod 'TOWebViewController'
+pod 'IQKeyboardManager'          
+pod 'ActionSheetPicker-3.0'
+pod 'JGActionSheet'
+pod 'FSImageViewer'

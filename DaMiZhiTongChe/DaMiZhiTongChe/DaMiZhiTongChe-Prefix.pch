@@ -1,0 +1,34 @@
+//
+//  DaMiZhiTongChe-Prefix.pch
+//  DaMiZhiTongChe
+//
+//  Created by Xiaodong Jiang on 2/23/16.
+//  Copyright © 2016 哈尔滨龙卫中新工贸有限责任公司. All rights reserved.
+//
+
+#ifndef DaMiZhiTongChe_Prefix_pch
+#define DaMiZhiTongChe_Prefix_pch
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+
+#ifdef __OBJC__
+#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
+
+//第三方公用
+#import <Masonry.h>
+#import <SDWebImage/UIImageView+WebCache.h>
+#import <MBProgressHUD.h>
+
+//自己的类
+#import "AppDelegate.h"
+#import "UIConfig.h"
+#import "Config.h"
+#import "MBProgressHUD+Helper.h"
+#import "ConfigArgument.h"
+#import "ConfigYTKRequest.h"
+#import "RequestAccessory.h"
+#endif
+
+#endif /* DaMiZhiTongChe_Prefix_pch */

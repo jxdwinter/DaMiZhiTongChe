@@ -8,6 +8,20 @@
 
 #import "AppDelegate.h"
 
+#import <AFNetworking.h>
+#import <GBVersionTracking.h>
+#import <YTKNetworkConfig.h>
+
+#import <KSCrash/KSCrashInstallationStandard.h>
+#import "MTA.h"
+#import "MTAConfig.h"
+
+#import "BaseNavigationController.h"
+
+#import "MainViewController.h"
+#import "CartViewController.h"
+#import "MineViewController.h"
+
 @interface AppDelegate ()
 
 @end
@@ -17,6 +31,8 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    [self config];
+    [self configUI];
     return YES;
 }
 
@@ -41,5 +57,145 @@
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
+#pragma mark - APP Config
+#pragma mark -
+
+- (void) config{
+    
+    [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
+    
+    //跟踪版本
+    [GBVersionTracking track];
+    
+    //注册网络改变通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(networkreachabilitystatuschanged:) name:@"NETWORKREACHABILITYSTATUSCHANGED" object:nil];
+    
+    //监控网络
+    [[AFNetworkReachabilityManager sharedManager] setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"NETWORKREACHABILITYSTATUSCHANGED" object:[NSNumber numberWithInteger:status]];
+    }];
+    [[AFNetworkReachabilityManager sharedManager] startMonitoring];
+    
+    // 开始推送通知
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0){
+#ifdef __IPHONE_8_0
+        [[UIApplication sharedApplication] registerUserNotificationSettings:[UIUserNotificationSettings
+                                                                             settingsForTypes:(UIUserNotificationTypeSound |
+                                                                                               UIUserNotificationTypeAlert |
+                                                                                               UIUserNotificationTypeBadge)
+                                                                             categories:nil]];
+        [[UIApplication sharedApplication] registerForRemoteNotifications];
+#endif
+    }else{
+        [[UIApplication sharedApplication] registerForRemoteNotificationTypes:
+         (UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound | UIRemoteNotificationTypeAlert)];
+    }
+    
+    /*!
+     *  设置图片缓存默认大小200M,图片缓存时间为7天
+     */
+    SDImageCache *imageCache = [SDImageCache sharedImageCache];
+    [imageCache setMaxCacheSize:1024*1024*200];
+    
+    if (!ISSIMULATOR) {
+        [MTA startWithAppkey:MTAAPPKEY];
+        KSCrashInstallationStandard* installation = [KSCrashInstallationStandard sharedInstance];
+        installation.url = [NSURL URLWithString:[NSString stringWithFormat:@"https://collector.bughd.com/kscrash?key=%@",BUGHDGENERALKEY]];
+        [installation install];
+        [installation sendAllReportsWithCompletion:nil];
+    }
+    
+    YTKNetworkConfig *config = [YTKNetworkConfig sharedInstance];
+    config.baseUrl = BASEURL;
+    
+}
+
+
+#pragma mark - UI Config
+#pragma mark -
+
+- (void)configUI{
+    
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    self.window.backgroundColor = [UIColor whiteColor];
+    
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+    
+    [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
+    [[UINavigationBar appearance] setBarTintColor:DEFAULTCOLOR];
+    [[UINavigationBar appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor],
+                                                           NSFontAttributeName : DEFAULNAVIGATIONBARFONT}];
+    
+    [[UITabBarItem appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName : DEFAULTBROWNCOLOR } forState:UIControlStateSelected];
+    [[UITabBarItem appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName : DEFAULTGRAYCOLOR } forState:UIControlStateNormal];
+    
+    self.tabBarController = [[UITabBarController alloc] init];
+    self.tabBarController.tabBar.translucent = NO;
+    
+    BaseNavigationController* mainNavController = [[BaseNavigationController alloc] initWithRootViewController:[[MainViewController alloc] init]];
+    BaseNavigationController* cartNavController = [[BaseNavigationController alloc] initWithRootViewController:[[CartViewController alloc] init]];
+    BaseNavigationController* mineNavController = [[BaseNavigationController alloc] initWithRootViewController:[[MineViewController alloc] init]];
+    NSArray* controllers = @[mainNavController,cartNavController,mineNavController];
+    self.tabBarController.viewControllers = controllers;
+    
+    UITabBar *tabBar = self.tabBarController.tabBar;
+    UITabBarItem *tabBarItem0 = [tabBar.items objectAtIndex:0];
+    UITabBarItem *tabBarItem1 = [tabBar.items objectAtIndex:1];
+    UITabBarItem *tabBarItem2 = [tabBar.items objectAtIndex:2];
+    
+    tabBarItem0.title = @"首页";
+    tabBarItem0.titlePositionAdjustment = UIOffsetMake(0.0, -2.0);
+    tabBarItem0.image = [[UIImage imageNamed:@"tabbar_main_unselect"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
+    tabBarItem0.selectedImage = [[UIImage imageNamed:@"tabbar_main_selected"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
+    
+    tabBarItem1.title = @"购物车";
+    tabBarItem1.titlePositionAdjustment = UIOffsetMake(0.0, -2.0);
+    tabBarItem1.image = [[UIImage imageNamed:@"tabbar_cart_unselect"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
+    tabBarItem1.selectedImage = [[UIImage imageNamed:@"tabbar_cart_selected"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
+    
+    tabBarItem2.title = @"我的";
+    tabBarItem2.titlePositionAdjustment = UIOffsetMake(0.0, -2.0);
+    tabBarItem2.image = [[UIImage imageNamed:@"tabbar_mine_unselect"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
+    tabBarItem2.selectedImage = [[UIImage imageNamed:@"tabbar_mine_selected"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
+    
+    self.tabBarController.selectedIndex = 0;
+    [self launchRootViewController];
+    [self.window makeKeyAndVisible];
+}
+
+/**
+ *  第一次启动客户端或者是某一个版本的第一次启动
+ */
+- (void)launchRootViewController{
+    self.window.rootViewController = self.tabBarController;
+    /*
+    if ([GBVersionTracking isFirstLaunchEver] || [GBVersionTracking isFirstLaunchForVersion]) {
+        //self.window.rootViewController = [[IntroViewController alloc] init];
+    }else{
+        self.window.rootViewController = self.tabBarController;
+    }
+     */
+}
+
+//网络情况改变通知
+- (void)networkreachabilitystatuschanged:(NSNotification*)aNotification{
+    AFNetworkReachabilityStatus status = [(NSNumber *)aNotification.object integerValue];
+    NSLog(@"Reachability: %@", AFStringFromNetworkReachabilityStatus(status));
+    switch (status) {
+        case AFNetworkReachabilityStatusReachableViaWWAN:
+            
+            break;
+        case AFNetworkReachabilityStatusReachableViaWiFi:
+            
+            break;
+        case AFNetworkReachabilityStatusNotReachable:
+            
+            break;
+        default:
+            
+            break;
+    }
+}
+
 
 @end

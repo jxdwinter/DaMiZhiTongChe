@@ -8,15 +8,33 @@
 
 #import "MainViewController.h"
 
-@interface MainViewController ()
+@interface MainViewController ()<UISearchBarDelegate,UIGestureRecognizerDelegate>
+
+@property (nonatomic, strong) UISearchBar *searchBar;
 
 @end
 
 @implementation MainViewController
 
+#pragma mark - life cycle
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"main_navigationbar_blank"]]];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"main_navigationbar_blank"]]];
+    
+    self.navigationItem.titleView = self.searchBar;
+    
+    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self  action:@selector(dismissKeyboard)];
+    tapGesture.numberOfTapsRequired = 1;
+    [tapGesture setDelegate:self];
+    [self.view addGestureRecognizer:tapGesture];
+}
+
+- (void) viewDidAppear:(BOOL)animated {
+    [self.searchBar resignFirstResponder];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -24,14 +42,35 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
+#pragma mark - searchBar delegate
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar{
+    [searchBar resignFirstResponder];
 }
-*/
+
+#pragma mark - privete method
+
+- (void) dismissKeyboard {
+    [self.searchBar resignFirstResponder];
+}
+
+#pragma mark - getter and setter
+
+- (UISearchBar *) searchBar {
+    if (!_searchBar) {
+        _searchBar = [[UISearchBar alloc] initWithFrame:CGRectZero];
+        [_searchBar setSearchFieldBackgroundImage:[UIImage imageNamed:@"main_navigationbar_searchbar"]forState:UIControlStateNormal];
+        _searchBar.placeholder = @"搜索好大米";
+        _searchBar.delegate = self;
+        [_searchBar sizeToFit];
+        _searchBar.barTintColor = DEFAULTCOLOR;
+        _searchBar.tintColor = DEFAULTCOLOR;
+        UITextField *searchField = [_searchBar valueForKey:@"_searchField"];
+        searchField.textColor = DEFAULTBROWNCOLOR;
+        [searchField setValue:DEFAULTBROWNCOLOR forKeyPath:@"_placeholderLabel.textColor"];
+        [_searchBar sizeToFit];
+    }
+    return _searchBar;
+}
 
 @end

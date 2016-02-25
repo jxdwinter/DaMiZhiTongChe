@@ -8,6 +8,9 @@
 
 #import "MainViewController.h"
 
+#import "LoginViewController.h"
+#import "BaseNavigationController.h"
+
 @interface MainViewController ()<UISearchBarDelegate,UIGestureRecognizerDelegate>
 
 @property (nonatomic, strong) UISearchBar *searchBar;
@@ -46,6 +49,10 @@
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar{
     [searchBar resignFirstResponder];
+    
+    [self.navigationController presentViewController:[[LoginViewController alloc] init] animated:YES completion:^{
+        
+    }];
 }
 
 #pragma mark - privete method

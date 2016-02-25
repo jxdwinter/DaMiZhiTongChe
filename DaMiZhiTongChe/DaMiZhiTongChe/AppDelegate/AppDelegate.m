@@ -121,7 +121,7 @@
     
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     
-    [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
+    [[UINavigationBar appearance] setTintColor:DEFAULTCOLOR];
     [[UINavigationBar appearance] setBarTintColor:DEFAULTCOLOR];
     [[UINavigationBar appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor],
                                                            NSFontAttributeName : DEFAULNAVIGATIONBARFONT}];

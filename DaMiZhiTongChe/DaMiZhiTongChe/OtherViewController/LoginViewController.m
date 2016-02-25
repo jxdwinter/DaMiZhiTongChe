@@ -11,6 +11,7 @@
 @interface LoginViewController () <UITextFieldDelegate,UIGestureRecognizerDelegate>
 
 @property (nonatomic, strong) UIImageView *backgroundImageView;
+@property (nonatomic, strong) UIImageView *blackImageView;
 @property (nonatomic, strong) UIImageView *iconImageView;
 @property (nonatomic, strong) UIButton *closeButton;
 @property (nonatomic, strong) UIImageView *phoneTextFieldBackgroundImageView;
@@ -37,28 +38,45 @@
      [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillhide:) name:UIKeyboardWillHideNotification object:nil];
 
     [self.view addSubview:self.backgroundImageView];
+    [self.backgroundImageView addSubview:self.blackImageView];
     
-    [self.backgroundImageView addSubview:self.closeButton];
+    [self.blackImageView addSubview:self.closeButton];
     [self.closeButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.view.mas_top).with.offset(20.0);
-        make.right.equalTo(self.view.mas_right).with.offset(-10.0);
+        make.top.equalTo(self.blackImageView.mas_top).with.offset(20.0);
+        make.right.equalTo(self.blackImageView.mas_right).with.offset(-10.0);
         make.width.equalTo(@25.0);
         make.height.equalTo(@25.0);
     }];
     
-    [self.backgroundImageView addSubview:self.iconImageView];
+    [self.blackImageView addSubview:self.iconImageView];
     [self.iconImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.view.mas_top).with.offset(100.0);
-        make.centerX.equalTo(self.view.mas_centerX);
+        if (IS_IPHONE_4_OR_LESS) {
+            make.top.equalTo(self.blackImageView.mas_top).with.offset(20.0);
+        } else if (IS_IPHONE_5) {
+            make.top.equalTo(self.blackImageView.mas_top).with.offset(50.0);
+        } else if (IS_IPHONE_6) {
+            make.top.equalTo(self.blackImageView.mas_top).with.offset(100.0);
+        } else if ( IS_IPHONE_6P ){
+            make.top.equalTo(self.blackImageView.mas_top).with.offset(130.0);
+        }
+        make.centerX.equalTo(self.blackImageView.mas_centerX);
         make.width.equalTo(@120.0);
         make.height.equalTo(@120.0);
     }];
     
-    [self.backgroundImageView addSubview:self.phoneTextFieldBackgroundImageView];
+    [self.blackImageView addSubview:self.phoneTextFieldBackgroundImageView];
     [self.phoneTextFieldBackgroundImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.iconImageView.mas_bottom).with.offset(100.0);
-        make.left.equalTo(self.view.mas_left).with.offset(20.0);
-        make.right.equalTo(self.view.mas_right).with.offset(-20.0);
+        if (IS_IPHONE_4_OR_LESS) {
+            make.top.equalTo(self.iconImageView.mas_bottom).with.offset(20.0);
+        } else if (IS_IPHONE_5) {
+            make.top.equalTo(self.iconImageView.mas_bottom).with.offset(50.0);
+        } else if (IS_IPHONE_6) {
+            make.top.equalTo(self.iconImageView.mas_bottom).with.offset(100.0);
+        } else if ( IS_IPHONE_6P ){
+            make.top.equalTo(self.iconImageView.mas_bottom).with.offset(130.0);
+        }
+        make.left.equalTo(self.blackImageView.mas_left).with.offset(20.0);
+        make.right.equalTo(self.blackImageView.mas_right).with.offset(-20.0);
         make.height.equalTo(@44.0);
     }];
     
@@ -74,15 +92,15 @@
     [self.phoneTextField mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.phoneTextFieldBackgroundImageView.mas_top).with.offset(7.0);
         make.left.equalTo(self.phoneImageView.mas_right).with.offset(20.0);
-        make.right.equalTo(self.view.mas_right).with.offset(-30.0);
+        make.right.equalTo(self.blackImageView.mas_right).with.offset(-30.0);
         make.height.equalTo(@30.0);
     }];
     
-    [self.backgroundImageView addSubview:self.passwordTextFieldBackgroundImageView];
+    [self.blackImageView addSubview:self.passwordTextFieldBackgroundImageView];
     [self.passwordTextFieldBackgroundImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.phoneTextFieldBackgroundImageView.mas_bottom).with.offset(2.0);
-        make.left.equalTo(self.view.mas_left).with.offset(20.0);
-        make.right.equalTo(self.view.mas_right).with.offset(-20.0);
+        make.left.equalTo(self.blackImageView.mas_left).with.offset(20.0);
+        make.right.equalTo(self.blackImageView.mas_right).with.offset(-20.0);
         make.height.equalTo(@44.0);
     }];
     
@@ -98,27 +116,27 @@
     [self.passwordTextField mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.passwordTextFieldBackgroundImageView.mas_top).with.offset(7.0);
         make.left.equalTo(self.passwordImageView.mas_right).with.offset(20.0);
-        make.right.equalTo(self.view.mas_right).with.offset(-30.0);
+        make.right.equalTo(self.blackImageView.mas_right).with.offset(-30.0);
         make.height.equalTo(@30.0);
     }];
     
-    [self.backgroundImageView addSubview:self.loginButton];
+    [self.blackImageView addSubview:self.loginButton];
     [self.loginButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.passwordTextFieldBackgroundImageView.mas_bottom).with.offset(20.0);
-        make.left.equalTo(self.view.mas_left).with.offset(20.0);
-        make.right.equalTo(self.view.mas_right).with.offset(-20.0);
+        make.left.equalTo(self.blackImageView.mas_left).with.offset(20.0);
+        make.right.equalTo(self.blackImageView.mas_right).with.offset(-20.0);
         make.height.equalTo(@44.0);
     }];
     
-    [self.backgroundImageView addSubview:self.forgetPasswordImageView];
+    [self.blackImageView addSubview:self.forgetPasswordImageView];
     [self.forgetPasswordImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.loginButton.mas_bottom).with.offset(10.0);
-        make.left.equalTo(self.view.mas_left).with.offset(20.0);
+        make.left.equalTo(self.blackImageView.mas_left).with.offset(20.0);
         make.width.equalTo(@15.0);
         make.height.equalTo(@15.0);
     }];
     
-    [self.backgroundImageView addSubview:self.forgetPasswordButton];
+    [self.blackImageView addSubview:self.forgetPasswordButton];
     [self.forgetPasswordButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.loginButton.mas_bottom).with.offset(10.0);
         make.left.equalTo(self.forgetPasswordImageView.mas_right).with.offset(0.0);
@@ -126,10 +144,10 @@
         make.height.equalTo(@15.0);
     }];
     
-    [self.backgroundImageView addSubview:self.signupButton];
+    [self.blackImageView addSubview:self.signupButton];
     [self.signupButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.equalTo(self.view.mas_bottom).with.offset(-40.0);
-        make.centerX.equalTo(self.view.mas_centerX);
+        make.bottom.equalTo(self.blackImageView.mas_bottom).with.offset(-40.0);
+        make.centerX.equalTo(self.blackImageView.mas_centerX);
         make.width.equalTo(@70.0);
         make.height.equalTo(@15.0);
     }];
@@ -189,10 +207,11 @@
     NSTimeInterval animationDuration = 0.30f;
     [UIView beginAnimations:@ "ResizeForKeyboard"  context:nil];
     [UIView setAnimationDuration:animationDuration];
-    self.view.frame = CGRectMake(0.0f, -100.0f, self.view.frame.size.width, self.view.frame.size.height); //64-216
+    self.blackImageView.frame = CGRectMake(0.0f, -100.0f, self.blackImageView.frame.size.width, self.blackImageView.frame.size.height);
     [UIView commitAnimations];
-    self.iconImageView.hidden = YES;
-    
+    [UIView transitionWithView:self.iconImageView duration:0.3 options:UIViewAnimationOptionTransitionCrossDissolve animations:^(void){
+        self.iconImageView.hidden = YES;
+    } completion:nil];
     if (textField == self.phoneTextField) {
         self.phoneImageView.image = [UIImage imageNamed:@"login_phone_selected"];
         self.passwordImageView.image = [UIImage imageNamed:@"login_password"];
@@ -206,9 +225,11 @@
     NSTimeInterval animationDuration = 0.30f;
     [UIView beginAnimations:@ "ResizeForKeyboard"  context:nil];
     [UIView setAnimationDuration:animationDuration];
-    self.view.frame = CGRectMake(0.0f, 0.0f, self.view.frame.size.width, self.view.frame.size.height); //64-216
+    self.blackImageView.frame = CGRectMake(0.0f, 0.0f, self.blackImageView.frame.size.width, self.blackImageView.frame.size.height);
     [UIView commitAnimations];
-     self.iconImageView.hidden = NO;
+    [UIView transitionWithView:self.iconImageView duration:0.3 options:UIViewAnimationOptionTransitionCrossDissolve animations:^(void){
+        self.iconImageView.hidden = NO;
+    } completion:nil];
 }
 
 #pragma mark - getter and setter
@@ -230,17 +251,21 @@
         _backgroundImageView = [[UIImageView alloc] initWithFrame:self.view.bounds];
         _backgroundImageView.userInteractionEnabled = YES;
         _backgroundImageView.image = [UIImage imageNamed:launchImageName];
+    }
+    return _backgroundImageView;
+}
 
-        UIImageView *blackImageView = [[UIImageView alloc] initWithFrame:self.view.bounds];
-        blackImageView.userInteractionEnabled = YES;
-        blackImageView.backgroundColor = [UIColor colorWithWhite:0.0 alpha:0.6];
-        [_backgroundImageView addSubview:blackImageView];
+- (UIImageView *) blackImageView {
+    if (!_blackImageView) {
+        _blackImageView = [[UIImageView alloc] initWithFrame:self.view.bounds];
+        _blackImageView.userInteractionEnabled = YES;
+        _blackImageView.backgroundColor = [UIColor colorWithWhite:0.0 alpha:0.6];
         UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self  action:@selector(dismissKeyboard)];
         tapGesture.numberOfTapsRequired = 1;
         [tapGesture setDelegate:self];
-        [blackImageView addGestureRecognizer:tapGesture];
+        [_blackImageView addGestureRecognizer:tapGesture];
     }
-    return _backgroundImageView;
+    return _blackImageView;
 }
 
 - (UIImageView *) iconImageView {

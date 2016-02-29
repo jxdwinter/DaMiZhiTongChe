@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		83548E771C83D84C00A2252F /* ForgetPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83548E761C83D84C00A2252F /* ForgetPasswordViewController.m */; };
 		836A64291C7BDFEB00219035 /* BaseNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 836A64261C7BDFEB00219035 /* BaseNavigationController.m */; };
 		836A642A1C7BDFEB00219035 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 836A64281C7BDFEB00219035 /* BaseViewController.m */; };
 		836A642F1C7BE09E00219035 /* Config.m in Sources */ = {isa = PBXBuildFile; fileRef = 836A642D1C7BE09E00219035 /* Config.m */; };
@@ -63,6 +64,8 @@
 /* Begin PBXFileReference section */
 		0FE7ABB510C854B55E126402 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		50FFD4F0D120AD746C8EA22F /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		83548E751C83D84C00A2252F /* ForgetPasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForgetPasswordViewController.h; sourceTree = "<group>"; };
+		83548E761C83D84C00A2252F /* ForgetPasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForgetPasswordViewController.m; sourceTree = "<group>"; };
 		836A64251C7BDFEB00219035 /* BaseNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseNavigationController.h; sourceTree = "<group>"; };
 		836A64261C7BDFEB00219035 /* BaseNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseNavigationController.m; sourceTree = "<group>"; };
 		836A64271C7BDFEB00219035 /* BaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseViewController.h; sourceTree = "<group>"; };
@@ -312,6 +315,8 @@
 			children = (
 				83A46F4B1C7D460300C17759 /* LoginViewController.h */,
 				83A46F4C1C7D460300C17759 /* LoginViewController.m */,
+				83548E751C83D84C00A2252F /* ForgetPasswordViewController.h */,
+				83548E761C83D84C00A2252F /* ForgetPasswordViewController.m */,
 				8384AD6D1C83C61E001CCA0C /* SetPasswordViewController.h */,
 				8384AD6E1C83C61E001CCA0C /* SetPasswordViewController.m */,
 			);
@@ -603,6 +608,7 @@
 			files = (
 				836A642F1C7BE09E00219035 /* Config.m in Sources */,
 				83E0A2921C7AF5F8002E4954 /* AppDelegate.m in Sources */,
+				83548E771C83D84C00A2252F /* ForgetPasswordViewController.m in Sources */,
 				836A642A1C7BDFEB00219035 /* BaseViewController.m in Sources */,
 				8384AD6F1C83C61E001CCA0C /* SetPasswordViewController.m in Sources */,
 				836A64531C7BE22100219035 /* GTMBase64.m in Sources */,

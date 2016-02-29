@@ -8,7 +8,7 @@
 
 #import "LoginViewController.h"
 #import "SetPasswordViewController.h"
-#import "BaseNavigationController.h"
+#import "ForgetPasswordViewController.h"
 
 @interface LoginViewController () <UITextFieldDelegate,UIGestureRecognizerDelegate>
 
@@ -286,7 +286,9 @@
 }
 
 - (void) signUp {
-    [self.navigationController pushViewController:[[SetPasswordViewController alloc] init] animated:YES];
+    SetPasswordViewController *setPasswordViewController = [[SetPasswordViewController alloc] init];
+    setPasswordViewController.setPasswordType = 0;
+    [self.navigationController pushViewController:setPasswordViewController animated:YES];
 }
 
 - (void) getCode : (UIButton *) button {
@@ -295,6 +297,10 @@
 
 - (void)declarationLabelClicked : (UILabel *) sender{
     NSLog(@"declarationLabelClicked");
+}
+
+- (void) forgetPassword {
+    [self.navigationController pushViewController:[[ForgetPasswordViewController alloc] init] animated:YES];
 }
 
 - (void) changeTosignup {
@@ -331,10 +337,6 @@
 
 - (void) dismissKeyboard {
     [self.view endEditing:YES];
-}
-
-- (void) forgetPassword {
-    NSLog(@"forgetPassword");
 }
 
 -(void) setButtonCountDown:(UIButton *)button {

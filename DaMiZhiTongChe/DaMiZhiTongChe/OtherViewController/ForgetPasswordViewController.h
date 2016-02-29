@@ -1,5 +1,5 @@
 //
-//  SetPasswordViewController.h
+//  ForgetPasswordViewController.h
 //  DaMiZhiTongChe
 //
 //  Created by Xiaodong Jiang on 2/29/16.
@@ -8,12 +8,6 @@
 
 #import "BaseViewController.h"
 
-@interface SetPasswordViewController : BaseViewController
-
-/*
- 0 为设置密码
- 1 为重设密码
- */
-@property (nonatomic, assign) NSUInteger setPasswordType;
+@interface ForgetPasswordViewController : BaseViewController
 
 @end

@@ -20,7 +20,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.title = @"设置密码";
+    if (self.setPasswordType == 0) {
+        self.title = @"设置密码";
+    }else if (self.setPasswordType == 1){
+        self.title = @"重设密码";
+    }
     
     [self.view addSubview:self.passwordTextField];
     [self.passwordTextField mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -63,8 +67,16 @@
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark - privete method
+
 - (void) confirm {
-    
+    if (self.setPasswordType == 0) {
+        [self dismissViewControllerAnimated:YES completion:^{
+            
+        }];
+    }else if (self.setPasswordType == 1){
+        [self.navigationController popToRootViewControllerAnimated:YES];
+    }
 }
 
 #pragma mark - getter and setter

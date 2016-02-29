@@ -121,9 +121,9 @@
     
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     
-    [[UINavigationBar appearance] setTintColor:DEFAULTCOLOR];
+    [[UINavigationBar appearance] setTintColor:DEFAULTBROWNCOLOR];
     [[UINavigationBar appearance] setBarTintColor:DEFAULTCOLOR];
-    [[UINavigationBar appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor],
+    [[UINavigationBar appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName : DEFAULTBROWNCOLOR,
                                                            NSFontAttributeName : DEFAULNAVIGATIONBARFONT}];
     
     [[UITabBarItem appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName : DEFAULTBROWNCOLOR } forState:UIControlStateSelected];

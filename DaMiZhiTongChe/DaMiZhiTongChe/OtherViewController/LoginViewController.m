@@ -7,7 +7,8 @@
 //
 
 #import "LoginViewController.h"
-#import "SignUpViewController.h"
+#import "SetPasswordViewController.h"
+#import "BaseNavigationController.h"
 
 @interface LoginViewController () <UITextFieldDelegate,UIGestureRecognizerDelegate>
 
@@ -246,7 +247,17 @@
 
 - (void) viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
+    self.navigationController.navigationBar.hidden = NO;
     [self.view endEditing:YES];
+}
+
+- (void) viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    self.navigationController.navigationBar.hidden = YES;
+}
+
+- (void) viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -275,7 +286,7 @@
 }
 
 - (void) signUp {
-    NSLog(@"signUp");
+    [self.navigationController pushViewController:[[SetPasswordViewController alloc] init] animated:YES];
 }
 
 - (void) getCode : (UIButton *) button {

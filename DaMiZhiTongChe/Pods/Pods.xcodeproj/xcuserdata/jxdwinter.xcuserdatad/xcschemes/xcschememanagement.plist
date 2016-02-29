@@ -69,6 +69,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>SDCycleScrollView.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>SDWebImage.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -102,6 +107,11 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>12D57F5BA36E4E026D70C69E06EC8DAC</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>1E8F96B2DA89BFDE661E5CC9552B69E1</key>
 		<dict>
 			<key>primary</key>
@@ -112,12 +122,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>2D83950A14992ECACC38D9D8824D829F</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>38EA2B758DB50530FE7999076E497AEE</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>3C5761B0B9F95465E8C26260AA0A84AB</key>
+		<key>47813C6DA8D52131E862000124A199E4</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -142,7 +157,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>67D9917B35A8D69187FADF2C6C58EBDB</key>
+		<key>6AEFA2E483F226FD0FCE6E314EC033C7</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -152,12 +167,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>9F12FB4A63E20F601CFB2E64A65B57C1</key>
+		<key>94FD37B2AD5B0826A429CC1FD60EED60</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>A036DF3BB7C13B59BB2BC0A279421D3E</key>
+		<key>9F12FB4A63E20F601CFB2E64A65B57C1</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -167,17 +182,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>B137CDC5C478E380B5C940FAFA322ED2</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>B3C760711B585710870482548EF04B3F</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>B680A0E6BB5FAB6A25DFB3FA01243C50</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -187,12 +192,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>C408DC4210148DF2F08C9A5FE5895A07</key>
+		<key>C569D6EE2C7E541B4B1D0EE61C3F2A25</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
 		<key>FE2F1D7B9D9FCEA148517E4657B243F4</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>FF41AC08DB2BBDF6007DDCE44F109617</key>
 		<dict>
 			<key>primary</key>
 			<true/>

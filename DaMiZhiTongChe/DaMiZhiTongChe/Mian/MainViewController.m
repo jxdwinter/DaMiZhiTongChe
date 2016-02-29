@@ -49,8 +49,7 @@
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar{
     [searchBar resignFirstResponder];
-    
-    [self.navigationController presentViewController:[[LoginViewController alloc] init] animated:YES completion:^{
+    [self.navigationController presentViewController:[[BaseNavigationController alloc] initWithRootViewController:[[LoginViewController alloc] init]] animated:YES completion:^{
         
     }];
 }

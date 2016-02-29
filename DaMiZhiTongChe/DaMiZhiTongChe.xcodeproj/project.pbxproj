@@ -33,8 +33,8 @@
 		836C9DD01C7BF370000DA3C5 /* ReleaseNotes.txt in Resources */ = {isa = PBXBuildFile; fileRef = 836C9DCC1C7BF370000DA3C5 /* ReleaseNotes.txt */; };
 		836C9DD31C7BF441000DA3C5 /* KSCrash.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 836C9DD21C7BF441000DA3C5 /* KSCrash.framework */; };
 		836C9DD51C7BF461000DA3C5 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 836C9DD41C7BF461000DA3C5 /* libc++.tbd */; };
+		8384AD6F1C83C61E001CCA0C /* SetPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8384AD6E1C83C61E001CCA0C /* SetPasswordViewController.m */; };
 		83A46F4D1C7D460300C17759 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83A46F4C1C7D460300C17759 /* LoginViewController.m */; };
-		83A46F501C7D464000C17759 /* SignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83A46F4F1C7D464000C17759 /* SignUpViewController.m */; };
 		83E0A25E1C7AF3B4002E4954 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 83E0A25D1C7AF3B4002E4954 /* main.m */; };
 		83E0A2691C7AF3B4002E4954 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 83E0A2681C7AF3B4002E4954 /* Assets.xcassets */; };
 		83E0A2771C7AF3B4002E4954 /* DaMiZhiTongCheTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 83E0A2761C7AF3B4002E4954 /* DaMiZhiTongCheTests.m */; };
@@ -110,10 +110,10 @@
 		836C9DCC1C7BF370000DA3C5 /* ReleaseNotes.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ReleaseNotes.txt; sourceTree = "<group>"; };
 		836C9DD21C7BF441000DA3C5 /* KSCrash.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = KSCrash.framework; sourceTree = "<group>"; };
 		836C9DD41C7BF461000DA3C5 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
+		8384AD6D1C83C61E001CCA0C /* SetPasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SetPasswordViewController.h; sourceTree = "<group>"; };
+		8384AD6E1C83C61E001CCA0C /* SetPasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SetPasswordViewController.m; sourceTree = "<group>"; };
 		83A46F4B1C7D460300C17759 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		83A46F4C1C7D460300C17759 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
-		83A46F4E1C7D464000C17759 /* SignUpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignUpViewController.h; sourceTree = "<group>"; };
-		83A46F4F1C7D464000C17759 /* SignUpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignUpViewController.m; sourceTree = "<group>"; };
 		83E0A2591C7AF3B4002E4954 /* DaMiZhiTongChe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DaMiZhiTongChe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		83E0A25D1C7AF3B4002E4954 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		83E0A2681C7AF3B4002E4954 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -312,8 +312,8 @@
 			children = (
 				83A46F4B1C7D460300C17759 /* LoginViewController.h */,
 				83A46F4C1C7D460300C17759 /* LoginViewController.m */,
-				83A46F4E1C7D464000C17759 /* SignUpViewController.h */,
-				83A46F4F1C7D464000C17759 /* SignUpViewController.m */,
+				8384AD6D1C83C61E001CCA0C /* SetPasswordViewController.h */,
+				8384AD6E1C83C61E001CCA0C /* SetPasswordViewController.m */,
 			);
 			path = OtherViewController;
 			sourceTree = "<group>";
@@ -604,8 +604,8 @@
 				836A642F1C7BE09E00219035 /* Config.m in Sources */,
 				83E0A2921C7AF5F8002E4954 /* AppDelegate.m in Sources */,
 				836A642A1C7BDFEB00219035 /* BaseViewController.m in Sources */,
+				8384AD6F1C83C61E001CCA0C /* SetPasswordViewController.m in Sources */,
 				836A64531C7BE22100219035 /* GTMBase64.m in Sources */,
-				83A46F501C7D464000C17759 /* SignUpViewController.m in Sources */,
 				836A645C1C7BE22100219035 /* MBProgressHUD+Helper.m in Sources */,
 				836A64D31C7BE30900219035 /* ConfigYTKRequest.m in Sources */,
 				836A64D21C7BE30900219035 /* ConfigArgument.m in Sources */,

@@ -10,7 +10,7 @@
 #import "FBEncryptorAES.h"
 #import "GTMBase64.h"
 
-#define kKey @"yunkangyihu-tang"
+#define kKey @"vU9HYgyhkyJLv2RN"
 
 @implementation AESenAndDe
 

@@ -22,6 +22,8 @@
 #import "CartViewController.h"
 #import "MineViewController.h"
 
+#import "Login_updateAnonymousTokenApi.h"
+
 @interface AppDelegate ()
 
 @end
@@ -57,6 +59,49 @@
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
+
+- (void)application:(UIApplication*)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData*)deviceToken{
+    NSString *pushToken = [[[[deviceToken description]
+                             stringByReplacingOccurrencesOfString:@"<" withString:@""]
+                            stringByReplacingOccurrencesOfString:@">" withString:@""]
+                           stringByReplacingOccurrencesOfString:@" " withString:@""] ;
+    NSLog(@"stringToken:%@",pushToken);
+    if (pushToken && pushToken.length) {
+        
+    }else{
+        pushToken = @"0";
+    }
+    [AccountHelper saveAccountTokenWithToken:pushToken];
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+        [self updateAnonymousToken];
+    });
+}
+
+- (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
+    NSLog(@"Registfail%@",error);
+}
+
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo{
+    // 处理推送消息
+    NSLog(@"userinfo:%@",userInfo);
+}
+
+- (void)updateAnonymousToken {
+    Login_updateAnonymousTokenApi *api = [[Login_updateAnonymousTokenApi alloc] init];
+    [api startWithCompletionBlockWithSuccess:^(YTKBaseRequest *request) {
+        NSDictionary *dic = [api responseDictionaryWithResponseString:request.responseString];
+        if (dic) {
+            if ([dic[@"result"] isEqualToString:@"0"]) {
+                
+            }else{
+                
+            }
+        }
+    } failure:^(YTKBaseRequest *request) {
+        
+    }];
+}
+
 #pragma mark - APP Config
 #pragma mark -
 

@@ -8,6 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		83548E771C83D84C00A2252F /* ForgetPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83548E761C83D84C00A2252F /* ForgetPasswordViewController.m */; };
+		836013EC1C8568870090257C /* Login_updateAnonymousTokenApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 836013EB1C8568870090257C /* Login_updateAnonymousTokenApi.m */; };
+		836013F31C856C3F0090257C /* AccountHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 836013EE1C856C3F0090257C /* AccountHelper.m */; };
+		836013F41C856C3F0090257C /* AccountManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 836013F01C856C3F0090257C /* AccountManager.m */; };
+		836013F51C856C3F0090257C /* SharedDatabaseHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 836013F21C856C3F0090257C /* SharedDatabaseHelper.m */; };
+		836013F91C856D5C0090257C /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 836013F81C856D5C0090257C /* User.m */; };
+		836013FC1C8571BD0090257C /* Mine_releaseTokenApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 836013FB1C8571BD0090257C /* Mine_releaseTokenApi.m */; };
+		836013FF1C8575370090257C /* Login_sendCodeApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 836013FE1C8575370090257C /* Login_sendCodeApi.m */; };
+		836014031C857EA70090257C /* VerifyTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 836014021C857EA70090257C /* VerifyTools.m */; };
 		836A64291C7BDFEB00219035 /* BaseNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 836A64261C7BDFEB00219035 /* BaseNavigationController.m */; };
 		836A642A1C7BDFEB00219035 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 836A64281C7BDFEB00219035 /* BaseViewController.m */; };
 		836A642F1C7BE09E00219035 /* Config.m in Sources */ = {isa = PBXBuildFile; fileRef = 836A642D1C7BE09E00219035 /* Config.m */; };
@@ -66,6 +74,22 @@
 		50FFD4F0D120AD746C8EA22F /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		83548E751C83D84C00A2252F /* ForgetPasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForgetPasswordViewController.h; sourceTree = "<group>"; };
 		83548E761C83D84C00A2252F /* ForgetPasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForgetPasswordViewController.m; sourceTree = "<group>"; };
+		836013EA1C8568870090257C /* Login_updateAnonymousTokenApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Login_updateAnonymousTokenApi.h; sourceTree = "<group>"; };
+		836013EB1C8568870090257C /* Login_updateAnonymousTokenApi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Login_updateAnonymousTokenApi.m; sourceTree = "<group>"; };
+		836013ED1C856C3F0090257C /* AccountHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountHelper.h; sourceTree = "<group>"; };
+		836013EE1C856C3F0090257C /* AccountHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountHelper.m; sourceTree = "<group>"; };
+		836013EF1C856C3F0090257C /* AccountManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountManager.h; sourceTree = "<group>"; };
+		836013F01C856C3F0090257C /* AccountManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountManager.m; sourceTree = "<group>"; };
+		836013F11C856C3F0090257C /* SharedDatabaseHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SharedDatabaseHelper.h; sourceTree = "<group>"; };
+		836013F21C856C3F0090257C /* SharedDatabaseHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SharedDatabaseHelper.m; sourceTree = "<group>"; };
+		836013F71C856D5C0090257C /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
+		836013F81C856D5C0090257C /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
+		836013FA1C8571BD0090257C /* Mine_releaseTokenApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Mine_releaseTokenApi.h; sourceTree = "<group>"; };
+		836013FB1C8571BD0090257C /* Mine_releaseTokenApi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Mine_releaseTokenApi.m; sourceTree = "<group>"; };
+		836013FD1C8575370090257C /* Login_sendCodeApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Login_sendCodeApi.h; sourceTree = "<group>"; };
+		836013FE1C8575370090257C /* Login_sendCodeApi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Login_sendCodeApi.m; sourceTree = "<group>"; };
+		836014011C857EA70090257C /* VerifyTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VerifyTools.h; sourceTree = "<group>"; };
+		836014021C857EA70090257C /* VerifyTools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VerifyTools.m; sourceTree = "<group>"; };
 		836A64251C7BDFEB00219035 /* BaseNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseNavigationController.h; sourceTree = "<group>"; };
 		836A64261C7BDFEB00219035 /* BaseNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseNavigationController.m; sourceTree = "<group>"; };
 		836A64271C7BDFEB00219035 /* BaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseViewController.h; sourceTree = "<group>"; };
@@ -166,6 +190,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		836013F61C856D470090257C /* CurrentUser */ = {
+			isa = PBXGroup;
+			children = (
+				836013F71C856D5C0090257C /* User.h */,
+				836013F81C856D5C0090257C /* User.m */,
+			);
+			path = CurrentUser;
+			sourceTree = "<group>";
+		};
+		836014001C857E1F0090257C /* Foundation */ = {
+			isa = PBXGroup;
+			children = (
+				836014011C857EA70090257C /* VerifyTools.h */,
+				836014021C857EA70090257C /* VerifyTools.m */,
+			);
+			path = Foundation;
+			sourceTree = "<group>";
+		};
 		836A64241C7BDFEB00219035 /* BaseViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -183,6 +225,12 @@
 				836A642C1C7BE09E00219035 /* Config.h */,
 				836A642D1C7BE09E00219035 /* Config.m */,
 				836A642E1C7BE09E00219035 /* UIConfig.h */,
+				836013ED1C856C3F0090257C /* AccountHelper.h */,
+				836013EE1C856C3F0090257C /* AccountHelper.m */,
+				836013EF1C856C3F0090257C /* AccountManager.h */,
+				836013F01C856C3F0090257C /* AccountManager.m */,
+				836013F11C856C3F0090257C /* SharedDatabaseHelper.h */,
+				836013F21C856C3F0090257C /* SharedDatabaseHelper.m */,
 			);
 			path = Configration;
 			sourceTree = "<group>";
@@ -190,6 +238,7 @@
 		836A64301C7BE22100219035 /* Toolkit */ = {
 			isa = PBXGroup;
 			children = (
+				836014001C857E1F0090257C /* Foundation */,
 				836A64311C7BE22100219035 /* AES&BASE64 */,
 				836A64391C7BE22100219035 /* Base64 */,
 				836A644C1C7BE22100219035 /* UIKit */,
@@ -240,6 +289,12 @@
 				836A64841C7BE30900219035 /* ConfigYTKRequest.m */,
 				836A64F21C7BE41700219035 /* RequestAccessory.h */,
 				836A64F31C7BE41700219035 /* RequestAccessory.m */,
+				836013EA1C8568870090257C /* Login_updateAnonymousTokenApi.h */,
+				836013EB1C8568870090257C /* Login_updateAnonymousTokenApi.m */,
+				836013FD1C8575370090257C /* Login_sendCodeApi.h */,
+				836013FE1C8575370090257C /* Login_sendCodeApi.m */,
+				836013FA1C8571BD0090257C /* Mine_releaseTokenApi.h */,
+				836013FB1C8571BD0090257C /* Mine_releaseTokenApi.m */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -354,6 +409,7 @@
 				836A642B1C7BE09E00219035 /* Configration */,
 				836A64301C7BE22100219035 /* Toolkit */,
 				836C9DC31C7BF370000DA3C5 /* ThirdPart */,
+				836013F61C856D470090257C /* CurrentUser */,
 				83A46F4A1C7D45ED00C17759 /* OtherViewController */,
 				836C9DA61C7BEADF000DA3C5 /* Mian */,
 				836C9DB21C7BEF95000DA3C5 /* Cart */,
@@ -606,24 +662,32 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				836013F91C856D5C0090257C /* User.m in Sources */,
 				836A642F1C7BE09E00219035 /* Config.m in Sources */,
 				83E0A2921C7AF5F8002E4954 /* AppDelegate.m in Sources */,
 				83548E771C83D84C00A2252F /* ForgetPasswordViewController.m in Sources */,
 				836A642A1C7BDFEB00219035 /* BaseViewController.m in Sources */,
+				836013FC1C8571BD0090257C /* Mine_releaseTokenApi.m in Sources */,
 				8384AD6F1C83C61E001CCA0C /* SetPasswordViewController.m in Sources */,
+				836013F51C856C3F0090257C /* SharedDatabaseHelper.m in Sources */,
 				836A64531C7BE22100219035 /* GTMBase64.m in Sources */,
 				836A645C1C7BE22100219035 /* MBProgressHUD+Helper.m in Sources */,
 				836A64D31C7BE30900219035 /* ConfigYTKRequest.m in Sources */,
 				836A64D21C7BE30900219035 /* ConfigArgument.m in Sources */,
+				836013F41C856C3F0090257C /* AccountManager.m in Sources */,
 				836A64511C7BE22100219035 /* AESenAndDe.m in Sources */,
 				836C9DB51C7BEF95000DA3C5 /* CartViewController.m in Sources */,
+				836013F31C856C3F0090257C /* AccountHelper.m in Sources */,
 				83E0A25E1C7AF3B4002E4954 /* main.m in Sources */,
 				836A645D1C7BE22100219035 /* TextView.m in Sources */,
 				836A64291C7BDFEB00219035 /* BaseNavigationController.m in Sources */,
+				836013EC1C8568870090257C /* Login_updateAnonymousTokenApi.m in Sources */,
 				836C9DB81C7BEFAC000DA3C5 /* MineViewController.m in Sources */,
 				836A64521C7BE22100219035 /* FBEncryptorAES.m in Sources */,
+				836014031C857EA70090257C /* VerifyTools.m in Sources */,
 				83A46F4D1C7D460300C17759 /* LoginViewController.m in Sources */,
 				836A64F41C7BE41700219035 /* RequestAccessory.m in Sources */,
+				836013FF1C8575370090257C /* Login_sendCodeApi.m in Sources */,
 				836C9DAB1C7BEB0D000DA3C5 /* MainViewController.m in Sources */,
 				836A64541C7BE22100219035 /* MF_Base64Additions.m in Sources */,
 			);

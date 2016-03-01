@@ -29,6 +29,9 @@
 #import "ConfigArgument.h"
 #import "ConfigYTKRequest.h"
 #import "RequestAccessory.h"
+#import "SharedDatabaseHelper.h"
+#import "AccountHelper.h"
+#import "VerifyTools.h"
 #endif
 
 #endif /* DaMiZhiTongChe_Prefix_pch */

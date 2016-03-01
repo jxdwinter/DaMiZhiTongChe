@@ -8,6 +8,7 @@
 
 #import "ForgetPasswordViewController.h"
 #import "SetPasswordViewController.h"
+#import "Login_sendCodeApi.h"
 
 @interface ForgetPasswordViewController () <UITextFieldDelegate>
 
@@ -94,7 +95,26 @@
 #pragma mark - privete method
 
 - (void) getCode : (UIButton *) button {
-    [self setButtonCountDown:button];
+    if ([VerifyTools verifyPhoneNumber:self.phoneTextField.text]) {
+        Login_sendCodeApi *api = [[Login_sendCodeApi alloc] initWithPhone:self.phoneTextField.text withType:@"1"];
+        RequestAccessory *accessory = [[RequestAccessory alloc] initAccessoryWithView:self.navigationController.view];
+        [api addAccessory:accessory];
+        [api startWithCompletionBlockWithSuccess:^(YTKBaseRequest *request) {
+            NSDictionary *dic = [api responseDictionaryWithResponseString:request.responseString];
+            if (dic) {
+                if ([dic[@"result"] isEqualToString:@"0"]) {
+                    [self setButtonCountDown:button];
+                    [MBProgressHUD showHUDwithSuccess:YES WithTitle:dic[@"msg"] withView:self.navigationController.view];
+                }else{
+                    [MBProgressHUD showHUDwithSuccess:NO WithTitle:dic[@"msg"] withView:self.navigationController.view];
+                }
+            }
+        } failure:^(YTKBaseRequest *request) {
+            
+        }];
+    }else{
+        [MBProgressHUD showHUDwithSuccess:NO WithTitle:@"请正确填写手机号码" withView:self.navigationController.view];
+    }
 }
 
 -(void) setButtonCountDown:(UIButton *)button {
@@ -124,9 +144,16 @@
 }
 
 - (void) confirm {
+    if ( [VerifyTools verifyPhoneNumber:self.phoneTextField.text] && [VerifyTools verifyVerityCode:self.codeTextField.text] ) {
+        
+    }else{
+        [MBProgressHUD showHUDwithSuccess:NO WithTitle:@"请正确填写手机号码和六位数字验证码" withView:self.navigationController.view];
+    }
+    /*
     SetPasswordViewController *setPasswordViewController = [[SetPasswordViewController alloc] init];
     setPasswordViewController.setPasswordType = 1;
     [self.navigationController pushViewController:setPasswordViewController animated:YES];
+     */
 }
 
 #pragma mark - getter and setter

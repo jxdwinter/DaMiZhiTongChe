@@ -28,12 +28,12 @@ NSString *const DATABASENAME = @"DaMiZhiTongChe.db";
 /**
  *  URL
  */
-NSString *const BASEURL = @"http://api.tanghuzhao.cn";
+NSString *const BASEURL = @"http://api.damizhitongche.com";
 
 /**
  *  每一页的数量,用于翻页
  */
-NSInteger const PAGENUMBER = 20;
+NSInteger const PAGENUMBER = 50;
 
 
 @end

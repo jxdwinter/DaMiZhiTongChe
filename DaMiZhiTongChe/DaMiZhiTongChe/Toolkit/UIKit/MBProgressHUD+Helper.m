@@ -15,11 +15,11 @@
 + (void) showHUDwithSuccess : (BOOL) success WithTitle : (NSString *) title withView : (UIView *)view{
     MBProgressHUD *HUD = [[MBProgressHUD alloc] initWithView:view?view:[[UIApplication sharedApplication] keyWindow]];
     [view addSubview:HUD];
-    HUD.customView = [[UIImageView alloc] initWithImage:success?[UIImage imageNamed:@"Checkmark"]:[UIImage imageNamed:@"error"]];
+    HUD.customView = [[UIImageView alloc] init];
     HUD.mode = MBProgressHUDModeCustomView;
     HUD.labelText = title;
     [HUD show:YES];
-    [HUD hide:YES afterDelay:1.5];
+    [HUD hide:YES afterDelay:2.0];
 }
 
 + (void) showHUDWhileNetworkWithView : (UIView *) view{

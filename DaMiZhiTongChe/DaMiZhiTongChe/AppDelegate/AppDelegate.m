@@ -17,6 +17,7 @@
 #import "MTAConfig.h"
 
 #import "BaseNavigationController.h"
+#import "LoginViewController.h"
 
 #import "MainViewController.h"
 #import "CartViewController.h"
@@ -24,7 +25,11 @@
 
 #import "Login_updateAnonymousTokenApi.h"
 
-@interface AppDelegate ()
+@interface AppDelegate () <UITabBarControllerDelegate>
+
+@property (nonatomic, strong) BaseNavigationController* mainNavController;
+@property (nonatomic, strong) BaseNavigationController* cartNavController;
+@property (nonatomic, strong) BaseNavigationController* mineNavController;
 
 @end
 
@@ -150,6 +155,12 @@
         [installation sendAllReportsWithCompletion:nil];
     }
     
+    /**
+     *  初始化数据库
+     */
+    SharedDatabaseHelper *sharedDatabaseHelper = [SharedDatabaseHelper sharedDatabaseHelper];
+    NSLog(@"%@",[sharedDatabaseHelper description]);
+    
     YTKNetworkConfig *config = [YTKNetworkConfig sharedInstance];
     config.baseUrl = BASEURL;
     
@@ -175,12 +186,13 @@
     [[UITabBarItem appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName : DEFAULTGRAYCOLOR } forState:UIControlStateNormal];
     
     self.tabBarController = [[UITabBarController alloc] init];
+    self.tabBarController.delegate = self;
     self.tabBarController.tabBar.translucent = NO;
     
-    BaseNavigationController* mainNavController = [[BaseNavigationController alloc] initWithRootViewController:[[MainViewController alloc] init]];
-    BaseNavigationController* cartNavController = [[BaseNavigationController alloc] initWithRootViewController:[[CartViewController alloc] init]];
-    BaseNavigationController* mineNavController = [[BaseNavigationController alloc] initWithRootViewController:[[MineViewController alloc] init]];
-    NSArray* controllers = @[mainNavController,cartNavController,mineNavController];
+    self.mainNavController = [[BaseNavigationController alloc] initWithRootViewController:[[MainViewController alloc] init]];
+    self.cartNavController = [[BaseNavigationController alloc] initWithRootViewController:[[CartViewController alloc] init]];
+    self.mineNavController = [[BaseNavigationController alloc] initWithRootViewController:[[MineViewController alloc] init]];
+    NSArray* controllers = @[self.mainNavController,self.cartNavController,self.mineNavController];
     self.tabBarController.viewControllers = controllers;
     
     UITabBar *tabBar = self.tabBarController.tabBar;
@@ -242,5 +254,34 @@
     }
 }
 
+#pragma mark - UITabBarControllerDelegate
+#pragma mark -
+
+-(BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController {
+    if (viewController == self.mainNavController) {
+        return YES;
+    }else if (viewController == self.cartNavController) {
+        if (![[AccountManager sharedAccountManager] getCurrentUser]) {
+            [self presentLoginViewController];
+            return NO;
+        }else{
+            return YES;
+        }
+    }else if (viewController == self.mineNavController) {
+        if (![[AccountManager sharedAccountManager] getCurrentUser]) {
+            [self presentLoginViewController];
+            return NO;
+        }else{
+            return YES;
+        }
+    }
+    return NO;
+}
+
+- (void) presentLoginViewController {
+    [self.mainNavController presentViewController:[[BaseNavigationController alloc] initWithRootViewController:[[LoginViewController alloc] init]] animated:YES completion:^{
+    
+    }];
+}
 
 @end

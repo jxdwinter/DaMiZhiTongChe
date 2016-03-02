@@ -20,4 +20,9 @@
  */
 + (BOOL) verifyVerityCode : (NSString *) verityCode;
 
+/*
+ *验证六位数字验证码
+ */
++ (BOOL) verifyPassword : (NSString *) password;
+
 @end

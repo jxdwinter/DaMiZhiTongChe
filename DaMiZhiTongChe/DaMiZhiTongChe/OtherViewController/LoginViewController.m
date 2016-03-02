@@ -277,6 +277,8 @@
 #pragma mark - privete method
 
 - (void) backToPreViewController {
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    [appDelegate.tabBarController setSelectedIndex:0];
     [self dismissViewControllerAnimated:YES completion:^{
         
     }];
@@ -296,7 +298,7 @@
     SetPasswordViewController *setPasswordViewController = [[SetPasswordViewController alloc] init];
     setPasswordViewController.setPasswordType = 0;
     [self.navigationController pushViewController:setPasswordViewController animated:YES];
-     */
+    */
 }
 
 - (void) getCode : (UIButton *) button {

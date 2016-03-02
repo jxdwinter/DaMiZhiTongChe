@@ -22,4 +22,12 @@
     return [pred evaluateWithObject:verityCode];
 }
 
++ (BOOL) verifyPassword : (NSString *) password{
+    if (password.length >= 6 && password.length <= 16) {
+        return YES;
+    }else{
+        return NO;
+    }
+}
+
 @end

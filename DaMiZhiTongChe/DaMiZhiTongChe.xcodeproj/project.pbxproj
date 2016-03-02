@@ -238,10 +238,10 @@
 		836A64301C7BE22100219035 /* Toolkit */ = {
 			isa = PBXGroup;
 			children = (
+				836A644C1C7BE22100219035 /* UIKit */,
 				836014001C857E1F0090257C /* Foundation */,
 				836A64311C7BE22100219035 /* AES&BASE64 */,
 				836A64391C7BE22100219035 /* Base64 */,
-				836A644C1C7BE22100219035 /* UIKit */,
 			);
 			path = Toolkit;
 			sourceTree = "<group>";

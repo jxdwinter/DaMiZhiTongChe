@@ -51,7 +51,7 @@
     [[self store] clearTable:CURRENTUSERTALBE];
 }
 
-- (void) userLogout{
+- (void) userLogout {
     [self clear];
     self.user = nil;
     [AccountHelper deleteAccountInfo];

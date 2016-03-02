@@ -153,7 +153,7 @@
     SetPasswordViewController *setPasswordViewController = [[SetPasswordViewController alloc] init];
     setPasswordViewController.setPasswordType = 1;
     [self.navigationController pushViewController:setPasswordViewController animated:YES];
-     */
+    */
 }
 
 #pragma mark - getter and setter

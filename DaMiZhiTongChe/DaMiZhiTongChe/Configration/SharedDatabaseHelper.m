@@ -39,6 +39,7 @@ static SharedDatabaseHelper* sharedDatabaseHelper = nil;
 
 - (void)clearAllCurrentUserDatabase{
     YTKKeyValueStore *store = [[YTKKeyValueStore alloc] initDBWithName:DATABASENAME];
+    
 }
 
 @end

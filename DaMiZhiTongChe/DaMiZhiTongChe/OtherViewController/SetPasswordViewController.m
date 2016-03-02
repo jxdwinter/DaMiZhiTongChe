@@ -70,12 +70,16 @@
 #pragma mark - privete method
 
 - (void) confirm {
-    if (self.setPasswordType == 0) {
-        [self dismissViewControllerAnimated:YES completion:^{
-            
-        }];
-    }else if (self.setPasswordType == 1){
-        [self.navigationController popToRootViewControllerAnimated:YES];
+    if ([VerifyTools verifyPassword:self.passwordTextField.text]) {
+        if (self.setPasswordType == 0) {
+            [self dismissViewControllerAnimated:YES completion:^{
+                
+            }];
+        }else if (self.setPasswordType == 1){
+            [self.navigationController popToRootViewControllerAnimated:YES];
+        }
+    }else{
+        [MBProgressHUD showHUDwithSuccess:NO WithTitle:@"请正确填写6~16位密码" withView:self.navigationController.view];
     }
 }
 

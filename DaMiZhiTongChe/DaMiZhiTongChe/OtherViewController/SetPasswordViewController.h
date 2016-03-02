@@ -15,5 +15,6 @@
  1 为重设密码
  */
 @property (nonatomic, assign) NSUInteger setPasswordType;
+@property (nonatomic, copy) NSString *phone;
 
 @end

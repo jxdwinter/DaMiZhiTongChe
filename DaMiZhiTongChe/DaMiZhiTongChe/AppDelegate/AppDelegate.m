@@ -278,6 +278,9 @@
     return NO;
 }
 
+/*
+ * 弹出登录页面
+ */
 - (void) presentLoginViewController {
     [self.mainNavController presentViewController:[[BaseNavigationController alloc] initWithRootViewController:[[LoginViewController alloc] init]] animated:YES completion:^{
     

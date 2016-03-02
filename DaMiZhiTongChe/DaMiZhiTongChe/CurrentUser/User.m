@@ -13,7 +13,10 @@
 - (instancetype) initWithUserInfomation:(NSDictionary *)userInfo{
     self = [super init];
     if (self) {
-        
+        self.username = userInfo[@"username"];
+        self.password = userInfo[@"password"];
+        self.nickname = userInfo[@"nickname"];
+        self.headimg = userInfo[@"headimg"];
     }
     return self;
 }

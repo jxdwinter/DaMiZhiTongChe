@@ -7,6 +7,8 @@
 //
 
 #import "SetPasswordViewController.h"
+#import "Signup_registerApi.h"
+#import "Login_resetPasswordApi.h"
 
 @interface SetPasswordViewController ()<UITextFieldDelegate>
 
@@ -69,17 +71,72 @@
 
 #pragma mark - privete method
 
+- (void) backToPreViewController {
+    [self dismissViewControllerAnimated:YES completion:^{
+        
+    }];
+}
+
+- (void) popToRootViewController {
+    [self.navigationController popToRootViewControllerAnimated:YES];
+}
+
 - (void) confirm {
     if ([VerifyTools verifyPassword:self.passwordTextField.text]) {
+        //注册设置密码
         if (self.setPasswordType == 0) {
-            [self dismissViewControllerAnimated:YES completion:^{
+            Signup_registerApi *api = [[Signup_registerApi alloc] initWithPhone:self.phone withPassword:self.passwordTextField.text];
+            RequestAccessory *accessory = [[RequestAccessory alloc] initAccessoryWithView:self.navigationController.view];
+            [api addAccessory:accessory];
+            [api startWithCompletionBlockWithSuccess:^(YTKBaseRequest *request) {
+                NSDictionary *dic = [api responseDictionaryWithResponseString:request.responseString];
+                if (dic) {
+                    if ([dic[@"result"] isEqualToString:@"0"]) {
+                        [MBProgressHUD showHUDwithSuccess:YES WithTitle:@"注册成功" withView:self.navigationController.view];
+                        [AccountHelper saveAccountInfoWithPhone:self.phone];
+                        AccountManager *accountManager = [AccountManager sharedAccountManager];
+                        [accountManager setCurrentUser:dic[@"data"]];
+                        [[NSNotificationCenter defaultCenter] postNotificationName:@"USERLOGIN" object:nil];
+                        [self performSelector:@selector(backToPreViewController) withObject:nil afterDelay:1.5];
+                    }else{
+                        [MBProgressHUD showHUDwithSuccess:NO WithTitle:dic[@"msg"] withView:self.navigationController.view];
+                    }
+                }
+            } failure:^(YTKBaseRequest *request) {
                 
             }];
-        }else if (self.setPasswordType == 1){
-            [self.navigationController popToRootViewControllerAnimated:YES];
+        }
+        //重置密码
+        else if (self.setPasswordType == 1){
+            Login_resetPasswordApi *api = [[Login_resetPasswordApi alloc] initWithPhone:self.phone withPassword:self.passwordTextField.text];
+            RequestAccessory *accessory = [[RequestAccessory alloc] initAccessoryWithView:self.navigationController.view];
+            [api addAccessory:accessory];
+            [api startWithCompletionBlockWithSuccess:^(YTKBaseRequest *request) {
+                NSDictionary *dic = [api responseDictionaryWithResponseString:request.responseString];
+                if (dic) {
+                    if ([dic[@"result"] isEqualToString:@"0"]) {
+                        [MBProgressHUD showHUDwithSuccess:YES WithTitle:@"修改成功,请重新登录" withView:self.navigationController.view];
+                        [self performSelector:@selector(popToRootViewController) withObject:nil afterDelay:1.5];
+                    }else{
+                        [MBProgressHUD showHUDwithSuccess:NO WithTitle:dic[@"msg"] withView:self.navigationController.view];
+                    }
+                }
+            } failure:^(YTKBaseRequest *request) {
+                
+            }];
         }
     }else{
         [MBProgressHUD showHUDwithSuccess:NO WithTitle:@"请正确填写6~16位密码" withView:self.navigationController.view];
+    }
+}
+
+- (void) changeSignupButtonStatus {
+    if (self.confirmButton.isEnabled) {
+        self.confirmButton.enabled = NO;
+        self.confirmButton.backgroundColor = DEFAULTGRAYCOLOR;
+    }else{
+        self.confirmButton.enabled = YES;
+        self.confirmButton.backgroundColor = DEFAULTBROWNCOLOR;
     }
 }
 

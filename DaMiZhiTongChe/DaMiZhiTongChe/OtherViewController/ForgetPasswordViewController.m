@@ -9,6 +9,7 @@
 #import "ForgetPasswordViewController.h"
 #import "SetPasswordViewController.h"
 #import "Login_sendCodeApi.h"
+#import "Login_validateCodeApi.h"
 
 @interface ForgetPasswordViewController () <UITextFieldDelegate>
 
@@ -145,15 +146,27 @@
 
 - (void) confirm {
     if ( [VerifyTools verifyPhoneNumber:self.phoneTextField.text] && [VerifyTools verifyVerityCode:self.codeTextField.text] ) {
-        
+        Login_validateCodeApi *api = [[Login_validateCodeApi alloc] initWithPhone:self.phoneTextField.text withCode:self.codeTextField.text withType:@"1"];
+        RequestAccessory *accessory = [[RequestAccessory alloc] initAccessoryWithView:self.navigationController.view];
+        [api addAccessory:accessory];
+        [api startWithCompletionBlockWithSuccess:^(YTKBaseRequest *request) {
+            NSDictionary *dic = [api responseDictionaryWithResponseString:request.responseString];
+            if (dic) {
+                if ([dic[@"result"] isEqualToString:@"0"]) {
+                    SetPasswordViewController *setPasswordViewController = [[SetPasswordViewController alloc] init];
+                    setPasswordViewController.setPasswordType = 1;
+                    setPasswordViewController.phone = self.phoneTextField.text;
+                    [self.navigationController pushViewController:setPasswordViewController animated:YES];
+                }else{
+                    [MBProgressHUD showHUDwithSuccess:NO WithTitle:dic[@"msg"] withView:self.navigationController.view];
+                }
+            }
+        } failure:^(YTKBaseRequest *request) {
+            
+        }];
     }else{
         [MBProgressHUD showHUDwithSuccess:NO WithTitle:@"请正确填写手机号码和六位数字验证码" withView:self.navigationController.view];
     }
-    /*
-    SetPasswordViewController *setPasswordViewController = [[SetPasswordViewController alloc] init];
-    setPasswordViewController.setPasswordType = 1;
-    [self.navigationController pushViewController:setPasswordViewController animated:YES];
-    */
 }
 
 #pragma mark - getter and setter

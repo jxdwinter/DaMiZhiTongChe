@@ -18,15 +18,13 @@
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
-+ (void) saveAccountInfoWithPhone : (NSString *) phone withPassword : (NSString *) password{
++ (void) saveAccountInfoWithPhone : (NSString *) phone {
     [[NSUserDefaults standardUserDefaults] setObject:phone forKey:@"phone"];
-    [[NSUserDefaults standardUserDefaults] setObject:password forKey:@"password"];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 + (void) deleteAccountInfo{
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"phone"];
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"password"];
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"token"];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
@@ -39,17 +37,8 @@
     return [[NSUserDefaults standardUserDefaults] stringForKey:@"phone"];
 }
 
-+ (NSString *) accountInfoPassword{
-    return [[NSUserDefaults standardUserDefaults] stringForKey:@"password"];
-}
-
 + (void) updateAccountPhone : (NSString *) phone{
     [[NSUserDefaults standardUserDefaults] setObject:phone forKey:@"phone"];
-    [[NSUserDefaults standardUserDefaults] synchronize];
-}
-
-+ (void) updateAccountPassword : (NSString *) password{
-    [[NSUserDefaults standardUserDefaults] setObject:password forKey:@"password"];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 

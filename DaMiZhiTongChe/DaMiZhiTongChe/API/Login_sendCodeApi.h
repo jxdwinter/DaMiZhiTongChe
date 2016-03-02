@@ -8,6 +8,10 @@
 
 #import "ConfigYTKRequest.h"
 
+/*
+ *发送验证码
+ */
+
 @interface Login_sendCodeApi : ConfigYTKRequest
 
 - (instancetype) initWithPhone : (NSString *) phone withType : (NSString *) type;

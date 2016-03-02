@@ -10,6 +10,8 @@
 #import "SetPasswordViewController.h"
 #import "ForgetPasswordViewController.h"
 #import "Login_sendCodeApi.h"
+#import "Login_validateCodeApi.h"
+#import "Login_loginApi.h"
 
 @interface LoginViewController () <UITextFieldDelegate,UIGestureRecognizerDelegate>
 
@@ -277,28 +279,61 @@
 #pragma mark - privete method
 
 - (void) backToPreViewController {
-    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-    [appDelegate.tabBarController setSelectedIndex:0];
     [self dismissViewControllerAnimated:YES completion:^{
         
     }];
 }
 
 - (void) login {
-    
+    if ( [VerifyTools verifyPhoneNumber:self.phoneTextField.text] && [VerifyTools verifyPassword:self.passwordTextField.text] ) {
+        Login_loginApi *api = [[Login_loginApi alloc] initWithPhone:self.phoneTextField.text withPassword:self.passwordTextField.text];
+        RequestAccessory *accessory = [[RequestAccessory alloc] initAccessoryWithView:self.navigationController.view];
+        [api addAccessory:accessory];
+        [api startWithCompletionBlockWithSuccess:^(YTKBaseRequest *request) {
+            NSDictionary *dic = [api responseDictionaryWithResponseString:request.responseString];
+            if (dic) {
+                if ([dic[@"result"] isEqualToString:@"0"]) {
+                    [MBProgressHUD showHUDwithSuccess:YES WithTitle:@"登录成功" withView:self.navigationController.view];
+                    [AccountHelper saveAccountInfoWithPhone:self.phoneTextField.text];
+                    AccountManager *accountManager = [AccountManager sharedAccountManager];
+                    [accountManager setCurrentUser:dic[@"data"]];
+                    [[NSNotificationCenter defaultCenter] postNotificationName:@"USERLOGIN" object:nil];
+                    [self performSelector:@selector(backToPreViewController) withObject:nil afterDelay:1.5];
+                }else{
+                    [MBProgressHUD showHUDwithSuccess:NO WithTitle:dic[@"msg"] withView:self.navigationController.view];
+                }
+            }
+        } failure:^(YTKBaseRequest *request) {
+            
+        }];
+    }else{
+        [MBProgressHUD showHUDwithSuccess:NO WithTitle:@"请正确填写手机号码和密码" withView:self.navigationController.view];
+    }
 }
 
 - (void) signUp {
     if ( [VerifyTools verifyPhoneNumber:self.phoneTextField.text] && [VerifyTools verifyVerityCode:self.codeTextField.text] ) {
-        
+        Login_validateCodeApi *api = [[Login_validateCodeApi alloc] initWithPhone:self.phoneTextField.text withCode:self.codeTextField.text withType:@"0"];
+        RequestAccessory *accessory = [[RequestAccessory alloc] initAccessoryWithView:self.navigationController.view];
+        [api addAccessory:accessory];
+        [api startWithCompletionBlockWithSuccess:^(YTKBaseRequest *request) {
+            NSDictionary *dic = [api responseDictionaryWithResponseString:request.responseString];
+            if (dic) {
+                if ([dic[@"result"] isEqualToString:@"0"]) {
+                    SetPasswordViewController *setPasswordViewController = [[SetPasswordViewController alloc] init];
+                    setPasswordViewController.setPasswordType = 0;
+                    setPasswordViewController.phone = self.phoneTextField.text;
+                    [self.navigationController pushViewController:setPasswordViewController animated:YES];
+                }else{
+                    [MBProgressHUD showHUDwithSuccess:NO WithTitle:dic[@"msg"] withView:self.navigationController.view];
+                }
+            }
+        } failure:^(YTKBaseRequest *request) {
+            
+        }];
     }else{
         [MBProgressHUD showHUDwithSuccess:NO WithTitle:@"请正确填写手机号码和六位数字验证码" withView:self.navigationController.view];
     }
-    /*
-    SetPasswordViewController *setPasswordViewController = [[SetPasswordViewController alloc] init];
-    setPasswordViewController.setPasswordType = 0;
-    [self.navigationController pushViewController:setPasswordViewController animated:YES];
-    */
 }
 
 - (void) getCode : (UIButton *) button {
@@ -321,16 +356,6 @@
         }];
     }else{
         [MBProgressHUD showHUDwithSuccess:NO WithTitle:@"请正确填写手机号码" withView:self.navigationController.view];
-    }
-}
-
-- (void) changeSignupButtonStatus {
-    if (self.loginButton.isEnabled) {
-        self.loginButton.enabled = NO;
-        self.loginButton.backgroundColor = DEFAULTGRAYCOLOR;
-    }else{
-        self.loginButton.enabled = YES;
-        self.loginButton.backgroundColor = DEFAULTBROWNCOLOR;
     }
 }
 

@@ -24,7 +24,7 @@
 - (void)setCurrentUser:(NSDictionary *)userInfo{
     [self clear];
     self.user = [[User alloc] initWithUserInfomation:userInfo];
-    [[self store] putObject:userInfo withId:userInfo[@"phone"] intoTable:CURRENTUSERTALBE];
+    [[self store] putObject:userInfo withId:userInfo[@"username"] intoTable:CURRENTUSERTALBE];
 }
 
 - (User *) getCurrentUser{

@@ -11,12 +11,10 @@
 @interface AccountHelper : NSObject
 
 + (void) saveAccountTokenWithToken : (NSString *) token;
-+ (void) saveAccountInfoWithPhone : (NSString *) phone withPassword : (NSString *) password;
++ (void) saveAccountInfoWithPhone : (NSString *) phone;
 + (void) deleteAccountInfo;
 + (NSString *) accountToken;
 + (NSString *) accountInfoPhone;
-+ (NSString *) accountInfoPassword;
 + (void) updateAccountPhone : (NSString *) phone;
-+ (void) updateAccountPassword : (NSString *) password;
 
 @end

@@ -18,6 +18,9 @@
 		8348AA071C881FD300ED9EF5 /* Main_Banner.m in Sources */ = {isa = PBXBuildFile; fileRef = 8348AA061C881FD300ED9EF5 /* Main_Banner.m */; };
 		8348AA0A1C88225300ED9EF5 /* Main_Topic.m in Sources */ = {isa = PBXBuildFile; fileRef = 8348AA091C88225300ED9EF5 /* Main_Topic.m */; };
 		8348AA0D1C88246800ED9EF5 /* Main_Category.m in Sources */ = {isa = PBXBuildFile; fileRef = 8348AA0C1C88246800ED9EF5 /* Main_Category.m */; };
+		8348AA101C882A6F00ED9EF5 /* Main_homeApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 8348AA0F1C882A6F00ED9EF5 /* Main_homeApi.m */; };
+		8348AA131C882C7500ED9EF5 /* MainDatabaseHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 8348AA121C882C7500ED9EF5 /* MainDatabaseHelper.m */; };
+		8348AA161C882E2100ED9EF5 /* DatabaseHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 8348AA151C882E2100ED9EF5 /* DatabaseHelper.m */; };
 		83548E771C83D84C00A2252F /* ForgetPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83548E761C83D84C00A2252F /* ForgetPasswordViewController.m */; };
 		836013EC1C8568870090257C /* Login_updateAnonymousTokenApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 836013EB1C8568870090257C /* Login_updateAnonymousTokenApi.m */; };
 		836013F31C856C3F0090257C /* AccountHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 836013EE1C856C3F0090257C /* AccountHelper.m */; };
@@ -102,6 +105,12 @@
 		8348AA091C88225300ED9EF5 /* Main_Topic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Main_Topic.m; sourceTree = "<group>"; };
 		8348AA0B1C88246800ED9EF5 /* Main_Category.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Main_Category.h; sourceTree = "<group>"; };
 		8348AA0C1C88246800ED9EF5 /* Main_Category.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Main_Category.m; sourceTree = "<group>"; };
+		8348AA0E1C882A6F00ED9EF5 /* Main_homeApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Main_homeApi.h; sourceTree = "<group>"; };
+		8348AA0F1C882A6F00ED9EF5 /* Main_homeApi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Main_homeApi.m; sourceTree = "<group>"; };
+		8348AA111C882C7500ED9EF5 /* MainDatabaseHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainDatabaseHelper.h; sourceTree = "<group>"; };
+		8348AA121C882C7500ED9EF5 /* MainDatabaseHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainDatabaseHelper.m; sourceTree = "<group>"; };
+		8348AA141C882E2100ED9EF5 /* DatabaseHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DatabaseHelper.h; sourceTree = "<group>"; };
+		8348AA151C882E2100ED9EF5 /* DatabaseHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DatabaseHelper.m; sourceTree = "<group>"; };
 		83548E751C83D84C00A2252F /* ForgetPasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForgetPasswordViewController.h; sourceTree = "<group>"; };
 		83548E761C83D84C00A2252F /* ForgetPasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForgetPasswordViewController.m; sourceTree = "<group>"; };
 		836013EA1C8568870090257C /* Login_updateAnonymousTokenApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Login_updateAnonymousTokenApi.h; sourceTree = "<group>"; };
@@ -239,6 +248,8 @@
 		8348A9EC1C881C1B00ED9EF5 /* Store */ = {
 			isa = PBXGroup;
 			children = (
+				8348AA111C882C7500ED9EF5 /* MainDatabaseHelper.h */,
+				8348AA121C882C7500ED9EF5 /* MainDatabaseHelper.m */,
 			);
 			path = Store;
 			sourceTree = "<group>";
@@ -374,6 +385,8 @@
 				836013F01C856C3F0090257C /* AccountManager.m */,
 				836013F11C856C3F0090257C /* SharedDatabaseHelper.h */,
 				836013F21C856C3F0090257C /* SharedDatabaseHelper.m */,
+				8348AA141C882E2100ED9EF5 /* DatabaseHelper.h */,
+				8348AA151C882E2100ED9EF5 /* DatabaseHelper.m */,
 			);
 			path = Configration;
 			sourceTree = "<group>";
@@ -446,6 +459,8 @@
 				8305D7FD1C86C9A300F71645 /* Login_loginApi.m */,
 				8305D7FF1C86CA5A00F71645 /* Login_resetPasswordApi.h */,
 				8305D8001C86CA5A00F71645 /* Login_resetPasswordApi.m */,
+				8348AA0E1C882A6F00ED9EF5 /* Main_homeApi.h */,
+				8348AA0F1C882A6F00ED9EF5 /* Main_homeApi.m */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -826,6 +841,7 @@
 				836013F91C856D5C0090257C /* User.m in Sources */,
 				836A642F1C7BE09E00219035 /* Config.m in Sources */,
 				8348AA041C881C9900ED9EF5 /* Main_Goods.m in Sources */,
+				8348AA161C882E2100ED9EF5 /* DatabaseHelper.m in Sources */,
 				83E0A2921C7AF5F8002E4954 /* AppDelegate.m in Sources */,
 				83548E771C83D84C00A2252F /* ForgetPasswordViewController.m in Sources */,
 				836A642A1C7BDFEB00219035 /* BaseViewController.m in Sources */,
@@ -837,6 +853,7 @@
 				836A645C1C7BE22100219035 /* MBProgressHUD+Helper.m in Sources */,
 				836A64D31C7BE30900219035 /* ConfigYTKRequest.m in Sources */,
 				836A64D21C7BE30900219035 /* ConfigArgument.m in Sources */,
+				8348AA101C882A6F00ED9EF5 /* Main_homeApi.m in Sources */,
 				8348A9F11C881C1B00ED9EF5 /* MainViewController.m in Sources */,
 				836013F41C856C3F0090257C /* AccountManager.m in Sources */,
 				836A64511C7BE22100219035 /* AESenAndDe.m in Sources */,
@@ -849,6 +866,7 @@
 				836013EC1C8568870090257C /* Login_updateAnonymousTokenApi.m in Sources */,
 				8348AA0D1C88246800ED9EF5 /* Main_Category.m in Sources */,
 				8305D7FE1C86C9A300F71645 /* Login_loginApi.m in Sources */,
+				8348AA131C882C7500ED9EF5 /* MainDatabaseHelper.m in Sources */,
 				8348AA011C881C2E00ED9EF5 /* MineViewController.m in Sources */,
 				836A64521C7BE22100219035 /* FBEncryptorAES.m in Sources */,
 				8348A9F91C881C2700ED9EF5 /* CartViewController.m in Sources */,

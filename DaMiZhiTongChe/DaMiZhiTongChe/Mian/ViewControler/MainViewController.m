@@ -7,6 +7,7 @@
 //
 
 #import "MainViewController.h"
+#import "Main_homeApi.h"
 
 @interface MainViewController ()<UISearchBarDelegate,UIGestureRecognizerDelegate>
 

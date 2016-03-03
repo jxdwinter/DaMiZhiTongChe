@@ -30,6 +30,7 @@
 #import "ConfigYTKRequest.h"
 #import "RequestAccessory.h"
 #import "SharedDatabaseHelper.h"
+#import "DatabaseHelper.h"
 #import "AccountHelper.h"
 #import "AccountManager.h"
 #import "VerifyTools.h"

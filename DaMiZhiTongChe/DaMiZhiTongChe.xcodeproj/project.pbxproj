@@ -570,6 +570,7 @@
 				TargetAttributes = {
 					83E0A2581C7AF3B4002E4954 = {
 						CreatedOnToolsVersion = 7.3;
+						DevelopmentTeam = CBM334KPUX;
 					};
 					83E0A2711C7AF3B4002E4954 = {
 						CreatedOnToolsVersion = 7.3;
@@ -835,6 +836,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Xiaodong Jiang (4YYM4WTHBS)";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -855,6 +858,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.longweizhongxingongmao.DaMiZhiTongChe;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "ca255d74-1a04-4dad-92da-d46599062a7e";
 			};
 			name = Debug;
 		};
@@ -864,6 +868,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Harbin Longwei Zhongxin Industry And Trade Co., Ltd. (CBM334KPUX)";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -884,6 +890,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.longweizhongxingongmao.DaMiZhiTongChe;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "e010ec7e-c36f-4222-9610-0badb27fde56";
 			};
 			name = Release;
 		};

@@ -34,7 +34,9 @@
     return [ConfigArgument configArgument:@{
                                             @"action" : @"register",
                                             @"phone" : self.phone,
-                                            @"password" : self.password
+                                            @"password" : self.password,
+                                            @"token" : [AccountHelper accountToken],
+                                            @"flag" : @"0"
                                             }];
 }
 

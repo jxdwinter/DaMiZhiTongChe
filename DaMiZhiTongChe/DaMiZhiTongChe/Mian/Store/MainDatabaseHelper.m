@@ -20,7 +20,7 @@
 }
 
 - (void) saveMainDataWithDictionary : (NSDictionary *) dictionary {
-    [[self store] putObject:dictionary withId:@"data" intoTable:CURRENTUSERTALBE];
+    [[self store] putObject:dictionary withId:@"data" intoTable:MAINDATATALBE];
 }
 
 - (NSDictionary *) queryMainData {

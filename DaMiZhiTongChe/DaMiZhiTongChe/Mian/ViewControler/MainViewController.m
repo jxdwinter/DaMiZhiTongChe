@@ -8,10 +8,31 @@
 
 #import "MainViewController.h"
 #import "Main_homeApi.h"
+#import "MainDatabaseHelper.h"
+#import "Main_Goods.h"
+#import "Main_Banner.h"
+#import "Main_Topic.h"
+#import "Main_Category.h"
+#import <SDCycleScrollView.h>
+#import <MJRefresh.h>
+#import "Main_TopicCollectionViewCell.h"
 
-@interface MainViewController ()<UISearchBarDelegate,UIGestureRecognizerDelegate>
+#define CollectionViewCellHight 250.0
 
+@interface MainViewController ()<UISearchBarDelegate,UIGestureRecognizerDelegate,SDCycleScrollViewDelegate,UICollectionViewDelegate,
+UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
+
+@property (nonatomic, strong) UIScrollView *scrollView;
+@property (nonatomic, strong) UIView *contentView;
 @property (nonatomic, strong) UISearchBar *searchBar;
+@property (nonatomic, strong) SDCycleScrollView *cycleScrollView;
+@property (nonatomic, strong) UICollectionView *collectionView;
+
+@property (nonatomic, strong) NSMutableArray *bannerItems;
+@property (nonatomic, strong) NSMutableArray *bannerImageStringItems;
+//@property (nonatomic, strong) NSMutableArray *bannerTitleItems;
+@property (nonatomic, strong) NSMutableArray *topicItems;
+@property (nonatomic, strong) NSMutableArray *categoryItems;
 
 @end
 
@@ -31,7 +52,55 @@
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self  action:@selector(dismissKeyboard)];
     tapGesture.numberOfTapsRequired = 1;
     [tapGesture setDelegate:self];
-    [self.view addGestureRecognizer:tapGesture];
+    //[self.view addGestureRecognizer:tapGesture];
+    
+    self.bannerItems = [[NSMutableArray alloc] initWithCapacity:1];
+    self.bannerImageStringItems = [[NSMutableArray alloc] initWithCapacity:1];
+    //self.bannerTitleItems = [[NSMutableArray alloc] initWithCapacity:1];
+    self.topicItems = [[NSMutableArray alloc] initWithCapacity:1];
+    self.categoryItems = [[NSMutableArray alloc] initWithCapacity:1];
+    
+    [self.view addSubview:self.scrollView];
+    [self.scrollView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.view.mas_top).with.offset(.0);
+        make.left.equalTo(self.view.mas_left).with.offset(0.0);
+        make.right.equalTo(self.view.mas_right).with.offset(0.0);
+        make.bottom.equalTo(self.view.mas_bottom).with.offset(0.0);
+    }];
+    
+    [self.scrollView addSubview:self.contentView];
+    [self.contentView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.scrollView.mas_top).with.offset(0.0);
+        make.left.equalTo(self.scrollView.mas_left).with.offset(0.0);
+        make.bottom.equalTo(self.scrollView.mas_bottom).with.offset(0.0);
+        make.right.equalTo(self.scrollView.mas_right).with.offset(0.0);
+        
+        make.width.equalTo(self.view.mas_width).with.offset(0.0);
+        make.height.equalTo(self.view.mas_height).with.offset(0.0);
+    }];
+    
+    [self.contentView addSubview:self.cycleScrollView];
+    [self.cycleScrollView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.contentView.mas_top).with.offset(.0);
+        make.left.equalTo(self.contentView.mas_left).with.offset(0.0);
+        make.right.equalTo(self.contentView.mas_right).with.offset(0.0);
+        make.height.equalTo(@(SCREEN_WIDTH/3));
+    }];
+    
+    [self.contentView addSubview:self.collectionView];
+    [self.collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.cycleScrollView.mas_bottom).with.offset(5.0);
+        make.left.equalTo(self.contentView.mas_left).with.offset(5.0);
+        make.right.equalTo(self.contentView.mas_right).with.offset(-5.0);
+    }];
+    
+    NSDictionary *cacheData = [[MainDatabaseHelper sharedMainDatabaseHelper] queryMainData];
+    if (cacheData) {
+        [self configDataWithMainData:cacheData];
+        [self getMainDataWithShowShouldShowHUD:NO];
+    }else{
+        [self getMainDataWithShowShouldShowHUD:YES];
+    }
 }
 
 - (void) viewDidAppear:(BOOL)animated {
@@ -43,20 +112,163 @@
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark - privete method
+
+- (void) loadData {
+    [self getMainDataWithShowShouldShowHUD:NO];
+}
+
+- (void) getMainDataWithShowShouldShowHUD : (BOOL) shouldShowHUD {
+    Main_homeApi *api = [[Main_homeApi alloc] init];
+    if (shouldShowHUD){
+        RequestAccessory *accessory = [[RequestAccessory alloc] initAccessoryWithView:self.navigationController.view];
+        [api addAccessory:accessory];
+    }
+    [api startWithCompletionBlockWithSuccess:^(YTKBaseRequest *request) {
+        NSDictionary *dic = [api responseDictionaryWithResponseString:request.responseString];
+        if (dic) {
+            if ([dic[@"result"] isEqualToString:@"0"]) {
+                [[MainDatabaseHelper sharedMainDatabaseHelper] deleteMainData];
+                [[MainDatabaseHelper sharedMainDatabaseHelper] saveMainDataWithDictionary:dic[@"data"]];
+                [self configDataWithMainData:dic[@"data"]];
+            }else{
+                [MBProgressHUD showHUDwithSuccess:NO WithTitle:dic[@"msg"] withView:self.navigationController.view];
+            }
+        }
+    } failure:^(YTKBaseRequest *request) {
+        
+    }];
+}
+
+- (void) configDataWithMainData : (NSDictionary *) data {
+    [self.bannerItems removeAllObjects];
+    [self.bannerImageStringItems removeAllObjects];
+    [self.topicItems removeAllObjects];
+    [self.categoryItems removeAllObjects];
+    for (NSDictionary *bannerDic in data[@"ad_list"]) {
+        Main_Banner *banner = [[Main_Banner alloc] initWithBannerInfo:bannerDic];
+        if (banner) {
+            [self.bannerItems addObject:banner];
+            [self.bannerImageStringItems addObject:banner.imgurl];
+            //[self.bannerTitleItems addObject:banner.title];
+        }
+    }
+    for (NSDictionary *topicDic in data[@"topic_list"]) {
+        Main_Topic *topic = [[Main_Topic alloc] initWithTopicInfo:topicDic];
+        if (topic) {
+            [self.topicItems addObject:topic];
+        }
+    }
+    for (NSDictionary *categoryDic in data[@"category_list"]) {
+        Main_Category *category = [[Main_Category alloc] initWithCategoryInfo:categoryDic];
+        if (category) {
+            [self.categoryItems addObject:category];
+        }
+    }
+    [self configUI];
+}
+
+- (void) configUI {
+    self.cycleScrollView.imageURLStringsGroup = self.bannerImageStringItems;
+    //self.cycleScrollView.titlesGroup = self.bannerTitleItems;
+    NSUInteger number = [self.topicItems count]/2;
+    if ([self.topicItems count] % 2 >0) {
+        number++;
+    }
+    [self.collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.height.equalTo(@(CollectionViewCellHight * number));
+    }];
+    [self.collectionView reloadData];
+    self.scrollView.contentSize = CGSizeMake(self.contentView.frame.size.width,self.cycleScrollView.frame.size.height + self.collectionView.frame.size.height + 10.0);
+    [self.scrollView.mj_header endRefreshing];
+}
+
+- (void) dismissKeyboard {
+    [self.searchBar resignFirstResponder];
+    
+}
 #pragma mark - searchBar delegate
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar{
     [searchBar resignFirstResponder];
     
 }
+#pragma mark - Collection View Datasource
 
-#pragma mark - privete method
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
+    return [self.topicItems count];
+}
 
-- (void) dismissKeyboard {
-    [self.searchBar resignFirstResponder];
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
+    Main_TopicCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"MAIN_TOPICCOLLECTIONVIEWCELL" forIndexPath:indexPath];
+    Main_Topic *topic = self.topicItems[indexPath.row];
+    [cell.logoImageView sd_setImageWithURL:[NSURL URLWithString:topic.imgurl] placeholderImage:nil];
+    cell.nameLabel.text = topic.name;
+    cell.desLabel.text = topic.des;
+    [cell.goodsImageView sd_setImageWithURL:[NSURL URLWithString:topic.goods.imgurl] placeholderImage:nil];
+    cell.goods_nameLabel.text = topic.goods.goods_name;
+    cell.farmer_nameLabel.text = [NSString stringWithFormat:@"农户:%@",topic.goods.farmer_name];
+    cell.origin_nameLabel.text = [NSString stringWithFormat:@"产地:%@",topic.goods.origin_name];
+    NSString *string = [NSString stringWithFormat:@"￥%@    原价￥%@",topic.goods.goods_price,topic.goods.market_price];
+    NSMutableAttributedString *attr = [[NSMutableAttributedString alloc] initWithString:string];
+    [attr addAttribute:NSStrikethroughStyleAttributeName value:[NSNumber numberWithInteger:NSUnderlinePatternSolid | NSUnderlineStyleSingle] range:[string rangeOfString:[NSString stringWithFormat:@"￥%@",topic.goods.market_price]]];
+    [attr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:10.0] range:[string rangeOfString:[NSString stringWithFormat:@"原价￥%@",topic.goods.market_price]]];
+    cell.priceLabel.attributedText = attr;
+    return cell;
+}
+
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
+    return CGSizeMake(SCREEN_WIDTH/2, CollectionViewCellHight);
+}
+
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section{
+    return 0.0f;
+}
+
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section{
+    return 0.0f;
+}
+
+- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
+    return UIEdgeInsetsMake(0, 0, 0, 0);
+}
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
+    [collectionView deselectItemAtIndexPath:indexPath animated:NO];
+}
+
+
+#pragma mark - SDCycleScrollViewDelegate
+
+- (void)cycleScrollView:(SDCycleScrollView *)cycleScrollView didSelectItemAtIndex:(NSInteger)index{
+    NSLog(@"---点击了第%ld张图片", (long)index);
 }
 
 #pragma mark - getter and setter
+
+- (UIScrollView *) scrollView {
+    if (!_scrollView) {
+        MJRefreshStateHeader *header = [MJRefreshStateHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadData)];
+        [header setTitle:@"下拉可以刷新" forState:MJRefreshStateIdle];
+        [header setTitle:@"松开立即刷新" forState:MJRefreshStatePulling];
+        [header setTitle:@"好大米在路上..." forState:MJRefreshStateRefreshing];
+        header.stateLabel.font = [UIFont systemFontOfSize:14];
+        header.lastUpdatedTimeLabel.font = [UIFont systemFontOfSize:10];
+        header.stateLabel.textColor = DEFAULTBROWNCOLOR;
+        header.lastUpdatedTimeLabel.textColor = DEFAULTBROWNCOLOR;
+        _scrollView = [[UIScrollView alloc] initWithFrame:CGRectZero];
+        _scrollView.mj_header = header;
+    }
+    return _scrollView;
+}
+
+- (UIView *) contentView {
+    if (!_contentView) {
+        _contentView = [[UIView alloc] initWithFrame:CGRectZero];
+        _contentView.backgroundColor = [UIColor colorWithRed:0.95 green:0.95 blue:0.95 alpha:1];
+    }
+    return _contentView;
+}
 
 - (UISearchBar *) searchBar {
     if (!_searchBar) {
@@ -73,6 +285,33 @@
         [_searchBar sizeToFit];
     }
     return _searchBar;
+}
+
+- (SDCycleScrollView *) cycleScrollView {
+    if (!_cycleScrollView) {
+        _cycleScrollView = [SDCycleScrollView cycleScrollViewWithFrame:CGRectZero delegate:self placeholderImage:nil];
+        _cycleScrollView.pageControlAliment = SDCycleScrollViewPageContolAlimentCenter;
+        _cycleScrollView.currentPageDotColor = DEFAULTBROWNCOLOR;
+        _cycleScrollView.pageDotColor = [UIColor whiteColor];
+        _cycleScrollView.autoScrollTimeInterval = 10;
+    }
+    return _cycleScrollView;
+}
+
+- (UICollectionView *)collectionView{
+    if (!_collectionView) {
+        UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
+        [flowLayout setScrollDirection:UICollectionViewScrollDirectionHorizontal];
+        flowLayout.minimumLineSpacing = 0;
+        _collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:flowLayout];
+        _collectionView.delegate = self;
+        _collectionView.dataSource = self;
+        _collectionView.pagingEnabled = YES;
+        _collectionView.showsHorizontalScrollIndicator = NO;
+        [_collectionView registerClass:[Main_TopicCollectionViewCell class] forCellWithReuseIdentifier:@"MAIN_TOPICCOLLECTIONVIEWCELL"];
+        _collectionView.backgroundColor = [UIColor colorWithRed:0.95 green:0.95 blue:0.95 alpha:1];;
+    }
+    return _collectionView;
 }
 
 @end

@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#import "Main_Goods.h"
 
 /*
  首页专题
@@ -29,7 +29,7 @@
 @property (nonatomic, copy)   NSString *imgurl;
 @property (nonatomic, copy)   NSString *name;
 @property (nonatomic, copy)   NSString *des;
-@property (nonatomic, copy)   NSArray *goods;
+@property (nonatomic, strong)   Main_Goods *goods;
 
 - (instancetype) initWithTopicInfo : (NSDictionary *) topicInfo;
 

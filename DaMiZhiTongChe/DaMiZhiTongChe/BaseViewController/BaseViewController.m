@@ -19,7 +19,7 @@
     // Do any additional setup after loading the view.
     self.tabBarController.tabBar.translucent = NO;
     self.navigationController.navigationBar.translucent = NO;
-    self.view.backgroundColor = [UIColor whiteColor];
+    self.view.backgroundColor = [UIColor colorWithRed:0.95 green:0.95 blue:0.95 alpha:1];
 }
 
 - (void)didReceiveMemoryWarning {

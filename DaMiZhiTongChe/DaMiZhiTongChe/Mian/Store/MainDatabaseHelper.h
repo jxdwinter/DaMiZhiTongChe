@@ -13,7 +13,7 @@
 + (instancetype)sharedMainDatabaseHelper;
 
 - (void) saveMainDataWithDictionary : (NSDictionary *) dictionary;
-- (NSArray *) queryMainData;
+- (NSDictionary *) queryMainData;
 - (void) deleteMainData;
 
 @end

@@ -11,6 +11,7 @@
 		8305D7FB1C86C87E00F71645 /* Signup_registerApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 8305D7FA1C86C87E00F71645 /* Signup_registerApi.m */; };
 		8305D7FE1C86C9A300F71645 /* Login_loginApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 8305D7FD1C86C9A300F71645 /* Login_loginApi.m */; };
 		8305D8011C86CA5A00F71645 /* Login_resetPasswordApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 8305D8001C86CA5A00F71645 /* Login_resetPasswordApi.m */; };
+		831C43421C8935DE00FDE244 /* Main_TopicCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 831C43411C8935DE00FDE244 /* Main_TopicCollectionViewCell.m */; };
 		8348A9F11C881C1B00ED9EF5 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8348A9F01C881C1B00ED9EF5 /* MainViewController.m */; };
 		8348A9F91C881C2700ED9EF5 /* CartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8348A9F81C881C2700ED9EF5 /* CartViewController.m */; };
 		8348AA011C881C2E00ED9EF5 /* MineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8348AA001C881C2E00ED9EF5 /* MineViewController.m */; };
@@ -91,6 +92,8 @@
 		8305D7FD1C86C9A300F71645 /* Login_loginApi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Login_loginApi.m; sourceTree = "<group>"; };
 		8305D7FF1C86CA5A00F71645 /* Login_resetPasswordApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Login_resetPasswordApi.h; sourceTree = "<group>"; };
 		8305D8001C86CA5A00F71645 /* Login_resetPasswordApi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Login_resetPasswordApi.m; sourceTree = "<group>"; };
+		831C43401C8935DE00FDE244 /* Main_TopicCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Main_TopicCollectionViewCell.h; sourceTree = "<group>"; };
+		831C43411C8935DE00FDE244 /* Main_TopicCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Main_TopicCollectionViewCell.m; sourceTree = "<group>"; };
 		8348A9EF1C881C1B00ED9EF5 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
 		8348A9F01C881C1B00ED9EF5 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
 		8348A9F71C881C2700ED9EF5 /* CartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CartViewController.h; sourceTree = "<group>"; };
@@ -257,6 +260,8 @@
 		8348A9ED1C881C1B00ED9EF5 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				831C43401C8935DE00FDE244 /* Main_TopicCollectionViewCell.h */,
+				831C43411C8935DE00FDE244 /* Main_TopicCollectionViewCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -849,6 +854,7 @@
 				8384AD6F1C83C61E001CCA0C /* SetPasswordViewController.m in Sources */,
 				8305D7FB1C86C87E00F71645 /* Signup_registerApi.m in Sources */,
 				836013F51C856C3F0090257C /* SharedDatabaseHelper.m in Sources */,
+				831C43421C8935DE00FDE244 /* Main_TopicCollectionViewCell.m in Sources */,
 				836A64531C7BE22100219035 /* GTMBase64.m in Sources */,
 				836A645C1C7BE22100219035 /* MBProgressHUD+Helper.m in Sources */,
 				836A64D31C7BE30900219035 /* ConfigYTKRequest.m in Sources */,

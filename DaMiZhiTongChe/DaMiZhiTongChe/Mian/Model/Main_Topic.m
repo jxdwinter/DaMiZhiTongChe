@@ -7,7 +7,6 @@
 //
 
 #import "Main_Topic.h"
-#import "Main_Goods.h"
 
 @implementation Main_Topic
 
@@ -18,14 +17,7 @@
         self.imgurl = topicInfo[@"imgurl"];;
         self.name = topicInfo[@"name"];;
         self.des = topicInfo[@"des"];;
-        NSMutableArray *tmpGoods = [[NSMutableArray alloc] initWithCapacity:1];
-        for (NSDictionary *dic in topicInfo[@"goods"]) {
-            Main_Goods *goods = [[Main_Goods alloc] initWithGoodsInfo:dic];
-            if (goods) {
-                [tmpGoods addObject:goods];
-            }
-        }
-        self.goods = [tmpGoods copy];
+        self.goods = [[Main_Goods alloc] initWithGoodsInfo:topicInfo[@"goods"]];
     }
     return self;
 }

@@ -56,6 +56,7 @@
 		836C9DD51C7BF461000DA3C5 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 836C9DD41C7BF461000DA3C5 /* libc++.tbd */; };
 		8384AD6F1C83C61E001CCA0C /* SetPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8384AD6E1C83C61E001CCA0C /* SetPasswordViewController.m */; };
 		83A46F4D1C7D460300C17759 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83A46F4C1C7D460300C17759 /* LoginViewController.m */; };
+		83A544F91C896CC90062FF0C /* Main_CategoryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 83A544F81C896CC90062FF0C /* Main_CategoryTableViewCell.m */; };
 		83E0A25E1C7AF3B4002E4954 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 83E0A25D1C7AF3B4002E4954 /* main.m */; };
 		83E0A2691C7AF3B4002E4954 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 83E0A2681C7AF3B4002E4954 /* Assets.xcassets */; };
 		83E0A2771C7AF3B4002E4954 /* DaMiZhiTongCheTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 83E0A2761C7AF3B4002E4954 /* DaMiZhiTongCheTests.m */; };
@@ -177,6 +178,8 @@
 		8384AD6E1C83C61E001CCA0C /* SetPasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SetPasswordViewController.m; sourceTree = "<group>"; };
 		83A46F4B1C7D460300C17759 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		83A46F4C1C7D460300C17759 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
+		83A544F71C896CC90062FF0C /* Main_CategoryTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Main_CategoryTableViewCell.h; sourceTree = "<group>"; };
+		83A544F81C896CC90062FF0C /* Main_CategoryTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Main_CategoryTableViewCell.m; sourceTree = "<group>"; };
 		83E0A2591C7AF3B4002E4954 /* DaMiZhiTongChe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DaMiZhiTongChe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		83E0A25D1C7AF3B4002E4954 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		83E0A2681C7AF3B4002E4954 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -262,6 +265,8 @@
 			children = (
 				831C43401C8935DE00FDE244 /* Main_TopicCollectionViewCell.h */,
 				831C43411C8935DE00FDE244 /* Main_TopicCollectionViewCell.m */,
+				83A544F71C896CC90062FF0C /* Main_CategoryTableViewCell.h */,
+				83A544F81C896CC90062FF0C /* Main_CategoryTableViewCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -873,6 +878,7 @@
 				8348AA0D1C88246800ED9EF5 /* Main_Category.m in Sources */,
 				8305D7FE1C86C9A300F71645 /* Login_loginApi.m in Sources */,
 				8348AA131C882C7500ED9EF5 /* MainDatabaseHelper.m in Sources */,
+				83A544F91C896CC90062FF0C /* Main_CategoryTableViewCell.m in Sources */,
 				8348AA011C881C2E00ED9EF5 /* MineViewController.m in Sources */,
 				836A64521C7BE22100219035 /* FBEncryptorAES.m in Sources */,
 				8348A9F91C881C2700ED9EF5 /* CartViewController.m in Sources */,

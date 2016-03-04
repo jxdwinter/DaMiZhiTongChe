@@ -131,7 +131,7 @@
         [self.contentView addSubview:self.priceLabel];
         [self.priceLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(originImageView.mas_bottom).with.offset(8.0);
-            make.left.equalTo(self.contentView.mas_left).with.offset(10.0);
+            make.left.equalTo(self.contentView.mas_left).with.offset(8.0);
             make.right.equalTo(rightLine.mas_left).with.offset(-10.0);
             make.height.equalTo(@20.0);
         }];

@@ -16,17 +16,22 @@
 #import <SDCycleScrollView.h>
 #import <MJRefresh.h>
 #import "Main_TopicCollectionViewCell.h"
+#import "Main_CategoryTableViewCell.h"
 
-#define CollectionViewCellHight 250.0
+#define HEADERVIEWHIGHT 50.0
 
 @interface MainViewController ()<UISearchBarDelegate,UIGestureRecognizerDelegate,SDCycleScrollViewDelegate,UICollectionViewDelegate,
-UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
+UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,UITableViewDelegate,UITableViewDataSource>
+
+@property (nonatomic, assign) double collectionViewCellHight;
 
 @property (nonatomic, strong) UIScrollView *scrollView;
 @property (nonatomic, strong) UIView *contentView;
 @property (nonatomic, strong) UISearchBar *searchBar;
 @property (nonatomic, strong) SDCycleScrollView *cycleScrollView;
 @property (nonatomic, strong) UICollectionView *collectionView;
+@property (nonatomic, strong) UITableView *tableView;
+@property (nonatomic, strong) UIView *headerView;
 
 @property (nonatomic, strong) NSMutableArray *bannerItems;
 @property (nonatomic, strong) NSMutableArray *bannerImageStringItems;
@@ -43,6 +48,16 @@ UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    if (IS_IPHONE_4_OR_LESS) {
+        self.collectionViewCellHight = 230.0;
+    }else if (IS_IPHONE_5) {
+        self.collectionViewCellHight = 230.0;
+    }else if (IS_IPHONE_6) {
+        self.collectionViewCellHight = 250.0;
+    }else if (IS_IPHONE_6P) {
+        self.collectionViewCellHight = 270.0;
+    }
 
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"main_navigationbar_blank"]]];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"main_navigationbar_blank"]]];
@@ -86,7 +101,7 @@ UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
         make.right.equalTo(self.contentView.mas_right).with.offset(0.0);
         make.height.equalTo(@(SCREEN_WIDTH/3));
     }];
-    
+
     [self.contentView addSubview:self.collectionView];
     [self.collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.cycleScrollView.mas_bottom).with.offset(5.0);
@@ -94,6 +109,13 @@ UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
         make.right.equalTo(self.contentView.mas_right).with.offset(-5.0);
     }];
     
+    [self.contentView addSubview:self.tableView];
+    [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.collectionView.mas_bottom).with.offset(5.0);
+        make.left.equalTo(self.contentView.mas_left).with.offset(5.0);
+        make.right.equalTo(self.contentView.mas_right).with.offset(-5.0);
+    }];
+
     NSDictionary *cacheData = [[MainDatabaseHelper sharedMainDatabaseHelper] queryMainData];
     if (cacheData) {
         [self configDataWithMainData:cacheData];
@@ -172,14 +194,35 @@ UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
     self.cycleScrollView.imageURLStringsGroup = self.bannerImageStringItems;
     //self.cycleScrollView.titlesGroup = self.bannerTitleItems;
     NSUInteger number = [self.topicItems count]/2;
-    if ([self.topicItems count] % 2 >0) {
+    if ([self.topicItems count] % 2 > 0) {
         number++;
     }
+    self.collectionView.frame = CGRectMake(self.collectionView.frame.origin.x,
+                                           self.collectionView.frame.origin.y,
+                                           self.collectionView.frame.size.width,
+                                           self.collectionViewCellHight * number);
+    self.tableView.frame = CGRectMake(self.tableView.frame.origin.x,
+                                      self.tableView.frame.origin.y,
+                                      self.tableView.frame.size.width,
+                                      SCREEN_WIDTH/3 * [self.categoryItems count] + HEADERVIEWHIGHT);
     [self.collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.height.equalTo(@(CollectionViewCellHight * number));
+        make.top.equalTo(self.cycleScrollView.mas_bottom).with.offset(5.0);
+        make.left.equalTo(self.contentView.mas_left).with.offset(5.0);
+        make.right.equalTo(self.contentView.mas_right).with.offset(-5.0);
+        make.height.equalTo(@(self.collectionViewCellHight * number));
     }];
+    [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.collectionView.mas_bottom).with.offset(5.0);
+        make.left.equalTo(self.contentView.mas_left).with.offset(5.0);
+        make.right.equalTo(self.contentView.mas_right).with.offset(-5.0);
+        make.height.equalTo(@(SCREEN_WIDTH/3 * [self.categoryItems count] + HEADERVIEWHIGHT));
+    }];
+    self.scrollView.contentSize = CGSizeMake(self.contentView.frame.size.width,
+                                             self.cycleScrollView.frame.size.height +
+                                             self.collectionView.frame.size.height +
+                                             self.tableView.frame.size.height + 50.0);
     [self.collectionView reloadData];
-    self.scrollView.contentSize = CGSizeMake(self.contentView.frame.size.width,self.cycleScrollView.frame.size.height + self.collectionView.frame.size.height + 10.0);
+    [self.tableView reloadData];
     [self.scrollView.mj_header endRefreshing];
 }
 
@@ -218,7 +261,7 @@ UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
-    return CGSizeMake(SCREEN_WIDTH/2, CollectionViewCellHight);
+    return CGSizeMake(SCREEN_WIDTH/2, self.collectionViewCellHight);
 }
 
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section{
@@ -244,6 +287,28 @@ UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
     NSLog(@"---点击了第%ld张图片", (long)index);
 }
 
+#pragma mark - Table view data source
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    return [self.categoryItems count];
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    static NSString *CELL = @"CELL";
+    Main_CategoryTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CELL];
+    if(cell == nil){
+        cell = [[Main_CategoryTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CELL];
+    }
+    Main_Category *category = self.categoryItems[indexPath.row];
+    [cell.picImageView sd_setImageWithURL:[NSURL URLWithString:category.category_image] placeholderImage:nil];
+    return cell;
+}
+
+#pragma mark - Table view delegate
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+
+}
+
 #pragma mark - getter and setter
 
 - (UIScrollView *) scrollView {
@@ -251,7 +316,7 @@ UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
         MJRefreshStateHeader *header = [MJRefreshStateHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadData)];
         [header setTitle:@"下拉可以刷新" forState:MJRefreshStateIdle];
         [header setTitle:@"松开立即刷新" forState:MJRefreshStatePulling];
-        [header setTitle:@"好大米在路上..." forState:MJRefreshStateRefreshing];
+        [header setTitle:@"好大米马上来..." forState:MJRefreshStateRefreshing];
         header.stateLabel.font = [UIFont systemFontOfSize:14];
         header.lastUpdatedTimeLabel.font = [UIFont systemFontOfSize:10];
         header.stateLabel.textColor = DEFAULTBROWNCOLOR;
@@ -298,7 +363,7 @@ UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
     return _cycleScrollView;
 }
 
-- (UICollectionView *)collectionView{
+- (UICollectionView *) collectionView {
     if (!_collectionView) {
         UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
         [flowLayout setScrollDirection:UICollectionViewScrollDirectionHorizontal];
@@ -309,9 +374,32 @@ UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
         _collectionView.pagingEnabled = YES;
         _collectionView.showsHorizontalScrollIndicator = NO;
         [_collectionView registerClass:[Main_TopicCollectionViewCell class] forCellWithReuseIdentifier:@"MAIN_TOPICCOLLECTIONVIEWCELL"];
-        _collectionView.backgroundColor = [UIColor colorWithRed:0.95 green:0.95 blue:0.95 alpha:1];;
+        _collectionView.backgroundColor = [UIColor colorWithRed:0.95 green:0.95 blue:0.95 alpha:1];
     }
     return _collectionView;
+}
+
+- (UITableView *) tableView {
+    if (!_tableView) {
+        _tableView = [[UITableView alloc] init];
+        _tableView.backgroundView = nil;
+        _tableView.backgroundColor = [UIColor colorWithRed:0.95 green:0.95 blue:0.95 alpha:1];
+        _tableView.rowHeight = SCREEN_WIDTH/3;
+        _tableView.delegate = self;
+        _tableView.dataSource = self;
+        [_tableView setTableFooterView:[[UIView alloc] initWithFrame:CGRectZero]];
+        _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        _tableView.tableHeaderView = self.headerView;
+    }
+    return _tableView;
+}
+
+- (UIView *) headerView {
+    if (!_headerView) {
+        _headerView = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, SCREEN_WIDTH, HEADERVIEWHIGHT)];
+        _headerView.backgroundColor = [UIColor whiteColor];
+    }
+    return _headerView;
 }
 
 @end

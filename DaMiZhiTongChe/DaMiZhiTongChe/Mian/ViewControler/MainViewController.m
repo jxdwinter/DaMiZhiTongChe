@@ -18,7 +18,7 @@
 #import "Main_TopicCollectionViewCell.h"
 #import "Main_CategoryTableViewCell.h"
 
-#define HEADERVIEWHIGHT 50.0
+#define HEADERVIEWHIGHT 40.0
 
 @interface MainViewController ()<UISearchBarDelegate,UIGestureRecognizerDelegate,SDCycleScrollViewDelegate,UICollectionViewDelegate,
 UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,UITableViewDelegate,UITableViewDataSource>
@@ -398,6 +398,29 @@ UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,UITableViewDelegat
     if (!_headerView) {
         _headerView = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, SCREEN_WIDTH, HEADERVIEWHIGHT)];
         _headerView.backgroundColor = [UIColor whiteColor];
+        UIImageView *iconImageView = [[UIImageView alloc] init];
+        iconImageView.image = [UIImage imageNamed:@"main_categoryIcon"];
+        [_headerView addSubview:iconImageView];
+        [iconImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(_headerView.mas_top).with.offset(15.0);
+            make.left.equalTo(_headerView.mas_left).with.offset(10.0);
+            make.width.equalTo(@18.5);
+            make.height.equalTo(@13.5);
+        }];
+        UILabel *label = [[UILabel alloc] init];
+        label.textColor = DEFAULTBROWNCOLOR;
+        label.font = [UIFont systemFontOfSize:12.0];
+        NSString *string = @"好好吃顿饭|选购原产优质食材";
+        NSMutableAttributedString *attr = [[NSMutableAttributedString alloc] initWithString:string];
+        [attr addAttribute:NSForegroundColorAttributeName value:DEFAULTGRAYCOLOR range:[string rangeOfString:@"|选购原产优质食材"]];
+        label.attributedText = attr;
+        [_headerView addSubview:label];
+        [label mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(_headerView.mas_top).with.offset(10.0);
+            make.left.equalTo(iconImageView.mas_right).with.offset(10.0);
+            make.right.equalTo(_headerView.mas_right).with.offset(-10.0);
+            make.height.equalTo(@20.0);
+        }];
     }
     return _headerView;
 }

@@ -9,7 +9,6 @@
 #import <Foundation/Foundation.h>
 
 #define CURRENTUSERTALBE @"currentUserTalbe"
-#define MAINDATATALBE @"mainDataTalbe"
 
 @interface SharedDatabaseHelper : NSObject
 

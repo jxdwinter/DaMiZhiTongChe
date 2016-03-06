@@ -32,19 +32,13 @@ static SharedDatabaseHelper* sharedDatabaseHelper = nil;
          *  当前登录用户
          */
         [store createTableWithName:CURRENTUSERTALBE];
-        
-        /**
-         *  首页数据
-         */
-        [store createTableWithName:MAINDATATALBE];
-
     }
     return self;
 }
 
 - (void)clearAllCurrentUserDatabase{
     YTKKeyValueStore *store = [[YTKKeyValueStore alloc] initDBWithName:DATABASENAME];
-    
+    [store description];
 }
 
 @end

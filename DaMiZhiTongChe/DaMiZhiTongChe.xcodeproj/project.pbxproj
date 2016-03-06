@@ -20,7 +20,6 @@
 		8348AA0A1C88225300ED9EF5 /* Main_Topic.m in Sources */ = {isa = PBXBuildFile; fileRef = 8348AA091C88225300ED9EF5 /* Main_Topic.m */; };
 		8348AA0D1C88246800ED9EF5 /* Main_Category.m in Sources */ = {isa = PBXBuildFile; fileRef = 8348AA0C1C88246800ED9EF5 /* Main_Category.m */; };
 		8348AA101C882A6F00ED9EF5 /* Main_homeApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 8348AA0F1C882A6F00ED9EF5 /* Main_homeApi.m */; };
-		8348AA131C882C7500ED9EF5 /* MainDatabaseHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 8348AA121C882C7500ED9EF5 /* MainDatabaseHelper.m */; };
 		8348AA161C882E2100ED9EF5 /* DatabaseHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 8348AA151C882E2100ED9EF5 /* DatabaseHelper.m */; };
 		83548E771C83D84C00A2252F /* ForgetPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83548E761C83D84C00A2252F /* ForgetPasswordViewController.m */; };
 		836013EC1C8568870090257C /* Login_updateAnonymousTokenApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 836013EB1C8568870090257C /* Login_updateAnonymousTokenApi.m */; };
@@ -111,8 +110,6 @@
 		8348AA0C1C88246800ED9EF5 /* Main_Category.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Main_Category.m; sourceTree = "<group>"; };
 		8348AA0E1C882A6F00ED9EF5 /* Main_homeApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Main_homeApi.h; sourceTree = "<group>"; };
 		8348AA0F1C882A6F00ED9EF5 /* Main_homeApi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Main_homeApi.m; sourceTree = "<group>"; };
-		8348AA111C882C7500ED9EF5 /* MainDatabaseHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainDatabaseHelper.h; sourceTree = "<group>"; };
-		8348AA121C882C7500ED9EF5 /* MainDatabaseHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainDatabaseHelper.m; sourceTree = "<group>"; };
 		8348AA141C882E2100ED9EF5 /* DatabaseHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DatabaseHelper.h; sourceTree = "<group>"; };
 		8348AA151C882E2100ED9EF5 /* DatabaseHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DatabaseHelper.m; sourceTree = "<group>"; };
 		83548E751C83D84C00A2252F /* ForgetPasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForgetPasswordViewController.h; sourceTree = "<group>"; };
@@ -254,8 +251,6 @@
 		8348A9EC1C881C1B00ED9EF5 /* Store */ = {
 			isa = PBXGroup;
 			children = (
-				8348AA111C882C7500ED9EF5 /* MainDatabaseHelper.h */,
-				8348AA121C882C7500ED9EF5 /* MainDatabaseHelper.m */,
 			);
 			path = Store;
 			sourceTree = "<group>";
@@ -877,7 +872,6 @@
 				836013EC1C8568870090257C /* Login_updateAnonymousTokenApi.m in Sources */,
 				8348AA0D1C88246800ED9EF5 /* Main_Category.m in Sources */,
 				8305D7FE1C86C9A300F71645 /* Login_loginApi.m in Sources */,
-				8348AA131C882C7500ED9EF5 /* MainDatabaseHelper.m in Sources */,
 				83A544F91C896CC90062FF0C /* Main_CategoryTableViewCell.m in Sources */,
 				8348AA011C881C2E00ED9EF5 /* MineViewController.m in Sources */,
 				836A64521C7BE22100219035 /* FBEncryptorAES.m in Sources */,

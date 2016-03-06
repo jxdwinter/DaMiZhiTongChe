@@ -8,7 +8,6 @@
 
 #import "MainViewController.h"
 #import "Main_homeApi.h"
-#import "MainDatabaseHelper.h"
 #import "Main_Goods.h"
 #import "Main_Banner.h"
 #import "Main_Topic.h"
@@ -116,13 +115,7 @@ UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,UITableViewDelegat
         make.right.equalTo(self.contentView.mas_right).with.offset(-5.0);
     }];
 
-    NSDictionary *cacheData = [[MainDatabaseHelper sharedMainDatabaseHelper] queryMainData];
-    if (cacheData) {
-        [self configDataWithMainData:cacheData];
-        [self getMainDataWithShowShouldShowHUD:NO];
-    }else{
-        [self getMainDataWithShowShouldShowHUD:YES];
-    }
+    [self getMainDataWithShowShouldShowHUD:YES];
 }
 
 - (void) viewDidAppear:(BOOL)animated {
@@ -150,15 +143,13 @@ UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,UITableViewDelegat
         NSDictionary *dic = [api responseDictionaryWithResponseString:request.responseString];
         if (dic) {
             if ([dic[@"result"] isEqualToString:@"0"]) {
-                [[MainDatabaseHelper sharedMainDatabaseHelper] deleteMainData];
-                [[MainDatabaseHelper sharedMainDatabaseHelper] saveMainDataWithDictionary:dic[@"data"]];
                 [self configDataWithMainData:dic[@"data"]];
             }else{
                 [MBProgressHUD showHUDwithSuccess:NO WithTitle:dic[@"msg"] withView:self.navigationController.view];
             }
         }
     } failure:^(YTKBaseRequest *request) {
-        
+        [self.scrollView.mj_header endRefreshing];
     }];
 }
 
@@ -217,12 +208,12 @@ UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,UITableViewDelegat
         make.right.equalTo(self.contentView.mas_right).with.offset(-5.0);
         make.height.equalTo(@(SCREEN_WIDTH/3 * [self.categoryItems count] + HEADERVIEWHIGHT));
     }];
-    self.scrollView.contentSize = CGSizeMake(self.contentView.frame.size.width,
-                                             self.cycleScrollView.frame.size.height +
-                                             self.collectionView.frame.size.height +
-                                             self.tableView.frame.size.height + 50.0);
     [self.collectionView reloadData];
     [self.tableView reloadData];
+    self.scrollView.contentSize = CGSizeMake(self.contentView.frame.size.width,
+                                             SCREEN_WIDTH/3 +
+                                             self.collectionView.frame.size.height +
+                                             self.tableView.frame.size.height + 50.0);
     [self.scrollView.mj_header endRefreshing];
 }
 
@@ -418,7 +409,6 @@ UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,UITableViewDelegat
         [label mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(_headerView.mas_top).with.offset(10.0);
             make.left.equalTo(iconImageView.mas_right).with.offset(10.0);
-            make.right.equalTo(_headerView.mas_right).with.offset(-10.0);
             make.height.equalTo(@20.0);
         }];
     }

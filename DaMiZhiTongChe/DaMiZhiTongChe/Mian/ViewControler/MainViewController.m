@@ -20,9 +20,11 @@
 #define HEADERVIEWHIGHT 40.0
 
 @interface MainViewController ()<UISearchBarDelegate,UIGestureRecognizerDelegate,SDCycleScrollViewDelegate,UICollectionViewDelegate,
-UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,UITableViewDelegate,UITableViewDataSource>
+UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,UITableViewDelegate,UITableViewDataSource,UIScrollViewDelegate>
 
 @property (nonatomic, assign) double collectionViewCellHight;
+
+@property (nonatomic, assign) BOOL isKeyboardShown;
 
 @property (nonatomic, strong) UIScrollView *scrollView;
 @property (nonatomic, strong) UIView *contentView;
@@ -47,6 +49,19 @@ UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,UITableViewDelegat
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    // Listen for keyboard appearances and disappearances
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardDidShow:)
+                                                 name:UIKeyboardDidShowNotification
+                                               object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardDidHide:)
+                                                 name:UIKeyboardDidHideNotification
+                                               object:nil];
+    
+    self.isKeyboardShown = NO;
     
     if (IS_IPHONE_4_OR_LESS) {
         self.collectionViewCellHight = 230.0;
@@ -119,6 +134,7 @@ UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,UITableViewDelegat
 }
 
 - (void) viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
     [self.searchBar resignFirstResponder];
 }
 
@@ -127,7 +143,21 @@ UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,UITableViewDelegat
     // Dispose of any resources that can be recreated.
 }
 
+
+- (void)dealloc{
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardDidShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardDidHideNotification object:nil];
+}
+
 #pragma mark - privete method
+
+- (void)keyboardDidShow: (NSNotification *) notif{
+    self.isKeyboardShown = YES;
+}
+
+- (void)keyboardDidHide: (NSNotification *) notif{
+    self.isKeyboardShown = NO;
+}
 
 - (void) loadData {
     [self getMainDataWithShowShouldShowHUD:NO];
@@ -299,6 +329,15 @@ UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,UITableViewDelegat
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
 
 }
+#pragma mark - scroll view delegate
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    if (scrollView == self.scrollView) {
+        if (self.isKeyboardShown) {
+            [self dismissKeyboard];
+        }
+    }
+}
 
 #pragma mark - getter and setter
 
@@ -314,6 +353,7 @@ UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,UITableViewDelegat
         header.lastUpdatedTimeLabel.textColor = DEFAULTBROWNCOLOR;
         _scrollView = [[UIScrollView alloc] initWithFrame:CGRectZero];
         _scrollView.mj_header = header;
+        _scrollView.delegate = self;
     }
     return _scrollView;
 }

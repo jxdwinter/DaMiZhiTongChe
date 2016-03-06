@@ -487,7 +487,6 @@
             if ([UIScreen mainScreen].scale == 1) launchImageName = @"LaunchImage-700-Portrait~ipad.png"; // iPad 2
             if ([UIScreen mainScreen].scale == 2) launchImageName = @"LaunchImage-700-Portrait@2x~ipad.png"; // Retina iPads
         }
-        
         _backgroundImageView = [[UIImageView alloc] initWithFrame:self.view.bounds];
         _backgroundImageView.userInteractionEnabled = YES;
         _backgroundImageView.image = [UIImage imageNamed:launchImageName];

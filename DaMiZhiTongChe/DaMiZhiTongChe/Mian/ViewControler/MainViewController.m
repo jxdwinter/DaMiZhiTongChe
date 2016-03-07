@@ -16,6 +16,7 @@
 #import <MJRefresh.h>
 #import "Main_TopicCollectionViewCell.h"
 #import "Main_CategoryTableViewCell.h"
+#import "Main_GoodsCollectionViewController.h"
 
 #define HEADERVIEWHIGHT 40.0
 
@@ -99,13 +100,8 @@ UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,UITableViewDelegat
     
     [self.scrollView addSubview:self.contentView];
     [self.contentView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.scrollView.mas_top).with.offset(0.0);
-        make.left.equalTo(self.scrollView.mas_left).with.offset(0.0);
-        make.bottom.equalTo(self.scrollView.mas_bottom).with.offset(0.0);
-        make.right.equalTo(self.scrollView.mas_right).with.offset(0.0);
-        
-        make.width.equalTo(self.view.mas_width).with.offset(0.0);
-        make.height.equalTo(self.view.mas_height).with.offset(0.0);
+        make.edges.equalTo(self.scrollView);
+        make.width.equalTo(self.scrollView);
     }];
     
     [self.contentView addSubview:self.cycleScrollView];
@@ -218,14 +214,6 @@ UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,UITableViewDelegat
     if ([self.topicItems count] % 2 > 0) {
         number++;
     }
-    self.collectionView.frame = CGRectMake(self.collectionView.frame.origin.x,
-                                           self.collectionView.frame.origin.y,
-                                           self.collectionView.frame.size.width,
-                                           self.collectionViewCellHight * number);
-    self.tableView.frame = CGRectMake(self.tableView.frame.origin.x,
-                                      self.tableView.frame.origin.y,
-                                      self.tableView.frame.size.width,
-                                      SCREEN_WIDTH/3 * [self.categoryItems count] + HEADERVIEWHIGHT);
     [self.collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.cycleScrollView.mas_bottom).with.offset(5.0);
         make.left.equalTo(self.contentView.mas_left).with.offset(5.0);
@@ -244,6 +232,9 @@ UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,UITableViewDelegat
                                              SCREEN_WIDTH/3 +
                                              self.collectionView.frame.size.height +
                                              self.tableView.frame.size.height + 50.0);
+    [self.contentView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.equalTo(self.tableView.mas_bottom).with.offset(50.0);
+    }];
     [self.scrollView.mj_header endRefreshing];
 }
 
@@ -255,8 +246,12 @@ UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,UITableViewDelegat
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar{
     [searchBar resignFirstResponder];
-    
+    Main_GoodsCollectionViewController *main_GoodsCollectionViewController = [[Main_GoodsCollectionViewController alloc] init];
+    main_GoodsCollectionViewController.search = searchBar.text;
+    main_GoodsCollectionViewController.title = @"搜索";
+    [self.navigationController pushViewController:main_GoodsCollectionViewController animated:YES];
 }
+
 #pragma mark - Collection View Datasource
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
@@ -282,7 +277,7 @@ UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,UITableViewDelegat
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
-    return CGSizeMake(SCREEN_WIDTH/2, self.collectionViewCellHight);
+    return CGSizeMake((SCREEN_WIDTH - 10.0)/2, self.collectionViewCellHight);
 }
 
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section{
@@ -298,9 +293,13 @@ UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,UITableViewDelegat
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
-    [collectionView deselectItemAtIndexPath:indexPath animated:NO];
+    [self dismissKeyboard];
+    Main_Topic *topic = self.topicItems[indexPath.row];
+    Main_GoodsCollectionViewController *main_GoodsCollectionViewController = [[Main_GoodsCollectionViewController alloc] init];
+    main_GoodsCollectionViewController.topic_id = topic._id;
+    main_GoodsCollectionViewController.title = topic.name;
+    [self.navigationController pushViewController:main_GoodsCollectionViewController animated:YES];
 }
-
 
 #pragma mark - SDCycleScrollViewDelegate
 
@@ -327,6 +326,12 @@ UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,UITableViewDelegat
 
 #pragma mark - Table view delegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    [self dismissKeyboard];
+    Main_Category *category = self.categoryItems[indexPath.row];
+    Main_GoodsCollectionViewController *main_GoodsCollectionViewController = [[Main_GoodsCollectionViewController alloc] init];
+    main_GoodsCollectionViewController.category_id = category._id;
+    main_GoodsCollectionViewController.title = category.category_name;
+    [self.navigationController pushViewController:main_GoodsCollectionViewController animated:YES];
 
 }
 #pragma mark - scroll view delegate
@@ -402,7 +407,6 @@ UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,UITableViewDelegat
         _collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:flowLayout];
         _collectionView.delegate = self;
         _collectionView.dataSource = self;
-        _collectionView.pagingEnabled = YES;
         _collectionView.showsHorizontalScrollIndicator = NO;
         [_collectionView registerClass:[Main_TopicCollectionViewCell class] forCellWithReuseIdentifier:@"MAIN_TOPICCOLLECTIONVIEWCELL"];
         _collectionView.backgroundColor = [UIColor colorWithRed:0.95 green:0.95 blue:0.95 alpha:1];

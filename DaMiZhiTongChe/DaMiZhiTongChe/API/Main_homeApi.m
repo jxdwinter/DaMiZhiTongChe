@@ -10,7 +10,6 @@
 
 @implementation Main_homeApi
 
-
 - (NSString *)requestUrl {
     return @"/Goods";
 }

@@ -11,6 +11,7 @@
 #import "Main_goodsListApi.h"
 #import <MJRefresh.h>
 #import "Main_Goods.h"
+#import "Main_GoodsDetailViewController.h"
 
 @interface Main_GoodsCollectionViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
 
@@ -92,7 +93,11 @@
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
-    [collectionView deselectItemAtIndexPath:indexPath animated:NO];
+    Main_Goods *goods = self.dataSource[indexPath.row];
+    Main_GoodsDetailViewController *main_GoodsDetailViewController = [[Main_GoodsDetailViewController alloc] init];
+    main_GoodsDetailViewController.title = goods.goods_name;
+    main_GoodsDetailViewController.goods_id = goods._id;
+    [self.navigationController pushViewController:main_GoodsDetailViewController animated:YES];
 }
 
 #pragma mark - privete method

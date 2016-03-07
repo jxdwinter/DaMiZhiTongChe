@@ -57,6 +57,9 @@
 		8377E8F61C8D075100709E83 /* Main_GoodsCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8377E8F51C8D075100709E83 /* Main_GoodsCollectionViewCell.m */; };
 		8377E8F91C8D2CA700709E83 /* Main_goodsListApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 8377E8F81C8D2CA700709E83 /* Main_goodsListApi.m */; };
 		8384AD6F1C83C61E001CCA0C /* SetPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8384AD6E1C83C61E001CCA0C /* SetPasswordViewController.m */; };
+		838983FF1C8D5BDD00D0057C /* Main_getGoodsApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 838983FE1C8D5BDD00D0057C /* Main_getGoodsApi.m */; };
+		838984021C8D5DEC00D0057C /* Main_GoodsDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 838984011C8D5DEC00D0057C /* Main_GoodsDetailViewController.m */; };
+		838984051C8D663B00D0057C /* Main_GoodsDetail.m in Sources */ = {isa = PBXBuildFile; fileRef = 838984041C8D663B00D0057C /* Main_GoodsDetail.m */; };
 		83A46F4D1C7D460300C17759 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83A46F4C1C7D460300C17759 /* LoginViewController.m */; };
 		83A544F91C896CC90062FF0C /* Main_CategoryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 83A544F81C896CC90062FF0C /* Main_CategoryTableViewCell.m */; };
 		83E0A25E1C7AF3B4002E4954 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 83E0A25D1C7AF3B4002E4954 /* main.m */; };
@@ -182,6 +185,12 @@
 		8377E8F81C8D2CA700709E83 /* Main_goodsListApi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Main_goodsListApi.m; sourceTree = "<group>"; };
 		8384AD6D1C83C61E001CCA0C /* SetPasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SetPasswordViewController.h; sourceTree = "<group>"; };
 		8384AD6E1C83C61E001CCA0C /* SetPasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SetPasswordViewController.m; sourceTree = "<group>"; };
+		838983FD1C8D5BDD00D0057C /* Main_getGoodsApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Main_getGoodsApi.h; sourceTree = "<group>"; };
+		838983FE1C8D5BDD00D0057C /* Main_getGoodsApi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Main_getGoodsApi.m; sourceTree = "<group>"; };
+		838984001C8D5DEC00D0057C /* Main_GoodsDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Main_GoodsDetailViewController.h; sourceTree = "<group>"; };
+		838984011C8D5DEC00D0057C /* Main_GoodsDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Main_GoodsDetailViewController.m; sourceTree = "<group>"; };
+		838984031C8D663B00D0057C /* Main_GoodsDetail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Main_GoodsDetail.h; sourceTree = "<group>"; };
+		838984041C8D663B00D0057C /* Main_GoodsDetail.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Main_GoodsDetail.m; sourceTree = "<group>"; };
 		83A46F4B1C7D460300C17759 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		83A46F4C1C7D460300C17759 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		83A544F71C896CC90062FF0C /* Main_CategoryTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Main_CategoryTableViewCell.h; sourceTree = "<group>"; };
@@ -247,6 +256,8 @@
 			children = (
 				8348AA021C881C9900ED9EF5 /* Main_Goods.h */,
 				8348AA031C881C9900ED9EF5 /* Main_Goods.m */,
+				838984031C8D663B00D0057C /* Main_GoodsDetail.h */,
+				838984041C8D663B00D0057C /* Main_GoodsDetail.m */,
 				8348AA051C881FD300ED9EF5 /* Main_Banner.h */,
 				8348AA061C881FD300ED9EF5 /* Main_Banner.m */,
 				8348AA081C88225300ED9EF5 /* Main_Topic.h */,
@@ -284,6 +295,8 @@
 				8348A9F01C881C1B00ED9EF5 /* MainViewController.m */,
 				8377E8F11C8D05E200709E83 /* Main_GoodsCollectionViewController.h */,
 				8377E8F21C8D05E200709E83 /* Main_GoodsCollectionViewController.m */,
+				838984001C8D5DEC00D0057C /* Main_GoodsDetailViewController.h */,
+				838984011C8D5DEC00D0057C /* Main_GoodsDetailViewController.m */,
 			);
 			path = ViewControler;
 			sourceTree = "<group>";
@@ -481,6 +494,8 @@
 				8348AA0F1C882A6F00ED9EF5 /* Main_homeApi.m */,
 				8377E8F71C8D2CA700709E83 /* Main_goodsListApi.h */,
 				8377E8F81C8D2CA700709E83 /* Main_goodsListApi.m */,
+				838983FD1C8D5BDD00D0057C /* Main_getGoodsApi.h */,
+				838983FE1C8D5BDD00D0057C /* Main_getGoodsApi.m */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -860,6 +875,7 @@
 			files = (
 				836013F91C856D5C0090257C /* User.m in Sources */,
 				836A642F1C7BE09E00219035 /* Config.m in Sources */,
+				838984051C8D663B00D0057C /* Main_GoodsDetail.m in Sources */,
 				8348AA041C881C9900ED9EF5 /* Main_Goods.m in Sources */,
 				8348AA161C882E2100ED9EF5 /* DatabaseHelper.m in Sources */,
 				83E0A2921C7AF5F8002E4954 /* AppDelegate.m in Sources */,
@@ -882,6 +898,7 @@
 				83E0A25E1C7AF3B4002E4954 /* main.m in Sources */,
 				8348AA0A1C88225300ED9EF5 /* Main_Topic.m in Sources */,
 				8305D7F81C86B8A900F71645 /* Login_validateCodeApi.m in Sources */,
+				838984021C8D5DEC00D0057C /* Main_GoodsDetailViewController.m in Sources */,
 				836A645D1C7BE22100219035 /* TextView.m in Sources */,
 				836A64291C7BDFEB00219035 /* BaseNavigationController.m in Sources */,
 				836013EC1C8568870090257C /* Login_updateAnonymousTokenApi.m in Sources */,
@@ -893,6 +910,7 @@
 				8348AA011C881C2E00ED9EF5 /* MineViewController.m in Sources */,
 				836A64521C7BE22100219035 /* FBEncryptorAES.m in Sources */,
 				8348A9F91C881C2700ED9EF5 /* CartViewController.m in Sources */,
+				838983FF1C8D5BDD00D0057C /* Main_getGoodsApi.m in Sources */,
 				836014031C857EA70090257C /* VerifyTools.m in Sources */,
 				8348AA071C881FD300ED9EF5 /* Main_Banner.m in Sources */,
 				83A46F4D1C7D460300C17759 /* LoginViewController.m in Sources */,

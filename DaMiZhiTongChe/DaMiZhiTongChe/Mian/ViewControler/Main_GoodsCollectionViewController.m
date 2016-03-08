@@ -217,6 +217,7 @@
         header.lastUpdatedTimeLabel.font = [UIFont systemFontOfSize:10];
         header.stateLabel.textColor = DEFAULTBROWNCOLOR;
         header.lastUpdatedTimeLabel.textColor = DEFAULTBROWNCOLOR;
+        header.lastUpdatedTimeLabel.hidden = YES;
         _collectionView.mj_header = header;
     }
     return _collectionView;

@@ -180,15 +180,18 @@
     [self.brownRoundedCornerImageView addSubview:self.whiteRoundedCornerImageView];
     [self.whiteRoundedCornerImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.brownRoundedCornerImageView.mas_top).with.offset(4.0);
-        make.left.equalTo(self.brownRoundedCornerImageView.mas_left).with.offset(35.0);
-        make.right.equalTo(self.brownRoundedCornerImageView.mas_right).with.offset(-35.0);
+//        make.left.equalTo(self.brownRoundedCornerImageView.mas_left).with.offset(35.0);
+//        make.right.equalTo(self.brownRoundedCornerImageView.mas_right).with.offset(-35.0);
+        make.centerX.equalTo(self.brownRoundedCornerImageView.mas_centerX).with.offset(0.0);
+        make.centerY.equalTo(self.brownRoundedCornerImageView.mas_centerY).with.offset(0.0);
         make.bottom.equalTo(self.brownRoundedCornerImageView.mas_bottom).with.offset(-4.0);
+        make.width.equalTo(@60.0);
     }];
     
     [self.brownRoundedCornerImageView addSubview:self.plusButton];
     [self.plusButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.brownRoundedCornerImageView.mas_top).with.offset(5.0);
-        make.left.equalTo(self.whiteRoundedCornerImageView.mas_right).with.offset(5.0);
+        make.left.equalTo(self.whiteRoundedCornerImageView.mas_right).with.offset(0.0);
         make.right.equalTo(self.brownRoundedCornerImageView.mas_right).with.offset(-5.0);
         make.bottom.equalTo(self.brownRoundedCornerImageView.mas_bottom).with.offset(-5.0);
     }];
@@ -197,7 +200,7 @@
     [self.minusButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.brownRoundedCornerImageView.mas_top).with.offset(5.0);
         make.left.equalTo(self.brownRoundedCornerImageView.mas_left).with.offset(5.0);
-        make.right.equalTo(self.whiteRoundedCornerImageView.mas_left).with.offset(-5.0);
+        make.right.equalTo(self.whiteRoundedCornerImageView.mas_left).with.offset(0.0);
         make.bottom.equalTo(self.brownRoundedCornerImageView.mas_bottom).with.offset(-5.0);
     }];
     
@@ -235,8 +238,16 @@
 #pragma mark - UIWebViewDelegate
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView {
-    NSString *result = [webView stringByEvaluatingJavaScriptFromString:@"document.body.offsetHeight;"];
-    float height = [result floatValue];
+    CGRect frame = webView.frame;
+    frame.size.height = 1;
+    webView.frame = frame;
+    CGSize fittingSize = [webView sizeThatFits:CGSizeZero];
+    frame.size = fittingSize;
+    webView.frame = frame;
+    float nativeHight = webView.frame.size.height;
+    NSString *output = [webView stringByEvaluatingJavaScriptFromString:@"document.body.scrollHeight;"];
+    float jsHight = [output floatValue];
+    float height = nativeHight >= jsHight ? nativeHight : jsHight;
     [self.webView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.infoView.mas_bottom).with.offset(.0);
         make.left.equalTo(self.contentView.mas_left).with.offset(0.0);
@@ -250,6 +261,11 @@
     }];
     [self.scrollView.mj_header endRefreshing];
     [[[UIApplication sharedApplication] keyWindow] addSubview:self.bottomView];
+}
+
+- (void)webView:(UIWebView *)webView didFailLoadWithError:(nullable NSError *)error {
+    NSLog(@"%@",[error description]);
+    [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:self.goodsDetailInfo.detail_url]]];
 }
 
 #pragma mark - privete method
@@ -315,6 +331,14 @@
     self.numberLabel.text = [NSString stringWithFormat:@"%lu",(unsigned long)number];
 }
 
+- (void) buy {
+    
+}
+
+- (void) cart {
+    
+}
+
 #pragma mark - getter and setter
 
 - (UIScrollView *) scrollView {
@@ -327,6 +351,7 @@
         header.lastUpdatedTimeLabel.font = [UIFont systemFontOfSize:10];
         header.stateLabel.textColor = DEFAULTBROWNCOLOR;
         header.lastUpdatedTimeLabel.textColor = DEFAULTBROWNCOLOR;
+        header.lastUpdatedTimeLabel.hidden = YES;
         _scrollView = [[UIScrollView alloc] initWithFrame:CGRectZero];
         _scrollView.mj_header = header;
     }
@@ -476,8 +501,36 @@
     if (!_bottomView) {
         _bottomView = [[UIView alloc] initWithFrame:CGRectMake(0.0, SCREEN_HEIGHT - 50.0, SCREEN_WIDTH, 50.0)];
         _bottomView.backgroundColor = [UIColor colorWithRed:0.95 green:0.95 blue:0.95 alpha:1];
+        [_bottomView addSubview:self.buyButton];
+        [_bottomView addSubview:self.cartButton];
     }
     return _bottomView;
+}
+
+- (UIButton *) buyButton {
+    if (!_buyButton) {
+        _buyButton = [[UIButton alloc] initWithFrame:CGRectMake(10.0, 10.0, (SCREEN_WIDTH - 30.0)/2, 30.0)];
+        [_buyButton.layer setMasksToBounds:YES];
+        [_buyButton.layer setCornerRadius:15.0];
+        [_buyButton addTarget:self action:@selector(buy) forControlEvents:UIControlEventTouchUpInside];
+        _buyButton.titleLabel.font = DEFAULFONT;
+        _buyButton.backgroundColor = [UIColor colorWithRed:0.98 green:0.65 blue:0.25 alpha:1];
+        [_buyButton setTitle:@"立即购买" forState:UIControlStateNormal];
+    }
+    return _buyButton;
+}
+
+- (UIButton *) cartButton {
+    if (!_cartButton) {
+        _cartButton = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2 + 5.0, 10.0, (SCREEN_WIDTH - 30.0)/2, 30.0)];
+        [_cartButton.layer setMasksToBounds:YES];
+        [_cartButton.layer setCornerRadius:15.0];
+        [_cartButton addTarget:self action:@selector(cart) forControlEvents:UIControlEventTouchUpInside];
+        _cartButton.titleLabel.font = DEFAULFONT;
+        _cartButton.backgroundColor = [UIColor colorWithRed:0.99 green:0.37 blue:0.37 alpha:1];
+        [_cartButton setTitle:@"加入购物车" forState:UIControlStateNormal];
+    }
+    return _cartButton;
 }
 
 @end

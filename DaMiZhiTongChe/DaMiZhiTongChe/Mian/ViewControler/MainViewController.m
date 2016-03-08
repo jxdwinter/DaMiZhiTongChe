@@ -357,6 +357,7 @@ UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,UITableViewDelegat
         header.lastUpdatedTimeLabel.font = [UIFont systemFontOfSize:10];
         header.stateLabel.textColor = DEFAULTBROWNCOLOR;
         header.lastUpdatedTimeLabel.textColor = DEFAULTBROWNCOLOR;
+        header.lastUpdatedTimeLabel.hidden = YES;
         _scrollView = [[UIScrollView alloc] initWithFrame:CGRectZero];
         _scrollView.mj_header = header;
         _scrollView.delegate = self;

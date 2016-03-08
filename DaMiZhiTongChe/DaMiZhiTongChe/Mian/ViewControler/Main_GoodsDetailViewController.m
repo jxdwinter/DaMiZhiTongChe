@@ -12,7 +12,7 @@
 #import <MJRefresh.h>
 #import "Main_GoodsDetail.h"
 
-@interface Main_GoodsDetailViewController () <UIWebViewDelegate>
+@interface Main_GoodsDetailViewController () <UIWebViewDelegate,UIScrollViewDelegate>
 
 @property (nonatomic, strong) UIButton *rightButton;
 @property (nonatomic, strong) UIScrollView *scrollView;
@@ -255,9 +255,9 @@
         make.height.equalTo(@(height));
     }];
     self.scrollView.contentSize = CGSizeMake(self.contentView.frame.size.width,
-                                             SCREEN_WIDTH/3*2 + height + 100.0);
+                                             SCREEN_WIDTH/3*2 + height + 50.0);
     [self.contentView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.equalTo(webView.mas_bottom).with.offset(100.0);
+        make.bottom.equalTo(webView.mas_bottom).with.offset(50.0);
     }];
     [self.scrollView.mj_header endRefreshing];
     [[[UIApplication sharedApplication] keyWindow] addSubview:self.bottomView];
@@ -266,6 +266,22 @@
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(nullable NSError *)error {
     NSLog(@"%@",[error description]);
     [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:self.goodsDetailInfo.detail_url]]];
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    if (scrollView == self.scrollView) {
+        self.bottomView.hidden = YES;
+        [NSObject cancelPreviousPerformRequestsWithTarget:self];
+        [self performSelector:@selector(scrollViewDidEndScrollingAnimation:) withObject:nil afterDelay:0.3];
+    }
+}
+
+-(void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView{
+    [NSObject cancelPreviousPerformRequestsWithTarget:self];
+    [UIView commitAnimations];
+    [UIView transitionWithView:self.bottomView duration:.3 options:UIViewAnimationOptionTransitionCrossDissolve animations:^(void){
+        self.bottomView.hidden = NO;
+    } completion:nil];
 }
 
 #pragma mark - privete method
@@ -353,6 +369,7 @@
         header.lastUpdatedTimeLabel.textColor = DEFAULTBROWNCOLOR;
         header.lastUpdatedTimeLabel.hidden = YES;
         _scrollView = [[UIScrollView alloc] initWithFrame:CGRectZero];
+        _scrollView.delegate = self;
         _scrollView.mj_header = header;
     }
     return _scrollView;

@@ -322,6 +322,7 @@ UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,UITableViewDelegat
     }
     Main_Category *category = self.categoryItems[indexPath.row];
     [cell.picImageView sd_setImageWithURL:[NSURL URLWithString:category.category_image] placeholderImage:nil];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
 }
 

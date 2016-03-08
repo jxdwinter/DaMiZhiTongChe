@@ -509,9 +509,9 @@
 
 - (UIButton *) buyButton {
     if (!_buyButton) {
-        _buyButton = [[UIButton alloc] initWithFrame:CGRectMake(10.0, 10.0, (SCREEN_WIDTH - 30.0)/2, 30.0)];
+        _buyButton = [[UIButton alloc] initWithFrame:CGRectMake(10.0, 5.0, (SCREEN_WIDTH - 30.0)/2, 40.0)];
         [_buyButton.layer setMasksToBounds:YES];
-        [_buyButton.layer setCornerRadius:15.0];
+        [_buyButton.layer setCornerRadius:20.0];
         [_buyButton addTarget:self action:@selector(buy) forControlEvents:UIControlEventTouchUpInside];
         _buyButton.titleLabel.font = DEFAULFONT;
         _buyButton.backgroundColor = [UIColor colorWithRed:0.98 green:0.65 blue:0.25 alpha:1];
@@ -522,9 +522,9 @@
 
 - (UIButton *) cartButton {
     if (!_cartButton) {
-        _cartButton = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2 + 5.0, 10.0, (SCREEN_WIDTH - 30.0)/2, 30.0)];
+        _cartButton = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2 + 5.0, 5.0, (SCREEN_WIDTH - 30.0)/2, 40.0)];
         [_cartButton.layer setMasksToBounds:YES];
-        [_cartButton.layer setCornerRadius:15.0];
+        [_cartButton.layer setCornerRadius:20.0];
         [_cartButton addTarget:self action:@selector(cart) forControlEvents:UIControlEventTouchUpInside];
         _cartButton.titleLabel.font = DEFAULFONT;
         _cartButton.backgroundColor = [UIColor colorWithRed:0.99 green:0.37 blue:0.37 alpha:1];

@@ -34,6 +34,8 @@
 @property (nonatomic, strong) UIImageView *brownRoundedCornerImageView;
 @property (nonatomic, strong) UIImageView *whiteRoundedCornerImageView;
 @property (nonatomic, strong) UIView *bottomView;
+@property (nonatomic, strong) UIButton *buyButton;
+@property (nonatomic, strong) UIButton *cartButton;
 
 @end
 
@@ -216,6 +218,15 @@
     [self getGoodsDetailInfoWithShowShouldShowHUD:YES];
 }
 
+- (void) viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+}
+
+- (void) viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [self.bottomView removeFromSuperview];
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -233,11 +244,12 @@
         make.height.equalTo(@(height));
     }];
     self.scrollView.contentSize = CGSizeMake(self.contentView.frame.size.width,
-                                             SCREEN_WIDTH/3*2 + height + 50.0);
+                                             SCREEN_WIDTH/3*2 + height + 100.0);
     [self.contentView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.equalTo(webView.mas_bottom).with.offset(50.0);
+        make.bottom.equalTo(webView.mas_bottom).with.offset(100.0);
     }];
     [self.scrollView.mj_header endRefreshing];
+    [[[UIApplication sharedApplication] keyWindow] addSubview:self.bottomView];
 }
 
 #pragma mark - privete method
@@ -463,7 +475,7 @@
 - (UIView *) bottomView {
     if (!_bottomView) {
         _bottomView = [[UIView alloc] initWithFrame:CGRectMake(0.0, SCREEN_HEIGHT - 50.0, SCREEN_WIDTH, 50.0)];
-        _bottomView.backgroundColor = [UIColor yellowColor];//[UIColor colorWithRed:0.95 green:0.95 blue:0.95 alpha:1];
+        _bottomView.backgroundColor = [UIColor colorWithRed:0.95 green:0.95 blue:0.95 alpha:1];
     }
     return _bottomView;
 }

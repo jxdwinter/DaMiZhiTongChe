@@ -17,6 +17,7 @@
 
 @property (nonatomic, assign) double collectionViewCellHight;
 @property (nonatomic, strong) UICollectionView *collectionView;
+
 @property (nonatomic, strong) NSMutableArray *dataSource;
 @property (nonatomic, assign) NSUInteger page_num;
 
@@ -27,6 +28,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.backButton.hidden = NO;
     if (IS_IPHONE_4_OR_LESS) {
         self.collectionViewCellHight = 180.0;
     }else if (IS_IPHONE_5) {

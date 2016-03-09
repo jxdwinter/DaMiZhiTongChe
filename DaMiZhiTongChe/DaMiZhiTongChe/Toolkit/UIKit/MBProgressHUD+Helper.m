@@ -19,7 +19,7 @@
     HUD.mode = MBProgressHUDModeCustomView;
     HUD.labelText = title;
     [HUD show:YES];
-    [HUD hide:YES afterDelay:1.5];
+    [HUD hide:YES afterDelay:.8];
 }
 
 + (void) showHUDWhileNetworkWithView : (UIView *) view{

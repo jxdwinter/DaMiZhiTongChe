@@ -15,6 +15,7 @@
     if (self) {
         self.goods = [[Main_Goods alloc] initWithGoodsInfo:cartGoodsInfo];
         self.counts = cartGoodsInfo[@"counts"];
+        self.isChecked = NO;
     }
     return self;
 }

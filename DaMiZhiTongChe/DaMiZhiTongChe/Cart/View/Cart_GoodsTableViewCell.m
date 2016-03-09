@@ -28,10 +28,10 @@
         self.checkBoxButton = [[UIButton alloc] init];
         [self.contentView addSubview:self.checkBoxButton];
         [self.checkBoxButton mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(self.contentView.mas_top).with.offset(40.0);
+            make.top.equalTo(self.contentView.mas_top).with.offset(12.5);
             make.left.equalTo(self.contentView.mas_left).with.offset(10.0);
-            make.width.equalTo(@20.0);
-            make.height.equalTo(@20.0);
+            make.width.equalTo(@30.0);
+            make.height.equalTo(@75.0);
         }];
 
         self.goodsImageView = [[UIImageView alloc] init];

@@ -21,8 +21,9 @@
 @property (nonatomic, strong) NSMutableArray *checkStatusDataSource;
 @property (nonatomic, strong) UIButton *allCheckButton;
 @property (nonatomic, strong) UIButton *buyButton;
-
+@property (nonatomic, strong) UILabel *allPriceLabel;
 @property (nonatomic, assign) BOOL isAllChecked;
+@property (nonatomic, assign) float allPrice;
 
 @end
 
@@ -35,24 +36,21 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(reloadData)
-                                                 name:@"RELOADCART"
-                                               object:nil];
-    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadData) name:@"RELOADCART" object:nil];
     self.title = @"购物车";
     
     self.dataSource = [[NSMutableArray alloc] initWithCapacity:1];
     self.checkStatusDataSource = [[NSMutableArray alloc] initWithCapacity:1];
     self.isAllChecked = NO;
+    self.allPrice = 0.00;
     
     [self.view addSubview:self.tableView];
     [self.view addSubview:self.allCheckButton];
     [self.allCheckButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.equalTo(self.view.mas_bottom).with.offset(-10.0);
+        make.bottom.equalTo(self.view.mas_bottom).with.offset(-7.5);
         make.left.equalTo(self.view.mas_left).with.offset(10.0);
-        make.width.equalTo(@20.0);
-        make.height.equalTo(@20.0);
+        make.width.equalTo(@35.0);
+        make.height.equalTo(@35.0);
     }];
     
     UILabel *allCheckLabel = [[UILabel alloc] initWithFrame:CGRectZero];
@@ -62,7 +60,7 @@
     allCheckLabel.font = [UIFont systemFontOfSize:12.0];
     [self.view addSubview:allCheckLabel];
     [allCheckLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.equalTo(self.view.mas_bottom).with.offset(-10.0);
+        make.bottom.equalTo(self.view.mas_bottom).with.offset(-15.0);
         make.left.equalTo(self.allCheckButton.mas_right).with.offset(10.0);
         make.height.equalTo(@20.0);
     }];
@@ -72,7 +70,15 @@
         make.bottom.equalTo(self.view.mas_bottom).with.offset(0.0);
         make.right.equalTo(self.view.mas_right).with.offset(0.0);
         make.width.equalTo(@120.0);
-        make.height.equalTo(@40.0);
+        make.height.equalTo(@50.0);
+    }];
+    
+    [self.view addSubview:self.allPriceLabel];
+    [self.allPriceLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.equalTo(self.view.mas_bottom).with.offset(0.0);
+        make.left.equalTo(allCheckLabel.mas_right).with.offset(5.0);
+        make.right.equalTo(self.buyButton.mas_left).with.offset(-5.0);
+        make.height.equalTo(@50.0);
     }];
     
     [self getCartDataWithShowShouldShowHUD:YES];
@@ -80,12 +86,19 @@
 
 - (void) viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    
+    self.allPrice = 0.00;
+    self.isAllChecked = NO;
+    self.allPriceLabel.text = [NSString stringWithFormat:@"合计:￥%0.2f",self.allPrice];
 }
 
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
     [self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow] animated:YES];
+    for (Cart_goods *cart_goods in self.dataSource) {
+        cart_goods.isChecked = NO;
+    }
+    [self.tableView reloadData];
+    [self.allCheckButton setImage:[UIImage imageNamed:@"cart_uncheck"] forState:UIControlStateNormal];
 }
 
 - (void) dealloc {
@@ -137,6 +150,9 @@
 - (void) configUI {
     [self.tableView reloadData];
     [self.tableView.mj_header endRefreshing];
+    [self.allCheckButton setImage:[UIImage imageNamed:@"cart_uncheck"] forState:UIControlStateNormal];
+    self.allPrice = 0.00;
+    self.allPriceLabel.text = [NSString stringWithFormat:@"合计:￥%0.2f",self.allPrice];
 }
 
 - (void) reloadData {
@@ -151,26 +167,90 @@
     
 }
 
+- (void) check : (UIButton *) button {
+    CGPoint buttonPosition = [button convertPoint:CGPointZero toView:self.tableView];
+    NSIndexPath *indexPath = [self.tableView indexPathForRowAtPoint:buttonPosition];
+    Cart_goods *cart_goods = self.dataSource[indexPath.row];
+    cart_goods.isChecked = !cart_goods.isChecked;
+    if (cart_goods.isChecked) {
+        [button setImage:[UIImage imageNamed:@"cart_cell_check"] forState:UIControlStateNormal];
+        BOOL isAllChecked = YES;
+        for (Cart_goods *cart_goods in self.dataSource) {
+            if (!cart_goods.isChecked) {
+                isAllChecked = NO;
+            }
+        }
+        if (isAllChecked) {
+            self.isAllChecked = YES;
+            [self.allCheckButton setImage:[UIImage imageNamed:@"cart_check"] forState:UIControlStateNormal];
+        }else{
+            self.isAllChecked = NO;
+            [self.allCheckButton setImage:[UIImage imageNamed:@"cart_uncheck"] forState:UIControlStateNormal];
+        }
+        self.allPrice += [cart_goods.goods.goods_price floatValue] * [cart_goods.counts integerValue];
+    }else{
+        [button setImage:[UIImage imageNamed:@"cart_cell_uncheck"] forState:UIControlStateNormal];
+        self.isAllChecked = NO;
+        [self.allCheckButton setImage:[UIImage imageNamed:@"cart_uncheck"] forState:UIControlStateNormal];
+        self.allPrice -= [cart_goods.goods.goods_price floatValue] * [cart_goods.counts integerValue];
+    }
+    self.allPriceLabel.text = [NSString stringWithFormat:@"合计:￥%0.2f",self.allPrice];
+}
+
 - (void) allCheckWithButton : (UIButton *) button {
     if (self.isAllChecked) {
         self.isAllChecked = NO;
         [button setImage:[UIImage imageNamed:@"cart_uncheck"] forState:UIControlStateNormal];
+        for (Cart_goods *cart_goods in self.dataSource) {
+            cart_goods.isChecked = NO;
+        }
+        self.allPrice = 0.00;
     }else{
         self.isAllChecked = YES;
         [button setImage:[UIImage imageNamed:@"cart_check"] forState:UIControlStateNormal];
+        for (Cart_goods *cart_goods in self.dataSource) {
+            if (!cart_goods.isChecked) {
+                cart_goods.isChecked = YES;
+                self.allPrice += [cart_goods.goods.goods_price floatValue] * [cart_goods.counts integerValue];
+            }
+        }
     }
+    [self.tableView reloadData];
+    self.allPriceLabel.text = [NSString stringWithFormat:@"合计:￥%0.2f",self.allPrice];
 }
 
-- (void)deleteCartGoodsWithCartGoods_id : (NSString *) cartGood_id withIndexPath : (NSIndexPath *) indexPath{
-    Cart_deleteApi *api = [[Cart_deleteApi alloc] initWithGoods_id:cartGood_id];
+- (void)deleteCartGoods : (Cart_goods *) cartGood withIndexPath : (NSIndexPath *) indexPath{
+    Cart_deleteApi *api = [[Cart_deleteApi alloc] initWithGoods_id:cartGood.goods._id];
     [api startWithCompletionBlockWithSuccess:^(YTKBaseRequest *request) {
         NSDictionary *dic = [api responseDictionaryWithResponseString:request.responseString];
         if (dic) {
             if ([dic[@"result"] isEqualToString:@"0"]) {
+                if (cartGood.isChecked) {
+                    self.allPrice -= [cartGood.goods.goods_price floatValue] * [cartGood.counts integerValue];
+                    self.allPriceLabel.text = [NSString stringWithFormat:@"合计:￥%0.2f",self.allPrice];
+                }
                 [self.tableView beginUpdates];
                 [self.dataSource removeObjectAtIndex:indexPath.row];
                 [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
                 [self.tableView endUpdates];
+                if ([self.dataSource count] == 0) {
+                    self.isAllChecked = NO;
+                    [self.allCheckButton setImage:[UIImage imageNamed:@"cart_uncheck"] forState:UIControlStateNormal];
+                    return;
+                }
+                BOOL isAllChecked = YES;
+                for (Cart_goods *cart_goods in self.dataSource) {
+                    if (!cart_goods.isChecked) {
+                        isAllChecked = NO;
+                    }
+                }
+                if (isAllChecked) {
+                    self.isAllChecked = YES;
+                    [self.allCheckButton setImage:[UIImage imageNamed:@"cart_check"] forState:UIControlStateNormal];
+                }else{
+                    self.isAllChecked = NO;
+                    [self.allCheckButton setImage:[UIImage imageNamed:@"cart_uncheck"] forState:UIControlStateNormal];
+                }
             }else {
                 [MBProgressHUD showHUDwithSuccess:NO WithTitle:dic[@"msg"] withView:self.navigationController.view];
             }
@@ -179,7 +259,6 @@
         
     }];
 }
-
 
 #pragma mark - Table view data source
 
@@ -194,7 +273,13 @@
         cell = [[Cart_GoodsTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CELL];
     }
     Cart_goods *cart_goods = self.dataSource[indexPath.row];
-    [cell.checkBoxButton setImage:[UIImage imageNamed:@"cart_uncheck"] forState:UIControlStateNormal];
+    if (cart_goods.isChecked) {
+        [cell.checkBoxButton setImage:[UIImage imageNamed:@"cart_cell_check"] forState:UIControlStateNormal];
+    }else{
+        [cell.checkBoxButton setImage:[UIImage imageNamed:@"cart_cell_uncheck"] forState:UIControlStateNormal];
+    }
+    [cell.checkBoxButton removeTarget:nil action:NULL forControlEvents:UIControlEventAllEvents];
+    [cell.checkBoxButton addTarget:self action:@selector(check:) forControlEvents:UIControlEventTouchUpInside];
     [cell.goodsImageView sd_setImageWithURL:[NSURL URLWithString:cart_goods.goods.imgurl] placeholderImage:nil];
     cell.goods_nameLabel.text = cart_goods.goods.goods_name;
     cell.farmer_nameLabel.text = cart_goods.goods.farmer_name;
@@ -228,7 +313,7 @@
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath{
     if (editingStyle ==  UITableViewCellEditingStyleDelete) {
         Cart_goods *cart_goods = self.dataSource[indexPath.row];
-        [self deleteCartGoodsWithCartGoods_id:cart_goods.goods._id withIndexPath:indexPath];
+        [self deleteCartGoods:cart_goods withIndexPath:indexPath];
     }
 }
 
@@ -241,7 +326,7 @@
 
 - (UITableView *)tableView{
     if (!_tableView) {
-        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0.0, 0.0, SCREEN_WIDTH,SCREEN_HEIGHT - NAVIGATIONBARHEIGHT - TABBARHEIGHT - 40.0)
+        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0.0, 0.0, SCREEN_WIDTH,SCREEN_HEIGHT - NAVIGATIONBARHEIGHT - TABBARHEIGHT - 50.0)
                                                   style:UITableViewStylePlain];
         _tableView.backgroundView = nil;
         _tableView.backgroundColor = DEFAULTLIGHTGRAYCOLOR;
@@ -279,9 +364,20 @@
         [_buyButton addTarget:self action:@selector(buy) forControlEvents:UIControlEventTouchUpInside];
         _buyButton.titleLabel.font = DEFAULFONT;
         _buyButton.backgroundColor = DEFAULTBROWNCOLOR;
-        [_buyButton setTitle:@"结算(0)" forState:UIControlStateNormal];
+        [_buyButton setTitle:@"结算" forState:UIControlStateNormal];
     }
     return _buyButton;
+}
+
+- (UILabel *) allPriceLabel {
+    if (!_allPriceLabel) {
+        _allPriceLabel = [[UILabel alloc] initWithFrame:CGRectZero];
+        _allPriceLabel.text = [NSString stringWithFormat:@"合计:￥%0.2f",self.allPrice];
+        _allPriceLabel.textColor = DEFAULTTEXTCOLOR;
+        _allPriceLabel.font = [UIFont systemFontOfSize:12.0];
+        _allPriceLabel.textAlignment = NSTextAlignmentRight;
+    }
+    return _allPriceLabel;
 }
 
 @end

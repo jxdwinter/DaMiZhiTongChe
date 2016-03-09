@@ -233,6 +233,7 @@
 - (void) viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     [self.bottomView removeFromSuperview];
+    self.bottomView = nil;
 }
 
 - (void)didReceiveMemoryWarning {

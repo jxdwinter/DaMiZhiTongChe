@@ -13,6 +13,7 @@
 
 @property (nonatomic, strong) Main_Goods *goods;
 @property (nonatomic, copy)   NSString *counts;
+@property (nonatomic, assign) BOOL isChecked;
 
 - (instancetype) initWithCartGoodsInfo : (NSDictionary *) cartGoodsInfo;
 

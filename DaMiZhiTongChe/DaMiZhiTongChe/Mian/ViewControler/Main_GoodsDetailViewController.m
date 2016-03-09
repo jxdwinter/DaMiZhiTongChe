@@ -49,13 +49,14 @@
     // Do any additional setup after loading the view.
     self.backButton.hidden = NO;
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.rightButton];
+    [self.view addSubview:self.bottomView];
     
     [self.view addSubview:self.scrollView];
     [self.scrollView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.view.mas_top).with.offset(.0);
         make.left.equalTo(self.view.mas_left).with.offset(0.0);
         make.right.equalTo(self.view.mas_right).with.offset(0.0);
-        make.bottom.equalTo(self.view.mas_bottom).with.offset(0.0);
+        make.bottom.equalTo(self.view.mas_bottom).with.offset(-50.0);
     }];
     
     [self.scrollView addSubview:self.contentView];
@@ -227,13 +228,10 @@
 
 - (void) viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    [[[UIApplication sharedApplication] keyWindow] addSubview:self.bottomView];
 }
 
 - (void) viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
-    [self.bottomView removeFromSuperview];
-    self.bottomView = nil;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -261,33 +259,16 @@
         make.height.equalTo(@(height));
     }];
     self.scrollView.contentSize = CGSizeMake(self.contentView.frame.size.width,
-                                             SCREEN_WIDTH/3*2 + height + 50.0);
+                                             SCREEN_WIDTH/3*2 + height);
     [self.contentView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.equalTo(webView.mas_bottom).with.offset(50.0);
+        make.bottom.equalTo(webView.mas_bottom).with.offset(0.0);
     }];
     [self.scrollView.mj_header endRefreshing];
-    [[[UIApplication sharedApplication] keyWindow] addSubview:self.bottomView];
 }
 
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(nullable NSError *)error {
     NSLog(@"%@",[error description]);
     [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:self.goodsDetailInfo.detail_url]]];
-}
-
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    if (scrollView == self.scrollView) {
-        self.bottomView.hidden = YES;
-        [NSObject cancelPreviousPerformRequestsWithTarget:self];
-        [self performSelector:@selector(scrollViewDidEndScrollingAnimation:) withObject:nil afterDelay:0.3];
-    }
-}
-
--(void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView{
-    [NSObject cancelPreviousPerformRequestsWithTarget:self];
-    [UIView commitAnimations];
-    [UIView transitionWithView:self.bottomView duration:.3 options:UIViewAnimationOptionTransitionCrossDissolve animations:^(void){
-        self.bottomView.hidden = NO;
-    } completion:nil];
 }
 
 #pragma mark - privete method
@@ -553,7 +534,7 @@
 
 - (UIView *) bottomView {
     if (!_bottomView) {
-        _bottomView = [[UIView alloc] initWithFrame:CGRectMake(0.0, SCREEN_HEIGHT - 50.0, SCREEN_WIDTH, 50.0)];
+        _bottomView = [[UIView alloc] initWithFrame:CGRectMake(0.0, SCREEN_HEIGHT - NAVIGATIONBARHEIGHT - 50.0, SCREEN_WIDTH, 50.0)];
         _bottomView.backgroundColor = [UIColor colorWithRed:0.95 green:0.95 blue:0.95 alpha:1];
         [_bottomView addSubview:self.buyButton];
         [_bottomView addSubview:self.cartButton];

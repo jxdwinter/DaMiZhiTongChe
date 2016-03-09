@@ -99,7 +99,7 @@
         self.numberLabel.textAlignment = NSTextAlignmentRight;
         [self.contentView addSubview:self.numberLabel];
         [self.numberLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(originImageView.mas_bottom).with.offset(8.0);
+            make.top.equalTo(originImageView.mas_bottom).with.offset(15.0);
             make.right.equalTo(self.contentView.mas_right).with.offset(-10.0);
             make.width.equalTo(@50.0);
             make.height.equalTo(@20.0);
@@ -110,7 +110,7 @@
         self.priceLabel.font = [UIFont systemFontOfSize:14.0];
         [self.contentView addSubview:self.priceLabel];
         [self.priceLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(originImageView.mas_bottom).with.offset(8.0);
+            make.top.equalTo(originImageView.mas_bottom).with.offset(13.0);
             make.left.equalTo(self.goodsImageView.mas_right).with.offset(10.0);
             make.right.equalTo(self.numberLabel.mas_left).with.offset(-10.0);
             make.height.equalTo(@20.0);

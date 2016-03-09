@@ -11,7 +11,6 @@
 
 @implementation Cart_getListApi
 
-
 - (NSString *)requestUrl {
     return @"/Cart";
 }

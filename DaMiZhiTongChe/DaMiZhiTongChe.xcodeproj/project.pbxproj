@@ -15,6 +15,7 @@
 		830722CE1C8FBCAE00475C41 /* Cart_addApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 830722CD1C8FBCAE00475C41 /* Cart_addApi.m */; };
 		830722D11C8FC00300475C41 /* Cart_getListApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 830722D01C8FC00300475C41 /* Cart_getListApi.m */; };
 		830722D41C8FC21700475C41 /* Cart_goods.m in Sources */ = {isa = PBXBuildFile; fileRef = 830722D31C8FC21700475C41 /* Cart_goods.m */; };
+		830722D71C8FD27100475C41 /* Cart_deleteApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 830722D61C8FD27100475C41 /* Cart_deleteApi.m */; };
 		831C43421C8935DE00FDE244 /* Main_TopicCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 831C43411C8935DE00FDE244 /* Main_TopicCollectionViewCell.m */; };
 		8348A9F11C881C1B00ED9EF5 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8348A9F01C881C1B00ED9EF5 /* MainViewController.m */; };
 		8348A9F91C881C2700ED9EF5 /* CartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8348A9F81C881C2700ED9EF5 /* CartViewController.m */; };
@@ -110,6 +111,8 @@
 		830722D01C8FC00300475C41 /* Cart_getListApi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Cart_getListApi.m; sourceTree = "<group>"; };
 		830722D21C8FC21700475C41 /* Cart_goods.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Cart_goods.h; sourceTree = "<group>"; };
 		830722D31C8FC21700475C41 /* Cart_goods.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Cart_goods.m; sourceTree = "<group>"; };
+		830722D51C8FD27000475C41 /* Cart_deleteApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Cart_deleteApi.h; sourceTree = "<group>"; };
+		830722D61C8FD27100475C41 /* Cart_deleteApi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Cart_deleteApi.m; sourceTree = "<group>"; };
 		831C43401C8935DE00FDE244 /* Main_TopicCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Main_TopicCollectionViewCell.h; sourceTree = "<group>"; };
 		831C43411C8935DE00FDE244 /* Main_TopicCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Main_TopicCollectionViewCell.m; sourceTree = "<group>"; };
 		8348A9EF1C881C1B00ED9EF5 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
@@ -516,6 +519,8 @@
 				830722CD1C8FBCAE00475C41 /* Cart_addApi.m */,
 				830722CF1C8FC00300475C41 /* Cart_getListApi.h */,
 				830722D01C8FC00300475C41 /* Cart_getListApi.m */,
+				830722D51C8FD27000475C41 /* Cart_deleteApi.h */,
+				830722D61C8FD27100475C41 /* Cart_deleteApi.m */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -913,6 +918,7 @@
 				836A64D21C7BE30900219035 /* ConfigArgument.m in Sources */,
 				8348AA101C882A6F00ED9EF5 /* Main_homeApi.m in Sources */,
 				8348A9F11C881C1B00ED9EF5 /* MainViewController.m in Sources */,
+				830722D71C8FD27100475C41 /* Cart_deleteApi.m in Sources */,
 				836013F41C856C3F0090257C /* AccountManager.m in Sources */,
 				836A64511C7BE22100219035 /* AESenAndDe.m in Sources */,
 				836013F31C856C3F0090257C /* AccountHelper.m in Sources */,

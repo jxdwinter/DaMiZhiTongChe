@@ -12,6 +12,7 @@
 #import "Main_GoodsDetailViewController.h"
 #import "Cart_getListApi.h"
 #import "Cart_goods.h"
+#import "Cart_deleteApi.h"
 
 @interface CartViewController () <UITableViewDelegate, UITableViewDataSource>
 
@@ -160,6 +161,26 @@
     }
 }
 
+- (void)deleteCartGoodsWithCartGoods_id : (NSString *) cartGood_id withIndexPath : (NSIndexPath *) indexPath{
+    Cart_deleteApi *api = [[Cart_deleteApi alloc] initWithGoods_id:cartGood_id];
+    [api startWithCompletionBlockWithSuccess:^(YTKBaseRequest *request) {
+        NSDictionary *dic = [api responseDictionaryWithResponseString:request.responseString];
+        if (dic) {
+            if ([dic[@"result"] isEqualToString:@"0"]) {
+                [self.tableView beginUpdates];
+                [self.dataSource removeObjectAtIndex:indexPath.row];
+                [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+                [self.tableView endUpdates];
+            }else {
+                [MBProgressHUD showHUDwithSuccess:NO WithTitle:dic[@"msg"] withView:self.navigationController.view];
+            }
+        }
+    } failure:^(YTKBaseRequest *request) {
+        
+    }];
+}
+
+
 #pragma mark - Table view data source
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -192,6 +213,28 @@
     main_GoodsDetailViewController.title = cart_goods.goods.goods_name;
     main_GoodsDetailViewController.goods_id = cart_goods.goods._id;
     [self.navigationController pushViewController:main_GoodsDetailViewController animated:YES];
+}
+
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath{
+    return YES;
+}
+
+//定义编辑样式
+- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return UITableViewCellEditingStyleDelete;
+}
+
+//进入编辑模式，按下出现的编辑按钮后
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (editingStyle ==  UITableViewCellEditingStyleDelete) {
+        Cart_goods *cart_goods = self.dataSource[indexPath.row];
+        [self deleteCartGoodsWithCartGoods_id:cart_goods.goods._id withIndexPath:indexPath];
+    }
+}
+
+//修改编辑按钮文字
+- (NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return @"删除";
 }
 
 #pragma mark - getter and setter

@@ -11,6 +11,9 @@
 #import <SDCycleScrollView.h>
 #import <MJRefresh.h>
 #import "Main_GoodsDetail.h"
+#import "BaseNavigationController.h"
+#import "LoginViewController.h"
+#import "Cart_addApi.h"
 
 @interface Main_GoodsDetailViewController () <UIWebViewDelegate,UIScrollViewDelegate>
 
@@ -180,8 +183,6 @@
     [self.brownRoundedCornerImageView addSubview:self.whiteRoundedCornerImageView];
     [self.whiteRoundedCornerImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.brownRoundedCornerImageView.mas_top).with.offset(4.0);
-//        make.left.equalTo(self.brownRoundedCornerImageView.mas_left).with.offset(35.0);
-//        make.right.equalTo(self.brownRoundedCornerImageView.mas_right).with.offset(-35.0);
         make.centerX.equalTo(self.brownRoundedCornerImageView.mas_centerX).with.offset(0.0);
         make.centerY.equalTo(self.brownRoundedCornerImageView.mas_centerY).with.offset(0.0);
         make.bottom.equalTo(self.brownRoundedCornerImageView.mas_bottom).with.offset(-4.0);
@@ -218,11 +219,15 @@
         make.left.equalTo(self.contentView.mas_left).with.offset(0.0);
         make.right.equalTo(self.contentView.mas_right).with.offset(0.0);
     }];
+    
+    NSLog(@"%@",self.goods_id);
+    
     [self getGoodsDetailInfoWithShowShouldShowHUD:YES];
 }
 
 - (void) viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
+    [[[UIApplication sharedApplication] keyWindow] addSubview:self.bottomView];
 }
 
 - (void) viewWillDisappear:(BOOL)animated {
@@ -348,11 +353,42 @@
 }
 
 - (void) buy {
-    
+    if (![[AccountManager sharedAccountManager] getCurrentUser]) {
+        [self presentLoginViewController];
+    }else{
+        
+    }
 }
 
 - (void) cart {
-    
+    if (![[AccountManager sharedAccountManager] getCurrentUser]) {
+        [self presentLoginViewController];
+    }else{
+        Cart_addApi *api = [[Cart_addApi alloc] initWithGoods_id:self.goods_id withCounts:self.numberLabel.text];
+        [api startWithCompletionBlockWithSuccess:^(YTKBaseRequest *request) {
+            NSDictionary *dic = [api responseDictionaryWithResponseString:request.responseString];
+            if (dic) {
+                if ([dic[@"result"] isEqualToString:@"0"]) {
+                    [[NSNotificationCenter defaultCenter] postNotificationName:@"RELOADCART" object:nil];
+                    [MBProgressHUD showHUDwithSuccess:YES WithTitle:dic[@"msg"] withView:self.navigationController.view];
+                }else{
+                    [MBProgressHUD showHUDwithSuccess:NO WithTitle:dic[@"msg"] withView:self.navigationController.view];
+                }
+            }
+        } failure:^(YTKBaseRequest *request) {
+            
+        }];
+    }
+}
+/*
+ * 弹出登录页面
+ */
+- (void) presentLoginViewController {
+    [self.navigationController presentViewController:[[BaseNavigationController alloc] initWithRootViewController:[[LoginViewController alloc] init]]
+                                            animated:YES
+                                          completion:^{
+        
+    }];
 }
 
 #pragma mark - getter and setter

@@ -11,6 +11,10 @@
 		8305D7FB1C86C87E00F71645 /* Signup_registerApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 8305D7FA1C86C87E00F71645 /* Signup_registerApi.m */; };
 		8305D7FE1C86C9A300F71645 /* Login_loginApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 8305D7FD1C86C9A300F71645 /* Login_loginApi.m */; };
 		8305D8011C86CA5A00F71645 /* Login_resetPasswordApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 8305D8001C86CA5A00F71645 /* Login_resetPasswordApi.m */; };
+		830722CB1C8FAE0700475C41 /* Cart_GoodsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 830722CA1C8FAE0700475C41 /* Cart_GoodsTableViewCell.m */; };
+		830722CE1C8FBCAE00475C41 /* Cart_addApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 830722CD1C8FBCAE00475C41 /* Cart_addApi.m */; };
+		830722D11C8FC00300475C41 /* Cart_getListApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 830722D01C8FC00300475C41 /* Cart_getListApi.m */; };
+		830722D41C8FC21700475C41 /* Cart_goods.m in Sources */ = {isa = PBXBuildFile; fileRef = 830722D31C8FC21700475C41 /* Cart_goods.m */; };
 		831C43421C8935DE00FDE244 /* Main_TopicCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 831C43411C8935DE00FDE244 /* Main_TopicCollectionViewCell.m */; };
 		8348A9F11C881C1B00ED9EF5 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8348A9F01C881C1B00ED9EF5 /* MainViewController.m */; };
 		8348A9F91C881C2700ED9EF5 /* CartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8348A9F81C881C2700ED9EF5 /* CartViewController.m */; };
@@ -98,6 +102,14 @@
 		8305D7FD1C86C9A300F71645 /* Login_loginApi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Login_loginApi.m; sourceTree = "<group>"; };
 		8305D7FF1C86CA5A00F71645 /* Login_resetPasswordApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Login_resetPasswordApi.h; sourceTree = "<group>"; };
 		8305D8001C86CA5A00F71645 /* Login_resetPasswordApi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Login_resetPasswordApi.m; sourceTree = "<group>"; };
+		830722C91C8FAE0700475C41 /* Cart_GoodsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Cart_GoodsTableViewCell.h; sourceTree = "<group>"; };
+		830722CA1C8FAE0700475C41 /* Cart_GoodsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Cart_GoodsTableViewCell.m; sourceTree = "<group>"; };
+		830722CC1C8FBCAE00475C41 /* Cart_addApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Cart_addApi.h; sourceTree = "<group>"; };
+		830722CD1C8FBCAE00475C41 /* Cart_addApi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Cart_addApi.m; sourceTree = "<group>"; };
+		830722CF1C8FC00300475C41 /* Cart_getListApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Cart_getListApi.h; sourceTree = "<group>"; };
+		830722D01C8FC00300475C41 /* Cart_getListApi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Cart_getListApi.m; sourceTree = "<group>"; };
+		830722D21C8FC21700475C41 /* Cart_goods.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Cart_goods.h; sourceTree = "<group>"; };
+		830722D31C8FC21700475C41 /* Cart_goods.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Cart_goods.m; sourceTree = "<group>"; };
 		831C43401C8935DE00FDE244 /* Main_TopicCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Main_TopicCollectionViewCell.h; sourceTree = "<group>"; };
 		831C43411C8935DE00FDE244 /* Main_TopicCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Main_TopicCollectionViewCell.m; sourceTree = "<group>"; };
 		8348A9EF1C881C1B00ED9EF5 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
@@ -311,6 +323,8 @@
 		8348A9F31C881C2700ED9EF5 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				830722D21C8FC21700475C41 /* Cart_goods.h */,
+				830722D31C8FC21700475C41 /* Cart_goods.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -325,6 +339,8 @@
 		8348A9F51C881C2700ED9EF5 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				830722C91C8FAE0700475C41 /* Cart_GoodsTableViewCell.h */,
+				830722CA1C8FAE0700475C41 /* Cart_GoodsTableViewCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -496,6 +512,10 @@
 				8377E8F81C8D2CA700709E83 /* Main_goodsListApi.m */,
 				838983FD1C8D5BDD00D0057C /* Main_getGoodsApi.h */,
 				838983FE1C8D5BDD00D0057C /* Main_getGoodsApi.m */,
+				830722CC1C8FBCAE00475C41 /* Cart_addApi.h */,
+				830722CD1C8FBCAE00475C41 /* Cart_addApi.m */,
+				830722CF1C8FC00300475C41 /* Cart_getListApi.h */,
+				830722D01C8FC00300475C41 /* Cart_getListApi.m */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -879,6 +899,7 @@
 				8348AA041C881C9900ED9EF5 /* Main_Goods.m in Sources */,
 				8348AA161C882E2100ED9EF5 /* DatabaseHelper.m in Sources */,
 				83E0A2921C7AF5F8002E4954 /* AppDelegate.m in Sources */,
+				830722CB1C8FAE0700475C41 /* Cart_GoodsTableViewCell.m in Sources */,
 				83548E771C83D84C00A2252F /* ForgetPasswordViewController.m in Sources */,
 				836A642A1C7BDFEB00219035 /* BaseViewController.m in Sources */,
 				836013FC1C8571BD0090257C /* Mine_releaseTokenApi.m in Sources */,
@@ -908,12 +929,15 @@
 				8305D7FE1C86C9A300F71645 /* Login_loginApi.m in Sources */,
 				83A544F91C896CC90062FF0C /* Main_CategoryTableViewCell.m in Sources */,
 				8348AA011C881C2E00ED9EF5 /* MineViewController.m in Sources */,
+				830722CE1C8FBCAE00475C41 /* Cart_addApi.m in Sources */,
+				830722D11C8FC00300475C41 /* Cart_getListApi.m in Sources */,
 				836A64521C7BE22100219035 /* FBEncryptorAES.m in Sources */,
 				8348A9F91C881C2700ED9EF5 /* CartViewController.m in Sources */,
 				838983FF1C8D5BDD00D0057C /* Main_getGoodsApi.m in Sources */,
 				836014031C857EA70090257C /* VerifyTools.m in Sources */,
 				8348AA071C881FD300ED9EF5 /* Main_Banner.m in Sources */,
 				83A46F4D1C7D460300C17759 /* LoginViewController.m in Sources */,
+				830722D41C8FC21700475C41 /* Cart_goods.m in Sources */,
 				8305D8011C86CA5A00F71645 /* Login_resetPasswordApi.m in Sources */,
 				8377E8F61C8D075100709E83 /* Main_GoodsCollectionViewCell.m in Sources */,
 				836A64F41C7BE41700219035 /* RequestAccessory.m in Sources */,

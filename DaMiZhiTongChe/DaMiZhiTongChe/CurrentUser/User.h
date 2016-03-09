@@ -16,6 +16,7 @@
  realname: "真实姓名",
  headimg: "头像地址",
  */
+@property (nonatomic, copy) NSString *uid;
 @property (nonatomic, copy) NSString *username;
 @property (nonatomic, copy) NSString *password;
 @property (nonatomic, copy) NSString *nickname;

@@ -48,7 +48,7 @@
         make.bottom.equalTo(self.view.mas_bottom).with.offset(-5.0);
     }];
     
-    [self performSelector:@selector(loadData) withObject:nil afterDelay:.3];
+    [self loadData];
 }
 
 - (void)didReceiveMemoryWarning {

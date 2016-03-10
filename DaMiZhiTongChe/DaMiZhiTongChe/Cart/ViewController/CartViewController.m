@@ -223,7 +223,6 @@
         for (Cart_goods *cart_goods in self.dataSource) {
             if (!cart_goods.isChecked) {
                 cart_goods.isChecked = YES;
-                NSLog(@"%f",[cart_goods.goods.goods_price doubleValue]);
                 self.allPrice += [cart_goods.goods.goods_price doubleValue] * [cart_goods.counts integerValue];
             }
         }

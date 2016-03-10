@@ -52,7 +52,7 @@
         }];
         self.desLabel = [[UILabel alloc] init];
         self.desLabel.textColor = DEFAULTGRAYCOLOR;
-        self.desLabel.font = [UIFont systemFontOfSize:8.0];
+        self.desLabel.font = [UIFont systemFontOfSize:10.0];
         [self.contentView addSubview:self.desLabel];
         [self.desLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(self.nameLabel.mas_bottom).with.offset(0.0);

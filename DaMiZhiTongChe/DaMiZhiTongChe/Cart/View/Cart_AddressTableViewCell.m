@@ -26,19 +26,19 @@
         
         self.phoneLabel = [[UILabel alloc] init];
         self.phoneLabel.textColor = DEFAULTTEXTCOLOR;
-        self.phoneLabel.font = [UIFont systemFontOfSize:12.0];
+        self.phoneLabel.font = [UIFont systemFontOfSize:14.0];
         self.phoneLabel.textAlignment = NSTextAlignmentRight;
         [self.contentView addSubview:self.phoneLabel];
         [self.phoneLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(self.contentView.mas_top).with.offset(10.0);
             make.right.equalTo(self.contentView.mas_right).with.offset(-10.0);
-            make.width.equalTo(@80.0);
+            make.width.equalTo(@100.0);
             make.height.equalTo(@20.0);
         }];
         
         self.nameLabel = [[UILabel alloc] init];
         self.nameLabel.textColor = DEFAULTTEXTCOLOR;
-        self.nameLabel.font = [UIFont systemFontOfSize:12.0];
+        self.nameLabel.font = [UIFont systemFontOfSize:14.0];
         [self.contentView addSubview:self.nameLabel];
         [self.nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(self.contentView.mas_top).with.offset(10.0);
@@ -51,7 +51,7 @@
         [self.addressLabel setNumberOfLines:0];
         self.addressLabel.lineBreakMode = NSLineBreakByWordWrapping;
         self.addressLabel.textColor = DEFAULTTEXTCOLOR;
-        self.addressLabel.font = [UIFont systemFontOfSize:10.0];
+        self.addressLabel.font = [UIFont systemFontOfSize:12.0];
         [self.contentView addSubview:self.addressLabel];
         [self.addressLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(self.phoneLabel.mas_bottom).with.offset(5.0);

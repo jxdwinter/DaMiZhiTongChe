@@ -13,17 +13,17 @@
 #import "Cart_getListApi.h"
 #import "Cart_goods.h"
 #import "Cart_deleteApi.h"
+#import "CartSettlementViewController.h"
 
 @interface CartViewController () <UITableViewDelegate, UITableViewDataSource>
 
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *dataSource;
-@property (nonatomic, strong) NSMutableArray *checkStatusDataSource;
 @property (nonatomic, strong) UIButton *allCheckButton;
 @property (nonatomic, strong) UIButton *buyButton;
 @property (nonatomic, strong) UILabel *allPriceLabel;
 @property (nonatomic, assign) BOOL isAllChecked;
-@property (nonatomic, assign) float allPrice;
+@property (nonatomic, assign) double allPrice;
 
 @end
 
@@ -40,7 +40,6 @@
     self.title = @"购物车";
     
     self.dataSource = [[NSMutableArray alloc] initWithCapacity:1];
-    self.checkStatusDataSource = [[NSMutableArray alloc] initWithCapacity:1];
     self.isAllChecked = NO;
     self.allPrice = 0.00;
     
@@ -164,7 +163,20 @@
 }
 
 - (void) buy {
-    
+    if (self.allPrice == 0.00) {
+        [MBProgressHUD showHUDwithSuccess:NO WithTitle:@"请选择一件商品" withView:self.navigationController.view];
+    }else{
+        NSMutableArray *tmpArray = [[NSMutableArray alloc] initWithCapacity:1];
+        for (Cart_goods *cart_goods in self.dataSource) {
+            if (cart_goods.isChecked) {
+                [tmpArray addObject:cart_goods];
+            }
+        }
+        CartSettlementViewController *cartSettlementViewController = [[CartSettlementViewController alloc] init];
+        cartSettlementViewController.dataSource = tmpArray;
+        cartSettlementViewController.allPrice = self.allPrice;
+        [self.navigationController pushViewController:cartSettlementViewController animated:YES];
+    }
 }
 
 - (void) check : (UIButton *) button {
@@ -187,12 +199,12 @@
             self.isAllChecked = NO;
             [self.allCheckButton setImage:[UIImage imageNamed:@"cart_uncheck"] forState:UIControlStateNormal];
         }
-        self.allPrice += [cart_goods.goods.goods_price floatValue] * [cart_goods.counts integerValue];
+        self.allPrice += [cart_goods.goods.goods_price doubleValue] * [cart_goods.counts integerValue];
     }else{
         [button setImage:[UIImage imageNamed:@"cart_cell_uncheck"] forState:UIControlStateNormal];
         self.isAllChecked = NO;
         [self.allCheckButton setImage:[UIImage imageNamed:@"cart_uncheck"] forState:UIControlStateNormal];
-        self.allPrice -= [cart_goods.goods.goods_price floatValue] * [cart_goods.counts integerValue];
+        self.allPrice -= [cart_goods.goods.goods_price doubleValue] * [cart_goods.counts integerValue];
     }
     self.allPriceLabel.text = [NSString stringWithFormat:@"合计:￥%0.2f",self.allPrice];
 }
@@ -211,7 +223,8 @@
         for (Cart_goods *cart_goods in self.dataSource) {
             if (!cart_goods.isChecked) {
                 cart_goods.isChecked = YES;
-                self.allPrice += [cart_goods.goods.goods_price floatValue] * [cart_goods.counts integerValue];
+                NSLog(@"%f",[cart_goods.goods.goods_price doubleValue]);
+                self.allPrice += [cart_goods.goods.goods_price doubleValue] * [cart_goods.counts integerValue];
             }
         }
     }
@@ -226,7 +239,7 @@
         if (dic) {
             if ([dic[@"result"] isEqualToString:@"0"]) {
                 if (cartGood.isChecked) {
-                    self.allPrice -= [cartGood.goods.goods_price floatValue] * [cartGood.counts integerValue];
+                    self.allPrice -= [cartGood.goods.goods_price doubleValue] * [cartGood.counts integerValue];
                     self.allPriceLabel.text = [NSString stringWithFormat:@"合计:￥%0.2f",self.allPrice];
                 }
                 [self.tableView beginUpdates];
@@ -326,8 +339,7 @@
 
 - (UITableView *)tableView{
     if (!_tableView) {
-        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0.0, 0.0, SCREEN_WIDTH,SCREEN_HEIGHT - NAVIGATIONBARHEIGHT - TABBARHEIGHT - 50.0)
-                                                  style:UITableViewStylePlain];
+        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0.0, 0.0, SCREEN_WIDTH,SCREEN_HEIGHT - NAVIGATIONBARHEIGHT - TABBARHEIGHT - 50.0) style:UITableViewStylePlain];
         _tableView.backgroundView = nil;
         _tableView.backgroundColor = DEFAULTLIGHTGRAYCOLOR;
         _tableView.rowHeight = 100;

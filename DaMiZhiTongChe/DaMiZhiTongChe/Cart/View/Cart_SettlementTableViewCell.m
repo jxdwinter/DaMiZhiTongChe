@@ -1,14 +1,15 @@
 //
-//  Cart_GoodsTableViewCell.m
+//  Cart_SettlementTableViewCell.m
 //  DaMiZhiTongChe
 //
-//  Created by Xiaodong Jiang on 3/9/16.
+//  Created by Xiaodong Jiang on 3/10/16.
 //  Copyright © 2016 哈尔滨龙卫中新工贸有限责任公司. All rights reserved.
 //
 
-#import "Cart_GoodsTableViewCell.h"
+#import "Cart_SettlementTableViewCell.h"
 
-@implementation Cart_GoodsTableViewCell
+@implementation Cart_SettlementTableViewCell
+
 
 - (instancetype) initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
@@ -24,21 +25,12 @@
             make.bottom.equalTo(self.contentView.mas_bottom).with.offset(-1.0);
             make.height.equalTo(@1.0);
         }];
-        
-        self.checkBoxButton = [[UIButton alloc] init];
-        [self.contentView addSubview:self.checkBoxButton];
-        [self.checkBoxButton mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(self.contentView.mas_top).with.offset(12.5);
-            make.left.equalTo(self.contentView.mas_left).with.offset(10.0);
-            make.width.equalTo(@30.0);
-            make.height.equalTo(@75.0);
-        }];
 
         self.goodsImageView = [[UIImageView alloc] init];
         [self.contentView addSubview:self.goodsImageView];
         [self.goodsImageView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(self.contentView.mas_top).with.offset(10.0);
-            make.left.equalTo(self.checkBoxButton.mas_right).with.offset(10.0);
+            make.left.equalTo(self.contentView.mas_left).with.offset(10.0);
             make.width.equalTo(@120.0);
             make.height.equalTo(@80.0);
         }];

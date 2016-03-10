@@ -62,6 +62,7 @@
 		8377E8F61C8D075100709E83 /* Main_GoodsCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8377E8F51C8D075100709E83 /* Main_GoodsCollectionViewCell.m */; };
 		8377E8F91C8D2CA700709E83 /* Main_goodsListApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 8377E8F81C8D2CA700709E83 /* Main_goodsListApi.m */; };
 		8384AD6F1C83C61E001CCA0C /* SetPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8384AD6E1C83C61E001CCA0C /* SetPasswordViewController.m */; };
+		8385751A1C903D4500A26960 /* Main_GoodsCommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 838575191C903D4500A26960 /* Main_GoodsCommentViewController.m */; };
 		838983FF1C8D5BDD00D0057C /* Main_getGoodsApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 838983FE1C8D5BDD00D0057C /* Main_getGoodsApi.m */; };
 		838984021C8D5DEC00D0057C /* Main_GoodsDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 838984011C8D5DEC00D0057C /* Main_GoodsDetailViewController.m */; };
 		838984051C8D663B00D0057C /* Main_GoodsDetail.m in Sources */ = {isa = PBXBuildFile; fileRef = 838984041C8D663B00D0057C /* Main_GoodsDetail.m */; };
@@ -72,6 +73,11 @@
 		83E0A2771C7AF3B4002E4954 /* DaMiZhiTongCheTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 83E0A2761C7AF3B4002E4954 /* DaMiZhiTongCheTests.m */; };
 		83E0A2821C7AF3B4002E4954 /* DaMiZhiTongCheUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 83E0A2811C7AF3B4002E4954 /* DaMiZhiTongCheUITests.m */; };
 		83E0A2921C7AF5F8002E4954 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 83E0A2911C7AF5F8002E4954 /* AppDelegate.m */; };
+		83FE91C21C90F61E0032654B /* CartSettlementViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83FE91C11C90F61E0032654B /* CartSettlementViewController.m */; };
+		83FE91C51C910BA90032654B /* Cart_SettlementTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 83FE91C41C910BA90032654B /* Cart_SettlementTableViewCell.m */; };
+		83FE91C81C91119E0032654B /* Cart_PaymentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 83FE91C71C91119E0032654B /* Cart_PaymentTableViewCell.m */; };
+		83FE91CB1C9118AE0032654B /* Cart_AddressTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 83FE91CA1C9118AE0032654B /* Cart_AddressTableViewCell.m */; };
+		83FE91CE1C9122880032654B /* CartAddressListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83FE91CD1C9122880032654B /* CartAddressListViewController.m */; };
 		D53058472E4618A3670C5603 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E3A9EB6C3077EF3167E81F88 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -200,6 +206,8 @@
 		8377E8F81C8D2CA700709E83 /* Main_goodsListApi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Main_goodsListApi.m; sourceTree = "<group>"; };
 		8384AD6D1C83C61E001CCA0C /* SetPasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SetPasswordViewController.h; sourceTree = "<group>"; };
 		8384AD6E1C83C61E001CCA0C /* SetPasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SetPasswordViewController.m; sourceTree = "<group>"; };
+		838575181C903D4500A26960 /* Main_GoodsCommentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Main_GoodsCommentViewController.h; sourceTree = "<group>"; };
+		838575191C903D4500A26960 /* Main_GoodsCommentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Main_GoodsCommentViewController.m; sourceTree = "<group>"; };
 		838983FD1C8D5BDD00D0057C /* Main_getGoodsApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Main_getGoodsApi.h; sourceTree = "<group>"; };
 		838983FE1C8D5BDD00D0057C /* Main_getGoodsApi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Main_getGoodsApi.m; sourceTree = "<group>"; };
 		838984001C8D5DEC00D0057C /* Main_GoodsDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Main_GoodsDetailViewController.h; sourceTree = "<group>"; };
@@ -222,6 +230,16 @@
 		83E0A2831C7AF3B4002E4954 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		83E0A2901C7AF5F8002E4954 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		83E0A2911C7AF5F8002E4954 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		83FE91C01C90F61E0032654B /* CartSettlementViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CartSettlementViewController.h; sourceTree = "<group>"; };
+		83FE91C11C90F61E0032654B /* CartSettlementViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CartSettlementViewController.m; sourceTree = "<group>"; };
+		83FE91C31C910BA90032654B /* Cart_SettlementTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Cart_SettlementTableViewCell.h; sourceTree = "<group>"; };
+		83FE91C41C910BA90032654B /* Cart_SettlementTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Cart_SettlementTableViewCell.m; sourceTree = "<group>"; };
+		83FE91C61C91119E0032654B /* Cart_PaymentTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Cart_PaymentTableViewCell.h; sourceTree = "<group>"; };
+		83FE91C71C91119E0032654B /* Cart_PaymentTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Cart_PaymentTableViewCell.m; sourceTree = "<group>"; };
+		83FE91C91C9118AE0032654B /* Cart_AddressTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Cart_AddressTableViewCell.h; sourceTree = "<group>"; };
+		83FE91CA1C9118AE0032654B /* Cart_AddressTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Cart_AddressTableViewCell.m; sourceTree = "<group>"; };
+		83FE91CC1C9122880032654B /* CartAddressListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CartAddressListViewController.h; sourceTree = "<group>"; };
+		83FE91CD1C9122880032654B /* CartAddressListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CartAddressListViewController.m; sourceTree = "<group>"; };
 		E3A9EB6C3077EF3167E81F88 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -312,6 +330,8 @@
 				8377E8F21C8D05E200709E83 /* Main_GoodsCollectionViewController.m */,
 				838984001C8D5DEC00D0057C /* Main_GoodsDetailViewController.h */,
 				838984011C8D5DEC00D0057C /* Main_GoodsDetailViewController.m */,
+				838575181C903D4500A26960 /* Main_GoodsCommentViewController.h */,
+				838575191C903D4500A26960 /* Main_GoodsCommentViewController.m */,
 			);
 			path = ViewControler;
 			sourceTree = "<group>";
@@ -344,6 +364,12 @@
 			children = (
 				830722C91C8FAE0700475C41 /* Cart_GoodsTableViewCell.h */,
 				830722CA1C8FAE0700475C41 /* Cart_GoodsTableViewCell.m */,
+				83FE91C31C910BA90032654B /* Cart_SettlementTableViewCell.h */,
+				83FE91C41C910BA90032654B /* Cart_SettlementTableViewCell.m */,
+				83FE91C61C91119E0032654B /* Cart_PaymentTableViewCell.h */,
+				83FE91C71C91119E0032654B /* Cart_PaymentTableViewCell.m */,
+				83FE91C91C9118AE0032654B /* Cart_AddressTableViewCell.h */,
+				83FE91CA1C9118AE0032654B /* Cart_AddressTableViewCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -353,6 +379,10 @@
 			children = (
 				8348A9F71C881C2700ED9EF5 /* CartViewController.h */,
 				8348A9F81C881C2700ED9EF5 /* CartViewController.m */,
+				83FE91C01C90F61E0032654B /* CartSettlementViewController.h */,
+				83FE91C11C90F61E0032654B /* CartSettlementViewController.m */,
+				83FE91CC1C9122880032654B /* CartAddressListViewController.h */,
+				83FE91CD1C9122880032654B /* CartAddressListViewController.m */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -904,13 +934,17 @@
 				8348AA041C881C9900ED9EF5 /* Main_Goods.m in Sources */,
 				8348AA161C882E2100ED9EF5 /* DatabaseHelper.m in Sources */,
 				83E0A2921C7AF5F8002E4954 /* AppDelegate.m in Sources */,
+				8385751A1C903D4500A26960 /* Main_GoodsCommentViewController.m in Sources */,
 				830722CB1C8FAE0700475C41 /* Cart_GoodsTableViewCell.m in Sources */,
 				83548E771C83D84C00A2252F /* ForgetPasswordViewController.m in Sources */,
 				836A642A1C7BDFEB00219035 /* BaseViewController.m in Sources */,
 				836013FC1C8571BD0090257C /* Mine_releaseTokenApi.m in Sources */,
 				8384AD6F1C83C61E001CCA0C /* SetPasswordViewController.m in Sources */,
+				83FE91C51C910BA90032654B /* Cart_SettlementTableViewCell.m in Sources */,
 				8305D7FB1C86C87E00F71645 /* Signup_registerApi.m in Sources */,
+				83FE91C21C90F61E0032654B /* CartSettlementViewController.m in Sources */,
 				836013F51C856C3F0090257C /* SharedDatabaseHelper.m in Sources */,
+				83FE91CB1C9118AE0032654B /* Cart_AddressTableViewCell.m in Sources */,
 				831C43421C8935DE00FDE244 /* Main_TopicCollectionViewCell.m in Sources */,
 				836A64531C7BE22100219035 /* GTMBase64.m in Sources */,
 				836A645C1C7BE22100219035 /* MBProgressHUD+Helper.m in Sources */,
@@ -928,6 +962,7 @@
 				838984021C8D5DEC00D0057C /* Main_GoodsDetailViewController.m in Sources */,
 				836A645D1C7BE22100219035 /* TextView.m in Sources */,
 				836A64291C7BDFEB00219035 /* BaseNavigationController.m in Sources */,
+				83FE91C81C91119E0032654B /* Cart_PaymentTableViewCell.m in Sources */,
 				836013EC1C8568870090257C /* Login_updateAnonymousTokenApi.m in Sources */,
 				8377E8F91C8D2CA700709E83 /* Main_goodsListApi.m in Sources */,
 				8348AA0D1C88246800ED9EF5 /* Main_Category.m in Sources */,
@@ -935,6 +970,7 @@
 				8305D7FE1C86C9A300F71645 /* Login_loginApi.m in Sources */,
 				83A544F91C896CC90062FF0C /* Main_CategoryTableViewCell.m in Sources */,
 				8348AA011C881C2E00ED9EF5 /* MineViewController.m in Sources */,
+				83FE91CE1C9122880032654B /* CartAddressListViewController.m in Sources */,
 				830722CE1C8FBCAE00475C41 /* Cart_addApi.m in Sources */,
 				830722D11C8FC00300475C41 /* Cart_getListApi.m in Sources */,
 				836A64521C7BE22100219035 /* FBEncryptorAES.m in Sources */,

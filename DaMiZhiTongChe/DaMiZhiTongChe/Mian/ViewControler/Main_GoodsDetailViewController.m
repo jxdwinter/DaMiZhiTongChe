@@ -14,6 +14,7 @@
 #import "BaseNavigationController.h"
 #import "LoginViewController.h"
 #import "Cart_addApi.h"
+#import "Main_GoodsCommentViewController.h"
 
 @interface Main_GoodsDetailViewController () <UIWebViewDelegate,UIScrollViewDelegate>
 
@@ -316,7 +317,8 @@
 }
 
 - (void) gotoCommentViewController {
-    
+    Main_GoodsCommentViewController *main_GoodsCommentViewController = [[Main_GoodsCommentViewController alloc] init];
+    [self.navigationController pushViewController:main_GoodsCommentViewController animated:YES];
 }
 
 - (void) plus {

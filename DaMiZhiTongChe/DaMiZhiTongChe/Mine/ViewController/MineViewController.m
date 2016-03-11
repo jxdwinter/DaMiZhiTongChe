@@ -52,7 +52,7 @@
     [self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow] animated:YES];
     if (self.headerView) {
         [self.headerView.avatarImageView sd_setImageWithURL:[NSURL URLWithString:[[[AccountManager sharedAccountManager] getCurrentUser] headimg]]
-                                           placeholderImage:[UIImage imageNamed:@"PersonalCenter_avatarImageView"]];
+                                           placeholderImage:[UIImage imageNamed:@"mine_headerImage"]];
         self.headerView.nameLabel.text = [NSString stringWithFormat:@"姓名:%@",[[[AccountManager sharedAccountManager] getCurrentUser] username]];
     }
 }
@@ -138,7 +138,7 @@
     if (!_headerView) {
         _headerView = [[HeaderView alloc] initWithFrame:CGRectMake(0.0, 0.0, SCREEN_WIDTH, 95.0)];
         [_headerView.avatarImageView sd_setImageWithURL:[NSURL URLWithString:[[[AccountManager sharedAccountManager] getCurrentUser] headimg]]
-                                       placeholderImage:[UIImage imageNamed:@"PersonalCenter_avatarImageView"]];
+                                       placeholderImage:[UIImage imageNamed:@"mine_headerImage"]];
         _headerView.nameLabel.text = [NSString stringWithFormat:@"姓名:%@",[[[AccountManager sharedAccountManager] getCurrentUser] username]];
         [_headerView addTarget:self action:@selector(headerViewTouched) forControlEvents:UIControlEventTouchUpInside];
     }

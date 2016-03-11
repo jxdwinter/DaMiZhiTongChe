@@ -79,6 +79,9 @@
 		838983FF1C8D5BDD00D0057C /* Main_getGoodsApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 838983FE1C8D5BDD00D0057C /* Main_getGoodsApi.m */; };
 		838984021C8D5DEC00D0057C /* Main_GoodsDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 838984011C8D5DEC00D0057C /* Main_GoodsDetailViewController.m */; };
 		838984051C8D663B00D0057C /* Main_GoodsDetail.m in Sources */ = {isa = PBXBuildFile; fileRef = 838984041C8D663B00D0057C /* Main_GoodsDetail.m */; };
+		839F26F31C92699E00DD65DF /* Mine_TableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 839F26F21C92699E00DD65DF /* Mine_TableViewCell.m */; };
+		839F26F81C926FFC00DD65DF /* FooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 839F26F41C926FFC00DD65DF /* FooterView.m */; };
+		839F26F91C926FFC00DD65DF /* HeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 839F26F71C926FFC00DD65DF /* HeaderView.m */; };
 		83A46F4D1C7D460300C17759 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83A46F4C1C7D460300C17759 /* LoginViewController.m */; };
 		83A544F91C896CC90062FF0C /* Main_CategoryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 83A544F81C896CC90062FF0C /* Main_CategoryTableViewCell.m */; };
 		83E0A25E1C7AF3B4002E4954 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 83E0A25D1C7AF3B4002E4954 /* main.m */; };
@@ -243,6 +246,12 @@
 		838984011C8D5DEC00D0057C /* Main_GoodsDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Main_GoodsDetailViewController.m; sourceTree = "<group>"; };
 		838984031C8D663B00D0057C /* Main_GoodsDetail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Main_GoodsDetail.h; sourceTree = "<group>"; };
 		838984041C8D663B00D0057C /* Main_GoodsDetail.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Main_GoodsDetail.m; sourceTree = "<group>"; };
+		839F26F11C92699E00DD65DF /* Mine_TableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Mine_TableViewCell.h; sourceTree = "<group>"; };
+		839F26F21C92699E00DD65DF /* Mine_TableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Mine_TableViewCell.m; sourceTree = "<group>"; };
+		839F26F41C926FFC00DD65DF /* FooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FooterView.m; sourceTree = "<group>"; };
+		839F26F51C926FFC00DD65DF /* FooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FooterView.h; sourceTree = "<group>"; };
+		839F26F61C926FFC00DD65DF /* HeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HeaderView.h; sourceTree = "<group>"; };
+		839F26F71C926FFC00DD65DF /* HeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HeaderView.m; sourceTree = "<group>"; };
 		83A46F4B1C7D460300C17759 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		83A46F4C1C7D460300C17759 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		83A544F71C896CC90062FF0C /* Main_CategoryTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Main_CategoryTableViewCell.h; sourceTree = "<group>"; };
@@ -470,6 +479,12 @@
 		8348A9FD1C881C2E00ED9EF5 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				839F26F11C92699E00DD65DF /* Mine_TableViewCell.h */,
+				839F26F21C92699E00DD65DF /* Mine_TableViewCell.m */,
+				839F26F61C926FFC00DD65DF /* HeaderView.h */,
+				839F26F71C926FFC00DD65DF /* HeaderView.m */,
+				839F26F51C926FFC00DD65DF /* FooterView.h */,
+				839F26F41C926FFC00DD65DF /* FooterView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1022,6 +1037,7 @@
 				831C43421C8935DE00FDE244 /* Main_TopicCollectionViewCell.m in Sources */,
 				836A64531C7BE22100219035 /* GTMBase64.m in Sources */,
 				836A645C1C7BE22100219035 /* MBProgressHUD+Helper.m in Sources */,
+				839F26F81C926FFC00DD65DF /* FooterView.m in Sources */,
 				836A64D31C7BE30900219035 /* ConfigYTKRequest.m in Sources */,
 				836A64D21C7BE30900219035 /* ConfigArgument.m in Sources */,
 				8348AA101C882A6F00ED9EF5 /* Main_homeApi.m in Sources */,
@@ -1032,6 +1048,7 @@
 				836013F31C856C3F0090257C /* AccountHelper.m in Sources */,
 				83E0A25E1C7AF3B4002E4954 /* main.m in Sources */,
 				8348AA0A1C88225300ED9EF5 /* Main_Topic.m in Sources */,
+				839F26F91C926FFC00DD65DF /* HeaderView.m in Sources */,
 				8305D7F81C86B8A900F71645 /* Login_validateCodeApi.m in Sources */,
 				838984021C8D5DEC00D0057C /* Main_GoodsDetailViewController.m in Sources */,
 				836A645D1C7BE22100219035 /* TextView.m in Sources */,
@@ -1040,6 +1057,7 @@
 				836013EC1C8568870090257C /* Login_updateAnonymousTokenApi.m in Sources */,
 				8377E8F91C8D2CA700709E83 /* Main_goodsListApi.m in Sources */,
 				8348AA0D1C88246800ED9EF5 /* Main_Category.m in Sources */,
+				839F26F31C92699E00DD65DF /* Mine_TableViewCell.m in Sources */,
 				8377E8F31C8D05E200709E83 /* Main_GoodsCollectionViewController.m in Sources */,
 				8305D7FE1C86C9A300F71645 /* Login_loginApi.m in Sources */,
 				83A544F91C896CC90062FF0C /* Main_CategoryTableViewCell.m in Sources */,

@@ -7,14 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "Main_Goods.h"
 
 @interface Main_GoodsDetail : NSObject
-@property (nonatomic, copy)   NSString *_id;
-@property (nonatomic, copy)   NSString *goods_name;
-@property (nonatomic, copy)   NSString *market_price;
-@property (nonatomic, copy)   NSString *goods_price;
-@property (nonatomic, copy)   NSString *farmer_name;
-@property (nonatomic, copy)   NSString *origin_name;
+
+@property (nonatomic, strong) Main_Goods *goods;
 @property (nonatomic, copy)   NSArray *imgs;
 @property (nonatomic, copy)   NSString *detail_url;
 

@@ -15,6 +15,8 @@
 #import "LoginViewController.h"
 #import "Cart_addApi.h"
 #import "Main_GoodsCommentViewController.h"
+#import "Cart_goods.h"
+#import "CartSettlementViewController.h"
 
 @interface Main_GoodsDetailViewController () <UIWebViewDelegate,UIScrollViewDelegate>
 
@@ -221,9 +223,6 @@
         make.left.equalTo(self.contentView.mas_left).with.offset(0.0);
         make.right.equalTo(self.contentView.mas_right).with.offset(0.0);
     }];
-    
-    NSLog(@"%@",self.goods_id);
-    
     [self getGoodsDetailInfoWithShowShouldShowHUD:YES];
 }
 
@@ -305,13 +304,13 @@
     self.originImageView.hidden = NO;
     self.brownRoundedCornerImageView.hidden = NO;
     self.cycleScrollView.imageURLStringsGroup = self.goodsDetailInfo.imgs;
-    self.goods_nameLabel.text = self.goodsDetailInfo.goods_name;
-    self.farmer_nameLabel.text = [NSString stringWithFormat:@"农户:%@",self.goodsDetailInfo.farmer_name];
-    self.origin_nameLabel.text = [NSString stringWithFormat:@"产地:%@",self.goodsDetailInfo.origin_name];
-    NSString *string = [NSString stringWithFormat:@"￥%@    原价￥%@",self.goodsDetailInfo.goods_price,self.goodsDetailInfo.market_price];
+    self.goods_nameLabel.text = self.goodsDetailInfo.goods.goods_name;
+    self.farmer_nameLabel.text = [NSString stringWithFormat:@"农户:%@",self.goodsDetailInfo.goods.farmer_name];
+    self.origin_nameLabel.text = [NSString stringWithFormat:@"产地:%@",self.goodsDetailInfo.goods.origin_name];
+    NSString *string = [NSString stringWithFormat:@"￥%@    原价￥%@",self.goodsDetailInfo.goods.goods_price,self.goodsDetailInfo.goods.market_price];
     NSMutableAttributedString *attr = [[NSMutableAttributedString alloc] initWithString:string];
-    [attr addAttribute:NSStrikethroughStyleAttributeName value:[NSNumber numberWithInteger:NSUnderlinePatternSolid | NSUnderlineStyleSingle] range:[string rangeOfString:[NSString stringWithFormat:@"￥%@",self.goodsDetailInfo.market_price]]];
-    [attr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:10.0] range:[string rangeOfString:[NSString stringWithFormat:@"原价￥%@",self.goodsDetailInfo.market_price]]];
+    [attr addAttribute:NSStrikethroughStyleAttributeName value:[NSNumber numberWithInteger:NSUnderlinePatternSolid | NSUnderlineStyleSingle] range:[string rangeOfString:[NSString stringWithFormat:@"￥%@",self.goodsDetailInfo.goods.market_price]]];
+    [attr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:10.0] range:[string rangeOfString:[NSString stringWithFormat:@"原价￥%@",self.goodsDetailInfo.goods.market_price]]];
     self.priceLabel.attributedText = attr;
     [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:self.goodsDetailInfo.detail_url]]];
 }
@@ -340,7 +339,16 @@
     if (![[AccountManager sharedAccountManager] getCurrentUser]) {
         [self presentLoginViewController];
     }else{
-        
+        Cart_goods *cart_goods = [[Cart_goods alloc] init];
+        cart_goods.goods = self.goodsDetailInfo.goods;
+        cart_goods.counts = self.numberLabel.text;
+        cart_goods.isChecked = NO;
+        NSMutableArray *dataSource = [[NSMutableArray alloc] initWithCapacity:1];
+        [dataSource addObject:cart_goods];
+        CartSettlementViewController *cartSettlementViewController = [[CartSettlementViewController alloc] init];
+        cartSettlementViewController.dataSource = dataSource;
+        cartSettlementViewController.allPrice = [self.goodsDetailInfo.goods.goods_price doubleValue] * [self.numberLabel.text integerValue];
+        [self.navigationController pushViewController:cartSettlementViewController animated:YES];
     }
 }
 

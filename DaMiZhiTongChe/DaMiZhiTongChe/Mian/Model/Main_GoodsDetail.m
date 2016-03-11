@@ -13,12 +13,7 @@
 - (instancetype) initWithGoodsDetailInfo : (NSDictionary *) goodsDetailInfo {
     self = [super init];
     if (self) {
-        self._id = goodsDetailInfo[@"id"];
-        self.goods_name = goodsDetailInfo[@"goods_name"];
-        self.market_price = goodsDetailInfo[@"market_price"];
-        self.goods_price = goodsDetailInfo[@"goods_price"];
-        self.farmer_name = goodsDetailInfo[@"farmer_name"];
-        self.origin_name = goodsDetailInfo[@"origin_name"];
+        self.goods = [[Main_Goods alloc] initWithGoodsInfo:goodsDetailInfo];
         self.detail_url = goodsDetailInfo[@"detail_url"];
         NSMutableArray *tmp = [[NSMutableArray alloc] initWithCapacity:1];
         if ([goodsDetailInfo[@"imgs"] isKindOfClass:[NSArray class]] && [goodsDetailInfo[@"imgs"] count]) {

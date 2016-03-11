@@ -36,4 +36,11 @@ NSString *const BASEURL = @"http://182.92.224.199:8080";//@"http://api.damizhito
 NSInteger const PAGENUMBER = 20;
 
 
+NSString *const AVATARSCOPENAME = @"app-user-headimage";
+
+
+
+NSString *const AVATARURL = @"http://7xrr70.com2.z0.glb.qiniucdn.com/";
+
+
 @end

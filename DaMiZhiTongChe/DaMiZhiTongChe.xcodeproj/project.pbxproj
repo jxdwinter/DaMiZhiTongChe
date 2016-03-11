@@ -40,6 +40,10 @@
 		8348AA101C882A6F00ED9EF5 /* Main_homeApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 8348AA0F1C882A6F00ED9EF5 /* Main_homeApi.m */; };
 		8348AA161C882E2100ED9EF5 /* DatabaseHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 8348AA151C882E2100ED9EF5 /* DatabaseHelper.m */; };
 		83548E771C83D84C00A2252F /* ForgetPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83548E761C83D84C00A2252F /* ForgetPasswordViewController.m */; };
+		835572CD1C92908E005642A7 /* PMHmacSha1.m in Sources */ = {isa = PBXBuildFile; fileRef = 835572C61C92908E005642A7 /* PMHmacSha1.m */; };
+		835572CE1C92908E005642A7 /* PMQiNiuPutPolicy.m in Sources */ = {isa = PBXBuildFile; fileRef = 835572C81C92908E005642A7 /* PMQiNiuPutPolicy.m */; };
+		835572CF1C92908E005642A7 /* PMQiNiuToken.m in Sources */ = {isa = PBXBuildFile; fileRef = 835572CA1C92908E005642A7 /* PMQiNiuToken.m */; };
+		835572D01C92908E005642A7 /* UploadManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 835572CC1C92908E005642A7 /* UploadManager.m */; };
 		836013EC1C8568870090257C /* Login_updateAnonymousTokenApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 836013EB1C8568870090257C /* Login_updateAnonymousTokenApi.m */; };
 		836013F31C856C3F0090257C /* AccountHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 836013EE1C856C3F0090257C /* AccountHelper.m */; };
 		836013F41C856C3F0090257C /* AccountManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 836013F01C856C3F0090257C /* AccountManager.m */; };
@@ -173,6 +177,14 @@
 		8348AA151C882E2100ED9EF5 /* DatabaseHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DatabaseHelper.m; sourceTree = "<group>"; };
 		83548E751C83D84C00A2252F /* ForgetPasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForgetPasswordViewController.h; sourceTree = "<group>"; };
 		83548E761C83D84C00A2252F /* ForgetPasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForgetPasswordViewController.m; sourceTree = "<group>"; };
+		835572C51C92908E005642A7 /* PMHmacSha1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PMHmacSha1.h; sourceTree = "<group>"; };
+		835572C61C92908E005642A7 /* PMHmacSha1.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PMHmacSha1.m; sourceTree = "<group>"; };
+		835572C71C92908E005642A7 /* PMQiNiuPutPolicy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PMQiNiuPutPolicy.h; sourceTree = "<group>"; };
+		835572C81C92908E005642A7 /* PMQiNiuPutPolicy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PMQiNiuPutPolicy.m; sourceTree = "<group>"; };
+		835572C91C92908E005642A7 /* PMQiNiuToken.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PMQiNiuToken.h; sourceTree = "<group>"; };
+		835572CA1C92908E005642A7 /* PMQiNiuToken.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PMQiNiuToken.m; sourceTree = "<group>"; };
+		835572CB1C92908E005642A7 /* UploadManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UploadManager.h; sourceTree = "<group>"; };
+		835572CC1C92908E005642A7 /* UploadManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UploadManager.m; sourceTree = "<group>"; };
 		836013EA1C8568870090257C /* Login_updateAnonymousTokenApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Login_updateAnonymousTokenApi.h; sourceTree = "<group>"; };
 		836013EB1C8568870090257C /* Login_updateAnonymousTokenApi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Login_updateAnonymousTokenApi.m; sourceTree = "<group>"; };
 		836013ED1C856C3F0090257C /* AccountHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountHelper.h; sourceTree = "<group>"; };
@@ -498,6 +510,21 @@
 			path = ViewController;
 			sourceTree = "<group>";
 		};
+		835572C41C92908E005642A7 /* QiNiu */ = {
+			isa = PBXGroup;
+			children = (
+				835572C51C92908E005642A7 /* PMHmacSha1.h */,
+				835572C61C92908E005642A7 /* PMHmacSha1.m */,
+				835572C71C92908E005642A7 /* PMQiNiuPutPolicy.h */,
+				835572C81C92908E005642A7 /* PMQiNiuPutPolicy.m */,
+				835572C91C92908E005642A7 /* PMQiNiuToken.h */,
+				835572CA1C92908E005642A7 /* PMQiNiuToken.m */,
+				835572CB1C92908E005642A7 /* UploadManager.h */,
+				835572CC1C92908E005642A7 /* UploadManager.m */,
+			);
+			path = QiNiu;
+			sourceTree = "<group>";
+		};
 		836013F61C856D470090257C /* CurrentUser */ = {
 			isa = PBXGroup;
 			children = (
@@ -668,6 +695,7 @@
 		836C9DC31C7BF370000DA3C5 /* ThirdPart */ = {
 			isa = PBXGroup;
 			children = (
+				835572C41C92908E005642A7 /* QiNiu */,
 				832399EB1C9165AA00ACC6C2 /* AlipaySDK */,
 				832399E11C915D0D00ACC6C2 /* SDK1.6.2 */,
 				836C9DD11C7BF441000DA3C5 /* KSCrash */,
@@ -1027,9 +1055,12 @@
 				830722CB1C8FAE0700475C41 /* Cart_GoodsTableViewCell.m in Sources */,
 				83548E771C83D84C00A2252F /* ForgetPasswordViewController.m in Sources */,
 				836A642A1C7BDFEB00219035 /* BaseViewController.m in Sources */,
+				835572D01C92908E005642A7 /* UploadManager.m in Sources */,
 				836013FC1C8571BD0090257C /* Mine_releaseTokenApi.m in Sources */,
 				8384AD6F1C83C61E001CCA0C /* SetPasswordViewController.m in Sources */,
+				835572CF1C92908E005642A7 /* PMQiNiuToken.m in Sources */,
 				83FE91C51C910BA90032654B /* Cart_SettlementTableViewCell.m in Sources */,
+				835572CE1C92908E005642A7 /* PMQiNiuPutPolicy.m in Sources */,
 				8305D7FB1C86C87E00F71645 /* Signup_registerApi.m in Sources */,
 				83FE91C21C90F61E0032654B /* CartSettlementViewController.m in Sources */,
 				836013F51C856C3F0090257C /* SharedDatabaseHelper.m in Sources */,
@@ -1057,6 +1088,7 @@
 				836013EC1C8568870090257C /* Login_updateAnonymousTokenApi.m in Sources */,
 				8377E8F91C8D2CA700709E83 /* Main_goodsListApi.m in Sources */,
 				8348AA0D1C88246800ED9EF5 /* Main_Category.m in Sources */,
+				835572CD1C92908E005642A7 /* PMHmacSha1.m in Sources */,
 				839F26F31C92699E00DD65DF /* Mine_TableViewCell.m in Sources */,
 				8377E8F31C8D05E200709E83 /* Main_GoodsCollectionViewController.m in Sources */,
 				8305D7FE1C86C9A300F71645 /* Login_loginApi.m in Sources */,

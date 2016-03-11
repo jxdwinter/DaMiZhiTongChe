@@ -36,4 +36,11 @@ extern NSString *const BASEURL;
 extern NSInteger const PAGENUMBER;
 
 
+
+extern NSString *const AVATARSCOPENAME;
+
+
+extern NSString *const AVATARURL;
+
+
 @end

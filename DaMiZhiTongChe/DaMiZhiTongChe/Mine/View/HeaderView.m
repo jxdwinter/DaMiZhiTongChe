@@ -49,17 +49,6 @@
             make.left.equalTo(self.avatarImageView.mas_right).with.offset(10.0);
             make.height.equalTo(@20.0);
         }];
-
-        UIImageView *lineImageView = [[UIImageView alloc] init];
-        lineImageView.backgroundColor = [UIColor colorWithRed:0.95 green:0.95 blue:0.95 alpha:1];
-        [self addSubview:lineImageView];
-        [lineImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(self.mas_left).with.offset(0.0);
-            make.bottom.equalTo(self.mas_bottom).with.offset(-0.5);
-            make.right.equalTo(self.mas_right).with.offset(0.0);
-            make.height.equalTo(@.5);
-        }];
-        
     }
     return self;
 }

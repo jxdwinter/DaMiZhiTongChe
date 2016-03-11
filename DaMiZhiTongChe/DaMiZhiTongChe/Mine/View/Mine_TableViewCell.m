@@ -21,7 +21,7 @@
         [lineImageView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(self.contentView.mas_left).with.offset(0.0);
             make.right.equalTo(self.contentView.mas_right).with.offset(0.0);
-            make.bottom.equalTo(self.contentView.mas_bottom).with.offset(-.5);
+            make.bottom.equalTo(self.contentView.mas_bottom).with.offset(0.0);
             make.height.equalTo(@.5);
         }];
         self.iconImageView = [[UIImageView alloc] init];

@@ -30,7 +30,7 @@
         [self addSubview:self.avatarImageView];
         [self.avatarImageView.layer setMasksToBounds:YES];
         [self.avatarImageView.layer setCornerRadius:20.0];
-        self.avatarImageView.layer.borderColor = DEFAULTGRAYCOLOR.CGColor;
+        self.avatarImageView.layer.borderColor = DEFAULTBROWNCOLOR.CGColor;
         self.avatarImageView.layer.borderWidth = 1.f;
         [self.avatarImageView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(view.mas_bottom).with.offset(10.0);

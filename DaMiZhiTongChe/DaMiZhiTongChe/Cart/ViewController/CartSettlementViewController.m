@@ -12,6 +12,9 @@
 #import "Cart_PaymentTableViewCell.h"
 #import "Cart_AddressTableViewCell.h"
 #import "CartAddressListViewController.h"
+#import "Cart_orderApi.h"
+
+#import "WXApi.h"
 
 @interface CartSettlementViewController () <UITableViewDelegate,UITableViewDataSource>
 
@@ -64,7 +67,38 @@
 #pragma mark - privete method
 
 - (void) settlement {
-
+    Cart_orderApi *api = [[Cart_orderApi alloc] init];
+    RequestAccessory *accessory = [[RequestAccessory alloc] initAccessoryWithView:self.navigationController.view];
+    [api addAccessory:accessory];
+    [api startWithCompletionBlockWithSuccess:^(YTKBaseRequest *request) {
+        NSDictionary *dic = [api responseDictionaryWithResponseString:request.responseString];
+        if (dic) {
+            if ([dic[@"result"] isEqualToString:@"0"]) {
+                //调起微信支付
+                PayReq* req             = [[PayReq alloc] init];
+                req.partnerId           = [dic[@"data"] objectForKey:@"partnerid"];
+                req.prepayId            = [dic[@"data"] objectForKey:@"prepayid"];
+                req.nonceStr            = [dic[@"data"] objectForKey:@"noncestr"];
+                req.timeStamp           = [[dic[@"data"] objectForKey:@"timestamp"] intValue];
+                req.package             = [dic[@"data"] objectForKey:@"package"];
+                req.sign                = [dic[@"data"] objectForKey:@"sign"];
+                [WXApi sendReq:req];
+                //日志输出
+                NSLog(@"appid=%@\npartid=%@\nprepayid=%@\nnoncestr=%@\ntimestamp=%ld\npackage=%@\nsign=%@",
+                      [dic objectForKey:@"appid"],
+                      req.partnerId,
+                      req.prepayId,
+                      req.nonceStr,
+                      (long)req.timeStamp,
+                      req.package,
+                      req.sign );
+            }else{
+                [MBProgressHUD showHUDwithSuccess:NO WithTitle:dic[@"msg"] withView:self.navigationController.view];
+            }
+        }
+    } failure:^(YTKBaseRequest *request) {
+        
+    }];
 }
 
 - (void) alipay {

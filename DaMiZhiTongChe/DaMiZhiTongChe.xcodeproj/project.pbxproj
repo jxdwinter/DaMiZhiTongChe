@@ -88,6 +88,7 @@
 		839F26F91C926FFC00DD65DF /* HeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 839F26F71C926FFC00DD65DF /* HeaderView.m */; };
 		83A46F4D1C7D460300C17759 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83A46F4C1C7D460300C17759 /* LoginViewController.m */; };
 		83A544F91C896CC90062FF0C /* Main_CategoryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 83A544F81C896CC90062FF0C /* Main_CategoryTableViewCell.m */; };
+		83C9B0691C929576001EB33C /* Cart_orderApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 83C9B0681C929576001EB33C /* Cart_orderApi.m */; };
 		83E0A25E1C7AF3B4002E4954 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 83E0A25D1C7AF3B4002E4954 /* main.m */; };
 		83E0A2691C7AF3B4002E4954 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 83E0A2681C7AF3B4002E4954 /* Assets.xcassets */; };
 		83E0A2771C7AF3B4002E4954 /* DaMiZhiTongCheTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 83E0A2761C7AF3B4002E4954 /* DaMiZhiTongCheTests.m */; };
@@ -268,6 +269,8 @@
 		83A46F4C1C7D460300C17759 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		83A544F71C896CC90062FF0C /* Main_CategoryTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Main_CategoryTableViewCell.h; sourceTree = "<group>"; };
 		83A544F81C896CC90062FF0C /* Main_CategoryTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Main_CategoryTableViewCell.m; sourceTree = "<group>"; };
+		83C9B0671C929576001EB33C /* Cart_orderApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Cart_orderApi.h; sourceTree = "<group>"; };
+		83C9B0681C929576001EB33C /* Cart_orderApi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Cart_orderApi.m; sourceTree = "<group>"; };
 		83E0A2591C7AF3B4002E4954 /* DaMiZhiTongChe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DaMiZhiTongChe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		83E0A25D1C7AF3B4002E4954 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		83E0A2681C7AF3B4002E4954 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -652,6 +655,8 @@
 				830722D01C8FC00300475C41 /* Cart_getListApi.m */,
 				830722D51C8FD27000475C41 /* Cart_deleteApi.h */,
 				830722D61C8FD27100475C41 /* Cart_deleteApi.m */,
+				83C9B0671C929576001EB33C /* Cart_orderApi.h */,
+				83C9B0681C929576001EB33C /* Cart_orderApi.m */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -1060,6 +1065,7 @@
 				8384AD6F1C83C61E001CCA0C /* SetPasswordViewController.m in Sources */,
 				835572CF1C92908E005642A7 /* PMQiNiuToken.m in Sources */,
 				83FE91C51C910BA90032654B /* Cart_SettlementTableViewCell.m in Sources */,
+				83C9B0691C929576001EB33C /* Cart_orderApi.m in Sources */,
 				835572CE1C92908E005642A7 /* PMQiNiuPutPolicy.m in Sources */,
 				8305D7FB1C86C87E00F71645 /* Signup_registerApi.m in Sources */,
 				83FE91C21C90F61E0032654B /* CartSettlementViewController.m in Sources */,

@@ -10,4 +10,6 @@
 
 @interface Cart_orderApi : ConfigYTKRequest
 
+- (instancetype) initWithPay_id : (NSString *) pay_id;
+
 @end

@@ -13,8 +13,10 @@
 #import "Cart_AddressTableViewCell.h"
 #import "CartAddressListViewController.h"
 #import "Cart_orderApi.h"
-
+#import "Order.h"
 #import "WXApi.h"
+#import <AlipaySDK/AlipaySDK.h>
+#import "DataSigner.h"
 
 @interface CartSettlementViewController () <UITableViewDelegate,UITableViewDataSource>
 
@@ -67,31 +69,53 @@
 #pragma mark - privete method
 
 - (void) settlement {
-    Cart_orderApi *api = [[Cart_orderApi alloc] init];
+    Cart_orderApi *api;
+    if (self.isCheckedAlipay) {
+        api = [[Cart_orderApi alloc] initWithPay_id:@"2"];
+    }else if (self.isCheckedWeixin){
+        api = [[Cart_orderApi alloc] initWithPay_id:@"1"];
+    }else{
+        [MBProgressHUD showHUDwithSuccess:NO WithTitle:@"请选择一种支付方式" withView:self.navigationController.view];
+        return;
+    }
     RequestAccessory *accessory = [[RequestAccessory alloc] initAccessoryWithView:self.navigationController.view];
     [api addAccessory:accessory];
     [api startWithCompletionBlockWithSuccess:^(YTKBaseRequest *request) {
         NSDictionary *dic = [api responseDictionaryWithResponseString:request.responseString];
         if (dic) {
             if ([dic[@"result"] isEqualToString:@"0"]) {
-                //调起微信支付
-                PayReq* req             = [[PayReq alloc] init];
-                req.partnerId           = [dic[@"data"] objectForKey:@"partnerid"];
-                req.prepayId            = [dic[@"data"] objectForKey:@"prepayid"];
-                req.nonceStr            = [dic[@"data"] objectForKey:@"noncestr"];
-                req.timeStamp           = [[dic[@"data"] objectForKey:@"timestamp"] intValue];
-                req.package             = [dic[@"data"] objectForKey:@"package"];
-                req.sign                = [dic[@"data"] objectForKey:@"sign"];
-                [WXApi sendReq:req];
-                //日志输出
-                NSLog(@"appid=%@\npartid=%@\nprepayid=%@\nnoncestr=%@\ntimestamp=%ld\npackage=%@\nsign=%@",
-                      [dic objectForKey:@"appid"],
-                      req.partnerId,
-                      req.prepayId,
-                      req.nonceStr,
-                      (long)req.timeStamp,
-                      req.package,
-                      req.sign );
+                if (self.isCheckedAlipay) {
+                    Order *order = [[Order alloc] init];
+                    order.partner = [dic[@"data"] objectForKey:@"partner"];
+                    order.seller = [dic[@"data"] objectForKey:@"seller_id"];
+                    order.tradeNO = [dic[@"data"] objectForKey:@"out_trade_no"]; //订单ID（由商家自行制定）
+                    order.productName = [dic[@"data"] objectForKey:@"subject"];  //商品标题
+                    order.productDescription = [dic[@"data"] objectForKey:@"body"];  //商品描述
+                    order.amount = [dic[@"data"] objectForKey:@"total_fee"]; //商品价格
+                    order.notifyURL =  [dic[@"data"] objectForKey:@"notify_url"];  //回调URL
+                    order.service = [dic[@"data"] objectForKey:@"service"];
+                    order.paymentType = [dic[@"data"] objectForKey:@"payment_type"];
+                    order.inputCharset = [dic[@"data"] objectForKey:@"_input_charset"];
+                    order.itBPay = @"30m";
+                    NSString *appScheme = @"damizhitongche";
+                    //将商品信息拼接成字符串
+                    NSString *orderSpec = [order description];
+                    NSLog(@"orderSpec = %@",orderSpec);
+                    NSString *orderString = [NSString stringWithFormat:@"%@&sign=\"%@\"&sign_type=\"%@\"",orderSpec, [dic[@"data"] objectForKey:@"sign"], @"RSA"];
+                    NSLog(@"%@",orderString);
+                    [[AlipaySDK defaultService] payOrder:orderString fromScheme:appScheme callback:^(NSDictionary *resultDic) {
+                        NSLog(@"reslut = %@",resultDic);
+                    }];
+                }else if (self.isCheckedWeixin){
+                    PayReq* req             = [[PayReq alloc] init];
+                    req.partnerId           = [dic[@"data"] objectForKey:@"partnerid"];
+                    req.prepayId            = [dic[@"data"] objectForKey:@"prepayid"];
+                    req.nonceStr            = [dic[@"data"] objectForKey:@"noncestr"];
+                    req.timeStamp           = [[dic[@"data"] objectForKey:@"timestamp"] intValue];
+                    req.package             = [dic[@"data"] objectForKey:@"package"];
+                    req.sign                = [dic[@"data"] objectForKey:@"sign"];
+                    [WXApi sendReq:req];
+                }
             }else{
                 [MBProgressHUD showHUDwithSuccess:NO WithTitle:dic[@"msg"] withView:self.navigationController.view];
             }
@@ -105,14 +129,14 @@
     [self.alipayButton setImage:[UIImage imageNamed:@"cart_check"] forState:UIControlStateNormal];
     self.isCheckedAlipay = YES;
     [self.weixinButton setImage:[UIImage imageNamed:@"cart_uncheck"] forState:UIControlStateNormal];
-    self.isCheckedAlipay = NO;
+    self.isCheckedWeixin = NO;
 }
 
 - (void) weixin {
     [self.alipayButton setImage:[UIImage imageNamed:@"cart_uncheck"] forState:UIControlStateNormal];
-    self.isCheckedAlipay = NO;
+    self.isCheckedWeixin = YES;
     [self.weixinButton setImage:[UIImage imageNamed:@"cart_check"] forState:UIControlStateNormal];
-    self.isCheckedAlipay = YES;
+    self.isCheckedAlipay = NO;
 }
 
 #pragma mark - Table view data source

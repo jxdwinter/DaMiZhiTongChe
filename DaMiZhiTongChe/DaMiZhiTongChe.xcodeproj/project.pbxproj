@@ -16,6 +16,11 @@
 		830722D11C8FC00300475C41 /* Cart_getListApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 830722D01C8FC00300475C41 /* Cart_getListApi.m */; };
 		830722D41C8FC21700475C41 /* Cart_goods.m in Sources */ = {isa = PBXBuildFile; fileRef = 830722D31C8FC21700475C41 /* Cart_goods.m */; };
 		830722D71C8FD27100475C41 /* Cart_deleteApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 830722D61C8FD27100475C41 /* Cart_deleteApi.m */; };
+		8312023B1C97D7E10073792B /* CartAddressAddViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8312023A1C97D7E10073792B /* CartAddressAddViewController.m */; };
+		8312023E1C97E6B50073792B /* Cart_AddAddressApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 8312023D1C97E6B50073792B /* Cart_AddAddressApi.m */; };
+		831202411C97E8450073792B /* Cart_address.m in Sources */ = {isa = PBXBuildFile; fileRef = 831202401C97E8450073792B /* Cart_address.m */; };
+		831202441C97E9270073792B /* Cart_getAddressListApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 831202431C97E9270073792B /* Cart_getAddressListApi.m */; };
+		831202471C97F3E00073792B /* Cart_getDefaultAddressApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 831202461C97F3E00073792B /* Cart_getDefaultAddressApi.m */; };
 		831C43421C8935DE00FDE244 /* Main_TopicCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 831C43411C8935DE00FDE244 /* Main_TopicCollectionViewCell.m */; };
 		832399E71C915D0D00ACC6C2 /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832399E21C915D0D00ACC6C2 /* libWeChatSDK.a */; };
 		832399E81C915D0D00ACC6C2 /* read_me.txt in Resources */ = {isa = PBXBuildFile; fileRef = 832399E31C915D0D00ACC6C2 /* read_me.txt */; };
@@ -156,6 +161,16 @@
 		830722D31C8FC21700475C41 /* Cart_goods.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Cart_goods.m; sourceTree = "<group>"; };
 		830722D51C8FD27000475C41 /* Cart_deleteApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Cart_deleteApi.h; sourceTree = "<group>"; };
 		830722D61C8FD27100475C41 /* Cart_deleteApi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Cart_deleteApi.m; sourceTree = "<group>"; };
+		831202391C97D7E10073792B /* CartAddressAddViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CartAddressAddViewController.h; sourceTree = "<group>"; };
+		8312023A1C97D7E10073792B /* CartAddressAddViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CartAddressAddViewController.m; sourceTree = "<group>"; };
+		8312023C1C97E6B50073792B /* Cart_AddAddressApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Cart_AddAddressApi.h; sourceTree = "<group>"; };
+		8312023D1C97E6B50073792B /* Cart_AddAddressApi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Cart_AddAddressApi.m; sourceTree = "<group>"; };
+		8312023F1C97E8450073792B /* Cart_address.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Cart_address.h; sourceTree = "<group>"; };
+		831202401C97E8450073792B /* Cart_address.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Cart_address.m; sourceTree = "<group>"; };
+		831202421C97E9270073792B /* Cart_getAddressListApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Cart_getAddressListApi.h; sourceTree = "<group>"; };
+		831202431C97E9270073792B /* Cart_getAddressListApi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Cart_getAddressListApi.m; sourceTree = "<group>"; };
+		831202451C97F3E00073792B /* Cart_getDefaultAddressApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Cart_getDefaultAddressApi.h; sourceTree = "<group>"; };
+		831202461C97F3E00073792B /* Cart_getDefaultAddressApi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Cart_getDefaultAddressApi.m; sourceTree = "<group>"; };
 		831C43401C8935DE00FDE244 /* Main_TopicCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Main_TopicCollectionViewCell.h; sourceTree = "<group>"; };
 		831C43411C8935DE00FDE244 /* Main_TopicCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Main_TopicCollectionViewCell.m; sourceTree = "<group>"; };
 		832399E21C915D0D00ACC6C2 /* libWeChatSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeChatSDK.a; sourceTree = "<group>"; };
@@ -559,6 +574,8 @@
 			children = (
 				830722D21C8FC21700475C41 /* Cart_goods.h */,
 				830722D31C8FC21700475C41 /* Cart_goods.m */,
+				8312023F1C97E8450073792B /* Cart_address.h */,
+				831202401C97E8450073792B /* Cart_address.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -594,6 +611,8 @@
 				83FE91C11C90F61E0032654B /* CartSettlementViewController.m */,
 				83FE91CC1C9122880032654B /* CartAddressListViewController.h */,
 				83FE91CD1C9122880032654B /* CartAddressListViewController.m */,
+				831202391C97D7E10073792B /* CartAddressAddViewController.h */,
+				8312023A1C97D7E10073792B /* CartAddressAddViewController.m */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -903,6 +922,12 @@
 				830722D61C8FD27100475C41 /* Cart_deleteApi.m */,
 				83C9B0671C929576001EB33C /* Cart_orderApi.h */,
 				83C9B0681C929576001EB33C /* Cart_orderApi.m */,
+				8312023C1C97E6B50073792B /* Cart_AddAddressApi.h */,
+				8312023D1C97E6B50073792B /* Cart_AddAddressApi.m */,
+				831202421C97E9270073792B /* Cart_getAddressListApi.h */,
+				831202431C97E9270073792B /* Cart_getAddressListApi.m */,
+				831202451C97F3E00073792B /* Cart_getDefaultAddressApi.h */,
+				831202461C97F3E00073792B /* Cart_getDefaultAddressApi.m */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -1313,6 +1338,7 @@
 				835572CF1C92908E005642A7 /* PMQiNiuToken.m in Sources */,
 				83FE91C51C910BA90032654B /* Cart_SettlementTableViewCell.m in Sources */,
 				83C9B0691C929576001EB33C /* Cart_orderApi.m in Sources */,
+				8312023B1C97D7E10073792B /* CartAddressAddViewController.m in Sources */,
 				835572CE1C92908E005642A7 /* PMQiNiuPutPolicy.m in Sources */,
 				8305D7FB1C86C87E00F71645 /* Signup_registerApi.m in Sources */,
 				8323A9D11C97A3A700D9738D /* MineOrderReceivedViewController.m in Sources */,
@@ -1325,6 +1351,7 @@
 				836A64531C7BE22100219035 /* GTMBase64.m in Sources */,
 				836A645C1C7BE22100219035 /* MBProgressHUD+Helper.m in Sources */,
 				839F26F81C926FFC00DD65DF /* FooterView.m in Sources */,
+				831202411C97E8450073792B /* Cart_address.m in Sources */,
 				836A64D31C7BE30900219035 /* ConfigYTKRequest.m in Sources */,
 				836A64D21C7BE30900219035 /* ConfigArgument.m in Sources */,
 				8348AA101C882A6F00ED9EF5 /* Main_homeApi.m in Sources */,
@@ -1335,6 +1362,7 @@
 				836A64511C7BE22100219035 /* AESenAndDe.m in Sources */,
 				836013F31C856C3F0090257C /* AccountHelper.m in Sources */,
 				836696701C96815D003CCB78 /* RSADataVerifier.m in Sources */,
+				8312023E1C97E6B50073792B /* Cart_AddAddressApi.m in Sources */,
 				83E0A25E1C7AF3B4002E4954 /* main.m in Sources */,
 				8348AA0A1C88225300ED9EF5 /* Main_Topic.m in Sources */,
 				839F26F91C926FFC00DD65DF /* HeaderView.m in Sources */,
@@ -1345,6 +1373,7 @@
 				8366966F1C96815D003CCB78 /* RSADataSigner.m in Sources */,
 				836A64291C7BDFEB00219035 /* BaseNavigationController.m in Sources */,
 				8366966A1C96815D003CCB78 /* DataSigner.m in Sources */,
+				831202441C97E9270073792B /* Cart_getAddressListApi.m in Sources */,
 				83FE91C81C91119E0032654B /* Cart_PaymentTableViewCell.m in Sources */,
 				836013EC1C8568870090257C /* Login_updateAnonymousTokenApi.m in Sources */,
 				8377E8F91C8D2CA700709E83 /* Main_goodsListApi.m in Sources */,
@@ -1356,6 +1385,7 @@
 				8305D7FE1C86C9A300F71645 /* Login_loginApi.m in Sources */,
 				83A544F91C896CC90062FF0C /* Main_CategoryTableViewCell.m in Sources */,
 				8348AA011C881C2E00ED9EF5 /* MineViewController.m in Sources */,
+				831202471C97F3E00073792B /* Cart_getDefaultAddressApi.m in Sources */,
 				8366966E1C96815D003CCB78 /* openssl_wrapper.m in Sources */,
 				83FE91CE1C9122880032654B /* CartAddressListViewController.m in Sources */,
 				830722CE1C8FBCAE00475C41 /* Cart_addApi.m in Sources */,

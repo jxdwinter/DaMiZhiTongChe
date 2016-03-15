@@ -22,10 +22,6 @@ CGFloat const UI_PLACEHOLDER_TEXT_CHANGED_ANIMATION_DURATION = 0.25;
 
 - (id)initWithFrame:(CGRect)frame{
     if( (self = [super initWithFrame:frame])){
-        self.layer.borderColor = DEFAULTGRAYCOLOR.CGColor;
-        self.layer.borderWidth = 1.f;
-        [self.layer setMasksToBounds:YES];
-        [self.layer setCornerRadius:3.0];
         [self setPlaceholder:@""];
         [self setPlaceholderColor:[UIColor lightGrayColor]];
         [[NSNotificationCenter defaultCenter] addObserver:self

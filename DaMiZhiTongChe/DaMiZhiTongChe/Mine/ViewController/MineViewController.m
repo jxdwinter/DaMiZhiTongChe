@@ -13,6 +13,7 @@
 #import "FooterView.h"
 #import "AccountManager.h"
 #import "User.h"
+#import "CartAddressListViewController.h"
 
 @interface MineViewController ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -120,7 +121,9 @@
             MineOrderViewController *mineOrderViewController = [[MineOrderViewController alloc] init];
             [self.navigationController pushViewController:mineOrderViewController animated:YES];
         }else if (indexPath.row == 1){
-            
+            CartAddressListViewController *cartAddressListViewController = [[CartAddressListViewController alloc] init];
+            cartAddressListViewController.type = 1;
+            [self.navigationController pushViewController:cartAddressListViewController animated:YES];
         }
     }else if (indexPath.section == 1){
         if (indexPath.row == 0) {

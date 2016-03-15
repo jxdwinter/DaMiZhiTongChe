@@ -17,8 +17,11 @@
 #import <AlipaySDK/AlipaySDK.h>
 #import "DataSigner.h"
 #import "MineOrderViewController.h"
+#import "Cart_getDefaultAddressApi.h"
+#import "Cart_address.h"
+#import "CartAddressListViewController.h"
 
-@interface CartSettlementViewController () <UITableViewDelegate,UITableViewDataSource>
+@interface CartSettlementViewController () <UITableViewDelegate,UITableViewDataSource,SelectAddressDelegate>
 
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) UIButton *settlementButton;
@@ -28,6 +31,8 @@
 @property (nonatomic, assign) BOOL isCheckedWeixin;
 @property (nonatomic, strong) UIButton *alipayButton;
 @property (nonatomic, assign) BOOL isCheckedAlipay;
+
+@property (nonatomic, strong) Cart_address *address;
 
 @end
 
@@ -71,12 +76,35 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void) viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+}
+
 - (void) dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"MINEPAYED" object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"MINEUNPAYED" object:nil];
 }
 
 #pragma mark - privete method
+
+- (void) getDefaultAddress {
+    Cart_getDefaultAddressApi *api = [[Cart_getDefaultAddressApi alloc] init];
+    [api startWithCompletionBlockWithSuccess:^(YTKBaseRequest *request) {
+        NSDictionary *dic = [api responseDictionaryWithResponseString:request.responseString];
+        if (dic) {
+            if ([dic[@"result"] isEqualToString:@"0"]) {
+                Cart_address *cart_address = [[Cart_address alloc] initWithCart_addressInfo:dic[@"data"]];
+                self.address = cart_address;
+                NSArray* rowsToReload = [NSArray arrayWithObjects:[NSIndexPath indexPathForRow:0 inSection:0], nil];
+                [self.tableView reloadRowsAtIndexPaths:rowsToReload withRowAnimation:UITableViewRowAnimationNone];
+            }else{
+                [MBProgressHUD showHUDwithSuccess:NO WithTitle:dic[@"msg"] withView:self.navigationController.view];
+            }
+        }
+    } failure:^(YTKBaseRequest *request) {
+        
+    }];
+}
 
 - (void) payFail {
     MineOrderViewController *mineOrderViewController = [[MineOrderViewController alloc] init];
@@ -153,6 +181,14 @@
     self.isCheckedAlipay = NO;
 }
 
+#pragma mark - SelectAddressDelegate
+
+- (void) setDefaultAdressWithAddress:(Cart_address *)address {
+    self.address = address;
+    NSArray* rowsToReload = [NSArray arrayWithObjects:[NSIndexPath indexPathForRow:0 inSection:0], nil];
+    [self.tableView reloadRowsAtIndexPaths:rowsToReload withRowAnimation:UITableViewRowAnimationNone];
+}
+
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -174,9 +210,9 @@
         if(cell == nil){
             cell = [[Cart_AddressTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CART_ADDRESSTABLEVIEWCELL];
         }
-        cell.nameLabel.text = [NSString stringWithFormat:@"收货人:%@",@"蒋晓冬"];
-        cell.phoneLabel.text = @"18603612430";
-        cell.addressLabel.text = @"黑龙江省哈尔滨市南岗区松花江街91-1号 松花江社区卫生服务站 401 ";
+        cell.nameLabel.text = self.address.name?[NSString stringWithFormat:@"收货人:%@",self.address.name]:@"";
+        cell.phoneLabel.text = self.address.mobile?self.address.mobile:@"";
+        cell.addressLabel.text = self.address.address?self.address.address:@"";
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
@@ -234,6 +270,8 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section == 0 && indexPath.row == 0) {
         CartAddressListViewController *cartAddressListViewController = [[CartAddressListViewController alloc] init];
+        cartAddressListViewController.type = 0;
+        cartAddressListViewController.selectAddressDelegate = self;
         [self.navigationController pushViewController:cartAddressListViewController animated:YES];
     }
 }

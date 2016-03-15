@@ -14,6 +14,17 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         self.contentView.backgroundColor = [UIColor whiteColor];
+        
+        UIImageView *lineImageView = [[UIImageView alloc] init];
+        lineImageView.backgroundColor = [UIColor colorWithRed:0.95 green:0.95 blue:0.95 alpha:1];
+        [self.contentView addSubview:lineImageView];
+        [lineImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(self.contentView.mas_left).with.offset(0.0);
+            make.right.equalTo(self.contentView.mas_right).with.offset(0.0);
+            make.bottom.equalTo(self.contentView.mas_bottom).with.offset(0.0);
+            make.height.equalTo(@.5);
+        }];
+        
         UIImageView *iconImageView = [[UIImageView alloc] init];
         iconImageView.image = [UIImage imageNamed:@"goods_origin"];
         [self.contentView addSubview:iconImageView];

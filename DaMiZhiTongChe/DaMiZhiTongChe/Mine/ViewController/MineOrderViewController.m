@@ -7,13 +7,14 @@
 //
 
 #import "MineOrderViewController.h"
-#import <WMPageController.h>
 #import "MineOrderUnPayedViewController.h"
 #import "MineOrderPayedViewController.h"
 #import "MineOrderSentViewController.h"
 #import "MineOrderReceivedViewController.h"
 
 @interface MineOrderViewController ()
+
+@property (nonatomic, strong) WMPageController *pageViewController;
 
 @end
 
@@ -43,19 +44,22 @@
     [titles addObject:@"已发货"];
     [viewControllers addObject:[MineOrderReceivedViewController class]];
     [titles addObject:@"已收货"];
-    WMPageController *pageViewController = [[WMPageController alloc] initWithViewControllerClasses:viewControllers
-                                                                                    andTheirTitles:titles];
-    pageViewController.menuViewStyle = WMMenuViewStyleLine;
-    pageViewController.pageAnimatable = YES;
-    pageViewController.menuItemWidth = 85;
-    pageViewController.titleColorSelected = DEFAULTBROWNCOLOR;
-    pageViewController.titleColorNormal = DEFAULTTEXTCOLOR;
-    pageViewController.titleSizeNormal = 10;
-    pageViewController.titleSizeSelected = 14;
-    pageViewController.menuHeight = 40;
-    pageViewController.menuBGColor = DEFAULTLIGHTGRAYCOLOR;
-    [self addChildViewController:pageViewController];
-    [self.view addSubview:pageViewController.view];
+    self.pageViewController = [[WMPageController alloc] initWithViewControllerClasses:viewControllers
+                                                                       andTheirTitles:titles];
+    self.pageViewController.menuViewStyle = WMMenuViewStyleLine;
+    self.pageViewController.pageAnimatable = YES;
+    self.pageViewController.menuItemWidth = 85;
+    self.pageViewController.titleColorSelected = DEFAULTBROWNCOLOR;
+    self.pageViewController.titleColorNormal = DEFAULTTEXTCOLOR;
+    self.pageViewController.titleSizeNormal = 10;
+    self.pageViewController.titleSizeSelected = 14;
+    self.pageViewController.menuHeight = 40;
+    self.pageViewController.menuBGColor = DEFAULTLIGHTGRAYCOLOR;
+    [self addChildViewController:self.pageViewController];
+    [self.view addSubview:self.pageViewController.view];
+    if (self.selectIndex) {
+        self.pageViewController.selectIndex = self.selectIndex;
+    }
 }
 
 @end

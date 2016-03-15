@@ -34,6 +34,7 @@
 		8323A9CB1C97A33400D9738D /* MineOrderPayedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8323A9CA1C97A33400D9738D /* MineOrderPayedViewController.m */; };
 		8323A9CE1C97A37300D9738D /* MineOrderSentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8323A9CD1C97A37300D9738D /* MineOrderSentViewController.m */; };
 		8323A9D11C97A3A700D9738D /* MineOrderReceivedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8323A9D01C97A3A700D9738D /* MineOrderReceivedViewController.m */; };
+		8323A9D41C97ADDF00D9738D /* MostTopViewControllerTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 8323A9D31C97ADDF00D9738D /* MostTopViewControllerTools.m */; };
 		8348A9F11C881C1B00ED9EF5 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8348A9F01C881C1B00ED9EF5 /* MainViewController.m */; };
 		8348A9F91C881C2700ED9EF5 /* CartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8348A9F81C881C2700ED9EF5 /* CartViewController.m */; };
 		8348AA011C881C2E00ED9EF5 /* MineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8348AA001C881C2E00ED9EF5 /* MineViewController.m */; };
@@ -182,6 +183,8 @@
 		8323A9CD1C97A37300D9738D /* MineOrderSentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MineOrderSentViewController.m; sourceTree = "<group>"; };
 		8323A9CF1C97A3A700D9738D /* MineOrderReceivedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MineOrderReceivedViewController.h; sourceTree = "<group>"; };
 		8323A9D01C97A3A700D9738D /* MineOrderReceivedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MineOrderReceivedViewController.m; sourceTree = "<group>"; };
+		8323A9D21C97ADDF00D9738D /* MostTopViewControllerTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MostTopViewControllerTools.h; sourceTree = "<group>"; };
+		8323A9D31C97ADDF00D9738D /* MostTopViewControllerTools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MostTopViewControllerTools.m; sourceTree = "<group>"; };
 		8348A9EF1C881C1B00ED9EF5 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
 		8348A9F01C881C1B00ED9EF5 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
 		8348A9F71C881C2700ED9EF5 /* CartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CartViewController.h; sourceTree = "<group>"; };
@@ -857,6 +860,8 @@
 				836A644E1C7BE22100219035 /* MBProgressHUD+Helper.m */,
 				836A644F1C7BE22100219035 /* TextView.h */,
 				836A64501C7BE22100219035 /* TextView.m */,
+				8323A9D21C97ADDF00D9738D /* MostTopViewControllerTools.h */,
+				8323A9D31C97ADDF00D9738D /* MostTopViewControllerTools.m */,
 			);
 			path = UIKit;
 			sourceTree = "<group>";
@@ -1354,6 +1359,7 @@
 				8366966E1C96815D003CCB78 /* openssl_wrapper.m in Sources */,
 				83FE91CE1C9122880032654B /* CartAddressListViewController.m in Sources */,
 				830722CE1C8FBCAE00475C41 /* Cart_addApi.m in Sources */,
+				8323A9D41C97ADDF00D9738D /* MostTopViewControllerTools.m in Sources */,
 				830722D11C8FC00300475C41 /* Cart_getListApi.m in Sources */,
 				836A64521C7BE22100219035 /* FBEncryptorAES.m in Sources */,
 				8348A9F91C881C2700ED9EF5 /* CartViewController.m in Sources */,

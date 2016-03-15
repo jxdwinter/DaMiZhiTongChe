@@ -16,6 +16,7 @@
 #import "WXApi.h"
 #import <AlipaySDK/AlipaySDK.h>
 #import "DataSigner.h"
+#import "MineOrderViewController.h"
 
 @interface CartSettlementViewController () <UITableViewDelegate,UITableViewDataSource>
 
@@ -35,6 +36,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    //支付成功
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(paySuccess) name:@"MINEPAYED" object:nil];
+    //支付失败
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(payFail) name:@"MINEUNPAYED" object:nil];
+    
     self.backButton.hidden = NO;
     self.title = @"确认订单";
     
@@ -65,7 +71,26 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void) dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"MINEPAYED" object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"MINEUNPAYED" object:nil];
+}
+
 #pragma mark - privete method
+
+- (void) payFail {
+    MineOrderViewController *mineOrderViewController = [[MineOrderViewController alloc] init];
+    mineOrderViewController.selectIndex = 0;
+    [self.navigationController pushViewController:mineOrderViewController animated:YES];
+}
+
+- (void) paySuccess {
+    //刷新购物车
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"RELOADCART" object:nil];
+    MineOrderViewController *mineOrderViewController = [[MineOrderViewController alloc] init];
+    mineOrderViewController.selectIndex = 1;
+    [self.navigationController pushViewController:mineOrderViewController animated:YES];
+}
 
 - (void) settlement {
     Cart_orderApi *api;
@@ -89,7 +114,11 @@
             if ([dic[@"result"] isEqualToString:@"0"]) {
                 if (self.isCheckedAlipay) {
                     [[AlipaySDK defaultService] payOrder:[dic[@"data"] objectForKey:@"para"] fromScheme:@"damizhitongche" callback:^(NSDictionary *resultDic) {
-                        NSLog(@"reslut = %@",resultDic);
+                        if ([resultDic[@"resultStatus"] isEqualToString:@"9000"]) {
+                            [self paySuccess];
+                        }else{
+                            [self payFail];
+                        }
                     }];
                 }else if (self.isCheckedWeixin){
                     PayReq* req             = [[PayReq alloc] init];

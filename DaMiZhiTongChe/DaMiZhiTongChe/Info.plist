@@ -67,5 +67,13 @@
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 	</array>
+    <key>LSApplicationQueriesSchemes</key>
+    <array>
+        <string>alipayauth</string>
+        <string>alipay</string>
+        <string>safepay</string>
+        <string>weixin</string>
+        <string>wechat</string>
+    </array>
 </dict>
 </plist>

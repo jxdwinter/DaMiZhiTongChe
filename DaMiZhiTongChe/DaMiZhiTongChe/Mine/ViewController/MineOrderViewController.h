@@ -7,7 +7,10 @@
 //
 
 #import "BaseViewController.h"
+#import <WMPageController.h>
 
 @interface MineOrderViewController : BaseViewController
+
+@property (nonatomic, assign) int selectIndex;
 
 @end

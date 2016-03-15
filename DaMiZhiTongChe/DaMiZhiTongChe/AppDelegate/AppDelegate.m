@@ -7,26 +7,22 @@
 //
 
 #import "AppDelegate.h"
-
 #import <AFNetworking.h>
 #import <GBVersionTracking.h>
 #import <YTKNetworkConfig.h>
-
 #import <KSCrash/KSCrashInstallationStandard.h>
 #import "MTA.h"
 #import "MTAConfig.h"
-
 #import "BaseNavigationController.h"
 #import "LoginViewController.h"
-
 #import "MainViewController.h"
 #import "CartViewController.h"
 #import "MineViewController.h"
-
+#import "MineOrderViewController.h"
 #import "Login_updateAnonymousTokenApi.h"
-
 #import "WXApi.h"
 #import <AlipaySDK/AlipaySDK.h>
+#import "MostTopViewControllerTools.h"
 
 @interface AppDelegate () <UITabBarControllerDelegate,WXApiDelegate>
 
@@ -104,26 +100,14 @@
     if ([url.host isEqualToString:@"safepay"]) {
         [[AlipaySDK defaultService] processOrderWithPaymentResult:url
                                                   standbyCallback:^(NSDictionary *resultDic) {
-                                                      if ([resultDic[@"resultStatus"] isEqualToString:@"9000"]) {
-                                                          
-                                                      }else if ([resultDic[@"resultStatus"] isEqualToString:@"8000"]){
-                                                          NSLog(@"支付结果确认中,请稍后");
-                                                      }else{
-                                                          NSLog(@"支付失败");
-                                                      }
+                                                      
                                                   }];
         return YES;
     }
     if ([url.host isEqualToString:@"platformapi"]){ //支付宝钱包快登授权返回 authCode
         [[AlipaySDK defaultService] processAuthResult:url
                                       standbyCallback:^(NSDictionary *resultDic) {
-                                          if ([resultDic[@"resultStatus"] isEqualToString:@"9000"]) {
-                                              
-                                          }else if ([resultDic[@"resultStatus"] isEqualToString:@"8000"]){
-                                              NSLog(@"支付结果确认中,请稍后");
-                                          }else{
-                                              NSLog(@"支付失败");
-                                          }
+
                                       }];
         return YES;
     }
@@ -337,26 +321,30 @@
 -(void)onResp:(BaseResp*)resp{
     if([resp isKindOfClass:[PayResp class]]){
         //支付返回结果，实际支付结果需要去微信服务器端查询
-        NSString *strMsg,*strTitle = [NSString stringWithFormat:@"支付结果"];
         switch (resp.errCode) {
             case WXSuccess:
-                strMsg = @"支付结果：成功！";
-                NSLog(@"支付成功－PaySuccess，retcode = %d", resp.errCode);
+                [self paySuccess];
                 break;
-                
             default:
-                strMsg = [NSString stringWithFormat:@"支付结果：失败！retcode = %d, retstr = %@", resp.errCode,resp.errStr];
-                NSLog(@"错误，retcode = %d, retstr = %@", resp.errCode,resp.errStr);
+                [self payFail];
                 break;
         }
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:strTitle message:strMsg delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-        [alert show];
     }
 }
 
 //onReq是微信终端向第三方程序发起请求，要求第三方程序响应。第三方程序响应完后必须调用sendRsp返回。在调用sendRsp返回时，会切回到微信终端程序界面。
 -(void) onReq:(BaseReq*)req {
     
+}
+
+//支付成功
+- (void) paySuccess {
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"MINEPAYED" object:nil];
+}
+
+//支付失败
+- (void) payFail {
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"MINEUNPAYED" object:nil];
 }
 
 @end

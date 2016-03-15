@@ -69,6 +69,8 @@
     }];
     
     [self.view addSubview:self.tableView];
+    
+    [self getDefaultAddress];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -210,6 +212,7 @@
         if(cell == nil){
             cell = [[Cart_AddressTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CART_ADDRESSTABLEVIEWCELL];
         }
+        cell.iconImageView.image = [UIImage imageNamed:@"mine_loacation"];
         cell.nameLabel.text = self.address.name?[NSString stringWithFormat:@"收货人:%@",self.address.name]:@"";
         cell.phoneLabel.text = self.address.mobile?self.address.mobile:@"";
         cell.addressLabel.text = self.address.address?self.address.address:@"";

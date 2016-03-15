@@ -13,6 +13,8 @@
 #import <MJRefresh.h>
 #import "Cart_getAddressListApi.h"
 #import "CartSettlementViewController.h"
+#import "CartAddressEditViewController.h"
+#import "Cart_deleteAddressApi.h"
 
 @interface CartAddressListViewController ()<UITableViewDelegate, UITableViewDataSource>
 
@@ -104,6 +106,26 @@
     [self getAddressDataWithShowShouldShowHUD:NO];
 }
 
+- (void)deleteAddress : (Cart_address *) address withIndexPath : (NSIndexPath *) indexPath{
+    Cart_deleteAddressApi *api = [[Cart_deleteAddressApi alloc] initWithId:address._id];
+    [api startWithCompletionBlockWithSuccess:^(YTKBaseRequest *request) {
+        NSDictionary *dic = [api responseDictionaryWithResponseString:request.responseString];
+        if (dic) {
+            if ([dic[@"result"] isEqualToString:@"0"]) {
+                [self.tableView beginUpdates];
+                [self.dataSource removeObjectAtIndex:indexPath.row];
+                [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+                [self.tableView endUpdates];
+            }else {
+                [MBProgressHUD showHUDwithSuccess:NO WithTitle:dic[@"msg"] withView:self.navigationController.view];
+            }
+        }
+    } failure:^(YTKBaseRequest *request) {
+        
+    }];
+}
+
+
 #pragma mark - Table view data source
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -117,6 +139,11 @@
         cell = [[Cart_AddressTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CART_ADDRESSTABLEVIEWCELL];
     }
     Cart_address *cart_address = self.dataSource[indexPath.row];
+    if ([cart_address.flag isEqualToString:@"Y"]) {
+        cell.iconImageView.image = [UIImage imageNamed:@"mine_loacation"];
+    }else if ([cart_address.flag isEqualToString:@"N"]){
+        cell.iconImageView.image = [UIImage imageNamed:@"goods_origin"];
+    }
     cell.nameLabel.text = [NSString stringWithFormat:@"收货人:%@",cart_address.name];
     cell.phoneLabel.text = cart_address.mobile;
     cell.addressLabel.text = cart_address.address;
@@ -133,8 +160,32 @@
         [self.selectAddressDelegate setDefaultAdressWithAddress:cart_address];
         [self.navigationController popViewControllerAnimated:YES];
     }else if (self.type == 1) {
-        
+        CartAddressEditViewController *cartAddressEditViewController = [[CartAddressEditViewController alloc] init];
+        cartAddressEditViewController.address = cart_address;
+        [self.navigationController pushViewController:cartAddressEditViewController animated:YES];
     }
+}
+
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath{
+    return YES;
+}
+
+//定义编辑样式
+- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return UITableViewCellEditingStyleDelete;
+}
+
+//进入编辑模式，按下出现的编辑按钮后
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (editingStyle ==  UITableViewCellEditingStyleDelete) {
+        Cart_address *cart_address = self.dataSource[indexPath.row];
+        [self deleteAddress:cart_address withIndexPath:indexPath];
+    }
+}
+
+//修改编辑按钮文字
+- (NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return @"删除";
 }
 
 #pragma mark - getter and setter

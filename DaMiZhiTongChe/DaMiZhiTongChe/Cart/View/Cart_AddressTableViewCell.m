@@ -25,10 +25,9 @@
             make.height.equalTo(@.5);
         }];
         
-        UIImageView *iconImageView = [[UIImageView alloc] init];
-        iconImageView.image = [UIImage imageNamed:@"goods_origin"];
-        [self.contentView addSubview:iconImageView];
-        [iconImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        self.iconImageView = [[UIImageView alloc] init];
+        [self.contentView addSubview:self.iconImageView];
+        [self.iconImageView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(self.contentView.mas_top).with.offset(30.0);
             make.left.equalTo(self.contentView.mas_left).with.offset(10.0);
             make.width.equalTo(@15.0);
@@ -53,7 +52,7 @@
         [self.contentView addSubview:self.nameLabel];
         [self.nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(self.contentView.mas_top).with.offset(10.0);
-            make.left.equalTo(iconImageView.mas_right).with.offset(10.0);
+            make.left.equalTo(self.iconImageView.mas_right).with.offset(10.0);
             make.right.equalTo(self.phoneLabel.mas_left).with.offset(-10.0);
             make.height.equalTo(@20.0);
         }];
@@ -66,7 +65,7 @@
         [self.contentView addSubview:self.addressLabel];
         [self.addressLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(self.phoneLabel.mas_bottom).with.offset(5.0);
-            make.left.equalTo(iconImageView.mas_right).with.offset(10.0);
+            make.left.equalTo(self.iconImageView.mas_right).with.offset(10.0);
             make.right.equalTo(self.contentView.mas_right).with.offset(-10.0);
             make.height.equalTo(@30.0);
         }];

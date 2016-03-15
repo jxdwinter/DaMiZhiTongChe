@@ -24,7 +24,7 @@
             make.top.equalTo(self.mas_top).with.offset(20.0);
             make.left.equalTo(self.mas_left).with.offset(20.0);
             make.right.equalTo(self.mas_right).with.offset(-20.0);
-            make.height.equalTo(@40.0);
+            make.height.equalTo(@44.0);
         }];
     }
     return self;

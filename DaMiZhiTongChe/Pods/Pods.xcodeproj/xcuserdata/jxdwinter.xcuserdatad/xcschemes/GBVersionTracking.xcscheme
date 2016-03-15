@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = 'E77FA74D389C69075E7F06F7'
+               BlueprintIdentifier = 'A0976C9E552AA45AA3666FC0'
                BlueprintName = 'GBVersionTracking'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'libGBVersionTracking.a'>

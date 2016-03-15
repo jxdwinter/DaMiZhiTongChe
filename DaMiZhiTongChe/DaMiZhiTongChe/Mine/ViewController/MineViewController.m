@@ -7,6 +7,7 @@
 //
 
 #import "MineViewController.h"
+#import "MineOrderViewController.h"
 #import "Mine_TableViewCell.h"
 #import "HeaderView.h"
 #import "FooterView.h"
@@ -114,7 +115,20 @@
 
 #pragma mark - Table view delegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    
+    if (indexPath.section == 0) {
+        if (indexPath.row == 0) {
+            MineOrderViewController *mineOrderViewController = [[MineOrderViewController alloc] init];
+            [self.navigationController pushViewController:mineOrderViewController animated:YES];
+        }else if (indexPath.row == 1){
+            
+        }
+    }else if (indexPath.section == 1){
+        if (indexPath.row == 0) {
+            
+        }else if (indexPath.row == 1){
+            
+        }
+    }
 }
 
 #pragma mark - getter and setter

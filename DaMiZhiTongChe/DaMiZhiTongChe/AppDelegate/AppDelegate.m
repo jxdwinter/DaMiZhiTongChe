@@ -104,14 +104,27 @@
     if ([url.host isEqualToString:@"safepay"]) {
         [[AlipaySDK defaultService] processOrderWithPaymentResult:url
                                                   standbyCallback:^(NSDictionary *resultDic) {
-                                                      NSLog(@"result = %@",resultDic);
+                                                      if ([resultDic[@"resultStatus"] isEqualToString:@"9000"]) {
+                                                          
+                                                      }else if ([resultDic[@"resultStatus"] isEqualToString:@"8000"]){
+                                                          NSLog(@"支付结果确认中,请稍后");
+                                                      }else{
+                                                          NSLog(@"支付失败");
+                                                      }
                                                   }];
         return YES;
     }
     if ([url.host isEqualToString:@"platformapi"]){ //支付宝钱包快登授权返回 authCode
-        [[AlipaySDK defaultService] processAuthResult:url standbyCallback:^(NSDictionary *resultDic) {
-            NSLog(@"result = %@",resultDic);
-        }];
+        [[AlipaySDK defaultService] processAuthResult:url
+                                      standbyCallback:^(NSDictionary *resultDic) {
+                                          if ([resultDic[@"resultStatus"] isEqualToString:@"9000"]) {
+                                              
+                                          }else if ([resultDic[@"resultStatus"] isEqualToString:@"8000"]){
+                                              NSLog(@"支付结果确认中,请稍后");
+                                          }else{
+                                              NSLog(@"支付失败");
+                                          }
+                                      }];
         return YES;
     }
     else return [WXApi handleOpenURL:url delegate:self];

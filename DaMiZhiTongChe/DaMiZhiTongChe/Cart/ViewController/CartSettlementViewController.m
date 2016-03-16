@@ -99,8 +99,6 @@
                 self.address = cart_address;
                 NSArray* rowsToReload = [NSArray arrayWithObjects:[NSIndexPath indexPathForRow:0 inSection:0], nil];
                 [self.tableView reloadRowsAtIndexPaths:rowsToReload withRowAnimation:UITableViewRowAnimationNone];
-            }else{
-                [MBProgressHUD showHUDwithSuccess:NO WithTitle:dic[@"msg"] withView:self.navigationController.view];
             }
         }
     } failure:^(YTKBaseRequest *request) {

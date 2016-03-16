@@ -378,6 +378,8 @@
     self.framerImageView.hidden = NO;
     self.originImageView.hidden = NO;
     self.brownRoundedCornerImageView.hidden = NO;
+    self.wxSceneSessionButton.hidden = NO;
+    self.wxSceneTimelineButton.hidden = NO;
     self.cycleScrollView.imageURLStringsGroup = self.goodsDetailInfo.imgs;
     self.goods_nameLabel.text = self.goodsDetailInfo.goods.goods_name;
     self.farmer_nameLabel.text = [NSString stringWithFormat:@"农户:%@",self.goodsDetailInfo.goods.farmer_name];
@@ -677,6 +679,7 @@
         _wxSceneSessionButton = [[UIButton alloc] init];
         [_wxSceneSessionButton setImage:[UIImage imageNamed:@"main_shareToSession"] forState:UIControlStateNormal];
         [_wxSceneSessionButton addTarget:self action:@selector(shareToSession) forControlEvents:UIControlEventTouchUpInside];
+        _wxSceneSessionButton.hidden = YES;
     }
     return _wxSceneSessionButton;
 }
@@ -686,6 +689,7 @@
         _wxSceneTimelineButton = [[UIButton alloc] init];
         [_wxSceneTimelineButton setImage:[UIImage imageNamed:@"main_shareToTimeline"] forState:UIControlStateNormal];
         [_wxSceneTimelineButton addTarget:self action:@selector(shareToTimeline) forControlEvents:UIControlEventTouchUpInside];
+        _wxSceneTimelineButton.hidden = YES;
     }
     return _wxSceneTimelineButton;
 }

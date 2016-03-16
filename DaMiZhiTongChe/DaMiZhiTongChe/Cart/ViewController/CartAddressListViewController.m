@@ -171,7 +171,9 @@
 }
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath{
-    return YES;
+    if (self.type == 0) {
+        return NO;
+    }else return YES;
 }
 
 //定义编辑样式

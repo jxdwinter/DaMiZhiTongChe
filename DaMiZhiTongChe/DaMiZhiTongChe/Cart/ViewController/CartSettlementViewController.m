@@ -141,11 +141,18 @@
             return;
         }
         NSString *jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+        NSString *is_cart;
+        //购物车
+        if (self.type == 0) {
+            is_cart = @"1";
+        }else if (self.type == 1){
+            is_cart = @"0";
+        }
         Cart_orderApi *api;
         if (self.isCheckedAlipay) {
-            api = [[Cart_orderApi alloc] initWithPay_id:@"2" withGoods:jsonString withAddress_id:self.address._id];
+            api = [[Cart_orderApi alloc] initWithPay_id:@"2" withGoods:jsonString withAddress_id:self.address._id withIs_cart:is_cart];
         }else if (self.isCheckedWeixin){
-            api = [[Cart_orderApi alloc] initWithPay_id:@"1" withGoods:jsonString withAddress_id:self.address._id];
+            api = [[Cart_orderApi alloc] initWithPay_id:@"1" withGoods:jsonString withAddress_id:self.address._id withIs_cart:is_cart];
             if (![WXApi isWXAppInstalled]) {
                 [MBProgressHUD showHUDwithSuccess:NO WithTitle:@"没有安装微信" withView:self.navigationController.view];
                 return;

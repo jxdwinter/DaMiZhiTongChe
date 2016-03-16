@@ -10,6 +10,8 @@
 
 @interface Cart_orderApi : ConfigYTKRequest
 
-- (instancetype) initWithPay_id : (NSString *) pay_id withGoods : (NSString *) goods withAddress_id : (NSString *) address_id;
-
+- (instancetype) initWithPay_id : (NSString *) pay_id
+                      withGoods : (NSString *) goods
+                 withAddress_id : (NSString *) address_id
+                    withIs_cart : (NSString *)is_cart;
 @end

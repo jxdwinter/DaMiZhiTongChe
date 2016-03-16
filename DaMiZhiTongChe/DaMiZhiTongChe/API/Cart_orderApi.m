@@ -14,17 +14,19 @@
 @property (nonatomic, copy) NSString *pay_id;
 @property (nonatomic, copy) NSString *goods;
 @property (nonatomic, copy) NSString *address_id;
+@property (nonatomic, copy) NSString *is_cart;
 
 @end
 
 @implementation Cart_orderApi
 
-- (instancetype) initWithPay_id : (NSString *) pay_id withGoods : (NSString *) goods withAddress_id : (NSString *) address_id {
+- (instancetype) initWithPay_id : (NSString *) pay_id withGoods : (NSString *) goods withAddress_id : (NSString *) address_id withIs_cart:(NSString *)is_cart{
     self = [super init];
     if (self) {
         self.pay_id = pay_id;
         self.goods = goods;
         self.address_id = address_id;
+        self.is_cart = is_cart;
     }
     return self;
 }
@@ -39,7 +41,8 @@
                                             @"uid" : [[[AccountManager sharedAccountManager] getCurrentUser] uid],
                                             @"pay_id" : self.pay_id,
                                             @"goods" : self.goods,
-                                            @"address_id" : self.address_id
+                                            @"address_id" : self.address_id,
+                                            @"is_cart" : self.is_cart
                                             }];
 }
 

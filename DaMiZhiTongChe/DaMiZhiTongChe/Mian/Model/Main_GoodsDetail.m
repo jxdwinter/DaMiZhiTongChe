@@ -15,6 +15,7 @@
     if (self) {
         self.goods = [[Main_Goods alloc] initWithGoodsInfo:goodsDetailInfo];
         self.detail_url = goodsDetailInfo[@"detail_url"];
+        self.share_url = goodsDetailInfo[@"share_url"];
         NSMutableArray *tmp = [[NSMutableArray alloc] initWithCapacity:1];
         if ([goodsDetailInfo[@"imgs"] isKindOfClass:[NSArray class]] && [goodsDetailInfo[@"imgs"] count]) {
             for (NSString *urlString in goodsDetailInfo[@"imgs"]) {

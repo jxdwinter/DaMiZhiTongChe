@@ -18,6 +18,7 @@
 #import "Cart_goods.h"
 #import "CartSettlementViewController.h"
 #import "MineOrderViewController.h"
+#import "WXApi.h"
 
 @interface Main_GoodsDetailViewController () <UIWebViewDelegate,UIScrollViewDelegate>
 
@@ -43,6 +44,9 @@
 @property (nonatomic, strong) UIView *bottomView;
 @property (nonatomic, strong) UIButton *buyButton;
 @property (nonatomic, strong) UIButton *cartButton;
+
+@property (nonatomic, strong) UIButton *wxSceneSessionButton;
+@property (nonatomic, strong) UIButton *wxSceneTimelineButton;
 
 @end
 
@@ -88,11 +92,27 @@
         make.height.equalTo(@(SCREEN_WIDTH/3));
     }];
     
+    [self.infoView addSubview:self.wxSceneTimelineButton];
+    [self.wxSceneTimelineButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.cycleScrollView.mas_bottom).with.offset(11.0);
+        make.right.equalTo(self.infoView.mas_right).with.offset(-10.0);
+        make.width.equalTo(@21.0);
+        make.height.equalTo(@21.0);
+    }];
+    
+    [self.infoView addSubview:self.wxSceneSessionButton];
+    [self.wxSceneSessionButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.cycleScrollView.mas_bottom).with.offset(10.0);
+        make.right.equalTo(self.wxSceneTimelineButton.mas_left).with.offset(-10.0);
+        make.width.equalTo(@22.0);
+        make.height.equalTo(@22.0);
+    }];
+    
     [self.infoView addSubview:self.goods_nameLabel];
     [self.goods_nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.infoView.mas_top).with.offset(5.0);
         make.left.equalTo(self.infoView.mas_left).with.offset(10.0);
-        make.right.equalTo(self.infoView.mas_right).with.offset(-10.0);
+        make.right.equalTo(self.wxSceneSessionButton.mas_left).with.offset(-10.0);
         if (IS_IPHONE_4_OR_LESS || IS_IPHONE_5) {
             make.height.equalTo(@20.0);
         }else{
@@ -294,8 +314,6 @@
     [self.navigationController pushViewController:mineOrderViewController animated:YES];
 }
 
-
-
 - (void) loadData {
     [self getGoodsDetailInfoWithShowShouldShowHUD:NO];
 }
@@ -321,6 +339,40 @@
     }];
 }
 
+- (void) shareToSession {
+    WXMediaMessage *message = [WXMediaMessage message];
+    message.title = self.goodsDetailInfo.goods.goods_name;
+    message.description = @"向您推荐好大米";
+    NSData *data = UIImageJPEGRepresentation([UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:self.goodsDetailInfo.goods.imgurl]]], 0.1);
+    UIImage *image = [UIImage imageWithData:data];
+    [message setThumbImage:[self scaleImage:image toSize:CGSizeMake(50.0, 33.5)]];
+    WXWebpageObject *ext = [WXWebpageObject object];
+    ext.webpageUrl = self.goodsDetailInfo.share_url;
+    message.mediaObject = ext;
+    SendMessageToWXReq* req = [[SendMessageToWXReq alloc] init];
+    req.bText = NO;
+    req.message = message;
+    req.scene = WXSceneSession;
+    [WXApi sendReq:req];
+}
+
+- (void) shareToTimeline {
+    WXMediaMessage *message = [WXMediaMessage message];
+    message.title = self.goodsDetailInfo.goods.goods_name;
+    message.description = @"向您推荐好大米";;
+    NSData *data = UIImageJPEGRepresentation([UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:self.goodsDetailInfo.goods.imgurl]]], 0.1);
+    UIImage *image = [UIImage imageWithData:data];
+    [message setThumbImage:[self scaleImage:image toSize:CGSizeMake(50.0, 33.5)]];
+    WXWebpageObject *ext = [WXWebpageObject object];
+    ext.webpageUrl = self.goodsDetailInfo.share_url;
+    message.mediaObject = ext;
+    SendMessageToWXReq* req = [[SendMessageToWXReq alloc] init];
+    req.bText = NO;
+    req.message = message;
+    req.scene = WXSceneTimeline;
+    [WXApi sendReq:req];
+}
+
 - (void) configUI {
     self.topicLine.hidden = NO;
     self.framerImageView.hidden = NO;
@@ -339,9 +391,27 @@
 }
 
 - (void) gotoCommentViewController {
-    Main_GoodsCommentViewController *main_GoodsCommentViewController = [[Main_GoodsCommentViewController alloc] init];
-    [self.navigationController pushViewController:main_GoodsCommentViewController animated:YES];
+    //Main_GoodsCommentViewController *main_GoodsCommentViewController = [[Main_GoodsCommentViewController alloc] init];
+    //[self.navigationController pushViewController:main_GoodsCommentViewController animated:YES];
+    /*
+      */
 }
+
+- (UIImage *)scaleImage:(UIImage *)image toSize:(CGSize)newSize {
+    CGSize actSize = image.size;
+    float scale = actSize.width/actSize.height;
+    if (scale < 1) {
+        newSize.height = newSize.width/scale;
+    } else {
+        newSize.width = newSize.height*scale;
+    }
+    UIGraphicsBeginImageContext(newSize);
+    [image drawInRect:CGRectMake(0, 0, newSize.width, newSize.height)];
+    UIImage* newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return newImage;
+}
+
 
 - (void) plus {
     NSUInteger number = [self.numberLabel.text integerValue];
@@ -600,6 +670,24 @@
         [_cartButton setTitle:@"加入购物车" forState:UIControlStateNormal];
     }
     return _cartButton;
+}
+
+- (UIButton *) wxSceneSessionButton {
+    if (!_wxSceneSessionButton) {
+        _wxSceneSessionButton = [[UIButton alloc] init];
+        [_wxSceneSessionButton setImage:[UIImage imageNamed:@"main_shareToSession"] forState:UIControlStateNormal];
+        [_wxSceneSessionButton addTarget:self action:@selector(shareToSession) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _wxSceneSessionButton;
+}
+
+- (UIButton *) wxSceneTimelineButton {
+    if (!_wxSceneTimelineButton) {
+        _wxSceneTimelineButton = [[UIButton alloc] init];
+        [_wxSceneTimelineButton setImage:[UIImage imageNamed:@"main_shareToTimeline"] forState:UIControlStateNormal];
+        [_wxSceneTimelineButton addTarget:self action:@selector(shareToTimeline) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _wxSceneTimelineButton;
 }
 
 @end

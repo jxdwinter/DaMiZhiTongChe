@@ -14,6 +14,7 @@
 @property (nonatomic, strong) Main_Goods *goods;
 @property (nonatomic, copy)   NSArray *imgs;
 @property (nonatomic, copy)   NSString *detail_url;
+@property (nonatomic, copy)   NSString *share_url;
 
 - (instancetype) initWithGoodsDetailInfo : (NSDictionary *) goodsDetailInfo;
 

@@ -227,7 +227,7 @@
     if (!_addressTextView) {
         _addressTextView = [[TextView alloc] init];
         _addressTextView.keyboardType = UIKeyboardTypeDefault;
-        _addressTextView.font = DEFAULFONT;
+        _addressTextView.font = [UIFont systemFontOfSize:12.0];
         _addressTextView.textColor = DEFAULTTEXTCOLOR;
         [_addressTextView setTintColor:DEFAULTBROWNCOLOR];
         _addressTextView.placeholder = @"详细地址";

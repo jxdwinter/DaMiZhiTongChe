@@ -17,6 +17,7 @@
 #import "Main_GoodsCommentViewController.h"
 #import "Cart_goods.h"
 #import "CartSettlementViewController.h"
+#import "MineOrderViewController.h"
 
 @interface Main_GoodsDetailViewController () <UIWebViewDelegate,UIScrollViewDelegate>
 
@@ -50,6 +51,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(paySuccess) name:@"GOODDETAILSUCCESS" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(payFail) name:@"GOODDETAILCARTFAIL" object:nil];
+    
     self.backButton.hidden = NO;
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.rightButton];
     [self.view addSubview:self.bottomView];
@@ -239,6 +243,11 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void) dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"GOODDETAILSUCCESS" object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"GOODDETAILCARTFAIL" object:nil];
+}
+
 #pragma mark - UIWebViewDelegate
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView {
@@ -272,6 +281,20 @@
 }
 
 #pragma mark - privete method
+
+- (void) payFail {
+    MineOrderViewController *mineOrderViewController = [[MineOrderViewController alloc] init];
+    mineOrderViewController.selectIndex = 0;
+    [self.navigationController pushViewController:mineOrderViewController animated:YES];
+}
+
+- (void) paySuccess {
+    MineOrderViewController *mineOrderViewController = [[MineOrderViewController alloc] init];
+    mineOrderViewController.selectIndex = 1;
+    [self.navigationController pushViewController:mineOrderViewController animated:YES];
+}
+
+
 
 - (void) loadData {
     [self getGoodsDetailInfoWithShowShouldShowHUD:NO];
@@ -348,6 +371,7 @@
         CartSettlementViewController *cartSettlementViewController = [[CartSettlementViewController alloc] init];
         cartSettlementViewController.dataSource = dataSource;
         cartSettlementViewController.allPrice = [self.goodsDetailInfo.goods.goods_price doubleValue] * [self.numberLabel.text integerValue];
+        cartSettlementViewController.type = 1;
         [self.navigationController pushViewController:cartSettlementViewController animated:YES];
     }
 }

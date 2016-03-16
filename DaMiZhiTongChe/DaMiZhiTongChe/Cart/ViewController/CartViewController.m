@@ -14,6 +14,7 @@
 #import "Cart_goods.h"
 #import "Cart_deleteApi.h"
 #import "CartSettlementViewController.h"
+#import "MineOrderViewController.h"
 
 @interface CartViewController () <UITableViewDelegate, UITableViewDataSource>
 
@@ -38,6 +39,8 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadData) name:@"RELOADCART" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadData) name:@"USERLOGIN" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(paySuccess) name:@"CARTSUCCESS" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(payFail) name:@"CARTFAIL" object:nil];
     self.title = @"购物车";
     
     self.dataSource = [[NSMutableArray alloc] initWithCapacity:1];
@@ -104,6 +107,8 @@
 - (void) dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"RELOADCART" object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"USERLOGIN" object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"CARTSUCCESS" object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"CARTFAIL" object:nil];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -112,6 +117,20 @@
 }
 
 #pragma mark - privete method
+
+- (void) payFail {
+    MineOrderViewController *mineOrderViewController = [[MineOrderViewController alloc] init];
+    mineOrderViewController.selectIndex = 0;
+    [self.navigationController pushViewController:mineOrderViewController animated:YES];
+}
+
+- (void) paySuccess {
+    //刷新购物车
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"RELOADCART" object:nil];
+    MineOrderViewController *mineOrderViewController = [[MineOrderViewController alloc] init];
+    mineOrderViewController.selectIndex = 1;
+    [self.navigationController pushViewController:mineOrderViewController animated:YES];
+}
 
 - (void) getCartDataWithShowShouldShowHUD : (BOOL) shouldShowHUD{
     Cart_getListApi *api = [[Cart_getListApi alloc] init];
@@ -181,6 +200,7 @@
         CartSettlementViewController *cartSettlementViewController = [[CartSettlementViewController alloc] init];
         cartSettlementViewController.dataSource = tmpArray;
         cartSettlementViewController.allPrice = self.allPrice;
+        cartSettlementViewController.type = 0;
         [self.navigationController pushViewController:cartSettlementViewController animated:YES];
     }
 }

@@ -37,6 +37,7 @@
     // Do any additional setup after loading the view.
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadData) name:@"RELOADCART" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadData) name:@"USERLOGIN" object:nil];
     self.title = @"购物车";
     
     self.dataSource = [[NSMutableArray alloc] initWithCapacity:1];
@@ -102,6 +103,7 @@
 
 - (void) dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"RELOADCART" object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"USERLOGIN" object:nil];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -122,6 +124,8 @@
         if (dic) {
             if ([dic[@"result"] isEqualToString:@"0"]) {
                 [self configDataWithCartData:dic[@"data"]];
+            }else if ([dic[@"result"] isEqualToString:@"1"]){
+                [self configDataWithCartData:nil];
             }else{
                 [MBProgressHUD showHUDwithSuccess:NO WithTitle:dic[@"msg"] withView:self.navigationController.view];
             }
@@ -132,7 +136,7 @@
 }
 
 - (void) configDataWithCartData : (NSArray *) data{
-    if ([data count]) {
+    if (data && [data count]) {
         NSMutableArray *tmpArray = [[NSMutableArray alloc] initWithCapacity:1];
         for (NSDictionary *cartGoodsDic in data) {
             Cart_goods *cartGoods = [[Cart_goods alloc] initWithCartGoodsInfo:cartGoodsDic];
@@ -142,6 +146,8 @@
         }
         self.dataSource = nil;
         self.dataSource  = [tmpArray mutableCopy];
+    }else {
+        [self.dataSource removeAllObjects];
     }
     [self configUI];
 }

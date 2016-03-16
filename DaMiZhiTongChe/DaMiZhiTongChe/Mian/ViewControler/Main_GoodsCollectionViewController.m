@@ -130,8 +130,12 @@
     [api startWithCompletionBlockWithSuccess:^(YTKBaseRequest *request) {
         NSDictionary *dic = [api responseDictionaryWithResponseString:request.responseString];
         if (dic) {
+            NSLog(@"%@",dic[@"result"]);
             if ([dic[@"result"] isEqualToString:@"0"]) {
                 [self configDataWithMainData:dic[@"data"] withShouldRefreshData:shouldRefreshData];
+            }else if ([dic[@"result"] isEqualToString:@"1"]){
+                [self configDataWithMainData:nil withShouldRefreshData:shouldRefreshData];
+                [self configErrorOrNoMoreDataWithShouldRefreshData:shouldRefreshData];
             }else{
                 [MBProgressHUD showHUDwithSuccess:NO WithTitle:dic[@"msg"] withView:self.navigationController.view];
                 [self configErrorOrNoMoreDataWithShouldRefreshData:shouldRefreshData];
@@ -139,22 +143,23 @@
         }
     } failure:^(YTKBaseRequest *request) {
         [self configErrorOrNoMoreDataWithShouldRefreshData:shouldRefreshData];
+        [self.collectionView.mj_header endRefreshing];
+        [self.collectionView.mj_footer endRefreshing];
     }];
 }
 
 - (void) configErrorOrNoMoreDataWithShouldRefreshData  : (BOOL) shouldRefreshData {
+    //如果是加载更多
     if (!shouldRefreshData) {
         self.page_num--;
         if (self.page_num <= 1) {
             self.page_num = 1;
         }
     }
-    [self.collectionView.mj_header endRefreshing];
-    [self.collectionView.mj_footer endRefreshing];
 }
 
 - (void) configDataWithMainData : (NSArray *) data withShouldRefreshData :(BOOL) shouldRefreshData {
-    if ([data count]) {
+    if ( data && [data count]) {
         NSMutableArray *tmpArray = [[NSMutableArray alloc] initWithCapacity:1];
         for (NSDictionary *goodsDic in data) {
             Main_Goods *goods = [[Main_Goods alloc] initWithGoodsInfo:goodsDic];
@@ -169,15 +174,18 @@
         }else{
             NSMutableArray *tmp = [[NSMutableArray alloc] initWithCapacity:1];
             for (Main_Goods *newGoods in tmpArray) {
+                BOOL isExist = NO;
                 for (Main_Goods *oldGoods in tmpDataSource) {
-                    if (![newGoods._id isEqualToString:oldGoods._id]) {
-                        [tmp addObject:newGoods];
+                    if ([newGoods._id isEqualToString:oldGoods._id]) {
+                        isExist = YES;
                     }
+                }
+                if (!isExist) {
+                    [tmp addObject:newGoods];
                 }
             }
             [tmpDataSource addObjectsFromArray:tmp];
         }
-        
         self.dataSource = nil;
         self.dataSource  = [tmpDataSource mutableCopy];
         if ([tmpArray count] < PAGENUMBER) {
@@ -185,6 +193,12 @@
         }else{
             self.collectionView.mj_footer = nil;
             self.collectionView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreData)];
+        }
+    } else {
+        if (shouldRefreshData) {
+            [self.dataSource removeAllObjects];
+        }else{
+            [self.collectionView.mj_footer endRefreshingWithNoMoreData];
         }
     }
     [self configUI];

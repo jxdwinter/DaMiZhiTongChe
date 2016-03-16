@@ -16,6 +16,7 @@
 }
 
 - (id)requestArgument {
+    NSLog(@"%@",[[[AccountManager sharedAccountManager] getCurrentUser] uid]);
     return [ConfigArgument configArgument:@{
                                             @"action" : @"getList",
                                             @"uid" : [[[AccountManager sharedAccountManager] getCurrentUser] uid]

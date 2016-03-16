@@ -28,6 +28,10 @@
 		831C43421C8935DE00FDE244 /* Main_TopicCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 831C43411C8935DE00FDE244 /* Main_TopicCollectionViewCell.m */; };
 		83225C7E1C98DB2800D77DFD /* MineEditInformationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83225C7D1C98DB2800D77DFD /* MineEditInformationViewController.m */; };
 		83225C811C98E76A00D77DFD /* Mine_modifyDetailApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 83225C801C98E76A00D77DFD /* Mine_modifyDetailApi.m */; };
+		83225C881C98F3FA00D77DFD /* AboutUSFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 83225C831C98F3FA00D77DFD /* AboutUSFooterView.m */; };
+		83225C891C98F3FA00D77DFD /* AboutUSHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 83225C851C98F3FA00D77DFD /* AboutUSHeaderView.m */; };
+		83225C8A1C98F3FA00D77DFD /* AboutUSTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 83225C871C98F3FA00D77DFD /* AboutUSTableViewCell.m */; };
+		83225C8D1C98F41800D77DFD /* MineAboutUSViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83225C8C1C98F41800D77DFD /* MineAboutUSViewController.m */; };
 		832399E71C915D0D00ACC6C2 /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832399E21C915D0D00ACC6C2 /* libWeChatSDK.a */; };
 		832399E81C915D0D00ACC6C2 /* read_me.txt in Resources */ = {isa = PBXBuildFile; fileRef = 832399E31C915D0D00ACC6C2 /* read_me.txt */; };
 		832399EA1C915DCE00ACC6C2 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 832399E91C915DCE00ACC6C2 /* libsqlite3.0.tbd */; };
@@ -191,6 +195,14 @@
 		83225C7D1C98DB2800D77DFD /* MineEditInformationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MineEditInformationViewController.m; sourceTree = "<group>"; };
 		83225C7F1C98E76A00D77DFD /* Mine_modifyDetailApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Mine_modifyDetailApi.h; sourceTree = "<group>"; };
 		83225C801C98E76A00D77DFD /* Mine_modifyDetailApi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Mine_modifyDetailApi.m; sourceTree = "<group>"; };
+		83225C821C98F3FA00D77DFD /* AboutUSFooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutUSFooterView.h; sourceTree = "<group>"; };
+		83225C831C98F3FA00D77DFD /* AboutUSFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutUSFooterView.m; sourceTree = "<group>"; };
+		83225C841C98F3FA00D77DFD /* AboutUSHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutUSHeaderView.h; sourceTree = "<group>"; };
+		83225C851C98F3FA00D77DFD /* AboutUSHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutUSHeaderView.m; sourceTree = "<group>"; };
+		83225C861C98F3FA00D77DFD /* AboutUSTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutUSTableViewCell.h; sourceTree = "<group>"; };
+		83225C871C98F3FA00D77DFD /* AboutUSTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutUSTableViewCell.m; sourceTree = "<group>"; };
+		83225C8B1C98F41800D77DFD /* MineAboutUSViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MineAboutUSViewController.h; sourceTree = "<group>"; };
+		83225C8C1C98F41800D77DFD /* MineAboutUSViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MineAboutUSViewController.m; sourceTree = "<group>"; };
 		832399E21C915D0D00ACC6C2 /* libWeChatSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeChatSDK.a; sourceTree = "<group>"; };
 		832399E31C915D0D00ACC6C2 /* read_me.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = read_me.txt; sourceTree = "<group>"; };
 		832399E41C915D0D00ACC6C2 /* WechatAuthSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WechatAuthSDK.h; sourceTree = "<group>"; };
@@ -667,6 +679,12 @@
 				839F26F71C926FFC00DD65DF /* HeaderView.m */,
 				839F26F51C926FFC00DD65DF /* FooterView.h */,
 				839F26F41C926FFC00DD65DF /* FooterView.m */,
+				83225C821C98F3FA00D77DFD /* AboutUSFooterView.h */,
+				83225C831C98F3FA00D77DFD /* AboutUSFooterView.m */,
+				83225C841C98F3FA00D77DFD /* AboutUSHeaderView.h */,
+				83225C851C98F3FA00D77DFD /* AboutUSHeaderView.m */,
+				83225C861C98F3FA00D77DFD /* AboutUSTableViewCell.h */,
+				83225C871C98F3FA00D77DFD /* AboutUSTableViewCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -688,6 +706,8 @@
 				8323A9CD1C97A37300D9738D /* MineOrderSentViewController.m */,
 				8323A9CF1C97A3A700D9738D /* MineOrderReceivedViewController.h */,
 				8323A9D01C97A3A700D9738D /* MineOrderReceivedViewController.m */,
+				83225C8B1C98F41800D77DFD /* MineAboutUSViewController.h */,
+				83225C8C1C98F41800D77DFD /* MineAboutUSViewController.m */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -1359,7 +1379,9 @@
 				83E0A2921C7AF5F8002E4954 /* AppDelegate.m in Sources */,
 				8323A9CB1C97A33400D9738D /* MineOrderPayedViewController.m in Sources */,
 				8385751A1C903D4500A26960 /* Main_GoodsCommentViewController.m in Sources */,
+				83225C8A1C98F3FA00D77DFD /* AboutUSTableViewCell.m in Sources */,
 				830722CB1C8FAE0700475C41 /* Cart_GoodsTableViewCell.m in Sources */,
+				83225C891C98F3FA00D77DFD /* AboutUSHeaderView.m in Sources */,
 				83548E771C83D84C00A2252F /* ForgetPasswordViewController.m in Sources */,
 				836A642A1C7BDFEB00219035 /* BaseViewController.m in Sources */,
 				835572D01C92908E005642A7 /* UploadManager.m in Sources */,
@@ -1432,12 +1454,14 @@
 				838983FF1C8D5BDD00D0057C /* Main_getGoodsApi.m in Sources */,
 				836014031C857EA70090257C /* VerifyTools.m in Sources */,
 				8348AA071C881FD300ED9EF5 /* Main_Banner.m in Sources */,
+				83225C8D1C98F41800D77DFD /* MineAboutUSViewController.m in Sources */,
 				83A46F4D1C7D460300C17759 /* LoginViewController.m in Sources */,
 				830722D41C8FC21700475C41 /* Cart_goods.m in Sources */,
 				8305D8011C86CA5A00F71645 /* Login_resetPasswordApi.m in Sources */,
 				8323A9CE1C97A37300D9738D /* MineOrderSentViewController.m in Sources */,
 				8377E8F61C8D075100709E83 /* Main_GoodsCollectionViewCell.m in Sources */,
 				836A64F41C7BE41700219035 /* RequestAccessory.m in Sources */,
+				83225C881C98F3FA00D77DFD /* AboutUSFooterView.m in Sources */,
 				8323A9C81C97A32200D9738D /* MineOrderUnPayedViewController.m in Sources */,
 				836013FF1C8575370090257C /* Login_sendCodeApi.m in Sources */,
 				836A64541C7BE22100219035 /* MF_Base64Additions.m in Sources */,

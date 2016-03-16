@@ -17,6 +17,7 @@
 #import "MineEditInformationViewController.h"
 #import "AccountManager.h"
 #import <JGActionSheet.h>
+#import "MineAboutUSViewController.h"
 
 @interface MineViewController ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -151,7 +152,8 @@
         if (indexPath.row == 0) {
             
         }else if (indexPath.row == 1){
-            
+            MineAboutUSViewController *mineAboutUSViewController = [[MineAboutUSViewController alloc] init];
+            [self.navigationController pushViewController:mineAboutUSViewController animated:YES];
         }
     }
 }

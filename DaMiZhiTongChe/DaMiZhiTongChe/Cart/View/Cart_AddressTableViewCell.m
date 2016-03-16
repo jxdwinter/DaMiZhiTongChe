@@ -67,7 +67,7 @@
             make.top.equalTo(self.phoneLabel.mas_bottom).with.offset(5.0);
             make.left.equalTo(self.iconImageView.mas_right).with.offset(10.0);
             make.right.equalTo(self.contentView.mas_right).with.offset(-10.0);
-            make.height.equalTo(@30.0);
+            make.height.equalTo(@35.0);
         }];
     }
     return self;

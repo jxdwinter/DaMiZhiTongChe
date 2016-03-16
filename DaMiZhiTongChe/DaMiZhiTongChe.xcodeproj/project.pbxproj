@@ -26,6 +26,8 @@
 		831202501C97FCD90073792B /* Cart_deleteAddressApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 8312024F1C97FCD90073792B /* Cart_deleteAddressApi.m */; };
 		831202531C97FEBA0073792B /* Cart_modifyDefaultAddressApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 831202521C97FEBA0073792B /* Cart_modifyDefaultAddressApi.m */; };
 		831C43421C8935DE00FDE244 /* Main_TopicCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 831C43411C8935DE00FDE244 /* Main_TopicCollectionViewCell.m */; };
+		83225C7E1C98DB2800D77DFD /* MineEditInformationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83225C7D1C98DB2800D77DFD /* MineEditInformationViewController.m */; };
+		83225C811C98E76A00D77DFD /* Mine_modifyDetailApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 83225C801C98E76A00D77DFD /* Mine_modifyDetailApi.m */; };
 		832399E71C915D0D00ACC6C2 /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832399E21C915D0D00ACC6C2 /* libWeChatSDK.a */; };
 		832399E81C915D0D00ACC6C2 /* read_me.txt in Resources */ = {isa = PBXBuildFile; fileRef = 832399E31C915D0D00ACC6C2 /* read_me.txt */; };
 		832399EA1C915DCE00ACC6C2 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 832399E91C915DCE00ACC6C2 /* libsqlite3.0.tbd */; };
@@ -185,6 +187,10 @@
 		831202521C97FEBA0073792B /* Cart_modifyDefaultAddressApi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Cart_modifyDefaultAddressApi.m; sourceTree = "<group>"; };
 		831C43401C8935DE00FDE244 /* Main_TopicCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Main_TopicCollectionViewCell.h; sourceTree = "<group>"; };
 		831C43411C8935DE00FDE244 /* Main_TopicCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Main_TopicCollectionViewCell.m; sourceTree = "<group>"; };
+		83225C7C1C98DB2800D77DFD /* MineEditInformationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MineEditInformationViewController.h; sourceTree = "<group>"; };
+		83225C7D1C98DB2800D77DFD /* MineEditInformationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MineEditInformationViewController.m; sourceTree = "<group>"; };
+		83225C7F1C98E76A00D77DFD /* Mine_modifyDetailApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Mine_modifyDetailApi.h; sourceTree = "<group>"; };
+		83225C801C98E76A00D77DFD /* Mine_modifyDetailApi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Mine_modifyDetailApi.m; sourceTree = "<group>"; };
 		832399E21C915D0D00ACC6C2 /* libWeChatSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeChatSDK.a; sourceTree = "<group>"; };
 		832399E31C915D0D00ACC6C2 /* read_me.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = read_me.txt; sourceTree = "<group>"; };
 		832399E41C915D0D00ACC6C2 /* WechatAuthSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WechatAuthSDK.h; sourceTree = "<group>"; };
@@ -670,6 +676,8 @@
 			children = (
 				8348A9FF1C881C2E00ED9EF5 /* MineViewController.h */,
 				8348AA001C881C2E00ED9EF5 /* MineViewController.m */,
+				83225C7C1C98DB2800D77DFD /* MineEditInformationViewController.h */,
+				83225C7D1C98DB2800D77DFD /* MineEditInformationViewController.m */,
 				8323A9C31C97A08C00D9738D /* MineOrderViewController.h */,
 				8323A9C41C97A08C00D9738D /* MineOrderViewController.m */,
 				8323A9C61C97A32200D9738D /* MineOrderUnPayedViewController.h */,
@@ -948,6 +956,8 @@
 				8312024F1C97FCD90073792B /* Cart_deleteAddressApi.m */,
 				831202511C97FEBA0073792B /* Cart_modifyDefaultAddressApi.h */,
 				831202521C97FEBA0073792B /* Cart_modifyDefaultAddressApi.m */,
+				83225C7F1C98E76A00D77DFD /* Mine_modifyDetailApi.h */,
+				83225C801C98E76A00D77DFD /* Mine_modifyDetailApi.m */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -1365,6 +1375,7 @@
 				8366966B1C96815D003CCB78 /* DataVerifier.m in Sources */,
 				836696691C96815D003CCB78 /* base64.m in Sources */,
 				83FE91C21C90F61E0032654B /* CartSettlementViewController.m in Sources */,
+				83225C7E1C98DB2800D77DFD /* MineEditInformationViewController.m in Sources */,
 				836013F51C856C3F0090257C /* SharedDatabaseHelper.m in Sources */,
 				83FE91CB1C9118AE0032654B /* Cart_AddressTableViewCell.m in Sources */,
 				831C43421C8935DE00FDE244 /* Main_TopicCollectionViewCell.m in Sources */,
@@ -1388,6 +1399,7 @@
 				83E0A25E1C7AF3B4002E4954 /* main.m in Sources */,
 				8348AA0A1C88225300ED9EF5 /* Main_Topic.m in Sources */,
 				839F26F91C926FFC00DD65DF /* HeaderView.m in Sources */,
+				83225C811C98E76A00D77DFD /* Mine_modifyDetailApi.m in Sources */,
 				8305D7F81C86B8A900F71645 /* Login_validateCodeApi.m in Sources */,
 				838984021C8D5DEC00D0057C /* Main_GoodsDetailViewController.m in Sources */,
 				8366966C1C96815D003CCB78 /* MD5DataSigner.m in Sources */,

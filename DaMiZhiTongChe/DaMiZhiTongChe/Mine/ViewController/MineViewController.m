@@ -14,6 +14,9 @@
 #import "AccountManager.h"
 #import "User.h"
 #import "CartAddressListViewController.h"
+#import "MineEditInformationViewController.h"
+#import "AccountManager.h"
+#import <JGActionSheet.h>
 
 @interface MineViewController ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -55,23 +58,42 @@
     if (self.headerView) {
         [self.headerView.avatarImageView sd_setImageWithURL:[NSURL URLWithString:[[[AccountManager sharedAccountManager] getCurrentUser] headimg]]
                                            placeholderImage:[UIImage imageNamed:@"mine_headerImage"]];
-        self.headerView.nameLabel.text = [NSString stringWithFormat:@"姓名:%@",[[[AccountManager sharedAccountManager] getCurrentUser] username]];
+        self.headerView.nameLabel.text = [NSString stringWithFormat:@"%@",[[[AccountManager sharedAccountManager] getCurrentUser] nickname]];
     }
-}
-
-#pragma mark - privete method
-
-- (void) headerViewTouched {
-    
-}
-
-- (void) logout {
-    
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - privete method
+
+- (void) headerViewTouched {
+    MineEditInformationViewController *mineEditInformationViewController = [[MineEditInformationViewController alloc] init];
+    [self.navigationController pushViewController:mineEditInformationViewController animated:YES];
+}
+
+- (void) logout {
+    JGActionSheetSection *section = [JGActionSheetSection sectionWithTitle:@"确认退出吗?" message:@"" buttonTitles:@[@"确认"] buttonStyle:JGActionSheetButtonStyleRed];
+    section.titleLabel.textColor = DEFAULTTEXTCOLOR;
+    section.titleLabel.font = DEFAULFONT;
+    JGActionSheetSection *cancelSection = [JGActionSheetSection sectionWithTitle:nil message:nil buttonTitles:@[@"取消"] buttonStyle:JGActionSheetButtonStyleCancel];
+    NSArray *sections = @[section, cancelSection];
+    JGActionSheet *sheet = [JGActionSheet actionSheetWithSections:sections];
+    [sheet setButtonPressedBlock:^(JGActionSheet *sheet, NSIndexPath *indexPath) {
+        [sheet dismissAnimated:YES];
+        if (indexPath.section == 0 && indexPath.row == 0) {
+            [self exit];
+        }
+    }];
+    [sheet showInView:self.view animated:YES];
+}
+
+- (void) exit {
+    [[AccountManager sharedAccountManager] userLogout];
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    [appDelegate.tabBarController setSelectedIndex:0];
 }
 
 #pragma mark - Table view data source
@@ -156,7 +178,7 @@
         _headerView = [[HeaderView alloc] initWithFrame:CGRectMake(0.0, 0.0, SCREEN_WIDTH, 95.0)];
         [_headerView.avatarImageView sd_setImageWithURL:[NSURL URLWithString:[[[AccountManager sharedAccountManager] getCurrentUser] headimg]]
                                        placeholderImage:[UIImage imageNamed:@"mine_headerImage"]];
-        _headerView.nameLabel.text = [NSString stringWithFormat:@"姓名:%@",[[[AccountManager sharedAccountManager] getCurrentUser] username]];
+        _headerView.nameLabel.text = [NSString stringWithFormat:@"%@",[[[AccountManager sharedAccountManager] getCurrentUser] nickname]];
         [_headerView addTarget:self action:@selector(headerViewTouched) forControlEvents:UIControlEventTouchUpInside];
     }
     return _headerView;

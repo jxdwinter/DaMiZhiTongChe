@@ -7,6 +7,9 @@
 //
 
 #import "MineOrderSentViewController.h"
+#import "Mine_getOrderListApi.h"
+
+#define ORDER_STATUS @"2"
 
 @interface MineOrderSentViewController ()
 

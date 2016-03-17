@@ -126,6 +126,9 @@
 		83E0A2821C7AF3B4002E4954 /* DaMiZhiTongCheUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 83E0A2811C7AF3B4002E4954 /* DaMiZhiTongCheUITests.m */; };
 		83E0A2921C7AF5F8002E4954 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 83E0A2911C7AF5F8002E4954 /* AppDelegate.m */; };
 		83E1A1C01C9A3D5E004B678F /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83E1A1BF1C9A3D5E004B678F /* WebViewController.m */; };
+		83E1A1C31C9A5938004B678F /* Mine_enterprise.m in Sources */ = {isa = PBXBuildFile; fileRef = 83E1A1C21C9A5938004B678F /* Mine_enterprise.m */; };
+		83E1A1C61C9A5B1E004B678F /* Mine_order.m in Sources */ = {isa = PBXBuildFile; fileRef = 83E1A1C51C9A5B1E004B678F /* Mine_order.m */; };
+		83E1A1C91C9A5DA4004B678F /* Mine_getOrderListApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 83E1A1C81C9A5DA4004B678F /* Mine_getOrderListApi.m */; };
 		83FE91C21C90F61E0032654B /* CartSettlementViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83FE91C11C90F61E0032654B /* CartSettlementViewController.m */; };
 		83FE91C51C910BA90032654B /* Cart_SettlementTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 83FE91C41C910BA90032654B /* Cart_SettlementTableViewCell.m */; };
 		83FE91C81C91119E0032654B /* Cart_PaymentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 83FE91C71C91119E0032654B /* Cart_PaymentTableViewCell.m */; };
@@ -453,6 +456,12 @@
 		83E0A2911C7AF5F8002E4954 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		83E1A1BE1C9A3D5E004B678F /* WebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewController.h; sourceTree = "<group>"; };
 		83E1A1BF1C9A3D5E004B678F /* WebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebViewController.m; sourceTree = "<group>"; };
+		83E1A1C11C9A5938004B678F /* Mine_enterprise.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Mine_enterprise.h; sourceTree = "<group>"; };
+		83E1A1C21C9A5938004B678F /* Mine_enterprise.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Mine_enterprise.m; sourceTree = "<group>"; };
+		83E1A1C41C9A5B1E004B678F /* Mine_order.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Mine_order.h; sourceTree = "<group>"; };
+		83E1A1C51C9A5B1E004B678F /* Mine_order.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Mine_order.m; sourceTree = "<group>"; };
+		83E1A1C71C9A5DA4004B678F /* Mine_getOrderListApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Mine_getOrderListApi.h; sourceTree = "<group>"; };
+		83E1A1C81C9A5DA4004B678F /* Mine_getOrderListApi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Mine_getOrderListApi.m; sourceTree = "<group>"; };
 		83FE91C01C90F61E0032654B /* CartSettlementViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CartSettlementViewController.h; sourceTree = "<group>"; };
 		83FE91C11C90F61E0032654B /* CartSettlementViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CartSettlementViewController.m; sourceTree = "<group>"; };
 		83FE91C31C910BA90032654B /* Cart_SettlementTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Cart_SettlementTableViewCell.h; sourceTree = "<group>"; };
@@ -662,6 +671,10 @@
 		8348A9FB1C881C2E00ED9EF5 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				83E1A1C41C9A5B1E004B678F /* Mine_order.h */,
+				83E1A1C51C9A5B1E004B678F /* Mine_order.m */,
+				83E1A1C11C9A5938004B678F /* Mine_enterprise.h */,
+				83E1A1C21C9A5938004B678F /* Mine_enterprise.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -981,6 +994,8 @@
 				831202521C97FEBA0073792B /* Cart_modifyDefaultAddressApi.m */,
 				83225C7F1C98E76A00D77DFD /* Mine_modifyDetailApi.h */,
 				83225C801C98E76A00D77DFD /* Mine_modifyDetailApi.m */,
+				83E1A1C71C9A5DA4004B678F /* Mine_getOrderListApi.h */,
+				83E1A1C81C9A5DA4004B678F /* Mine_getOrderListApi.m */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -1397,6 +1412,7 @@
 				83C9B0691C929576001EB33C /* Cart_orderApi.m in Sources */,
 				8312023B1C97D7E10073792B /* CartAddressAddViewController.m in Sources */,
 				835572CE1C92908E005642A7 /* PMQiNiuPutPolicy.m in Sources */,
+				83E1A1C31C9A5938004B678F /* Mine_enterprise.m in Sources */,
 				83E1A1C01C9A3D5E004B678F /* WebViewController.m in Sources */,
 				8305D7FB1C86C87E00F71645 /* Signup_registerApi.m in Sources */,
 				8323A9D11C97A3A700D9738D /* MineOrderReceivedViewController.m in Sources */,
@@ -1421,6 +1437,8 @@
 				8312024D1C97F9AB0073792B /* Cart_modifyAddressApi.m in Sources */,
 				836013F41C856C3F0090257C /* AccountManager.m in Sources */,
 				836A64511C7BE22100219035 /* AESenAndDe.m in Sources */,
+				83E1A1C61C9A5B1E004B678F /* Mine_order.m in Sources */,
+				83E1A1C91C9A5DA4004B678F /* Mine_getOrderListApi.m in Sources */,
 				836013F31C856C3F0090257C /* AccountHelper.m in Sources */,
 				836696701C96815D003CCB78 /* RSADataVerifier.m in Sources */,
 				8312023E1C97E6B50073792B /* Cart_AddAddressApi.m in Sources */,

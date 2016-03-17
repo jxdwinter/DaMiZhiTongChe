@@ -7,6 +7,9 @@
 //
 
 #import "MineOrderReceivedViewController.h"
+#import "Mine_getOrderListApi.h"
+
+#define ORDER_STATUS @"3"
 
 @interface MineOrderReceivedViewController ()
 

@@ -13,10 +13,13 @@
 #import "Main_Topic.h"
 #import "Main_Category.h"
 #import <SDCycleScrollView.h>
+#import <TOWebViewController.h>
 #import <MJRefresh.h>
 #import "Main_TopicCollectionViewCell.h"
 #import "Main_CategoryTableViewCell.h"
 #import "Main_GoodsCollectionViewController.h"
+#import "Main_GoodsDetailViewController.h"
+#import "WebViewController.h"
 
 #define HEADERVIEWHIGHT 40.0
 
@@ -305,7 +308,22 @@ UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,UITableViewDelegat
 
 - (void)cycleScrollView:(SDCycleScrollView *)cycleScrollView didSelectItemAtIndex:(NSInteger)index{
     [self dismissKeyboard];
-    NSLog(@"---点击了第%ld张图片", (long)index);
+    Main_Banner *banner = self.bannerItems[index];
+    if ([banner.type isEqualToString:@"0"]) {
+        TOWebViewController *webViewController = [[TOWebViewController alloc] initWithURL:[NSURL URLWithString:banner.linkurl]];
+        webViewController.navigationButtonsHidden = YES;
+        webViewController.loadingBarTintColor = DEFAULTBROWNCOLOR;
+        webViewController.showUrlWhileLoading = NO;
+        [self.navigationController pushViewController:webViewController animated:YES];
+    }else if ([banner.type isEqualToString:@"1"]){
+        WebViewController *webViewController = [[WebViewController alloc] init];
+        webViewController.htmlString = banner.content;
+        [self.navigationController pushViewController:webViewController animated:YES];
+    }else if ([banner.type isEqualToString:@"2"]){
+        Main_GoodsDetailViewController *main_GoodsDetailViewController = [[Main_GoodsDetailViewController alloc] init];
+        main_GoodsDetailViewController.goods_id = banner.goods_id;
+        [self.navigationController pushViewController:main_GoodsDetailViewController animated:YES];
+    }
 }
 
 #pragma mark - Table view data source

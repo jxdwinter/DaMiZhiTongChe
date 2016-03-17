@@ -8,8 +8,6 @@
 
 #import "BaseViewController.h"
 #import <WMPageController.h>
-#import "Mine_order.h"
-#import "Mine_enterprise.h"
 
 @interface MineOrderViewController : BaseViewController
 

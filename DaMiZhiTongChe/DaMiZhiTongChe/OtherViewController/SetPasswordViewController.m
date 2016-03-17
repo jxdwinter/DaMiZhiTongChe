@@ -22,6 +22,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.backButton.hidden = NO;
     if (self.setPasswordType == 0) {
         self.title = @"设置密码";
     }else if (self.setPasswordType == 1){

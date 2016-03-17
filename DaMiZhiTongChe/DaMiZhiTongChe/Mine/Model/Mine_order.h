@@ -11,7 +11,8 @@
 @interface Mine_order : NSObject
 
 @property (nonatomic, copy) NSString *order_sn;
-@property (nonatomic, strong) NSArray *enterprise;
+@property (nonatomic, copy) NSString *total_amount;
+@property (nonatomic, strong) NSArray *goods_list;
 
 - (instancetype) initWithOrderInfo : (NSDictionary *) orderInfo;
 

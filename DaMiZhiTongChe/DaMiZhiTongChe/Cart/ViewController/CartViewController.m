@@ -91,6 +91,9 @@
     [super viewWillAppear:animated];
     self.allPrice = 0.00;
     self.isAllChecked = NO;
+    if (self.allPrice < 0) {
+        self.allPrice = 0.00;
+    }
     self.allPriceLabel.text = [NSString stringWithFormat:@"合计:￥%0.2f",self.allPrice];
 }
 
@@ -232,6 +235,9 @@
         [self.allCheckButton setImage:[UIImage imageNamed:@"cart_uncheck"] forState:UIControlStateNormal];
         self.allPrice -= [cart_goods.goods.goods_price doubleValue] * [cart_goods.counts integerValue];
     }
+    if (self.allPrice < 0) {
+        self.allPrice = 0.00;
+    }
     self.allPriceLabel.text = [NSString stringWithFormat:@"合计:￥%0.2f",self.allPrice];
 }
 
@@ -254,6 +260,9 @@
         }
     }
     [self.tableView reloadData];
+    if (self.allPrice < 0) {
+        self.allPrice = 0.00;
+    }
     self.allPriceLabel.text = [NSString stringWithFormat:@"合计:￥%0.2f",self.allPrice];
 }
 
@@ -265,6 +274,9 @@
             if ([dic[@"result"] isEqualToString:@"0"]) {
                 if (cartGood.isChecked) {
                     self.allPrice -= [cartGood.goods.goods_price doubleValue] * [cartGood.counts integerValue];
+                    if (self.allPrice < 0) {
+                        self.allPrice = 0.00;
+                    }
                     self.allPriceLabel.text = [NSString stringWithFormat:@"合计:￥%0.2f",self.allPrice];
                 }
                 [self.tableView beginUpdates];

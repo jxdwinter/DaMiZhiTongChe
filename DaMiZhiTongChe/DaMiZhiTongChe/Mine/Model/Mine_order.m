@@ -7,7 +7,7 @@
 //
 
 #import "Mine_order.h"
-#import "Mine_enterprise.h"
+#import "Mine_order_goods.h"
 
 @implementation Mine_order
 
@@ -15,14 +15,15 @@
     self = [super init];
     if (self) {
         self.order_sn = orderInfo[@"order_sn"];
+        self.total_amount = orderInfo[@"total_amount"];
         NSMutableArray *tmpArray = [[NSMutableArray alloc] initWithCapacity:1];
-        for (NSDictionary *dic in orderInfo[@"enterprise"]) {
-            Mine_enterprise *enterprise = [[Mine_enterprise alloc] initWitEnterpriseInfo:dic];
-            if (enterprise) {
-                [tmpArray addObject:enterprise];
+        for (NSDictionary *dic in orderInfo[@"goods_list"]) {
+            Mine_order_goods *mine_order_goods = [[Mine_order_goods alloc] initWithMine_order_goodsInfo:dic];
+            if (mine_order_goods) {
+                [tmpArray addObject:mine_order_goods];
             }
         }
-        self.enterprise = [tmpArray copy];
+        self.goods_list = [tmpArray copy];
     }
     return self;
 }

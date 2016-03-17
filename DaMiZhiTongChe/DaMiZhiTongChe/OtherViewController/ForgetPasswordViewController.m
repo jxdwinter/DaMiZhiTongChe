@@ -25,6 +25,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.backButton.hidden = NO;
     self.title = @"验证手机";
     
     [self.view addSubview:self.phoneTextField];

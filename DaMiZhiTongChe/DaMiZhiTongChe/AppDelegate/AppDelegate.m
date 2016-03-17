@@ -23,6 +23,7 @@
 #import "WXApi.h"
 #import <AlipaySDK/AlipaySDK.h>
 #import "MostTopViewControllerTools.h"
+#import <JDStatusBarNotification.h>
 
 @interface AppDelegate () <UITabBarControllerDelegate,WXApiDelegate>
 
@@ -267,16 +268,13 @@
     NSLog(@"Reachability: %@", AFStringFromNetworkReachabilityStatus(status));
     switch (status) {
         case AFNetworkReachabilityStatusReachableViaWWAN:
-            
             break;
         case AFNetworkReachabilityStatusReachableViaWiFi:
-            
             break;
         case AFNetworkReachabilityStatusNotReachable:
-            
+        [JDStatusBarNotification showWithStatus:@"无网络连接" dismissAfter:2.0 styleName:JDStatusBarStyleWarning];
             break;
         default:
-            
             break;
     }
 }

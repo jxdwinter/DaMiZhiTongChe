@@ -72,7 +72,7 @@
     
     [self.view addSubview:self.tableView];
     
-    if (self.type == 0 && self.type == 1) {
+    if (self.type == 0 || self.type == 1) {
         [self getDefaultAddress];
     }else if (self.type == 2){
         [self getOrderAddress];
@@ -378,7 +378,7 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (self.type == 0 && self.type == 1) {
+    if (self.type == 0 || self.type == 1) {
         if (indexPath.section == 0 || indexPath.row == 0) {
             CartAddressListViewController *cartAddressListViewController = [[CartAddressListViewController alloc] init];
             cartAddressListViewController.type = 0;

@@ -106,7 +106,7 @@
 }
 
 - (void) cancelWithButton : (UIButton *) button {
-    JGActionSheetSection *section = [JGActionSheetSection sectionWithTitle:@"确认取消订单吗?" message:@"" buttonTitles:@[@"确认"] buttonStyle:JGActionSheetButtonStyleRed];
+    JGActionSheetSection *section = [JGActionSheetSection sectionWithTitle:@"确认取消订单吗?" message:@"" buttonTitles:@[@"确认"] buttonStyle:JGActionSheetButtonStyleDefault];
     section.titleLabel.textColor = DEFAULTTEXTCOLOR;
     section.titleLabel.font = DEFAULFONT;
     JGActionSheetSection *cancelSection = [JGActionSheetSection sectionWithTitle:nil message:nil buttonTitles:@[@"取消"] buttonStyle:JGActionSheetButtonStyleCancel];

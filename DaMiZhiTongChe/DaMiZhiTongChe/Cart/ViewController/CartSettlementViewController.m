@@ -20,6 +20,7 @@
 #import "Cart_getDefaultAddressApi.h"
 #import "Cart_address.h"
 #import "CartAddressListViewController.h"
+#import "Cart_payOrderApi.h"
 
 @interface CartSettlementViewController () <UITableViewDelegate,UITableViewDataSource,SelectAddressDelegate>
 
@@ -112,6 +113,8 @@
         [[NSNotificationCenter defaultCenter] postNotificationName:@"CARTFAIL" object:nil];
     }else if (self.type == 1){
         [[NSNotificationCenter defaultCenter] postNotificationName:@"GOODDETAILCARTFAIL" object:nil];
+    }else if (self.type == 2){
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"ORDERFAIL" object:nil];
     }
 }
 
@@ -121,77 +124,129 @@
         [[NSNotificationCenter defaultCenter] postNotificationName:@"CARTSUCCESS" object:nil];
     }else if (self.type == 1){
         [[NSNotificationCenter defaultCenter] postNotificationName:@"GOODDETAILSUCCESS" object:nil];
+    }else if (self.type == 2){
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"ORDERSUCCESS" object:nil];
     }
 }
 
 - (void) settlement {
     if (self.address) {
-        NSMutableArray *tmpArray = [[NSMutableArray alloc] initWithCapacity:1];
-        for (Cart_goods *cart_goods in self.dataSource) {
-            NSMutableDictionary *tmpDic = [[NSMutableDictionary alloc] initWithCapacity:1];
-            [tmpDic setValue:cart_goods.goods._id forKey:@"id"];
-            [tmpDic setValue:cart_goods.counts forKey:@"count"];
-            [tmpArray addObject:tmpDic];
-        }
-        NSError *error;
-        NSData *jsonData = [NSJSONSerialization dataWithJSONObject:tmpArray options:NSJSONWritingPrettyPrinted error:&error];
-        if (error) {
-            return;
-        }
-        NSString *jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
-        NSString *is_cart;
-        //购物车
-        if (self.type == 0) {
-            is_cart = @"1";
-        }else if (self.type == 1){
-            is_cart = @"0";
-        }
-        Cart_orderApi *api;
-        if (self.isCheckedAlipay) {
-            api = [[Cart_orderApi alloc] initWithPay_id:@"2" withGoods:jsonString withAddress_id:self.address._id withIs_cart:is_cart];
-        }else if (self.isCheckedWeixin){
-            api = [[Cart_orderApi alloc] initWithPay_id:@"1" withGoods:jsonString withAddress_id:self.address._id withIs_cart:is_cart];
-            if (![WXApi isWXAppInstalled]) {
-                [MBProgressHUD showHUDwithSuccess:NO WithTitle:@"没有安装微信" withView:self.navigationController.view];
+        //从订单页面过来
+        if (self.type == 2) {
+            Cart_payOrderApi *api;
+            if (self.isCheckedAlipay) {
+                api = [[Cart_payOrderApi alloc] initWithOrder_sn:self.order_sn withPay_id:@"2"];
+            }else if (self.isCheckedWeixin){
+                api = [[Cart_payOrderApi alloc] initWithOrder_sn:self.order_sn withPay_id:@"1"];
+                if (![WXApi isWXAppInstalled]) {
+                    [MBProgressHUD showHUDwithSuccess:NO WithTitle:@"没有安装微信" withView:self.navigationController.view];
+                    return;
+                }
+            }else{
+                [MBProgressHUD showHUDwithSuccess:NO WithTitle:@"请选择一种支付方式" withView:self.navigationController.view];
                 return;
             }
-        }else{
-            [MBProgressHUD showHUDwithSuccess:NO WithTitle:@"请选择一种支付方式" withView:self.navigationController.view];
-            return;
-        }
-        RequestAccessory *accessory = [[RequestAccessory alloc] initAccessoryWithView:self.navigationController.view];
-        [api addAccessory:accessory];
-        [api startWithCompletionBlockWithSuccess:^(YTKBaseRequest *request) {
-            NSDictionary *dic = [api responseDictionaryWithResponseString:request.responseString];
-            if (dic) {
-                if ([dic[@"result"] isEqualToString:@"0"]) {
-                    if (self.isCheckedAlipay) {
-                        [[AlipaySDK defaultService] payOrder:[dic[@"data"] objectForKey:@"para"] fromScheme:@"damizhitongche" callback:^(NSDictionary *resultDic) {
-                            if ([resultDic[@"resultStatus"] isEqualToString:@"9000"]) {
-                                [self paySuccess];
-                            }else{
-                                [self payFail];
-                            }
-                        }];
-                    }else if (self.isCheckedWeixin){
-                        PayReq* req             = [[PayReq alloc] init];
-                        req.partnerId           = [dic[@"data"] objectForKey:@"partnerid"];
-                        req.prepayId            = [dic[@"data"] objectForKey:@"prepayid"];
-                        req.nonceStr            = [dic[@"data"] objectForKey:@"noncestr"];
-                        req.timeStamp           = [[dic[@"data"] objectForKey:@"timestamp"] intValue];
-                        req.package             = [dic[@"data"] objectForKey:@"package"];
-                        req.sign                = [dic[@"data"] objectForKey:@"sign"];
-                        [WXApi sendReq:req];
+            RequestAccessory *accessory = [[RequestAccessory alloc] initAccessoryWithView:self.navigationController.view];
+            [api addAccessory:accessory];
+            [api startWithCompletionBlockWithSuccess:^(YTKBaseRequest *request) {
+                NSDictionary *dic = [api responseDictionaryWithResponseString:request.responseString];
+                if (dic) {
+                    if ([dic[@"result"] isEqualToString:@"0"]) {
+                        if (self.isCheckedAlipay) {
+                            [[AlipaySDK defaultService] payOrder:[dic[@"data"] objectForKey:@"para"] fromScheme:@"damizhitongche" callback:^(NSDictionary *resultDic) {
+                                if ([resultDic[@"resultStatus"] isEqualToString:@"9000"]) {
+                                    [self paySuccess];
+                                }else{
+                                    [self payFail];
+                                }
+                            }];
+                        }else if (self.isCheckedWeixin){
+                            PayReq* req             = [[PayReq alloc] init];
+                            req.partnerId           = [dic[@"data"] objectForKey:@"partnerid"];
+                            req.prepayId            = [dic[@"data"] objectForKey:@"prepayid"];
+                            req.nonceStr            = [dic[@"data"] objectForKey:@"noncestr"];
+                            req.timeStamp           = [[dic[@"data"] objectForKey:@"timestamp"] intValue];
+                            req.package             = [dic[@"data"] objectForKey:@"package"];
+                            req.sign                = [dic[@"data"] objectForKey:@"sign"];
+                            [WXApi sendReq:req];
+                        }
+                        //通知购物车刷新
+                        [[NSNotificationCenter defaultCenter] postNotificationName:@"RELOADCART" object:nil];
+                    }else{
+                        [MBProgressHUD showHUDwithSuccess:NO WithTitle:dic[@"msg"] withView:self.navigationController.view];
                     }
-                    //通知购物车刷新
-                    [[NSNotificationCenter defaultCenter] postNotificationName:@"RELOADCART" object:nil];
-                }else{
-                    [MBProgressHUD showHUDwithSuccess:NO WithTitle:dic[@"msg"] withView:self.navigationController.view];
                 }
+            } failure:^(YTKBaseRequest *request) {
+                
+            }];
+        }else{
+            NSMutableArray *tmpArray = [[NSMutableArray alloc] initWithCapacity:1];
+            for (Cart_goods *cart_goods in self.dataSource) {
+                NSMutableDictionary *tmpDic = [[NSMutableDictionary alloc] initWithCapacity:1];
+                [tmpDic setValue:cart_goods.goods._id forKey:@"id"];
+                [tmpDic setValue:cart_goods.counts forKey:@"count"];
+                [tmpArray addObject:tmpDic];
             }
-        } failure:^(YTKBaseRequest *request) {
-            
-        }];
+            NSError *error;
+            NSData *jsonData = [NSJSONSerialization dataWithJSONObject:tmpArray options:NSJSONWritingPrettyPrinted error:&error];
+            if (error) {
+                return;
+            }
+            NSString *jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+            NSString *is_cart;
+            //购物车
+            if (self.type == 0) {
+                is_cart = @"1";
+            }else if (self.type == 1){
+                is_cart = @"0";
+            }
+            Cart_orderApi *api;
+            if (self.isCheckedAlipay) {
+                api = [[Cart_orderApi alloc] initWithPay_id:@"2" withGoods:jsonString withAddress_id:self.address._id withIs_cart:is_cart];
+            }else if (self.isCheckedWeixin){
+                api = [[Cart_orderApi alloc] initWithPay_id:@"1" withGoods:jsonString withAddress_id:self.address._id withIs_cart:is_cart];
+                if (![WXApi isWXAppInstalled]) {
+                    [MBProgressHUD showHUDwithSuccess:NO WithTitle:@"没有安装微信" withView:self.navigationController.view];
+                    return;
+                }
+            }else{
+                [MBProgressHUD showHUDwithSuccess:NO WithTitle:@"请选择一种支付方式" withView:self.navigationController.view];
+                return;
+            }
+            RequestAccessory *accessory = [[RequestAccessory alloc] initAccessoryWithView:self.navigationController.view];
+            [api addAccessory:accessory];
+            [api startWithCompletionBlockWithSuccess:^(YTKBaseRequest *request) {
+                NSDictionary *dic = [api responseDictionaryWithResponseString:request.responseString];
+                if (dic) {
+                    if ([dic[@"result"] isEqualToString:@"0"]) {
+                        if (self.isCheckedAlipay) {
+                            [[AlipaySDK defaultService] payOrder:[dic[@"data"] objectForKey:@"para"] fromScheme:@"damizhitongche" callback:^(NSDictionary *resultDic) {
+                                if ([resultDic[@"resultStatus"] isEqualToString:@"9000"]) {
+                                    [self paySuccess];
+                                }else{
+                                    [self payFail];
+                                }
+                            }];
+                        }else if (self.isCheckedWeixin){
+                            PayReq* req             = [[PayReq alloc] init];
+                            req.partnerId           = [dic[@"data"] objectForKey:@"partnerid"];
+                            req.prepayId            = [dic[@"data"] objectForKey:@"prepayid"];
+                            req.nonceStr            = [dic[@"data"] objectForKey:@"noncestr"];
+                            req.timeStamp           = [[dic[@"data"] objectForKey:@"timestamp"] intValue];
+                            req.package             = [dic[@"data"] objectForKey:@"package"];
+                            req.sign                = [dic[@"data"] objectForKey:@"sign"];
+                            [WXApi sendReq:req];
+                        }
+                        //通知购物车刷新
+                        [[NSNotificationCenter defaultCenter] postNotificationName:@"RELOADCART" object:nil];
+                    }else{
+                        [MBProgressHUD showHUDwithSuccess:NO WithTitle:dic[@"msg"] withView:self.navigationController.view];
+                    }
+                }
+            } failure:^(YTKBaseRequest *request) {
+                
+            }];
+        }
     }else{
         [MBProgressHUD showHUDwithSuccess:NO WithTitle:@"请选择收货地址" withView:self.navigationController.view];
     }

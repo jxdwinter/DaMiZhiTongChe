@@ -23,6 +23,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(paySuccess) name:@"ORDERSUCCESS" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(payFail) name:@"ORDERFAIL" object:nil];
     self.backButton.hidden = NO;
     self.title = @"我的订单";
     [self configController];
@@ -31,6 +33,11 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void) dealloc{
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"ORDERSUCCESS" object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"ORDERFAIL" object:nil];
 }
 
 - (void)configController{
@@ -60,6 +67,17 @@
     if (self.selectIndex) {
         self.pageViewController.selectIndex = self.selectIndex;
     }
+}
+
+- (void) payFail {
+    self.pageViewController.selectIndex = 0;
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"UNPAYEDRELOAD" object:nil];
+}
+
+- (void) paySuccess {
+    self.pageViewController.selectIndex = 1;
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"UNPAYEDRELOAD" object:nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"PAYEDRELOAD" object:nil];
 }
 
 @end

@@ -114,6 +114,7 @@
 		838983FF1C8D5BDD00D0057C /* Main_getGoodsApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 838983FE1C8D5BDD00D0057C /* Main_getGoodsApi.m */; };
 		838984021C8D5DEC00D0057C /* Main_GoodsDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 838984011C8D5DEC00D0057C /* Main_GoodsDetailViewController.m */; };
 		838984051C8D663B00D0057C /* Main_GoodsDetail.m in Sources */ = {isa = PBXBuildFile; fileRef = 838984041C8D663B00D0057C /* Main_GoodsDetail.m */; };
+		839326371C9B90D60077E17F /* Cart_payOrderApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 839326361C9B90D60077E17F /* Cart_payOrderApi.m */; };
 		839F26F31C92699E00DD65DF /* Mine_TableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 839F26F21C92699E00DD65DF /* Mine_TableViewCell.m */; };
 		839F26F81C926FFC00DD65DF /* FooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 839F26F41C926FFC00DD65DF /* FooterView.m */; };
 		839F26F91C926FFC00DD65DF /* HeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 839F26F71C926FFC00DD65DF /* HeaderView.m */; };
@@ -433,6 +434,8 @@
 		838984011C8D5DEC00D0057C /* Main_GoodsDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Main_GoodsDetailViewController.m; sourceTree = "<group>"; };
 		838984031C8D663B00D0057C /* Main_GoodsDetail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Main_GoodsDetail.h; sourceTree = "<group>"; };
 		838984041C8D663B00D0057C /* Main_GoodsDetail.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Main_GoodsDetail.m; sourceTree = "<group>"; };
+		839326351C9B90D60077E17F /* Cart_payOrderApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Cart_payOrderApi.h; sourceTree = "<group>"; };
+		839326361C9B90D60077E17F /* Cart_payOrderApi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Cart_payOrderApi.m; sourceTree = "<group>"; };
 		839F26F11C92699E00DD65DF /* Mine_TableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Mine_TableViewCell.h; sourceTree = "<group>"; };
 		839F26F21C92699E00DD65DF /* Mine_TableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Mine_TableViewCell.m; sourceTree = "<group>"; };
 		839F26F41C926FFC00DD65DF /* FooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FooterView.m; sourceTree = "<group>"; };
@@ -1011,6 +1014,8 @@
 				83225C801C98E76A00D77DFD /* Mine_modifyDetailApi.m */,
 				83E1A1C71C9A5DA4004B678F /* Mine_getOrderListApi.h */,
 				83E1A1C81C9A5DA4004B678F /* Mine_getOrderListApi.m */,
+				839326351C9B90D60077E17F /* Cart_payOrderApi.h */,
+				839326361C9B90D60077E17F /* Cart_payOrderApi.m */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -1456,6 +1461,7 @@
 				83E1A1C61C9A5B1E004B678F /* Mine_order.m in Sources */,
 				83E1A1C91C9A5DA4004B678F /* Mine_getOrderListApi.m in Sources */,
 				836013F31C856C3F0090257C /* AccountHelper.m in Sources */,
+				839326371C9B90D60077E17F /* Cart_payOrderApi.m in Sources */,
 				836696701C96815D003CCB78 /* RSADataVerifier.m in Sources */,
 				8312023E1C97E6B50073792B /* Cart_AddAddressApi.m in Sources */,
 				83E0A25E1C7AF3B4002E4954 /* main.m in Sources */,

@@ -15,6 +15,7 @@
 #import "Cart_goods.h"
 #import "Mine_OrderHeaderView.h"
 #import "Mine_OrderFooterView.h"
+#import "CartSettlementViewController.h"
 
 #define ORDER_STATUS @"0"
 
@@ -30,6 +31,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getOrderData) name:@"UNPAYEDRELOAD" object:nil];
     self.dataSource = [[NSMutableArray alloc] initWithCapacity:1];
     [self.view addSubview:self.tableView];
     
@@ -39,6 +41,10 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void) dealloc{
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"UNPAYEDRELOAD" object:nil];
 }
 
 #pragma mark - privete method
@@ -83,6 +89,20 @@
     [self.tableView.mj_header endRefreshing];
 }
 
+- (void) buyWithButton : (UIButton *) button {
+    Mine_order *order = self.dataSource[button.tag];
+    NSMutableArray *tmpArray = [[NSMutableArray alloc] initWithCapacity:1];
+    for (Mine_order_goods *order_goods in order.goods_list) {
+        [tmpArray addObject:order_goods.cart_goods];
+    }
+    CartSettlementViewController *cartSettlementViewController = [[CartSettlementViewController alloc] init];
+    cartSettlementViewController.dataSource = tmpArray;
+    cartSettlementViewController.allPrice = [order.total_amount doubleValue];
+    cartSettlementViewController.type = 2;
+    cartSettlementViewController.order_sn = order.order_sn;
+    [self.navigationController pushViewController:cartSettlementViewController animated:YES];
+}
+
 #pragma mark - Table view data source
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return [self.dataSource count];
@@ -105,6 +125,8 @@
 - (UIView *) tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
     Mine_OrderFooterView *footerView = [[Mine_OrderFooterView alloc] initWithFrame:CGRectMake(0.0, 0.0, SCREEN_WIDTH, 35.0)];
     [footerView.button setTitle:@"去支付" forState:UIControlStateNormal];
+    footerView.button.tag = section;
+    [footerView.button addTarget:self action:@selector(buyWithButton:) forControlEvents:UIControlEventTouchUpInside];
     footerView.priceLabel.text = [NSString stringWithFormat:@"订单总价:%@",[self.dataSource[section] total_amount]];
     return footerView;
 }

@@ -31,6 +31,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getOrderData) name:@"RECEIVEDRELOAD" object:nil];
     self.dataSource = [[NSMutableArray alloc] initWithCapacity:1];
     [self.view addSubview:self.tableView];
     
@@ -40,6 +41,10 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void) dealloc{
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"RECEIVEDRELOAD" object:nil];
 }
 
 #pragma mark - privete method
@@ -131,7 +136,7 @@
     cell.origin_nameLabel.text = order_goods.cart_goods.goods.origin_name;
     cell.numberLabel.text = [NSString stringWithFormat:@"x%@",order_goods.cart_goods.counts];
     cell.priceLabel.text =  order_goods.cart_goods.goods.goods_price;
-    cell.logistics_snLabel.text = [NSString stringWithFormat:@"运单编号:%@",order_goods.logistics_sn];
+    cell.logistics_snLabel.text = [NSString stringWithFormat:@"%@",order_goods.logistics_sn];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
 }

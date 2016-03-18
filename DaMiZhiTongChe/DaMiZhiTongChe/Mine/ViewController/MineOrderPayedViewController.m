@@ -30,6 +30,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getOrderData) name:@"PAYEDRELOAD" object:nil];
     self.dataSource = [[NSMutableArray alloc] initWithCapacity:1];
     [self.view addSubview:self.tableView];
     
@@ -39,6 +40,10 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void) dealloc{
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"PAYEDRELOAD" object:nil];
 }
 
 #pragma mark - privete method
@@ -104,7 +109,8 @@
 
 - (UIView *) tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
     Mine_OrderFooterView *footerView = [[Mine_OrderFooterView alloc] initWithFrame:CGRectMake(0.0, 0.0, SCREEN_WIDTH, 35.0)];
-    [footerView.button setTitle:@"联系卖家" forState:UIControlStateNormal];
+    //[footerView.button setTitle:@"联系卖家" forState:UIControlStateNormal];
+    footerView.button.hidden = YES;
     footerView.priceLabel.text = [NSString stringWithFormat:@"订单总价:%@",[self.dataSource[section] total_amount]];
     return footerView;
 }

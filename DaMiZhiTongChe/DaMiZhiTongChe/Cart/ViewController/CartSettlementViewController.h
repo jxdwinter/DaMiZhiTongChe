@@ -13,8 +13,12 @@
 //从哪个页面过来,控制付款后转跳
 //0从购物车
 //1从商品详情
+//2从订单页面
 @property (nonatomic, assign) int type;
 @property (nonatomic, strong) NSMutableArray *dataSource;
 @property (nonatomic, assign) float allPrice;
+
+//从订单页面过来,带订单编号
+@property (nonatomic, copy) NSString *order_sn;
 
 @end

@@ -34,7 +34,7 @@
             make.top.equalTo(self.mas_top).with.offset(5.0);
             make.right.equalTo(self.mas_right).with.offset(-10.0);
             make.width.equalTo(@80.0);
-            make.height.equalTo(@25.0);
+            make.height.equalTo(@40.0);
         }];
         
         self.orderNumberLabel = [[UILabel alloc] init];
@@ -55,7 +55,7 @@
         [self.addressLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(self.orderNumberLabel.mas_bottom).with.offset(0.0);
             make.left.equalTo(self.mas_left).with.offset(10.0);
-            make.right.equalTo(self.mas_right).with.offset(-10.0);
+            make.right.equalTo(self.button.mas_left).with.offset(-10.0);
             make.height.equalTo(@15.0);
         }];
     }

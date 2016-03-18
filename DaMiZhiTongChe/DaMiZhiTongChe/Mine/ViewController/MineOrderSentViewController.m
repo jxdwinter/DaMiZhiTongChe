@@ -116,7 +116,7 @@
             [self receivedOrder:order withEnt_ids:ent_ids withIndex:button.tag];
         }
     }];
-    [sheet showInView:self.view animated:YES];
+    [sheet showInView:self.navigationController.view animated:YES];
 }
 
 - (void)receivedOrder : (Mine_order *) order withEnt_ids : (NSString *) ent_ids withIndex  : (NSInteger) index{

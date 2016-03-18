@@ -119,7 +119,7 @@
             [self deleteOrder:order withIndex:button.tag];
         }
     }];
-    [sheet showInView:self.view animated:YES];
+    [sheet showInView:self.navigationController.view animated:YES];
 }
 
 - (void)deleteOrder : (Mine_order *) order withIndex  : (NSInteger) index{

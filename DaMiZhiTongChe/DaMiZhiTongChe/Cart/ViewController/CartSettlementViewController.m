@@ -379,7 +379,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     if (self.type == 0 || self.type == 1) {
-        if (indexPath.section == 0 || indexPath.row == 0) {
+        if (indexPath.section == 0 && indexPath.row == 0) {
             CartAddressListViewController *cartAddressListViewController = [[CartAddressListViewController alloc] init];
             cartAddressListViewController.type = 0;
             cartAddressListViewController.selectAddressDelegate = self;

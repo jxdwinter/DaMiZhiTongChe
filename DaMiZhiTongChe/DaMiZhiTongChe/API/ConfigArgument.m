@@ -23,6 +23,7 @@
                 jsonString = [[NSString alloc] initWithBytes:[jsonData bytes] length:[jsonData length] encoding:NSUTF8StringEncoding];
             }
             NSString *str_64 = [AESenAndDe En_AESandBase64EnToString:jsonString];
+            NSLog(@"%@",str_64);
             return @{@"para": str_64};
         }
     }

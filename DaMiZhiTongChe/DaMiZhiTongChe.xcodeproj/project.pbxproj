@@ -115,6 +115,8 @@
 		838984021C8D5DEC00D0057C /* Main_GoodsDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 838984011C8D5DEC00D0057C /* Main_GoodsDetailViewController.m */; };
 		838984051C8D663B00D0057C /* Main_GoodsDetail.m in Sources */ = {isa = PBXBuildFile; fileRef = 838984041C8D663B00D0057C /* Main_GoodsDetail.m */; };
 		839326371C9B90D60077E17F /* Cart_payOrderApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 839326361C9B90D60077E17F /* Cart_payOrderApi.m */; };
+		8393263A1C9B999C0077E17F /* Cart_cancelOrderApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 839326391C9B999C0077E17F /* Cart_cancelOrderApi.m */; };
+		8393263D1C9B9F1F0077E17F /* Cart_confirmReceiptApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 8393263C1C9B9F1F0077E17F /* Cart_confirmReceiptApi.m */; };
 		839F26F31C92699E00DD65DF /* Mine_TableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 839F26F21C92699E00DD65DF /* Mine_TableViewCell.m */; };
 		839F26F81C926FFC00DD65DF /* FooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 839F26F41C926FFC00DD65DF /* FooterView.m */; };
 		839F26F91C926FFC00DD65DF /* HeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 839F26F71C926FFC00DD65DF /* HeaderView.m */; };
@@ -436,6 +438,10 @@
 		838984041C8D663B00D0057C /* Main_GoodsDetail.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Main_GoodsDetail.m; sourceTree = "<group>"; };
 		839326351C9B90D60077E17F /* Cart_payOrderApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Cart_payOrderApi.h; sourceTree = "<group>"; };
 		839326361C9B90D60077E17F /* Cart_payOrderApi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Cart_payOrderApi.m; sourceTree = "<group>"; };
+		839326381C9B999C0077E17F /* Cart_cancelOrderApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Cart_cancelOrderApi.h; sourceTree = "<group>"; };
+		839326391C9B999C0077E17F /* Cart_cancelOrderApi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Cart_cancelOrderApi.m; sourceTree = "<group>"; };
+		8393263B1C9B9F1F0077E17F /* Cart_confirmReceiptApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Cart_confirmReceiptApi.h; sourceTree = "<group>"; };
+		8393263C1C9B9F1F0077E17F /* Cart_confirmReceiptApi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Cart_confirmReceiptApi.m; sourceTree = "<group>"; };
 		839F26F11C92699E00DD65DF /* Mine_TableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Mine_TableViewCell.h; sourceTree = "<group>"; };
 		839F26F21C92699E00DD65DF /* Mine_TableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Mine_TableViewCell.m; sourceTree = "<group>"; };
 		839F26F41C926FFC00DD65DF /* FooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FooterView.m; sourceTree = "<group>"; };
@@ -1016,6 +1022,10 @@
 				83E1A1C81C9A5DA4004B678F /* Mine_getOrderListApi.m */,
 				839326351C9B90D60077E17F /* Cart_payOrderApi.h */,
 				839326361C9B90D60077E17F /* Cart_payOrderApi.m */,
+				839326381C9B999C0077E17F /* Cart_cancelOrderApi.h */,
+				839326391C9B999C0077E17F /* Cart_cancelOrderApi.m */,
+				8393263B1C9B9F1F0077E17F /* Cart_confirmReceiptApi.h */,
+				8393263C1C9B9F1F0077E17F /* Cart_confirmReceiptApi.m */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -1411,6 +1421,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8393263D1C9B9F1F0077E17F /* Cart_confirmReceiptApi.m in Sources */,
 				836013F91C856D5C0090257C /* User.m in Sources */,
 				836A642F1C7BE09E00219035 /* Config.m in Sources */,
 				838984051C8D663B00D0057C /* Main_GoodsDetail.m in Sources */,
@@ -1420,6 +1431,7 @@
 				8323A9CB1C97A33400D9738D /* MineOrderPayedViewController.m in Sources */,
 				8385751A1C903D4500A26960 /* Main_GoodsCommentViewController.m in Sources */,
 				83225C8A1C98F3FA00D77DFD /* AboutUSTableViewCell.m in Sources */,
+				8393263A1C9B999C0077E17F /* Cart_cancelOrderApi.m in Sources */,
 				830722CB1C8FAE0700475C41 /* Cart_GoodsTableViewCell.m in Sources */,
 				83225C891C98F3FA00D77DFD /* AboutUSHeaderView.m in Sources */,
 				83548E771C83D84C00A2252F /* ForgetPasswordViewController.m in Sources */,

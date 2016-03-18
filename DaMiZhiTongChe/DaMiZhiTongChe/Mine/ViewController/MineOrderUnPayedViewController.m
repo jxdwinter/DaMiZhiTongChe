@@ -16,6 +16,8 @@
 #import "Mine_OrderHeaderView.h"
 #import "Mine_OrderFooterView.h"
 #import "CartSettlementViewController.h"
+#import <JGActionSheet.h>
+#import "Cart_cancelOrderApi.h"
 
 #define ORDER_STATUS @"0"
 
@@ -103,6 +105,40 @@
     [self.navigationController pushViewController:cartSettlementViewController animated:YES];
 }
 
+- (void) cancelWithButton : (UIButton *) button {
+    JGActionSheetSection *section = [JGActionSheetSection sectionWithTitle:@"确认取消订单吗?" message:@"" buttonTitles:@[@"确认"] buttonStyle:JGActionSheetButtonStyleRed];
+    section.titleLabel.textColor = DEFAULTTEXTCOLOR;
+    section.titleLabel.font = DEFAULFONT;
+    JGActionSheetSection *cancelSection = [JGActionSheetSection sectionWithTitle:nil message:nil buttonTitles:@[@"取消"] buttonStyle:JGActionSheetButtonStyleCancel];
+    NSArray *sections = @[section, cancelSection];
+    JGActionSheet *sheet = [JGActionSheet actionSheetWithSections:sections];
+    [sheet setButtonPressedBlock:^(JGActionSheet *sheet, NSIndexPath *indexPath) {
+        [sheet dismissAnimated:YES];
+        if (indexPath.section == 0 && indexPath.row == 0) {
+            Mine_order *order = self.dataSource[button.tag];
+            [self deleteOrder:order withIndex:button.tag];
+        }
+    }];
+    [sheet showInView:self.view animated:YES];
+}
+
+- (void)deleteOrder : (Mine_order *) order withIndex  : (NSInteger) index{
+    Cart_cancelOrderApi *api = [[Cart_cancelOrderApi alloc] initWithOrder_sn:order.order_sn];
+    [api startWithCompletionBlockWithSuccess:^(YTKBaseRequest *request) {
+        NSDictionary *dic = [api responseDictionaryWithResponseString:request.responseString];
+        if (dic) {
+            if ([dic[@"result"] isEqualToString:@"0"]) {
+                [self.dataSource removeObjectAtIndex:index];
+                [self.tableView reloadData];
+            }else {
+                [MBProgressHUD showHUDwithSuccess:NO WithTitle:dic[@"msg"] withView:self.navigationController.view];
+            }
+        }
+    } failure:^(YTKBaseRequest *request) {
+        
+    }];
+}
+
 #pragma mark - Table view data source
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return [self.dataSource count];
@@ -115,6 +151,9 @@
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     Mine_OrderHeaderView *headerView = [[Mine_OrderHeaderView alloc] initWithFrame:CGRectMake(0.0, 0.0, SCREEN_WIDTH, 35.0)];
     headerView.orderNumberLabel.text = [NSString stringWithFormat:@"订单编号:%@",[self.dataSource[section] order_sn]];
+    [headerView.button setTitle:@"取消订单" forState:UIControlStateNormal];
+    headerView.button.tag = section;
+    [headerView.button addTarget:self action:@selector(cancelWithButton:) forControlEvents:UIControlEventTouchUpInside];
     return headerView;
 }
 

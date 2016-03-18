@@ -16,6 +16,8 @@
 #import "Cart_goods.h"
 #import "Mine_OrderHeaderView.h"
 #import "Mine_OrderFooterView.h"
+#import "Cart_confirmReceiptApi.h"
+#import <JGActionSheet.h>
 
 #define ORDER_STATUS @"2"
 
@@ -89,6 +91,52 @@
     [self.tableView.mj_header endRefreshing];
 }
 
+
+- (void) receivedWithButton : (UIButton *) button {
+    JGActionSheetSection *section = [JGActionSheetSection sectionWithTitle:@"确认收货吗?" message:@"" buttonTitles:@[@"确认"] buttonStyle:JGActionSheetButtonStyleRed];
+    section.titleLabel.textColor = DEFAULTTEXTCOLOR;
+    section.titleLabel.font = DEFAULFONT;
+    JGActionSheetSection *cancelSection = [JGActionSheetSection sectionWithTitle:nil message:nil buttonTitles:@[@"取消"] buttonStyle:JGActionSheetButtonStyleCancel];
+    NSArray *sections = @[section, cancelSection];
+    JGActionSheet *sheet = [JGActionSheet actionSheetWithSections:sections];
+    [sheet setButtonPressedBlock:^(JGActionSheet *sheet, NSIndexPath *indexPath) {
+        [sheet dismissAnimated:YES];
+        if (indexPath.section == 0 && indexPath.row == 0) {
+            Mine_order *order = self.dataSource[button.tag];
+            NSArray *tmpArray = order.goods_list;
+            NSMutableString *tmpString = [[NSMutableString alloc] initWithCapacity:1];;
+            for (Mine_order_goods *order_goods in tmpArray) {
+                [tmpString appendString:order_goods.ent_id];
+                [tmpString appendString:@","];
+            }
+            NSString *ent_ids;
+            if ([tmpString length] > 0) {
+                ent_ids = [tmpString substringToIndex:[tmpString length] - 1];
+            }
+            [self receivedOrder:order withEnt_ids:ent_ids withIndex:button.tag];
+        }
+    }];
+    [sheet showInView:self.view animated:YES];
+}
+
+- (void)receivedOrder : (Mine_order *) order withEnt_ids : (NSString *) ent_ids withIndex  : (NSInteger) index{
+    Cart_confirmReceiptApi *api = [[Cart_confirmReceiptApi alloc] initWithOrder_sn:order.order_sn withEnt_id:ent_ids];
+    [api startWithCompletionBlockWithSuccess:^(YTKBaseRequest *request) {
+        NSDictionary *dic = [api responseDictionaryWithResponseString:request.responseString];
+        if (dic) {
+            if ([dic[@"result"] isEqualToString:@"0"]) {
+                [self.dataSource removeObjectAtIndex:index];
+                [self.tableView reloadData];
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"RECEIVEDRELOAD" object:nil];
+            }else {
+                [MBProgressHUD showHUDwithSuccess:NO WithTitle:dic[@"msg"] withView:self.navigationController.view];
+            }
+        }
+    } failure:^(YTKBaseRequest *request) {
+        
+    }];
+}
+
 #pragma mark - Table view data source
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return [self.dataSource count];
@@ -100,6 +148,7 @@
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     Mine_OrderHeaderView *headerView = [[Mine_OrderHeaderView alloc] initWithFrame:CGRectMake(0.0, 0.0, SCREEN_WIDTH, 35.0)];
+    headerView.button.hidden = YES;
     headerView.orderNumberLabel.text = [NSString stringWithFormat:@"订单编号:%@",[self.dataSource[section] order_sn]];
     return headerView;
 }
@@ -111,6 +160,8 @@
 - (UIView *) tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
     Mine_OrderFooterView *footerView = [[Mine_OrderFooterView alloc] initWithFrame:CGRectMake(0.0, 0.0, SCREEN_WIDTH, 35.0)];
     [footerView.button setTitle:@"确认收货" forState:UIControlStateNormal];
+    footerView.button.tag = section;
+    [footerView.button addTarget:self action:@selector(receivedWithButton:) forControlEvents:UIControlEventTouchUpInside];
     footerView.priceLabel.text = [NSString stringWithFormat:@"订单总价:%@",[self.dataSource[section] total_amount]];
     return footerView;
 }
@@ -135,7 +186,7 @@
     cell.origin_nameLabel.text = order_goods.cart_goods.goods.origin_name;
     cell.numberLabel.text = [NSString stringWithFormat:@"x%@",order_goods.cart_goods.counts];
     cell.priceLabel.text =  order_goods.cart_goods.goods.goods_price;
-    cell.logistics_snLabel.text = [NSString stringWithFormat:@"%@",order_goods.logistics_sn];
+    cell.logistics_snLabel.text = [NSString stringWithFormat:@"%@",order_goods.logistics_info];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
 }

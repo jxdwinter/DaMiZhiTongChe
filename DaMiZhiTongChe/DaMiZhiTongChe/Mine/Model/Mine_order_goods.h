@@ -15,7 +15,7 @@
 @property (nonatomic, copy)   NSString *ent_id;
 @property (nonatomic, copy)   NSString *ent_name;
 @property (nonatomic, copy)   NSString *linkmode;
-@property (nonatomic, copy)   NSString *logistics_sn;
+@property (nonatomic, copy)   NSString *logistics_info;
 @property (nonatomic, strong) Cart_goods *cart_goods;
 
 - (instancetype) initWithMine_order_goodsInfo : (NSDictionary *) mine_order_goodsInfo;

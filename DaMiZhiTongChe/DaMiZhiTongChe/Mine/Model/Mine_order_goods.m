@@ -17,7 +17,7 @@
         self.ent_id = mine_order_goodsInfo[@"ent_id"];
         self.ent_name = mine_order_goodsInfo[@"ent_name"];
         self.linkmode = mine_order_goodsInfo[@"linkmode"];
-        self.logistics_sn = mine_order_goodsInfo[@"logistics_sn"];
+        self.logistics_info = mine_order_goodsInfo[@"logistics_info"];
         self.cart_goods = [[Cart_goods alloc] initWithCartGoodsInfo:mine_order_goodsInfo];
     }
     return self;

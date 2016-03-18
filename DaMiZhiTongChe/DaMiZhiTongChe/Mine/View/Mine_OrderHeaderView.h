@@ -10,6 +10,7 @@
 
 @interface Mine_OrderHeaderView : UIView
 
+@property (nonatomic, strong) UIButton *button;
 @property (nonatomic, strong) UILabel *orderNumberLabel;
 
 @end

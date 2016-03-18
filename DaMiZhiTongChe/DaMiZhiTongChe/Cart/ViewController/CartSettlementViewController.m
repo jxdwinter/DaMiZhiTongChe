@@ -21,6 +21,7 @@
 #import "Cart_address.h"
 #import "CartAddressListViewController.h"
 #import "Cart_payOrderApi.h"
+#import "Cart_getOrderAddressApi.h"
 
 @interface CartSettlementViewController () <UITableViewDelegate,UITableViewDataSource,SelectAddressDelegate>
 
@@ -71,7 +72,11 @@
     
     [self.view addSubview:self.tableView];
     
-    [self getDefaultAddress];
+    if (self.type == 0 && self.type == 1) {
+        [self getDefaultAddress];
+    }else if (self.type == 2){
+        [self getOrderAddress];
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -92,6 +97,23 @@
 
 - (void) getDefaultAddress {
     Cart_getDefaultAddressApi *api = [[Cart_getDefaultAddressApi alloc] init];
+    [api startWithCompletionBlockWithSuccess:^(YTKBaseRequest *request) {
+        NSDictionary *dic = [api responseDictionaryWithResponseString:request.responseString];
+        if (dic) {
+            if ([dic[@"result"] isEqualToString:@"0"]) {
+                Cart_address *cart_address = [[Cart_address alloc] initWithCart_addressInfo:dic[@"data"]];
+                self.address = cart_address;
+                NSArray* rowsToReload = [NSArray arrayWithObjects:[NSIndexPath indexPathForRow:0 inSection:0], nil];
+                [self.tableView reloadRowsAtIndexPaths:rowsToReload withRowAnimation:UITableViewRowAnimationNone];
+            }
+        }
+    } failure:^(YTKBaseRequest *request) {
+        
+    }];
+}
+
+- (void) getOrderAddress {
+    Cart_getOrderAddressApi *api = [[Cart_getOrderAddressApi alloc] initWithOrder_sn:self.order_sn];
     [api startWithCompletionBlockWithSuccess:^(YTKBaseRequest *request) {
         NSDictionary *dic = [api responseDictionaryWithResponseString:request.responseString];
         if (dic) {
@@ -299,7 +321,9 @@
         cell.nameLabel.text = self.address.name?[NSString stringWithFormat:@"收货人:%@",self.address.name]:@"";
         cell.phoneLabel.text = self.address.mobile?self.address.mobile:@"";
         cell.addressLabel.text = self.address.address?self.address.address:@"";
-        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        if (self.type == 0 || self.type == 1) {
+            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        }
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
     }else if (indexPath.section == 1){
@@ -354,11 +378,15 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (indexPath.section == 0 && indexPath.row == 0) {
-        CartAddressListViewController *cartAddressListViewController = [[CartAddressListViewController alloc] init];
-        cartAddressListViewController.type = 0;
-        cartAddressListViewController.selectAddressDelegate = self;
-        [self.navigationController pushViewController:cartAddressListViewController animated:YES];
+    if (self.type == 0 && self.type == 1) {
+        if (indexPath.section == 0 || indexPath.row == 0) {
+            CartAddressListViewController *cartAddressListViewController = [[CartAddressListViewController alloc] init];
+            cartAddressListViewController.type = 0;
+            cartAddressListViewController.selectAddressDelegate = self;
+            [self.navigationController pushViewController:cartAddressListViewController animated:YES];
+        }
+    }else{
+        
     }
 }
 

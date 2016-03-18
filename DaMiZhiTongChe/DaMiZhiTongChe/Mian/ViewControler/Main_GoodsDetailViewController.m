@@ -502,7 +502,7 @@
     if (!_rightButton) {
         _rightButton = [[UIButton alloc] initWithFrame:CGRectMake(0.0, 0.0, 20.0, 20.0)];
         [_rightButton addTarget:self action:@selector(shareToWeiXin) forControlEvents:UIControlEventTouchUpInside];
-        [_rightButton setImage:[UIImage imageNamed:@"goods_pingjia"] forState:UIControlStateNormal];
+        [_rightButton setImage:[UIImage imageNamed:@"main_share"] forState:UIControlStateNormal];
     }
     return _rightButton;
 }

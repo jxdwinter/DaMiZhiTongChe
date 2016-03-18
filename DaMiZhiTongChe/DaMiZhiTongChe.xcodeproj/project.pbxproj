@@ -140,6 +140,7 @@
 		83FE91C81C91119E0032654B /* Cart_PaymentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 83FE91C71C91119E0032654B /* Cart_PaymentTableViewCell.m */; };
 		83FE91CB1C9118AE0032654B /* Cart_AddressTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 83FE91CA1C9118AE0032654B /* Cart_AddressTableViewCell.m */; };
 		83FE91CE1C9122880032654B /* CartAddressListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83FE91CD1C9122880032654B /* CartAddressListViewController.m */; };
+		83FF83811C9BEF4600AA211E /* Cart_getOrderAddressApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 83FF83801C9BEF4600AA211E /* Cart_getOrderAddressApi.m */; };
 		D53058472E4618A3670C5603 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E3A9EB6C3077EF3167E81F88 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -490,6 +491,8 @@
 		83FE91CA1C9118AE0032654B /* Cart_AddressTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Cart_AddressTableViewCell.m; sourceTree = "<group>"; };
 		83FE91CC1C9122880032654B /* CartAddressListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CartAddressListViewController.h; sourceTree = "<group>"; };
 		83FE91CD1C9122880032654B /* CartAddressListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CartAddressListViewController.m; sourceTree = "<group>"; };
+		83FF837F1C9BEF4600AA211E /* Cart_getOrderAddressApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Cart_getOrderAddressApi.h; sourceTree = "<group>"; };
+		83FF83801C9BEF4600AA211E /* Cart_getOrderAddressApi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Cart_getOrderAddressApi.m; sourceTree = "<group>"; };
 		E3A9EB6C3077EF3167E81F88 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -1026,6 +1029,8 @@
 				839326391C9B999C0077E17F /* Cart_cancelOrderApi.m */,
 				8393263B1C9B9F1F0077E17F /* Cart_confirmReceiptApi.h */,
 				8393263C1C9B9F1F0077E17F /* Cart_confirmReceiptApi.m */,
+				83FF837F1C9BEF4600AA211E /* Cart_getOrderAddressApi.h */,
+				83FF83801C9BEF4600AA211E /* Cart_getOrderAddressApi.m */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -1519,6 +1524,7 @@
 				8305D8011C86CA5A00F71645 /* Login_resetPasswordApi.m in Sources */,
 				8323A9CE1C97A37300D9738D /* MineOrderSentViewController.m in Sources */,
 				8377E8F61C8D075100709E83 /* Main_GoodsCollectionViewCell.m in Sources */,
+				83FF83811C9BEF4600AA211E /* Cart_getOrderAddressApi.m in Sources */,
 				836A64F41C7BE41700219035 /* RequestAccessory.m in Sources */,
 				83225C881C98F3FA00D77DFD /* AboutUSFooterView.m in Sources */,
 				8323A9C81C97A32200D9738D /* MineOrderUnPayedViewController.m in Sources */,

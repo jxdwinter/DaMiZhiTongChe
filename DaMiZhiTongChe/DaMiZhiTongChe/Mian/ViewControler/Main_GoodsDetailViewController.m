@@ -59,7 +59,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(payFail) name:@"GOODDETAILCARTFAIL" object:nil];
     
     self.backButton.hidden = NO;
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.rightButton];
+    //self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.rightButton];
     [self.view addSubview:self.bottomView];
     
     [self.view addSubview:self.scrollView];

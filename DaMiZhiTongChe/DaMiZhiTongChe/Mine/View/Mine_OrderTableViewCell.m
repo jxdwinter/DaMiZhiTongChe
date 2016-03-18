@@ -132,10 +132,10 @@
         
         self.logistics_snLabel = [[UILabel alloc] init];
         self.logistics_snLabel.textColor = DEFAULTTEXTCOLOR;
-        self.logistics_snLabel.font = [UIFont systemFontOfSize:10.0];
+        self.logistics_snLabel.font = [UIFont systemFontOfSize:8.0];
         [self.contentView addSubview:self.logistics_snLabel];
         [self.logistics_snLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(self.priceLabel.mas_bottom).with.offset(4.0);
+            make.top.equalTo(self.priceLabel.mas_bottom).with.offset(5.0);
             make.left.equalTo(self.contentView.mas_left).with.offset(10.0);
             make.right.equalTo(self.contentView.mas_right).with.offset(-10.0);
             make.height.equalTo(@10.0);

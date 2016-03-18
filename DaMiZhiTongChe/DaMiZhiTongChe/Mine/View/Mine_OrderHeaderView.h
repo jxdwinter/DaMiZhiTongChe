@@ -12,5 +12,6 @@
 
 @property (nonatomic, strong) UIButton *button;
 @property (nonatomic, strong) UILabel *orderNumberLabel;
+@property (nonatomic, strong) UILabel *addressLabel;
 
 @end

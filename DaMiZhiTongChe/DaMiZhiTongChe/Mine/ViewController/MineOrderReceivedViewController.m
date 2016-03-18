@@ -102,11 +102,12 @@
     Mine_OrderHeaderView *headerView = [[Mine_OrderHeaderView alloc] initWithFrame:CGRectMake(0.0, 0.0, SCREEN_WIDTH, 35.0)];
     headerView.button.hidden = YES;
     headerView.orderNumberLabel.text = [NSString stringWithFormat:@"订单编号:%@",[self.dataSource[section] order_sn]];
+    headerView.addressLabel.text = [NSString stringWithFormat:@"收货信息:%@ %@ %@",[self.dataSource[section] name],[self.dataSource[section] mobile],[self.dataSource[section] address]];
     return headerView;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    return 35.0;
+    return 50.0;
 }
 
 - (UIView *) tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {

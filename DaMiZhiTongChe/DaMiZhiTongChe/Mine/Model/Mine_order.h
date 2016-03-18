@@ -12,6 +12,11 @@
 
 @property (nonatomic, copy) NSString *order_sn;
 @property (nonatomic, copy) NSString *total_amount;
+@property (nonatomic, copy) NSString *name;
+@property (nonatomic, copy) NSString *address;
+@property (nonatomic, copy) NSString *zipcode;
+@property (nonatomic, copy) NSString *mobile;
+
 @property (nonatomic, strong) NSArray *goods_list;
 
 - (instancetype) initWithOrderInfo : (NSDictionary *) orderInfo;

@@ -19,6 +19,7 @@
 #import "CartSettlementViewController.h"
 #import "MineOrderViewController.h"
 #import "WXApi.h"
+#import <JGActionSheet.h>
 
 @interface Main_GoodsDetailViewController () <UIWebViewDelegate,UIScrollViewDelegate>
 
@@ -45,9 +46,6 @@
 @property (nonatomic, strong) UIButton *buyButton;
 @property (nonatomic, strong) UIButton *cartButton;
 
-@property (nonatomic, strong) UIButton *wxSceneSessionButton;
-@property (nonatomic, strong) UIButton *wxSceneTimelineButton;
-
 @end
 
 @implementation Main_GoodsDetailViewController
@@ -59,7 +57,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(payFail) name:@"GOODDETAILCARTFAIL" object:nil];
     
     self.backButton.hidden = NO;
-    //self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.rightButton];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.rightButton];
     [self.view addSubview:self.bottomView];
     
     [self.view addSubview:self.scrollView];
@@ -91,28 +89,12 @@
         make.right.equalTo(self.contentView.mas_right).with.offset(0.0);
         make.height.equalTo(@(SCREEN_WIDTH/3));
     }];
-    
-    [self.infoView addSubview:self.wxSceneTimelineButton];
-    [self.wxSceneTimelineButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.cycleScrollView.mas_bottom).with.offset(11.0);
-        make.right.equalTo(self.infoView.mas_right).with.offset(-10.0);
-        make.width.equalTo(@21.0);
-        make.height.equalTo(@21.0);
-    }];
-    
-    [self.infoView addSubview:self.wxSceneSessionButton];
-    [self.wxSceneSessionButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.cycleScrollView.mas_bottom).with.offset(10.0);
-        make.right.equalTo(self.wxSceneTimelineButton.mas_left).with.offset(-10.0);
-        make.width.equalTo(@22.0);
-        make.height.equalTo(@22.0);
-    }];
-    
+
     [self.infoView addSubview:self.goods_nameLabel];
     [self.goods_nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.infoView.mas_top).with.offset(5.0);
         make.left.equalTo(self.infoView.mas_left).with.offset(10.0);
-        make.right.equalTo(self.wxSceneSessionButton.mas_left).with.offset(-10.0);
+        make.right.equalTo(self.infoView.mas_right).with.offset(-10.0);
         if (IS_IPHONE_4_OR_LESS || IS_IPHONE_5) {
             make.height.equalTo(@20.0);
         }else{
@@ -339,13 +321,40 @@
     }];
 }
 
+- (void) shareToWeiXin {
+    JGActionSheetSection *section = [JGActionSheetSection sectionWithTitle:@"分享微信" message:@"" buttonTitles:@[@"好友",@"朋友圈"] buttonStyle:JGActionSheetButtonStyleDefault];
+    section.titleLabel.textColor = DEFAULTTEXTCOLOR;
+    section.titleLabel.font = DEFAULFONT;
+    JGActionSheetSection *cancelSection = [JGActionSheetSection sectionWithTitle:nil message:nil buttonTitles:@[@"取消"] buttonStyle:JGActionSheetButtonStyleCancel];
+    NSArray *sections = @[section,cancelSection];
+    JGActionSheet *sheet = [JGActionSheet actionSheetWithSections:sections];
+    [sheet setButtonPressedBlock:^(JGActionSheet *sheet, NSIndexPath *indexPath) {
+        [sheet dismissAnimated:YES];
+        if (indexPath.section == 0 && indexPath.row == 0) {
+            if([WXApi isWXAppInstalled]){
+                [self shareToSession];
+            }
+            else{
+                [MBProgressHUD showHUDwithSuccess:NO WithTitle:@"没有安装微信" withView:self.navigationController.view];
+            }
+        }else if (indexPath.section == 0 && indexPath.row == 1){
+            if([WXApi isWXAppInstalled]){
+                [self shareToTimeline];
+            }else{
+                [MBProgressHUD showHUDwithSuccess:NO WithTitle:@"没有安装微信" withView:self.navigationController.view];
+            }
+        }
+    }];
+    [sheet showInView:self.navigationController.view animated:YES];
+}
+
 - (void) shareToSession {
     WXMediaMessage *message = [WXMediaMessage message];
     message.title = self.goodsDetailInfo.goods.goods_name;
     message.description = @"向您推荐好大米";
-    NSData *data = UIImageJPEGRepresentation([UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:self.goodsDetailInfo.goods.imgurl]]], 0.1);
+    NSData *data = UIImageJPEGRepresentation([UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@?imageView2/1/w/50/h/50",self.goodsDetailInfo.goods.imgurl]]]], 0.5);
     UIImage *image = [UIImage imageWithData:data];
-    [message setThumbImage:[self scaleImage:image toSize:CGSizeMake(50.0, 33.5)]];
+    [message setThumbImage:image];
     WXWebpageObject *ext = [WXWebpageObject object];
     ext.webpageUrl = self.goodsDetailInfo.share_url;
     message.mediaObject = ext;
@@ -359,10 +368,10 @@
 - (void) shareToTimeline {
     WXMediaMessage *message = [WXMediaMessage message];
     message.title = self.goodsDetailInfo.goods.goods_name;
-    message.description = @"向您推荐好大米";;
-    NSData *data = UIImageJPEGRepresentation([UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:self.goodsDetailInfo.goods.imgurl]]], 0.1);
+    message.description = @"向您推荐好大米";
+    NSData *data = UIImageJPEGRepresentation([UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@?imageView2/1/w/50/h/50",self.goodsDetailInfo.goods.imgurl]]]], 0.5);
     UIImage *image = [UIImage imageWithData:data];
-    [message setThumbImage:[self scaleImage:image toSize:CGSizeMake(50.0, 33.5)]];
+    [message setThumbImage:image];
     WXWebpageObject *ext = [WXWebpageObject object];
     ext.webpageUrl = self.goodsDetailInfo.share_url;
     message.mediaObject = ext;
@@ -378,8 +387,6 @@
     self.framerImageView.hidden = NO;
     self.originImageView.hidden = NO;
     self.brownRoundedCornerImageView.hidden = NO;
-    self.wxSceneSessionButton.hidden = NO;
-    self.wxSceneTimelineButton.hidden = NO;
     self.cycleScrollView.imageURLStringsGroup = self.goodsDetailInfo.imgs;
     self.goods_nameLabel.text = self.goodsDetailInfo.goods.goods_name;
     self.farmer_nameLabel.text = [NSString stringWithFormat:@"农户:%@",self.goodsDetailInfo.goods.farmer_name];
@@ -398,22 +405,6 @@
     /*
       */
 }
-
-- (UIImage *)scaleImage:(UIImage *)image toSize:(CGSize)newSize {
-    CGSize actSize = image.size;
-    float scale = actSize.width/actSize.height;
-    if (scale < 1) {
-        newSize.height = newSize.width/scale;
-    } else {
-        newSize.width = newSize.height*scale;
-    }
-    UIGraphicsBeginImageContext(newSize);
-    [image drawInRect:CGRectMake(0, 0, newSize.width, newSize.height)];
-    UIImage* newImage = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    return newImage;
-}
-
 
 - (void) plus {
     NSUInteger number = [self.numberLabel.text integerValue];
@@ -510,7 +501,7 @@
 - (UIButton *) rightButton {
     if (!_rightButton) {
         _rightButton = [[UIButton alloc] initWithFrame:CGRectMake(0.0, 0.0, 20.0, 20.0)];
-        [_rightButton addTarget:self action:@selector(gotoCommentViewController) forControlEvents:UIControlEventTouchUpInside];
+        [_rightButton addTarget:self action:@selector(shareToWeiXin) forControlEvents:UIControlEventTouchUpInside];
         [_rightButton setImage:[UIImage imageNamed:@"goods_pingjia"] forState:UIControlStateNormal];
     }
     return _rightButton;
@@ -672,26 +663,6 @@
         [_cartButton setTitle:@"加入购物车" forState:UIControlStateNormal];
     }
     return _cartButton;
-}
-
-- (UIButton *) wxSceneSessionButton {
-    if (!_wxSceneSessionButton) {
-        _wxSceneSessionButton = [[UIButton alloc] init];
-        [_wxSceneSessionButton setImage:[UIImage imageNamed:@"main_shareToSession"] forState:UIControlStateNormal];
-        [_wxSceneSessionButton addTarget:self action:@selector(shareToSession) forControlEvents:UIControlEventTouchUpInside];
-        _wxSceneSessionButton.hidden = YES;
-    }
-    return _wxSceneSessionButton;
-}
-
-- (UIButton *) wxSceneTimelineButton {
-    if (!_wxSceneTimelineButton) {
-        _wxSceneTimelineButton = [[UIButton alloc] init];
-        [_wxSceneTimelineButton setImage:[UIImage imageNamed:@"main_shareToTimeline"] forState:UIControlStateNormal];
-        [_wxSceneTimelineButton addTarget:self action:@selector(shareToTimeline) forControlEvents:UIControlEventTouchUpInside];
-        _wxSceneTimelineButton.hidden = YES;
-    }
-    return _wxSceneTimelineButton;
 }
 
 @end

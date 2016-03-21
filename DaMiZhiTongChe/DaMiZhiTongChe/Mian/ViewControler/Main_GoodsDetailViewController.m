@@ -154,7 +154,7 @@
     [self.priceLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.originImageView.mas_bottom).with.offset(8.0);
         make.left.equalTo(self.contentView.mas_left).with.offset(8.0);
-        make.width.equalTo(@(SCREEN_WIDTH/2));
+        make.width.equalTo(@(SCREEN_WIDTH*2/5));
         make.bottom.equalTo(self.infoView.mas_bottom).with.offset(0.0);
     }];
     
@@ -175,8 +175,8 @@
     [self.infoView addSubview:self.brownRoundedCornerImageView];
     [self.brownRoundedCornerImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.originImageView.mas_bottom).with.offset(8.0);
-        make.left.equalTo(self.priceLabel.mas_right).with.offset(25.0);
-        make.right.equalTo(self.infoView.mas_right).with.offset(-25.0);
+        make.left.equalTo(self.priceLabel.mas_right).with.offset(10.0);
+        make.right.equalTo(self.infoView.mas_right).with.offset(-10.0);
         if (IS_IPHONE_4_OR_LESS || IS_IPHONE_5) {
             make.height.equalTo(@34.0);
         }else if (IS_IPHONE_6){

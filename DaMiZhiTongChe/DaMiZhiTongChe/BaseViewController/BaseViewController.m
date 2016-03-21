@@ -17,11 +17,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.navigationController.interactivePopGestureRecognizer.delegate = self;
+    //self.navigationController.interactivePopGestureRecognizer.delegate = self;
     self.tabBarController.tabBar.translucent = NO;
     self.navigationController.navigationBar.translucent = NO;
     self.view.backgroundColor = [UIColor colorWithRed:0.95 green:0.95 blue:0.95 alpha:1];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.backButton];
+    self.navigationItem.backBarButtonItem.title = @"";
 }
 
 - (void)didReceiveMemoryWarning {
@@ -36,6 +37,18 @@
 - (void) popToPreViewController {
     [self.navigationController popViewControllerAnimated:YES];
 }
+
+/*
+- (void) viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    self.navigationController.interactivePopGestureRecognizer.enabled = YES;
+}
+
+- (void) viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    self.navigationController.interactivePopGestureRecognizer.enabled = NO;
+}
+*/
 
 #pragma mark - getter and setter
 

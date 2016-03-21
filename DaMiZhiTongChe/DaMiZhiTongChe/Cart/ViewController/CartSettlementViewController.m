@@ -385,8 +385,11 @@
             cartAddressListViewController.selectAddressDelegate = self;
             [self.navigationController pushViewController:cartAddressListViewController animated:YES];
         }
-    }else{
-        
+    }
+    if (indexPath.section == 1 && indexPath.row == 0) {
+        [self alipay];
+    }else if (indexPath.section == 1 && indexPath.row == 1){
+        [self weixin];
     }
 }
 

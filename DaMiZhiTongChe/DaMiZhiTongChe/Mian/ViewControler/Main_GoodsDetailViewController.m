@@ -11,7 +11,6 @@
 #import <SDCycleScrollView.h>
 #import <MJRefresh.h>
 #import "Main_GoodsDetail.h"
-#import "BaseNavigationController.h"
 #import "LoginViewController.h"
 #import "Cart_addApi.h"
 #import "Main_GoodsCommentViewController.h"
@@ -463,7 +462,7 @@
  * 弹出登录页面
  */
 - (void) presentLoginViewController {
-    [self.navigationController presentViewController:[[BaseNavigationController alloc] initWithRootViewController:[[LoginViewController alloc] init]]
+    [self.navigationController presentViewController:[[UINavigationController alloc] initWithRootViewController:[[LoginViewController alloc] init]]
                                             animated:YES
                                           completion:^{
         

@@ -83,7 +83,6 @@
 		836696791C9682AF003CCB78 /* AlipaySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 836696771C9682AF003CCB78 /* AlipaySDK.framework */; };
 		836696CE1C9686F7003CCB78 /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 836696CC1C9686F7003CCB78 /* libcrypto.a */; };
 		836696CF1C9686F7003CCB78 /* libssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 836696CD1C9686F7003CCB78 /* libssl.a */; };
-		836A64291C7BDFEB00219035 /* BaseNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 836A64261C7BDFEB00219035 /* BaseNavigationController.m */; };
 		836A642A1C7BDFEB00219035 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 836A64281C7BDFEB00219035 /* BaseViewController.m */; };
 		836A642F1C7BE09E00219035 /* Config.m in Sources */ = {isa = PBXBuildFile; fileRef = 836A642D1C7BE09E00219035 /* Config.m */; };
 		836A64511C7BE22100219035 /* AESenAndDe.m in Sources */ = {isa = PBXBuildFile; fileRef = 836A64331C7BE22100219035 /* AESenAndDe.m */; };
@@ -380,8 +379,6 @@
 		836696C51C968390003CCB78 /* x509v3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = x509v3.h; sourceTree = "<group>"; };
 		836696CC1C9686F7003CCB78 /* libcrypto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libcrypto.a; sourceTree = "<group>"; };
 		836696CD1C9686F7003CCB78 /* libssl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libssl.a; sourceTree = "<group>"; };
-		836A64251C7BDFEB00219035 /* BaseNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseNavigationController.h; sourceTree = "<group>"; };
-		836A64261C7BDFEB00219035 /* BaseNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseNavigationController.m; sourceTree = "<group>"; };
 		836A64271C7BDFEB00219035 /* BaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseViewController.h; sourceTree = "<group>"; };
 		836A64281C7BDFEB00219035 /* BaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseViewController.m; sourceTree = "<group>"; };
 		836A642C1C7BE09E00219035 /* Config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Config.h; sourceTree = "<group>"; };
@@ -899,8 +896,6 @@
 			children = (
 				836A64271C7BDFEB00219035 /* BaseViewController.h */,
 				836A64281C7BDFEB00219035 /* BaseViewController.m */,
-				836A64251C7BDFEB00219035 /* BaseNavigationController.h */,
-				836A64261C7BDFEB00219035 /* BaseNavigationController.m */,
 			);
 			path = BaseViewController;
 			sourceTree = "<group>";
@@ -1490,7 +1485,6 @@
 				8366966C1C96815D003CCB78 /* MD5DataSigner.m in Sources */,
 				836A645D1C7BE22100219035 /* TextView.m in Sources */,
 				8366966F1C96815D003CCB78 /* RSADataSigner.m in Sources */,
-				836A64291C7BDFEB00219035 /* BaseNavigationController.m in Sources */,
 				8366966A1C96815D003CCB78 /* DataSigner.m in Sources */,
 				831202441C97E9270073792B /* Cart_getAddressListApi.m in Sources */,
 				83FE91C81C91119E0032654B /* Cart_PaymentTableViewCell.m in Sources */,

@@ -13,7 +13,6 @@
 #import <KSCrash/KSCrashInstallationStandard.h>
 #import "MTA.h"
 #import "MTAConfig.h"
-#import "BaseNavigationController.h"
 #import "LoginViewController.h"
 #import "MainViewController.h"
 #import "CartViewController.h"
@@ -27,9 +26,9 @@
 
 @interface AppDelegate () <UITabBarControllerDelegate,WXApiDelegate>
 
-@property (nonatomic, strong) BaseNavigationController* mainNavController;
-@property (nonatomic, strong) BaseNavigationController* cartNavController;
-@property (nonatomic, strong) BaseNavigationController* mineNavController;
+@property (nonatomic, strong) UINavigationController* mainNavController;
+@property (nonatomic, strong) UINavigationController* cartNavController;
+@property (nonatomic, strong) UINavigationController* mineNavController;
 
 @end
 
@@ -217,9 +216,9 @@
     self.tabBarController.delegate = self;
     self.tabBarController.tabBar.translucent = NO;
     
-    self.mainNavController = [[BaseNavigationController alloc] initWithRootViewController:[[MainViewController alloc] init]];
-    self.cartNavController = [[BaseNavigationController alloc] initWithRootViewController:[[CartViewController alloc] init]];
-    self.mineNavController = [[BaseNavigationController alloc] initWithRootViewController:[[MineViewController alloc] init]];
+    self.mainNavController = [[UINavigationController alloc] initWithRootViewController:[[MainViewController alloc] init]];
+    self.cartNavController = [[UINavigationController alloc] initWithRootViewController:[[CartViewController alloc] init]];
+    self.mineNavController = [[UINavigationController alloc] initWithRootViewController:[[MineViewController alloc] init]];
     NSArray* controllers = @[self.mainNavController,self.cartNavController,self.mineNavController];
     self.tabBarController.viewControllers = controllers;
     
@@ -307,7 +306,7 @@
  * 弹出登录页面
  */
 - (void) presentLoginViewController {
-    [self.mainNavController presentViewController:[[BaseNavigationController alloc] initWithRootViewController:[[LoginViewController alloc] init]] animated:YES completion:^{
+    [self.mainNavController presentViewController:[[UINavigationController alloc] initWithRootViewController:[[LoginViewController alloc] init]] animated:YES completion:^{
     
     }];
 }

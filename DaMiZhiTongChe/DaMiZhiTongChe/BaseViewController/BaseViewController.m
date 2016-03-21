@@ -17,9 +17,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.navigationController.interactivePopGestureRecognizer.delegate = self;
+    
     self.tabBarController.tabBar.translucent = NO;
     self.navigationController.navigationBar.translucent = NO;
+    
+    self.navigationController.interactivePopGestureRecognizer.delegate = self;
+    
     self.view.backgroundColor = [UIColor colorWithRed:0.95 green:0.95 blue:0.95 alpha:1];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.backButton];
     self.navigationItem.backBarButtonItem.title = @"";
@@ -38,18 +41,6 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-/*
-- (void) viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-    self.navigationController.interactivePopGestureRecognizer.enabled = YES;
-}
-
-- (void) viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
-    self.navigationController.interactivePopGestureRecognizer.enabled = NO;
-}
-*/
-
 #pragma mark - getter and setter
 
 - (UIButton *) backButton {
@@ -57,7 +48,7 @@
         _backButton = [[UIButton alloc] initWithFrame:CGRectMake(0.0, 0.0, 20.0, 20.0)];
         [_backButton addTarget:self action:@selector(popToPreViewController) forControlEvents:UIControlEventTouchUpInside];
         [_backButton setImage:[UIImage imageNamed:@"main_back"] forState:UIControlStateNormal];
-        _backButton.hidden = YES;
+        //_backButton.hidden = YES;
     }
     return _backButton;
 }

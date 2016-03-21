@@ -48,7 +48,7 @@
         _backButton = [[UIButton alloc] initWithFrame:CGRectMake(0.0, 0.0, 20.0, 20.0)];
         [_backButton addTarget:self action:@selector(popToPreViewController) forControlEvents:UIControlEventTouchUpInside];
         [_backButton setImage:[UIImage imageNamed:@"main_back"] forState:UIControlStateNormal];
-        //_backButton.hidden = YES;
+        _backButton.hidden = YES;
     }
     return _backButton;
 }

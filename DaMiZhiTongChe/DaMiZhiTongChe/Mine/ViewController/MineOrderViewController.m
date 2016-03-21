@@ -35,6 +35,16 @@
     // Dispose of any resources that can be recreated.
 }
 
+ - (void) viewDidAppear:(BOOL)animated {
+     [super viewDidAppear:animated];
+     self.navigationController.interactivePopGestureRecognizer.enabled = NO;
+ }
+ 
+ - (void) viewWillDisappear:(BOOL)animated {
+     [super viewWillDisappear:animated];
+     self.navigationController.interactivePopGestureRecognizer.enabled = YES;
+ }
+
 - (void) dealloc{
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"ORDERSUCCESS" object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"ORDERFAIL" object:nil];

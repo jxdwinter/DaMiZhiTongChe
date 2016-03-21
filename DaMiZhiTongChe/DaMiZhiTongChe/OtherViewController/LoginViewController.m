@@ -235,16 +235,16 @@
     [self.changeToSignupButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.equalTo(self.view.mas_bottom).with.offset(-40.0);
         make.centerX.equalTo(self.blackImageView.mas_centerX);
-        make.width.equalTo(@70.0);
-        make.height.equalTo(@15.0);
+        make.width.equalTo(@150.0);
+        make.height.equalTo(@30.0);
     }];
     
     [self.blackImageView addSubview:self.changeToLoginButton];
     [self.changeToLoginButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.equalTo(self.view.mas_bottom).with.offset(-40.0);
         make.centerX.equalTo(self.blackImageView.mas_centerX);
-        make.width.equalTo(@70.0);
-        make.height.equalTo(@15.0);
+        make.width.equalTo(@150.0);
+        make.height.equalTo(@30.0);
     }];
 }
 

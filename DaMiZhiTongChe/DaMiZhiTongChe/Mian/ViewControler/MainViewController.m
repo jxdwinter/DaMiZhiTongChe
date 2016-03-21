@@ -252,6 +252,7 @@ UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,UITableViewDelegat
     Main_GoodsCollectionViewController *main_GoodsCollectionViewController = [[Main_GoodsCollectionViewController alloc] init];
     main_GoodsCollectionViewController.search = searchBar.text;
     main_GoodsCollectionViewController.title = @"搜索";
+    main_GoodsCollectionViewController.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:main_GoodsCollectionViewController animated:YES];
 }
 
@@ -301,6 +302,7 @@ UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,UITableViewDelegat
     Main_GoodsCollectionViewController *main_GoodsCollectionViewController = [[Main_GoodsCollectionViewController alloc] init];
     main_GoodsCollectionViewController.topic_id = topic._id;
     main_GoodsCollectionViewController.title = topic.name;
+    main_GoodsCollectionViewController.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:main_GoodsCollectionViewController animated:YES];
 }
 
@@ -314,14 +316,17 @@ UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,UITableViewDelegat
         webViewController.navigationButtonsHidden = YES;
         webViewController.loadingBarTintColor = DEFAULTBROWNCOLOR;
         webViewController.showUrlWhileLoading = NO;
+        webViewController.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:webViewController animated:YES];
     }else if ([banner.type isEqualToString:@"1"]){
         WebViewController *webViewController = [[WebViewController alloc] init];
         webViewController.htmlString = banner.content;
+        webViewController.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:webViewController animated:YES];
     }else if ([banner.type isEqualToString:@"2"]){
         Main_GoodsDetailViewController *main_GoodsDetailViewController = [[Main_GoodsDetailViewController alloc] init];
         main_GoodsDetailViewController.goods_id = banner.goods_id;
+        main_GoodsDetailViewController.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:main_GoodsDetailViewController animated:YES];
     }
 }
@@ -351,6 +356,7 @@ UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,UITableViewDelegat
     Main_GoodsCollectionViewController *main_GoodsCollectionViewController = [[Main_GoodsCollectionViewController alloc] init];
     main_GoodsCollectionViewController.category_id = category._id;
     main_GoodsCollectionViewController.title = category.category_name;
+    main_GoodsCollectionViewController.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:main_GoodsCollectionViewController animated:YES];
 
 }

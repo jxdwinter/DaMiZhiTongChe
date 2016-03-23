@@ -72,11 +72,11 @@
     self.pageViewController.titleSizeSelected = 14;
     self.pageViewController.menuHeight = 40;
     self.pageViewController.menuBGColor = DEFAULTLIGHTGRAYCOLOR;
-    [self addChildViewController:self.pageViewController];
-    [self.view addSubview:self.pageViewController.view];
     if (self.selectIndex) {
         self.pageViewController.selectIndex = self.selectIndex;
     }
+    [self addChildViewController:self.pageViewController];
+    [self.view addSubview:self.pageViewController.view];
 }
 
 - (void) payFail {

@@ -19,9 +19,11 @@
 #import "MineOrderViewController.h"
 #import "WXApi.h"
 #import <JGActionSheet.h>
+#import "BaseNavigationController.h"
 
-@interface Main_GoodsDetailViewController () <UIWebViewDelegate,UIScrollViewDelegate>
+@interface Main_GoodsDetailViewController () <UIWebViewDelegate,UIScrollViewDelegate,UIGestureRecognizerDelegate>
 
+@property (nonatomic, strong) UIButton *backButton;
 @property (nonatomic, strong) UIButton *rightButton;
 @property (nonatomic, strong) UIScrollView *scrollView;
 @property (nonatomic, strong) UIView *contentView;
@@ -55,7 +57,10 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(paySuccess) name:@"GOODDETAILSUCCESS" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(payFail) name:@"GOODDETAILCARTFAIL" object:nil];
     
-    self.backButton.hidden = NO;
+    self.navigationController.interactivePopGestureRecognizer.delegate = self;
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.backButton];
+    self.navigationItem.backBarButtonItem.title = @"";
+    
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.rightButton];
     [self.view addSubview:self.bottomView];
     
@@ -462,14 +467,27 @@
  * 弹出登录页面
  */
 - (void) presentLoginViewController {
-    [self.navigationController presentViewController:[[UINavigationController alloc] initWithRootViewController:[[LoginViewController alloc] init]]
+    [self.navigationController presentViewController:[[BaseNavigationController alloc] initWithRootViewController:[[LoginViewController alloc] init]]
                                             animated:YES
                                           completion:^{
         
     }];
 }
 
+- (void) popToPreViewController {
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
 #pragma mark - getter and setter
+
+- (UIButton *) backButton {
+    if (!_backButton) {
+        _backButton = [[UIButton alloc] initWithFrame:CGRectMake(0.0, 0.0, 20.0, 20.0)];
+        [_backButton addTarget:self action:@selector(popToPreViewController) forControlEvents:UIControlEventTouchUpInside];
+        [_backButton setImage:[UIImage imageNamed:@"main_back"] forState:UIControlStateNormal];
+    }
+    return _backButton;
+}
 
 - (UIScrollView *) scrollView {
     if (!_scrollView) {

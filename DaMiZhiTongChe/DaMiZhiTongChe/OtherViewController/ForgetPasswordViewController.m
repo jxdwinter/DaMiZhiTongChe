@@ -11,8 +11,9 @@
 #import "Login_sendCodeApi.h"
 #import "Login_validateCodeApi.h"
 
-@interface ForgetPasswordViewController () <UITextFieldDelegate>
+@interface ForgetPasswordViewController () <UITextFieldDelegate,UIGestureRecognizerDelegate>
 
+@property (nonatomic, strong) UIButton *backButton;
 @property (nonatomic, strong) UITextField *phoneTextField;
 @property (nonatomic, strong) UITextField *codeTextField;
 @property (nonatomic, strong) UIButton *getCodeButton;
@@ -25,9 +26,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.backButton.hidden = NO;
     self.title = @"验证手机";
-    
+    self.navigationController.interactivePopGestureRecognizer.delegate = self;
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.backButton];
+    self.navigationItem.backBarButtonItem.title = @"";
     [self.view addSubview:self.phoneTextField];
     [self.phoneTextField mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.view.mas_top).with.offset(50.0);
@@ -170,7 +172,20 @@
     }
 }
 
+- (void) popToPreViewController {
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
 #pragma mark - getter and setter
+
+- (UIButton *) backButton {
+    if (!_backButton) {
+        _backButton = [[UIButton alloc] initWithFrame:CGRectMake(0.0, 0.0, 20.0, 20.0)];
+        [_backButton addTarget:self action:@selector(popToPreViewController) forControlEvents:UIControlEventTouchUpInside];
+        [_backButton setImage:[UIImage imageNamed:@"main_back"] forState:UIControlStateNormal];
+    }
+    return _backButton;
+}
 
 - (UITextField *) phoneTextField{
     if (!_phoneTextField) {

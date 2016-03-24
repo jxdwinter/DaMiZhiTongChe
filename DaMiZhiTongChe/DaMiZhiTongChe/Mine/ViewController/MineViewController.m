@@ -72,7 +72,6 @@
 
 - (void) headerViewTouched {
     MineEditInformationViewController *mineEditInformationViewController = [[MineEditInformationViewController alloc] init];
-    mineEditInformationViewController.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:mineEditInformationViewController animated:YES];
 }
 
@@ -143,12 +142,10 @@
     if (indexPath.section == 0) {
         if (indexPath.row == 0) {
             MineOrderViewController *mineOrderViewController = [[MineOrderViewController alloc] init];
-            mineOrderViewController.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:mineOrderViewController animated:YES];
         }else if (indexPath.row == 1){
             CartAddressListViewController *cartAddressListViewController = [[CartAddressListViewController alloc] init];
             cartAddressListViewController.type = 1;
-            cartAddressListViewController.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:cartAddressListViewController animated:YES];
         }
     }else if (indexPath.section == 1){
@@ -156,7 +153,6 @@
             
         }else if (indexPath.row == 1){
             MineAboutUSViewController *mineAboutUSViewController = [[MineAboutUSViewController alloc] init];
-            mineAboutUSViewController.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:mineAboutUSViewController animated:YES];
         }
     }

@@ -14,8 +14,9 @@
 #import <QNUploadManager.h>
 #import "Mine_modifyDetailApi.h"
 
-@interface MineEditInformationViewController ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate>
+@interface MineEditInformationViewController ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate,UIGestureRecognizerDelegate>
 
+@property (nonatomic, strong) UIButton *backButton;
 @property (nonatomic, strong) UIButton *saveButton;
 @property (nonatomic, strong) UIImagePickerController *ctr;
 @property (nonatomic, strong) UIImageView *avatarImageView;
@@ -29,9 +30,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
-    self.backButton.hidden = NO;
+
     self.title = @"个人资料";
+    self.navigationController.interactivePopGestureRecognizer.delegate = self;
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.backButton];
+    self.navigationItem.backBarButtonItem.title = @"";
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.saveButton];
     
     UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, SCREEN_WIDTH, 130.0)];
@@ -207,6 +210,10 @@
     }];
 }
 
+- (void) popToPreViewController {
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
 # pragma mark -
 # pragma mark UIImagePickerDelegate Methods
 
@@ -219,6 +226,15 @@
 }
 
 #pragma mark - getter and setter
+
+- (UIButton *) backButton {
+    if (!_backButton) {
+        _backButton = [[UIButton alloc] initWithFrame:CGRectMake(0.0, 0.0, 20.0, 20.0)];
+        [_backButton addTarget:self action:@selector(popToPreViewController) forControlEvents:UIControlEventTouchUpInside];
+        [_backButton setImage:[UIImage imageNamed:@"main_back"] forState:UIControlStateNormal];
+    }
+    return _backButton;
+}
 
 - (UIButton *) saveButton {
     if (!_saveButton) {

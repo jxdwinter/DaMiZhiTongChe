@@ -21,7 +21,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.backButton.hidden = NO;
     self.title = @"商品评价";
     
     self.imageView1 = [[UIImageView alloc] initWithFrame:CGRectMake(0.0, 0.0, SCREEN_WIDTH, 200.0)];

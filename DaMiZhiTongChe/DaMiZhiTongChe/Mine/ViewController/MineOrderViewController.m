@@ -12,8 +12,9 @@
 #import "MineOrderSentViewController.h"
 #import "MineOrderReceivedViewController.h"
 
-@interface MineOrderViewController ()
+@interface MineOrderViewController ()<UIGestureRecognizerDelegate>
 
+@property (nonatomic, strong) UIButton *backButton;
 @property (nonatomic, strong) WMPageController *pageViewController;
 
 @end
@@ -25,8 +26,10 @@
     // Do any additional setup after loading the view.
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(paySuccess) name:@"ORDERSUCCESS" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(payFail) name:@"ORDERFAIL" object:nil];
-    self.backButton.hidden = NO;
     self.title = @"我的订单";
+    self.navigationController.interactivePopGestureRecognizer.delegate = self;
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.backButton];
+    self.navigationItem.backBarButtonItem.title = @"";
     [self configController];
 }
 
@@ -37,12 +40,10 @@
 
  - (void) viewDidAppear:(BOOL)animated {
      [super viewDidAppear:animated];
-     self.navigationController.interactivePopGestureRecognizer.enabled = NO;
  }
  
  - (void) viewWillDisappear:(BOOL)animated {
      [super viewWillDisappear:animated];
-     self.navigationController.interactivePopGestureRecognizer.enabled = YES;
  }
 
 - (void) dealloc{
@@ -88,6 +89,21 @@
     self.pageViewController.selectIndex = 1;
     [[NSNotificationCenter defaultCenter] postNotificationName:@"UNPAYEDRELOAD" object:nil];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"PAYEDRELOAD" object:nil];
+}
+
+- (void) popToPreViewController {
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+#pragma mark - getter and setter
+
+- (UIButton *) backButton {
+    if (!_backButton) {
+        _backButton = [[UIButton alloc] initWithFrame:CGRectMake(0.0, 0.0, 20.0, 20.0)];
+        [_backButton addTarget:self action:@selector(popToPreViewController) forControlEvents:UIControlEventTouchUpInside];
+        [_backButton setImage:[UIImage imageNamed:@"main_back"] forState:UIControlStateNormal];
+    }
+    return _backButton;
 }
 
 @end

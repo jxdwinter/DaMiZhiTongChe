@@ -10,6 +10,4 @@
 
 @interface BaseViewController : UIViewController
 
-@property (nonatomic, strong) UIButton *backButton;
-
 @end

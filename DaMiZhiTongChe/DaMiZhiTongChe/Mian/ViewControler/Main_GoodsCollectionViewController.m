@@ -13,7 +13,9 @@
 #import "Main_Goods.h"
 #import "Main_GoodsDetailViewController.h"
 
-@interface Main_GoodsCollectionViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
+@interface Main_GoodsCollectionViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,UIGestureRecognizerDelegate>
+
+@property (nonatomic, strong) UIButton *backButton;
 
 @property (nonatomic, assign) double collectionViewCellHight;
 @property (nonatomic, strong) UICollectionView *collectionView;
@@ -28,7 +30,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.backButton.hidden = NO;
+    self.navigationController.interactivePopGestureRecognizer.delegate = self;
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.backButton];
+    self.navigationItem.backBarButtonItem.title = @"";
+    
     if (IS_IPHONE_4_OR_LESS) {
         self.collectionViewCellHight = 180.0;
     }else if (IS_IPHONE_5) {
@@ -210,6 +215,10 @@
     [self.collectionView.mj_footer endRefreshing];
 }
 
+- (void) popToPreViewController {
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
 #pragma mark - getter and setter
 
 - (UICollectionView *) collectionView {
@@ -234,6 +243,15 @@
         _collectionView.mj_header = header;
     }
     return _collectionView;
+}
+
+- (UIButton *) backButton {
+    if (!_backButton) {
+        _backButton = [[UIButton alloc] initWithFrame:CGRectMake(0.0, 0.0, 20.0, 20.0)];
+        [_backButton addTarget:self action:@selector(popToPreViewController) forControlEvents:UIControlEventTouchUpInside];
+        [_backButton setImage:[UIImage imageNamed:@"main_back"] forState:UIControlStateNormal];
+    }
+    return _backButton;
 }
 
 @end

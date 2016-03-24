@@ -8,7 +8,9 @@
 
 #import "WebViewController.h"
 
-@interface WebViewController ()<UIWebViewDelegate>
+@interface WebViewController ()<UIWebViewDelegate,UIGestureRecognizerDelegate>
+
+@property (nonatomic, strong) UIButton *backButton;
 
 @end
 
@@ -17,8 +19,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.backButton.hidden = NO;
     self.title = self.name;
+    self.navigationController.interactivePopGestureRecognizer.delegate = self;
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.backButton];
+    self.navigationItem.backBarButtonItem.title = @"";
     [self.view addSubview:self.webView];
     [self.webView loadHTMLString:self.htmlString baseURL:nil];
     
@@ -37,6 +41,10 @@
 //    [webView stringByEvaluatingJavaScriptFromString:jsString];
 //}
 
+- (void) popToPreViewController {
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
 #pragma mark - getter and setter
 
 - (UIWebView *)webView{
@@ -45,6 +53,15 @@
         _webView.delegate = self;
     }
     return _webView;
+}
+
+- (UIButton *) backButton {
+    if (!_backButton) {
+        _backButton = [[UIButton alloc] initWithFrame:CGRectMake(0.0, 0.0, 20.0, 20.0)];
+        [_backButton addTarget:self action:@selector(popToPreViewController) forControlEvents:UIControlEventTouchUpInside];
+        [_backButton setImage:[UIImage imageNamed:@"main_back"] forState:UIControlStateNormal];
+    }
+    return _backButton;
 }
 
 @end

@@ -23,8 +23,9 @@
 #import "Cart_payOrderApi.h"
 #import "Cart_getOrderAddressApi.h"
 
-@interface CartSettlementViewController () <UITableViewDelegate,UITableViewDataSource,SelectAddressDelegate>
+@interface CartSettlementViewController () <UITableViewDelegate,UITableViewDataSource,SelectAddressDelegate,UIGestureRecognizerDelegate>
 
+@property (nonatomic, strong) UIButton *backButton;
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) UIButton *settlementButton;
 @property (nonatomic, strong) UILabel *allPriceLabel;
@@ -47,9 +48,11 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(paySuccess) name:@"MINEPAYED" object:nil];
     //支付失败
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(payFail) name:@"MINEUNPAYED" object:nil];
-    
-    self.backButton.hidden = NO;
+
     self.title = @"确认订单";
+    self.navigationController.interactivePopGestureRecognizer.delegate = self;
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.backButton];
+    self.navigationItem.backBarButtonItem.title = @"";
     
     self.isCheckedWeixin = NO;
     self.isCheckedAlipay = NO;
@@ -288,6 +291,10 @@
     self.isCheckedAlipay = NO;
 }
 
+- (void) popToPreViewController {
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
 #pragma mark - SelectAddressDelegate
 
 - (void) setDefaultAdressWithAddress:(Cart_address *)address {
@@ -394,6 +401,15 @@
 }
 
 #pragma mark - getter and setter
+
+- (UIButton *) backButton {
+    if (!_backButton) {
+        _backButton = [[UIButton alloc] initWithFrame:CGRectMake(0.0, 0.0, 20.0, 20.0)];
+        [_backButton addTarget:self action:@selector(popToPreViewController) forControlEvents:UIControlEventTouchUpInside];
+        [_backButton setImage:[UIImage imageNamed:@"main_back"] forState:UIControlStateNormal];
+    }
+    return _backButton;
+}
 
 - (UITableView *)tableView{
     if (!_tableView) {

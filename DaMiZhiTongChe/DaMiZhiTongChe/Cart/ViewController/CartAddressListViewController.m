@@ -16,8 +16,9 @@
 #import "CartAddressEditViewController.h"
 #import "Cart_deleteAddressApi.h"
 
-@interface CartAddressListViewController ()<UITableViewDelegate, UITableViewDataSource>
+@interface CartAddressListViewController ()<UITableViewDelegate, UITableViewDataSource,UIGestureRecognizerDelegate>
 
+@property (nonatomic, strong) UIButton *backButton;
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *dataSource;
 
@@ -31,8 +32,10 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadData) name:@"RELOADADDRESS" object:nil];
-    self.backButton.hidden = NO;
     self.title = @"收货地址";
+    self.navigationController.interactivePopGestureRecognizer.delegate = self;
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.backButton];
+    self.navigationItem.backBarButtonItem.title = @"";
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.addButton];
     
     self.dataSource = [[NSMutableArray alloc] initWithCapacity:1];
@@ -129,6 +132,10 @@
     }];
 }
 
+- (void) popToPreViewController {
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
 #pragma mark - Table view data source
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -194,6 +201,15 @@
 }
 
 #pragma mark - getter and setter
+
+- (UIButton *) backButton {
+    if (!_backButton) {
+        _backButton = [[UIButton alloc] initWithFrame:CGRectMake(0.0, 0.0, 20.0, 20.0)];
+        [_backButton addTarget:self action:@selector(popToPreViewController) forControlEvents:UIControlEventTouchUpInside];
+        [_backButton setImage:[UIImage imageNamed:@"main_back"] forState:UIControlStateNormal];
+    }
+    return _backButton;
+}
 
 - (UITableView *)tableView{
     if (!_tableView) {

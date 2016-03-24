@@ -124,7 +124,6 @@
 - (void) payFail {
     MineOrderViewController *mineOrderViewController = [[MineOrderViewController alloc] init];
     mineOrderViewController.selectIndex = 0;
-    mineOrderViewController.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:mineOrderViewController animated:YES];
 }
 
@@ -133,7 +132,6 @@
     [[NSNotificationCenter defaultCenter] postNotificationName:@"RELOADCART" object:nil];
     MineOrderViewController *mineOrderViewController = [[MineOrderViewController alloc] init];
     mineOrderViewController.selectIndex = 1;
-    mineOrderViewController.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:mineOrderViewController animated:YES];
 }
 
@@ -206,7 +204,6 @@
         cartSettlementViewController.dataSource = tmpArray;
         cartSettlementViewController.allPrice = self.allPrice;
         cartSettlementViewController.type = 0;
-        cartSettlementViewController.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:cartSettlementViewController animated:YES];
     }
 }
@@ -350,7 +347,6 @@
     Main_GoodsDetailViewController *main_GoodsDetailViewController = [[Main_GoodsDetailViewController alloc] init];
     main_GoodsDetailViewController.title = cart_goods.goods.goods_name;
     main_GoodsDetailViewController.goods_id = cart_goods.goods._id;
-    main_GoodsDetailViewController.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:main_GoodsDetailViewController animated:YES];
 }
 

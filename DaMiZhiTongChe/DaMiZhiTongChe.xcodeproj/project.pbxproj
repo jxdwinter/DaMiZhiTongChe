@@ -64,6 +64,7 @@
 		835572CE1C92908E005642A7 /* PMQiNiuPutPolicy.m in Sources */ = {isa = PBXBuildFile; fileRef = 835572C81C92908E005642A7 /* PMQiNiuPutPolicy.m */; };
 		835572CF1C92908E005642A7 /* PMQiNiuToken.m in Sources */ = {isa = PBXBuildFile; fileRef = 835572CA1C92908E005642A7 /* PMQiNiuToken.m */; };
 		835572D01C92908E005642A7 /* UploadManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 835572CC1C92908E005642A7 /* UploadManager.m */; };
+		835D43F21CA40CB100D9D69E /* BaseNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 835D43F11CA40CB100D9D69E /* BaseNavigationController.m */; };
 		836013EC1C8568870090257C /* Login_updateAnonymousTokenApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 836013EB1C8568870090257C /* Login_updateAnonymousTokenApi.m */; };
 		836013F31C856C3F0090257C /* AccountHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 836013EE1C856C3F0090257C /* AccountHelper.m */; };
 		836013F41C856C3F0090257C /* AccountManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 836013F01C856C3F0090257C /* AccountManager.m */; };
@@ -268,6 +269,8 @@
 		835572CA1C92908E005642A7 /* PMQiNiuToken.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PMQiNiuToken.m; sourceTree = "<group>"; };
 		835572CB1C92908E005642A7 /* UploadManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UploadManager.h; sourceTree = "<group>"; };
 		835572CC1C92908E005642A7 /* UploadManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UploadManager.m; sourceTree = "<group>"; };
+		835D43F01CA40CB100D9D69E /* BaseNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseNavigationController.h; sourceTree = "<group>"; };
+		835D43F11CA40CB100D9D69E /* BaseNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseNavigationController.m; sourceTree = "<group>"; };
 		836013EA1C8568870090257C /* Login_updateAnonymousTokenApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Login_updateAnonymousTokenApi.h; sourceTree = "<group>"; };
 		836013EB1C8568870090257C /* Login_updateAnonymousTokenApi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Login_updateAnonymousTokenApi.m; sourceTree = "<group>"; };
 		836013ED1C856C3F0090257C /* AccountHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountHelper.h; sourceTree = "<group>"; };
@@ -894,6 +897,8 @@
 		836A64241C7BDFEB00219035 /* BaseViewController */ = {
 			isa = PBXGroup;
 			children = (
+				835D43F01CA40CB100D9D69E /* BaseNavigationController.h */,
+				835D43F11CA40CB100D9D69E /* BaseNavigationController.m */,
 				836A64271C7BDFEB00219035 /* BaseViewController.h */,
 				836A64281C7BDFEB00219035 /* BaseViewController.m */,
 			);
@@ -1450,6 +1455,7 @@
 				8305D7FB1C86C87E00F71645 /* Signup_registerApi.m in Sources */,
 				8323A9D11C97A3A700D9738D /* MineOrderReceivedViewController.m in Sources */,
 				8366966B1C96815D003CCB78 /* DataVerifier.m in Sources */,
+				835D43F21CA40CB100D9D69E /* BaseNavigationController.m in Sources */,
 				836696691C96815D003CCB78 /* base64.m in Sources */,
 				83FE91C21C90F61E0032654B /* CartSettlementViewController.m in Sources */,
 				83225C7E1C98DB2800D77DFD /* MineEditInformationViewController.m in Sources */,

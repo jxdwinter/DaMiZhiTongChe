@@ -10,11 +10,11 @@
 #import "AboutUSHeaderView.h"
 #import "AboutUSFooterView.h"
 #import "AboutUSTableViewCell.h"
-
 #import <JGActionSheet.h>
 
-@interface MineAboutUSViewController () <UITableViewDelegate,UITableViewDataSource>
+@interface MineAboutUSViewController () <UITableViewDelegate,UITableViewDataSource,UIGestureRecognizerDelegate>
 
+@property (nonatomic, strong) UIButton *backButton;
 @property (nonatomic, strong) NSArray *dataSource;
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) AboutUSHeaderView *headerView;
@@ -27,9 +27,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.backButton.hidden = NO;
     self.title = @"关于我们";
-    
+    self.navigationController.interactivePopGestureRecognizer.delegate = self;
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.backButton];
+    self.navigationItem.backBarButtonItem.title = @"";
     self.dataSource = @[@"客服电话 : 0451-87553921",@"微信公众号 : 大米直通车"];
     [self.view addSubview:self.tableView];
 }
@@ -77,7 +78,20 @@
     }
 }
 
+- (void) popToPreViewController {
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
 #pragma mark - getter and setter
+
+- (UIButton *) backButton {
+    if (!_backButton) {
+        _backButton = [[UIButton alloc] initWithFrame:CGRectMake(0.0, 0.0, 20.0, 20.0)];
+        [_backButton addTarget:self action:@selector(popToPreViewController) forControlEvents:UIControlEventTouchUpInside];
+        [_backButton setImage:[UIImage imageNamed:@"main_back"] forState:UIControlStateNormal];
+    }
+    return _backButton;
+}
 
 - (UITableView *)tableView{
     if (!_tableView) {

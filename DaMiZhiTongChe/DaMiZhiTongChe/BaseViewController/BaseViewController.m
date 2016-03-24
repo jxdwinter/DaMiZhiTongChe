@@ -8,7 +8,9 @@
 
 #import "BaseViewController.h"
 
-@interface BaseViewController () <UIGestureRecognizerDelegate>
+@interface BaseViewController () //<UIGestureRecognizerDelegate>
+
+//@property (nonatomic, strong) UIButton *backButton;
 
 @end
 
@@ -20,12 +22,12 @@
     
     self.tabBarController.tabBar.translucent = NO;
     self.navigationController.navigationBar.translucent = NO;
-    
-    self.navigationController.interactivePopGestureRecognizer.delegate = self;
-    
     self.view.backgroundColor = [UIColor colorWithRed:0.95 green:0.95 blue:0.95 alpha:1];
+    /*
+    self.navigationController.interactivePopGestureRecognizer.delegate = self;
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.backButton];
     self.navigationItem.backBarButtonItem.title = @"";
+     */
 }
 
 - (void)didReceiveMemoryWarning {
@@ -37,10 +39,12 @@
     return UIStatusBarStyleDefault;
 }
 
+/*
 - (void) popToPreViewController {
     [self.navigationController popViewControllerAnimated:YES];
 }
-
+*/
+/*
 #pragma mark - getter and setter
 
 - (UIButton *) backButton {
@@ -52,5 +56,6 @@
     }
     return _backButton;
 }
+*/
 
 @end

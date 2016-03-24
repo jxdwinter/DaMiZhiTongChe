@@ -12,10 +12,10 @@
 #import "Cart_address.h"
 #import "Cart_modifyDefaultAddressApi.h"
 
-@interface CartAddressEditViewController ()
+@interface CartAddressEditViewController ()<UIGestureRecognizerDelegate>
 
 @property (nonatomic, strong) UIButton *editButton;
-
+@property (nonatomic, strong) UIButton *backButton;
 @property (nonatomic, strong) UITextField *nameTextField;
 @property (nonatomic, strong) UITextField *phoneTextField;
 @property (nonatomic, strong) UITextField *zipCodeTextField;
@@ -31,8 +31,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.backButton.hidden = NO;
     self.title = @"修改收货地址";
+    self.navigationController.interactivePopGestureRecognizer.delegate = self;
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.backButton];
+    self.navigationItem.backBarButtonItem.title = @"";
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.editButton];
     
     UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, SCREEN_WIDTH, 250.0)];
@@ -173,7 +175,20 @@
     }
 }
 
+- (void) popToPreViewController {
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
 #pragma mark - getter and setter
+
+- (UIButton *) backButton {
+    if (!_backButton) {
+        _backButton = [[UIButton alloc] initWithFrame:CGRectMake(0.0, 0.0, 20.0, 20.0)];
+        [_backButton addTarget:self action:@selector(popToPreViewController) forControlEvents:UIControlEventTouchUpInside];
+        [_backButton setImage:[UIImage imageNamed:@"main_back"] forState:UIControlStateNormal];
+    }
+    return _backButton;
+}
 
 - (UIButton *) editButton {
     if (!_editButton) {

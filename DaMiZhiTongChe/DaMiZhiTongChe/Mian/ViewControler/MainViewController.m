@@ -213,7 +213,7 @@ UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,UITableViewDelegat
     [self.contentView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.equalTo(self.tableView.mas_bottom).with.offset(50.0);
     }];
-    [self.scrollView.mj_header endRefreshing];
+
 }
 
 - (void) cleanUI {

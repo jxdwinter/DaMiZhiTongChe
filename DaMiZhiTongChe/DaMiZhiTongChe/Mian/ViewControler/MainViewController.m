@@ -23,7 +23,7 @@
 
 #define HEADERVIEWHIGHT 40.0
 
-@interface MainViewController ()<UISearchBarDelegate,UIGestureRecognizerDelegate,SDCycleScrollViewDelegate,UICollectionViewDelegate,
+@interface MainViewController ()<UISearchBarDelegate,SDCycleScrollViewDelegate,UICollectionViewDelegate,
 UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,UITableViewDelegate,UITableViewDataSource,UIScrollViewDelegate>
 
 @property (nonatomic, assign) double collectionViewCellHight;
@@ -79,13 +79,7 @@ UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,UITableViewDelegat
 
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"main_navigationbar_blank"]]];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"main_navigationbar_blank"]]];
-    
     self.navigationItem.titleView = self.searchBar;
-    
-    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self  action:@selector(dismissKeyboard)];
-    tapGesture.numberOfTapsRequired = 1;
-    [tapGesture setDelegate:self];
-    //[self.view addGestureRecognizer:tapGesture];
     
     self.bannerItems = [[NSMutableArray alloc] initWithCapacity:1];
     self.bannerImageStringItems = [[NSMutableArray alloc] initWithCapacity:1];
@@ -93,42 +87,6 @@ UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,UITableViewDelegat
     self.topicItems = [[NSMutableArray alloc] initWithCapacity:1];
     self.categoryItems = [[NSMutableArray alloc] initWithCapacity:1];
     
-    [self.view addSubview:self.scrollView];
-    [self.scrollView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.view.mas_top).with.offset(.0);
-        make.left.equalTo(self.view.mas_left).with.offset(0.0);
-        make.right.equalTo(self.view.mas_right).with.offset(0.0);
-        make.bottom.equalTo(self.view.mas_bottom).with.offset(0.0);
-    }];
-    
-    [self.scrollView addSubview:self.contentView];
-    [self.contentView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.equalTo(self.scrollView);
-        make.width.equalTo(self.scrollView);
-    }];
-    
-    [self.contentView addSubview:self.cycleScrollView];
-    [self.cycleScrollView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.contentView.mas_top).with.offset(.0);
-        make.left.equalTo(self.contentView.mas_left).with.offset(0.0);
-        make.right.equalTo(self.contentView.mas_right).with.offset(0.0);
-        make.height.equalTo(@(SCREEN_WIDTH/3));
-    }];
-
-    [self.contentView addSubview:self.collectionView];
-    [self.collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.cycleScrollView.mas_bottom).with.offset(5.0);
-        make.left.equalTo(self.contentView.mas_left).with.offset(5.0);
-        make.right.equalTo(self.contentView.mas_right).with.offset(-5.0);
-    }];
-    
-    [self.contentView addSubview:self.tableView];
-    [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.collectionView.mas_bottom).with.offset(5.0);
-        make.left.equalTo(self.contentView.mas_left).with.offset(5.0);
-        make.right.equalTo(self.contentView.mas_right).with.offset(-5.0);
-    }];
-
     [self getMainDataWithShowShouldShowHUD:YES];
 }
 
@@ -211,35 +169,40 @@ UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,UITableViewDelegat
 }
 
 - (void) configUI {
+    [self cleanUI];
     self.cycleScrollView.imageURLStringsGroup = self.bannerImageStringItems;
     //self.cycleScrollView.titlesGroup = self.bannerTitleItems;
     NSUInteger number = [self.topicItems count]/2;
     if ([self.topicItems count] % 2 > 0) {
         number++;
     }
-    self.scrollView.contentSize = CGSizeMake(self.contentView.frame.size.width,
-                                             SCREEN_WIDTH/3 +
-                                             self.collectionViewCellHight * number +
-                                             SCREEN_WIDTH/3 * [self.categoryItems count] + HEADERVIEWHIGHT +
-                                             50.0);
-
-    self.collectionView.frame = CGRectMake(self.collectionView.frame.origin.x,
-                                           self.collectionView.frame.origin.y,
-                                           self.collectionView.frame.size.width,
-                                           self.collectionViewCellHight * number);
-    
-    self.tableView.frame = CGRectMake(self.tableView.frame.origin.x,
-                                      self.tableView.frame.origin.y,
-                                      self.tableView.frame.size.width,
-                                      SCREEN_WIDTH/3 * [self.categoryItems count] + HEADERVIEWHIGHT);
-    
+    [self.view addSubview:self.scrollView];
+    [self.scrollView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.view.mas_top).with.offset(.0);
+        make.left.equalTo(self.view.mas_left).with.offset(0.0);
+        make.right.equalTo(self.view.mas_right).with.offset(0.0);
+        make.bottom.equalTo(self.view.mas_bottom).with.offset(0.0);
+    }];
+    [self.scrollView addSubview:self.contentView];
+    [self.contentView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(self.scrollView);
+        make.width.equalTo(self.scrollView);
+    }];
+    [self.contentView addSubview:self.cycleScrollView];
+    [self.cycleScrollView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.contentView.mas_top).with.offset(.0);
+        make.left.equalTo(self.contentView.mas_left).with.offset(0.0);
+        make.right.equalTo(self.contentView.mas_right).with.offset(0.0);
+        make.height.equalTo(@(SCREEN_WIDTH/3));
+    }];
+    [self.contentView addSubview:self.collectionView];
     [self.collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.cycleScrollView.mas_bottom).with.offset(5.0);
         make.left.equalTo(self.contentView.mas_left).with.offset(5.0);
         make.right.equalTo(self.contentView.mas_right).with.offset(-5.0);
         make.height.equalTo(@(self.collectionViewCellHight * number));
     }];
-    
+    [self.contentView addSubview:self.tableView];
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.collectionView.mas_bottom).with.offset(5.0);
         make.left.equalTo(self.contentView.mas_left).with.offset(5.0);
@@ -250,16 +213,27 @@ UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,UITableViewDelegat
     [self.contentView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.equalTo(self.tableView.mas_bottom).with.offset(50.0);
     }];
-
-    [self.collectionView reloadData];
-    [self.tableView reloadData];
     [self.scrollView.mj_header endRefreshing];
+}
+
+- (void) cleanUI {
+    [self.cycleScrollView removeFromSuperview];
+    self.cycleScrollView = nil;
+    [self.collectionView removeFromSuperview];
+    self.collectionView = nil;
+    [self.tableView removeFromSuperview];
+    self.tableView = nil;
+    [self.contentView removeFromSuperview];
+    self.contentView = nil;
+    [self.scrollView removeFromSuperview];
+    self.scrollView = nil;
 }
 
 - (void) dismissKeyboard {
     [self.searchBar resignFirstResponder];
     
 }
+
 #pragma mark - searchBar delegate
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar{

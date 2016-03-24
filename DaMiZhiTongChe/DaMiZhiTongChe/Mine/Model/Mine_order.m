@@ -20,6 +20,7 @@
         self.address = orderInfo[@"address"];
         self.zipcode = orderInfo[@"zipcode"];
         self.mobile = orderInfo[@"mobile"];
+        self.add_time = orderInfo[@"add_time"];
         NSMutableArray *tmpArray = [[NSMutableArray alloc] initWithCapacity:1];
         for (NSDictionary *dic in orderInfo[@"goods_list"]) {
             Mine_order_goods *mine_order_goods = [[Mine_order_goods alloc] initWithMine_order_goodsInfo:dic];

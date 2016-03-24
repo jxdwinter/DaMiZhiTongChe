@@ -11,6 +11,7 @@
 @interface Mine_OrderHeaderView : UIView
 
 @property (nonatomic, strong) UIButton *button;
+@property (nonatomic, strong) UILabel *timeLabel;
 @property (nonatomic, strong) UILabel *orderNumberLabel;
 @property (nonatomic, strong) UILabel *addressLabel;
 

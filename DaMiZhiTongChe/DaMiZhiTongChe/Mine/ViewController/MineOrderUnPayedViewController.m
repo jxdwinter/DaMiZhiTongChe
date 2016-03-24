@@ -150,6 +150,7 @@
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     Mine_OrderHeaderView *headerView = [[Mine_OrderHeaderView alloc] initWithFrame:CGRectMake(0.0, 0.0, SCREEN_WIDTH, 35.0)];
+    headerView.timeLabel.text = [NSString stringWithFormat:@"订单时间:%@",[self.dataSource[section] add_time]];
     headerView.orderNumberLabel.text = [NSString stringWithFormat:@"订单编号:%@",[self.dataSource[section] order_sn]];
     headerView.addressLabel.text = [NSString stringWithFormat:@"收货信息:%@ %@ %@",[self.dataSource[section] name],[self.dataSource[section] mobile],[self.dataSource[section] address]];
     [headerView.button setTitle:@"取消订单" forState:UIControlStateNormal];
@@ -159,7 +160,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    return 50.0;
+    return 75.0;
 }
 
 - (UIView *) tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {

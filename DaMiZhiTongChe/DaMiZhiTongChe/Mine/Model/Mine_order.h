@@ -16,6 +16,7 @@
 @property (nonatomic, copy) NSString *address;
 @property (nonatomic, copy) NSString *zipcode;
 @property (nonatomic, copy) NSString *mobile;
+@property (nonatomic, copy) NSString *add_time;
 
 @property (nonatomic, strong) NSArray *goods_list;
 

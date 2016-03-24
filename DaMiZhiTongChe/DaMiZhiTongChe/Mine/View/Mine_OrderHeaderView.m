@@ -34,7 +34,18 @@
             make.top.equalTo(self.mas_top).with.offset(0.0);
             make.right.equalTo(self.mas_right).with.offset(0.0);
             make.width.equalTo(@80.0);
-            make.height.equalTo(@30.0);
+            make.height.equalTo(@45.0);
+        }];
+        
+        self.timeLabel = [[UILabel alloc] init];
+        self.timeLabel.textColor = DEFAULTTEXTCOLOR;
+        self.timeLabel.font = [UIFont systemFontOfSize:10.0];
+        [self addSubview:self.timeLabel];
+        [self.timeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(self.mas_top).with.offset(7.5);
+            make.left.equalTo(self.mas_left).with.offset(10.0);
+            make.right.equalTo(self.button.mas_left).with.offset(-10.0);
+            make.height.equalTo(@20.0);
         }];
         
         self.orderNumberLabel = [[UILabel alloc] init];
@@ -42,7 +53,7 @@
         self.orderNumberLabel.font = [UIFont systemFontOfSize:10.0];
         [self addSubview:self.orderNumberLabel];
         [self.orderNumberLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(self.mas_top).with.offset(7.5);
+            make.top.equalTo(self.timeLabel.mas_bottom).with.offset(0.0);
             make.left.equalTo(self.mas_left).with.offset(10.0);
             make.right.equalTo(self.button.mas_left).with.offset(-10.0);
             make.height.equalTo(@20.0);
@@ -51,14 +62,12 @@
         self.addressLabel = [[UILabel alloc] init];
         self.addressLabel.textColor = DEFAULTTEXTCOLOR;
         self.addressLabel.font = [UIFont systemFontOfSize:10.0];
-        //self.addressLabel.lineBreakMode = NSLineBreakByWordWrapping;
-        //self.addressLabel.numberOfLines = 0;
         [self addSubview:self.addressLabel];
         [self.addressLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(self.orderNumberLabel.mas_bottom).with.offset(0.0);
             make.left.equalTo(self.mas_left).with.offset(10.0);
             make.right.equalTo(self.mas_right).with.offset(-10.0);
-            make.height.equalTo(@15.0);
+            make.height.equalTo(@20.0);
         }];
     }
     return self;

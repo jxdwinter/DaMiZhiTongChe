@@ -217,27 +217,42 @@ UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,UITableViewDelegat
     if ([self.topicItems count] % 2 > 0) {
         number++;
     }
+    self.scrollView.contentSize = CGSizeMake(self.contentView.frame.size.width,
+                                             SCREEN_WIDTH/3 +
+                                             self.collectionViewCellHight * number +
+                                             SCREEN_WIDTH/3 * [self.categoryItems count] + HEADERVIEWHIGHT +
+                                             50.0);
+
+    self.collectionView.frame = CGRectMake(self.collectionView.frame.origin.x,
+                                           self.collectionView.frame.origin.y,
+                                           self.collectionView.frame.size.width,
+                                           self.collectionViewCellHight * number);
+    
+    self.tableView.frame = CGRectMake(self.tableView.frame.origin.x,
+                                      self.tableView.frame.origin.y,
+                                      self.tableView.frame.size.width,
+                                      SCREEN_WIDTH/3 * [self.categoryItems count] + HEADERVIEWHIGHT);
+    
     [self.collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.cycleScrollView.mas_bottom).with.offset(5.0);
         make.left.equalTo(self.contentView.mas_left).with.offset(5.0);
         make.right.equalTo(self.contentView.mas_right).with.offset(-5.0);
         make.height.equalTo(@(self.collectionViewCellHight * number));
     }];
+    
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.collectionView.mas_bottom).with.offset(5.0);
         make.left.equalTo(self.contentView.mas_left).with.offset(5.0);
         make.right.equalTo(self.contentView.mas_right).with.offset(-5.0);
         make.height.equalTo(@(SCREEN_WIDTH/3 * [self.categoryItems count] + HEADERVIEWHIGHT));
     }];
-    [self.collectionView reloadData];
-    [self.tableView reloadData];
-    self.scrollView.contentSize = CGSizeMake(self.contentView.frame.size.width,
-                                             SCREEN_WIDTH/3 +
-                                             self.collectionView.frame.size.height +
-                                             self.tableView.frame.size.height + 50.0);
+    
     [self.contentView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.equalTo(self.tableView.mas_bottom).with.offset(50.0);
     }];
+
+    [self.collectionView reloadData];
+    [self.tableView reloadData];
     [self.scrollView.mj_header endRefreshing];
 }
 

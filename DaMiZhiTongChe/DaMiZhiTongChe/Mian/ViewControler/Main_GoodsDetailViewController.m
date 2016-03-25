@@ -317,6 +317,9 @@
                 self.goodsDetailInfo = [[Main_GoodsDetail alloc] initWithGoodsDetailInfo:dic[@"data"]];
                 [self configUI];
             }else{
+                self.buyButton.hidden = YES;
+                self.cartButton.hidden = YES;
+                self.rightButton.hidden = YES;
                 [MBProgressHUD showHUDwithSuccess:NO WithTitle:dic[@"msg"] withView:self.navigationController.view];
             }
         }

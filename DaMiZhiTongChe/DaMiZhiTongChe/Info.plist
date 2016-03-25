@@ -51,7 +51,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>20160324_04</string>
+	<string>20160325_01</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>alipayauth</string>

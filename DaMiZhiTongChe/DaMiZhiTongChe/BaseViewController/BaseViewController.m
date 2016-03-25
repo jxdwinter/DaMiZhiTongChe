@@ -8,9 +8,7 @@
 
 #import "BaseViewController.h"
 
-@interface BaseViewController () //<UIGestureRecognizerDelegate>
-
-//@property (nonatomic, strong) UIButton *backButton;
+@interface BaseViewController ()
 
 @end
 
@@ -23,11 +21,6 @@
     self.tabBarController.tabBar.translucent = NO;
     self.navigationController.navigationBar.translucent = NO;
     self.view.backgroundColor = [UIColor colorWithRed:0.95 green:0.95 blue:0.95 alpha:1];
-    /*
-    self.navigationController.interactivePopGestureRecognizer.delegate = self;
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.backButton];
-    self.navigationItem.backBarButtonItem.title = @"";
-     */
 }
 
 - (void)didReceiveMemoryWarning {
@@ -38,24 +31,5 @@
 - (UIStatusBarStyle)preferredStatusBarStyle {
     return UIStatusBarStyleDefault;
 }
-
-/*
-- (void) popToPreViewController {
-    [self.navigationController popViewControllerAnimated:YES];
-}
-*/
-/*
-#pragma mark - getter and setter
-
-- (UIButton *) backButton {
-    if (!_backButton) {
-        _backButton = [[UIButton alloc] initWithFrame:CGRectMake(0.0, 0.0, 20.0, 20.0)];
-        [_backButton addTarget:self action:@selector(popToPreViewController) forControlEvents:UIControlEventTouchUpInside];
-        [_backButton setImage:[UIImage imageNamed:@"main_back"] forState:UIControlStateNormal];
-        _backButton.hidden = YES;
-    }
-    return _backButton;
-}
-*/
 
 @end

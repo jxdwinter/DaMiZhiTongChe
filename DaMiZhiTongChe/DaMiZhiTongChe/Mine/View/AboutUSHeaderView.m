@@ -11,21 +11,17 @@
 @implementation AboutUSHeaderView
 
 - (instancetype) initWithFrame:(CGRect)frame{
-    
     self = [super initWithFrame:frame];
-    
     if (self) {
-        
         UIImageView *iconImageView = [[UIImageView alloc] init];
         iconImageView.image = [UIImage imageNamed:@"icon"];
         [self addSubview:iconImageView];
         [iconImageView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerX.equalTo(self.mas_centerX);
-            make.centerY.equalTo(self.mas_centerY).with.offset(-5.0);
+            make.centerY.equalTo(self.mas_centerY).with.offset(-15.0);
             make.width.equalTo(@60.0);
             make.height.equalTo(@60.0);
         }];
-        
         UILabel *versionLabel = [[UILabel alloc] init];
         versionLabel.textAlignment = NSTextAlignmentCenter;
         versionLabel.textColor = DEFAULTTEXTCOLOR;
@@ -39,7 +35,19 @@
             make.right.equalTo(self.mas_right).with.offset(-10.0);
             make.height.equalTo(@20.0);
         }];
-        
+        UILabel *buildLabel = [[UILabel alloc] init];
+        buildLabel.textAlignment = NSTextAlignmentCenter;
+        buildLabel.textColor = DEFAULTTEXTCOLOR;
+        buildLabel.font = [UIFont systemFontOfSize:8.0];
+        [buildLabel sizeToFit];
+        buildLabel.text = [NSString stringWithFormat:@"build:%@", [[NSBundle mainBundle] objectForInfoDictionaryKey: (NSString *)kCFBundleVersionKey]];
+        [self addSubview:buildLabel];
+        [buildLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(versionLabel.mas_bottom).with.offset(0.0);
+            make.left.equalTo(self.mas_left).with.offset(10.0);
+            make.right.equalTo(self.mas_right).with.offset(-10.0);
+            make.height.equalTo(@10.0);
+        }];
     }
     return self;
 }

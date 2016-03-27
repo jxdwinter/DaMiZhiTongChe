@@ -61,12 +61,14 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_resource "FSImageViewer/FSImageViewer.bundle"
   install_resource "IQKeyboardManager/IQKeyBoardManager/Resources/IQKeyboardManager.bundle"
   install_resource "MJRefresh/MJRefresh/MJRefresh.bundle"
+  install_resource "VTAcknowledgementsViewController/VTAcknowledgementsViewController.bundle"
   install_resource "${BUILT_PRODUCTS_DIR}/TOWebViewControllerLocalizable.bundle"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_resource "FSImageViewer/FSImageViewer.bundle"
   install_resource "IQKeyboardManager/IQKeyBoardManager/Resources/IQKeyboardManager.bundle"
   install_resource "MJRefresh/MJRefresh/MJRefresh.bundle"
+  install_resource "VTAcknowledgementsViewController/VTAcknowledgementsViewController.bundle"
   install_resource "${BUILT_PRODUCTS_DIR}/TOWebViewControllerLocalizable.bundle"
 fi
 

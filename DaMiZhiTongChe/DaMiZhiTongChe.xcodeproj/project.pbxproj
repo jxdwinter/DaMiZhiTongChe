@@ -122,6 +122,7 @@
 		839F26F91C926FFC00DD65DF /* HeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 839F26F71C926FFC00DD65DF /* HeaderView.m */; };
 		83A46F4D1C7D460300C17759 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83A46F4C1C7D460300C17759 /* LoginViewController.m */; };
 		83A544F91C896CC90062FF0C /* Main_CategoryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 83A544F81C896CC90062FF0C /* Main_CategoryTableViewCell.m */; };
+		83A7FB1A1CA80BD000948C86 /* Pods-acknowledgements.plist in Resources */ = {isa = PBXBuildFile; fileRef = 83A7FB191CA80BD000948C86 /* Pods-acknowledgements.plist */; };
 		83C9B0691C929576001EB33C /* Cart_orderApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 83C9B0681C929576001EB33C /* Cart_orderApi.m */; };
 		83E0A25E1C7AF3B4002E4954 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 83E0A25D1C7AF3B4002E4954 /* main.m */; };
 		83E0A2691C7AF3B4002E4954 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 83E0A2681C7AF3B4002E4954 /* Assets.xcassets */; };
@@ -453,6 +454,7 @@
 		83A46F4C1C7D460300C17759 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		83A544F71C896CC90062FF0C /* Main_CategoryTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Main_CategoryTableViewCell.h; sourceTree = "<group>"; };
 		83A544F81C896CC90062FF0C /* Main_CategoryTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Main_CategoryTableViewCell.m; sourceTree = "<group>"; };
+		83A7FB191CA80BD000948C86 /* Pods-acknowledgements.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "Pods-acknowledgements.plist"; path = "../Pods/Target Support Files/Pods/Pods-acknowledgements.plist"; sourceTree = "<group>"; };
 		83C9B0671C929576001EB33C /* Cart_orderApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Cart_orderApi.h; sourceTree = "<group>"; };
 		83C9B0681C929576001EB33C /* Cart_orderApi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Cart_orderApi.m; sourceTree = "<group>"; };
 		83E0A2591C7AF3B4002E4954 /* DaMiZhiTongChe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DaMiZhiTongChe.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1173,6 +1175,7 @@
 		83E0A25C1C7AF3B4002E4954 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				83A7FB191CA80BD000948C86 /* Pods-acknowledgements.plist */,
 				832399FE1C916A6100ACC6C2 /* alipay.png */,
 				832399FC1C916A5A00ACC6C2 /* weixin.png */,
 				83E0A26D1C7AF3B4002E4954 /* Info.plist */,
@@ -1352,6 +1355,7 @@
 				836C9DCD1C7BF370000DA3C5 /* MTA Advanced Gamming Model Programming Guide.pdf in Resources */,
 				83E0A2691C7AF3B4002E4954 /* Assets.xcassets in Resources */,
 				832399FF1C916A6100ACC6C2 /* alipay.png in Resources */,
+				83A7FB1A1CA80BD000948C86 /* Pods-acknowledgements.plist in Resources */,
 				836C9DCE1C7BF370000DA3C5 /* MTA Developing Guide.pdf in Resources */,
 				832399E81C915D0D00ACC6C2 /* read_me.txt in Resources */,
 			);

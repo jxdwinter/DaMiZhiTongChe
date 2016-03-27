@@ -11,6 +11,7 @@
 #import "AboutUSFooterView.h"
 #import "AboutUSTableViewCell.h"
 #import <JGActionSheet.h>
+#import <VTAcknowledgementsViewController.h>
 
 @interface MineAboutUSViewController () <UITableViewDelegate,UITableViewDataSource,UIGestureRecognizerDelegate>
 
@@ -31,7 +32,7 @@
     self.navigationController.interactivePopGestureRecognizer.delegate = self;
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.backButton];
     self.navigationItem.backBarButtonItem.title = @"";
-    self.dataSource = @[@"客服电话 : 0451-87553921",@"微信公众号 : 大米直通车"];
+    self.dataSource = @[@"客服电话 : 0451-87553921",@"微信公众号 : 大米直通车",@"开源组件许可"];
     [self.view addSubview:self.tableView];
 }
 
@@ -75,6 +76,11 @@
             }
         }];
         [sheet showInView:self.view animated:YES];
+    }else if (indexPath.row == 2){
+        VTAcknowledgementsViewController *viewController = [VTAcknowledgementsViewController acknowledgementsViewController];
+        viewController.title = @"开源组件";
+        viewController.headerText = @"大米直通车iOS版在开发过程中使用了下列第三方开源类库和组件,感谢开源社区对我们的帮助和对整个互联网的贡献";
+        [self.navigationController pushViewController:viewController animated:YES];
     }
 }
 

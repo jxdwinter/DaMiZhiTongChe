@@ -24,9 +24,9 @@ PODS:
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
   - EGOCache (2.1.3)
-  - FMDB (2.6):
-    - FMDB/standard (= 2.6)
-  - FMDB/standard (2.6)
+  - FMDB (2.6.2):
+    - FMDB/standard (= 2.6.2)
+  - FMDB/standard (2.6.2)
   - FSImageViewer (3.4):
     - AFNetworking (~> 2.5)
     - EGOCache (~> 2.1)
@@ -52,6 +52,7 @@ PODS:
     - TOWebViewController/Core (= 2.2.3)
   - TOWebViewController/Core (2.2.3)
   - UAProgressView (0.1.3)
+  - VTAcknowledgementsViewController (0.17)
   - WMPageController (1.4.1)
   - YTKKeyValueStore (0.1.2):
     - FMDB (~> 2.0)
@@ -75,6 +76,7 @@ DEPENDENCIES:
   - SDCycleScrollView
   - SDWebImage
   - TOWebViewController
+  - VTAcknowledgementsViewController
   - WMPageController
   - YTKKeyValueStore
   - YTKNetwork
@@ -84,7 +86,7 @@ SPEC CHECKSUMS:
   AFDownloadRequestOperation: 748a1643423e1ddb23f2178f778087d4f0ae8ac7
   AFNetworking: cb8d14a848e831097108418f5d49217339d4eb60
   EGOCache: f0295dbe041156acabd39021354ad1045ee49e72
-  FMDB: c1968bab3ab0aed38f66cb778ae1e7fa9a652b6e
+  FMDB: 854a0341b4726e53276f2a8996f06f1b80f9259a
   FSImageViewer: 0dea92069cce74a800b75cb8777c923f2be59124
   GBVersionTracking: 0214439bf789fc3825cd8c88685e41c076bb2308
   HappyDNS: 6d85942e64c28b4fa61f8c76580398f52d6d1d11
@@ -100,6 +102,7 @@ SPEC CHECKSUMS:
   SDWebImage: 69c6303e3348fba97e03f65d65d4fbc26740f461
   TOWebViewController: ca47b9aeefe66acb3353d197dc8270338540b116
   UAProgressView: ce49aee47c14df6dc372f6fd57852f570ca97e6b
+  VTAcknowledgementsViewController: 6056f5f5e5ed995bbf0581bed6ddd29355ca9a80
   WMPageController: 3b6d2aa2ddcd53f2cbc2319f2473f27b4ea4fe89
   YTKKeyValueStore: 4d002941540dd5108fa23009b71e0f2f937f7a0f
   YTKNetwork: 988660d5fab310a55895239751ecfa74c3224a77

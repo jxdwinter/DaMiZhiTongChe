@@ -64,7 +64,7 @@ UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,UITableViewDelegat
                                              selector:@selector(keyboardDidHide:)
                                                  name:UIKeyboardDidHideNotification
                                                object:nil];
-    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadData) name:@"USERLOGIN" object:nil];
     self.isKeyboardShown = NO;
     
     if (IS_IPHONE_4_OR_LESS) {
@@ -100,10 +100,10 @@ UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,UITableViewDelegat
     // Dispose of any resources that can be recreated.
 }
 
-
 - (void)dealloc{
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardDidShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardDidHideNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"USERLOGIN" object:nil];
 }
 
 #pragma mark - privete method

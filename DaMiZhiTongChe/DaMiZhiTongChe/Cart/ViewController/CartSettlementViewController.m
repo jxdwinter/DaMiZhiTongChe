@@ -345,6 +345,11 @@
             [cell.checkBoxButton setImage:[UIImage imageNamed:@"cart_uncheck"] forState:UIControlStateNormal];
             [cell.checkBoxButton removeTarget:nil action:NULL forControlEvents:UIControlEventAllEvents];
             [cell.checkBoxButton addTarget:self action:@selector(alipay) forControlEvents:UIControlEventTouchUpInside];
+            if (self.isCheckedAlipay) {
+                [cell.checkBoxButton setImage:[UIImage imageNamed:@"cart_check"] forState:UIControlStateNormal];
+            }else if (self.isCheckedWeixin) {
+                [cell.checkBoxButton setImage:[UIImage imageNamed:@"cart_uncheck"] forState:UIControlStateNormal];
+            }
             self.alipayButton = cell.checkBoxButton;
         }else if (indexPath.row == 1){
             cell.iconImagView.image = [UIImage imageNamed:@"weixin"];
@@ -352,6 +357,11 @@
             [cell.checkBoxButton setImage:[UIImage imageNamed:@"cart_uncheck"] forState:UIControlStateNormal];
             [cell.checkBoxButton removeTarget:nil action:NULL forControlEvents:UIControlEventAllEvents];
             [cell.checkBoxButton addTarget:self action:@selector(weixin) forControlEvents:UIControlEventTouchUpInside];
+            if (self.isCheckedAlipay) {
+                [cell.checkBoxButton setImage:[UIImage imageNamed:@"cart_uncheck"] forState:UIControlStateNormal];
+            }else if (self.isCheckedWeixin) {
+                [cell.checkBoxButton setImage:[UIImage imageNamed:@"cart_check"] forState:UIControlStateNormal];
+            }
             self.weixinButton = cell.checkBoxButton;
         }
         cell.selectionStyle = UITableViewCellSelectionStyleNone;

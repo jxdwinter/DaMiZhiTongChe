@@ -20,6 +20,20 @@
                ReferencedContainer = "container:DaMiZhiTongChe.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "83E0A2711C7AF3B4002E4954"
+               BuildableName = "DaMiZhiTongCheTests.xctest"
+               BlueprintName = "DaMiZhiTongCheTests"
+               ReferencedContainer = "container:DaMiZhiTongChe.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction

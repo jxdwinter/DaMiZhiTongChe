@@ -43,7 +43,7 @@ PODS:
     - AFNetworking (~> 2.0)
     - HappyDNS (~> 0.2)
   - Reveal-iOS-SDK (1.6.2)
-  - SDCycleScrollView (1.61):
+  - SDCycleScrollView (1.62):
     - SDWebImage (~> 3.7)
   - SDWebImage (3.7.5):
     - SDWebImage/Core (= 3.7.5)
@@ -98,7 +98,7 @@ SPEC CHECKSUMS:
   MJRefresh: 743e6404967d1c2c688472ea3ecfde247d872db4
   Qiniu: 51a8702cddc02b50867e10cef99291b9a8a006b1
   Reveal-iOS-SDK: e2250b3c155bcfac53ae223ddc1f76d08f206c33
-  SDCycleScrollView: a002d85b30cfa9d0ac74069cd3973ca19ff4f22f
+  SDCycleScrollView: ae016cb4cc4036523917f146ede6f7b11d408f6a
   SDWebImage: 69c6303e3348fba97e03f65d65d4fbc26740f461
   TOWebViewController: ca47b9aeefe66acb3353d197dc8270338540b116
   UAProgressView: ce49aee47c14df6dc372f6fd57852f570ca97e6b

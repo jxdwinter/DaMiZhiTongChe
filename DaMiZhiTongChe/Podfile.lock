@@ -53,10 +53,10 @@ PODS:
   - TOWebViewController/Core (2.2.3)
   - UAProgressView (0.1.3)
   - VTAcknowledgementsViewController (0.17)
-  - WMPageController (1.4.1)
+  - WMPageController (1.4.2)
   - YTKKeyValueStore (0.1.2):
     - FMDB (~> 2.0)
-  - YTKNetwork (0.6.0):
+  - YTKNetwork (1.0.0):
     - AFDownloadRequestOperation (~> 2.0)
     - AFNetworking (~> 2.0)
 
@@ -103,8 +103,8 @@ SPEC CHECKSUMS:
   TOWebViewController: ca47b9aeefe66acb3353d197dc8270338540b116
   UAProgressView: ce49aee47c14df6dc372f6fd57852f570ca97e6b
   VTAcknowledgementsViewController: 6056f5f5e5ed995bbf0581bed6ddd29355ca9a80
-  WMPageController: 3b6d2aa2ddcd53f2cbc2319f2473f27b4ea4fe89
+  WMPageController: fe28a8a96c3a6db146ca8f4c41e077996d75ecff
   YTKKeyValueStore: 4d002941540dd5108fa23009b71e0f2f937f7a0f
-  YTKNetwork: 988660d5fab310a55895239751ecfa74c3224a77
+  YTKNetwork: 28ef7a3c119f61e737a76abbe74ff2fe1afec913
 
 COCOAPODS: 0.39.0

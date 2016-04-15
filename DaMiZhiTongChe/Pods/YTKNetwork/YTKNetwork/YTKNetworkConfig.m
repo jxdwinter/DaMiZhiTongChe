@@ -43,10 +43,6 @@
         _urlFilters = [NSMutableArray array];
         _cacheDirPathFilters = [NSMutableArray array];
         _securityPolicy = [AFSecurityPolicy defaultPolicy];
-        /**
-         *  edit by jxdwinter 2016.03.22
-         */
-        _securityPolicy.allowInvalidCertificates = NO;
     }
     return self;
 }

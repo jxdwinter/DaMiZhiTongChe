@@ -64,6 +64,7 @@
     [titles addObject:@"已收货"];
     self.pageViewController = [[WMPageController alloc] initWithViewControllerClasses:viewControllers
                                                                        andTheirTitles:titles];
+    self.pageViewController.edgesForExtendedLayout = UIRectEdgeNone;
     self.pageViewController.menuViewStyle = WMMenuViewStyleLine;
     self.pageViewController.pageAnimatable = YES;
     self.pageViewController.menuItemWidth = 85;

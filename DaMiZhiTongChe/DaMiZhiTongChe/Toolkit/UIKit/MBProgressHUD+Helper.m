@@ -19,7 +19,11 @@
     HUD.mode = MBProgressHUDModeCustomView;
     HUD.labelText = title;
     [HUD show:YES];
-    [HUD hide:YES afterDelay:.8];
+    double delayInSeconds = 0.8;
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        [MBProgressHUD hideAllHUDsForView:view animated:YES];
+    });
 }
 
 + (void) showHUDWhileNetworkWithView : (UIView *) view{

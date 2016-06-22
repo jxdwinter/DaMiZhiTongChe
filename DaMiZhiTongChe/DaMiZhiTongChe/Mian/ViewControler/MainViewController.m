@@ -343,6 +343,7 @@ UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,UITableViewDelegat
     [self.navigationController pushViewController:main_GoodsCollectionViewController animated:YES];
 
 }
+
 #pragma mark - scroll view delegate
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
